@@ -1,0 +1,232 @@
+# 音樂風格偏好 - Music Style Preferences
+# 此檔案記錄使用者的音樂風格偏好與特性
+# 由 Inventory Manager Skill 管理
+
+version: 1.0
+last_updated: 2025-12-30
+created: 2025-12-30
+source: "migrated from 2025-v3-signal-chain project"
+
+# ============================================================
+# 音樂風格優先順序
+# priority: 1 = 最高優先, 數字越大優先順序越低
+# ============================================================
+
+preferences:
+  - style: "Jazz"
+    priority: 1
+    usage_percentage: 80
+
+    characteristics:
+      - "Clean headroom required"
+      - "Subtle compression"
+      - "Warm, natural overdrive (optional)"
+      - "Short delay (1/4 note)"
+      - "Room reverb (subtle)"
+
+    recommended_equipment:
+      guitars:
+        - "ESP Throbber-CTM"
+        - "Greco TE-500"
+        - "Fender Tokyo Thinline"
+      amp: "Roland JC-22"
+      compressor: "Empress MKII (transparent)"
+      overdrive: "Sweet Honey (low gain, mostly bypassed)"
+      delay: "FT-1Y (short, subtle)"
+      reverb: "Nucleo (room mode)"
+
+    notes: "最高優先風格，需要極度 clean 的音色與動態表現"
+
+  - style: "Neo Soul"
+    priority: 2
+    usage_percentage: 70
+
+    characteristics:
+      - "Warm overdrive stacking"
+      - "Compression essential"
+      - "Smooth, sweet tones"
+      - "Ambient reverb"
+      - "Chorus (optional)"
+
+    recommended_equipment:
+      guitars:
+        - "Greco TE-500"
+        - "ESP Throbber-CTM"
+        - "Fender Tokyo Thinline"
+      amp: "Roland JC-22"
+      compressor: "Empress MKII"
+      overdrive: "Sweet Honey + PRS Horsemeat (stacked)"
+      delay: "FT-1Y (medium)"
+      reverb: "Nucleo (room/hall)"
+
+    notes: "需要溫暖 OD 疊加，甜美音色為主"
+
+  - style: "Funk"
+    priority: 3
+    usage_percentage: 60
+
+    characteristics:
+      - "Tight compression"
+      - "Clean boost for punch"
+      - "Minimal overdrive"
+      - "Tight, rhythmic"
+
+    recommended_equipment:
+      guitars:
+        - "Greco TE-500"
+        - "Fender Tokyo Thinline"
+      amp: "Roland JC-22 (chorus ON)"
+      compressor: "Empress MKII (higher ratio)"
+      overdrive: "Clean boost only (PA-1QG)"
+      delay: "Minimal or off"
+      reverb: "Minimal"
+
+    notes: "緊實節奏，可能需要 envelope filter（待購入）"
+
+  - style: "Post Rock"
+    priority: 4
+    usage_percentage: 40
+
+    characteristics:
+      - "Gain stacking"
+      - "Long delay with HOLD"
+      - "Shimmer reverb"
+      - "Ambient layers"
+      - "High sustain"
+
+    recommended_equipment:
+      guitars:
+        - "ESP Eclipse CTM"
+        - "Greco TE-500"
+      amp: "Tone King Imperial MKII (4CM)"
+      compressor: "Cali76 FET (sustain + warmth)"
+      overdrive: "Roshi Blacklon + Morning Glory + TWA Source Code"
+      delay: "FT-1Y (long delay, HOLD on)"
+      reverb: "AASB (shimmer) + Nucleo (long decay, freeze)"
+
+    notes: "需要大量音景層次，Freeze 和 HOLD 功能重要"
+
+  - style: "Fusion"
+    priority: 5
+    usage_percentage: 30
+
+    characteristics:
+      - "Transparent compression"
+      - "Dumble-style overdrive"
+      - "Chorus"
+      - "Short delay"
+      - "High headroom"
+
+    recommended_equipment:
+      guitars:
+        - "ESP Throbber-CTM"
+        - "ESP Eclipse CTM"
+      amp: "Tone King Imperial MKII"
+      compressor: "Cali76 FET or Empress MKII"
+      overdrive: "ODL-1-CS (Dumble)"
+      delay: "FT-1Y (short)"
+      reverb: "Nucleo (subtle)"
+
+    notes: "Larry Carlton / Robben Ford 風格，需要 Dumble 音色"
+
+  - style: "Pop Rock"
+    priority: 6
+    usage_percentage: 30
+
+    characteristics:
+      - "Versatile overdrive"
+      - "Modulation (chorus/phaser)"
+      - "Medium reverb"
+      - "Radio-friendly tones"
+
+    recommended_equipment:
+      guitars:
+        - "Fender Tokyo Thinline"
+        - "Greco TE-500"
+      amp: "Roland JC-22"
+      compressor: "Empress MKII"
+      overdrive: "Sweet Honey or Morning Glory"
+      delay: "FT-1Y (medium)"
+      reverb: "Nucleo (medium)"
+
+    notes: "需要多樣性，待補充 modulation 效果器"
+
+  - style: "Rock"
+    priority: 7
+    usage_percentage: 20
+
+    characteristics:
+      - "Classic Rock overdrive"
+      - "Bluesbreaker or TS-style"
+      - "Medium gain"
+      - "Punchy tones"
+
+    recommended_equipment:
+      guitars:
+        - "ESP Eclipse CTM"
+        - "ESP Throbber-CTM"
+      amp: "Tone King Imperial MKII"
+      compressor: "Cali76 FET"
+      overdrive: "Morning Glory (BB) or TWA Source Code (TS)"
+      delay: "FT-1Y (short)"
+      reverb: "Nucleo (room)"
+
+    notes: "Classic Rock 風格，需要 BB 或 TS 音色"
+
+# ============================================================
+# 使用情境
+# ============================================================
+
+usage_context:
+  recording: 80  # 80% 時間用於錄音
+  practice: 20   # 20% 時間用於練習
+  live: 0        # 不需考慮現場演出
+
+  environment: "home_studio"
+
+  notes: >
+    主要使用情境為居家錄音，不需考慮現場演出需求。
+    因此可以優先考慮音色品質、噪音控制、stereo 配置，
+    而不需考慮 pedalboard 便攜性或即時切換速度。
+
+# ============================================================
+# 設備缺口分析（從 2025-v3-signal-chain 專案）
+# ============================================================
+
+equipment_gaps:
+  modulation:
+    missing:
+      - "Chorus pedal (JC-22 內建，但可能需要獨立 chorus 用於其他音箱)"
+      - "Phaser pedal"
+      - "Flanger pedal"
+    priority: "medium"
+    reason: "Funk 和 Pop Rock 可能需要 modulation 效果"
+
+  utility:
+    missing:
+      - "Envelope Filter (Funk)"
+      - "Dedicated Volume Pedal (可用 Expression Pedal + Swiss Things)"
+    priority: "low"
+    reason: "Swiss Things 的 Expression Pedal 音量控制可能已足夠"
+
+  gain:
+    missing: []
+    notes: "破音效果器已充足，涵蓋透明 boost 到 Dumble 高階音色"
+
+  time_based:
+    missing: []
+    notes: "Delay 和 Reverb 已充足，涵蓋傳統到實驗性音景"
+
+# ============================================================
+# 統計資訊
+# ============================================================
+
+stats:
+  total_styles: 7
+  top_3_styles:
+    - "Jazz"
+    - "Neo Soul"
+    - "Funk"
+
+  combined_usage_top_3: 210  # 80% + 70% + 60% = 210%
+  # Note: 百分比總和可超過 100%，因為可能同時演奏多種風格

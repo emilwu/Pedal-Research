@@ -1,0 +1,398 @@
+# 效果器清單 - Pedal Inventory
+# 此檔案記錄當前擁有的所有效果器
+# 由 Inventory Manager Skill 管理
+
+version: 1.0
+last_updated: 2025-12-30
+created: 2025-12-30
+source: "migrated from 2025-v3-signal-chain project"
+
+pedals:
+  # ============================================================
+  # COMPRESSORS (2)
+  # ============================================================
+
+  - id: "empress_mkii"
+    brand: "Empress"
+    model: "Guitar Compressor MKII"
+    type: "compressor"
+    subtype: "vca"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 219
+      currency: "USD"
+
+    features:
+      - "Transparent compression"
+      - "Mix control (parallel compression)"
+      - "Tilt EQ"
+      - "Variable ratio"
+
+    best_for:
+      - "Jazz"
+      - "Neo Soul"
+      - "Funk"
+      - "Clean tones"
+
+    signal_chain_position: "always_on_pre_amp"
+    swiss_things_assignment: "before_input"
+
+    research_file: "shared/equipment_database/pedals/empress_mkii.yaml"
+    notes: "極度透明的 VCA 壓縮，適合 Jazz 和 Neo Soul"
+
+  - id: "cali76_fet"
+    brand: "Origin Effects"
+    model: "Cali76 FET Compressor"
+    type: "compressor"
+    subtype: "fet"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 369
+      currency: "USD"
+
+    features:
+      - "1176-style FET compression"
+      - "Warm coloration"
+      - "Dry mix control"
+      - "Sustain enhancement"
+
+    best_for:
+      - "Post Rock"
+      - "Blues"
+      - "Rock"
+      - "Sustaining leads"
+
+    signal_chain_position: "always_on_pre_amp"
+    swiss_things_assignment: "before_input"
+
+    research_file: "shared/equipment_database/pedals/cali76_fet.yaml"
+    notes: "溫暖 FET 染色壓縮，增加 sustain 適合 Post Rock"
+
+  # ============================================================
+  # EQ (1)
+  # ============================================================
+
+  - id: "pa1qg"
+    brand: "Free the Tone"
+    model: "PA-1QG Programmable Analog 10 Band EQ"
+    type: "eq"
+    subtype: "parametric_graphic"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 425
+      currency: "USD"
+
+    features:
+      - "10-band parametric EQ"
+      - "99 presets"
+      - "MIDI support"
+      - "LEVEL control (Clean Boost)"
+      - "Buffered output"
+
+    best_for:
+      - "Guitar-specific EQ"
+      - "Clean boost"
+      - "Preset switching"
+
+    signal_chain_position: "always_on_pre_amp"
+    swiss_things_assignment: "before_input"
+
+    research_file: "shared/equipment_database/pedals/pa1qg.yaml"
+    notes: "可程式化 EQ，為每把吉他建立專用 preset，附 Clean Boost 功能"
+
+  # ============================================================
+  # OVERDRIVE / DISTORTION (5)
+  # ============================================================
+
+  - id: "sweet_honey"
+    brand: "Mad Professor"
+    model: "Sweet Honey Overdrive Deluxe"
+    type: "overdrive"
+    subtype: "transparent_warm"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 220
+      currency: "USD"
+
+    features:
+      - "Honey Bee circuit evolution"
+      - "FOCUS control"
+      - "Warm, sweet tone"
+      - "Low to medium gain"
+
+    best_for:
+      - "Jazz"
+      - "Neo Soul"
+      - "Blues"
+      - "Warm overdrive"
+
+    signal_chain_position: "pre_amp_gain"
+    swiss_things_assignment: "loop_1"
+
+    research_file: "shared/equipment_database/pedals/sweet_honey.yaml"
+    notes: "訊號鏈1核心溫暖 OD，Neo Soul 甜蜜點"
+
+  - id: "prs_horsemeat"
+    brand: "PRS"
+    model: "Horsemeat Transparent Overdrive"
+    type: "overdrive"
+    subtype: "klon_style_transparent"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: null  # 請補充價格
+      currency: "USD"
+
+    features:
+      - "Klon-style circuit"
+      - "Extremely transparent"
+      - "Mid-frequency enhancement"
+      - "Can be used as clean boost"
+
+    best_for:
+      - "Transparent boost"
+      - "Stacking with other overdrives"
+      - "Adding clarity"
+
+    signal_chain_position: "pre_amp_gain"
+    swiss_things_assignment: "loop_1"
+
+    research_file: "shared/equipment_database/pedals/prs_horsemeat.yaml"
+    notes: "V3.0 新增，取代 Colosseum Klon Side，訊號鏈1透明 Boost"
+
+  - id: "morning_glory"
+    brand: "JHS Pedals"
+    model: "Morning Glory V3"
+    type: "overdrive"
+    subtype: "bluesbreaker"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 179
+      currency: "USD"
+
+    features:
+      - "Bluesbreaker-style circuit"
+      - "Classic Marshall tone"
+      - "Open, clear overdrive"
+      - "No clipping issues"
+
+    best_for:
+      - "Classic Rock"
+      - "Blues"
+      - "British tones"
+
+    signal_chain_position: "pre_amp_gain"
+    swiss_things_assignment: "loop_1"
+
+    research_file: "shared/equipment_database/pedals/morning_glory.yaml"
+    notes: "V3.0 新增，取代 Colosseum BB Side，經典 BB 音色"
+
+  - id: "roshi_blacklon"
+    brand: "Roshi"
+    model: "Blacklon Amp-in-a-Box"
+    type: "overdrive"
+    subtype: "amp_simulator"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 200
+      currency: "USD"
+
+    features:
+      - "Blackface amp simulation"
+      - "6L6 / 6V6 tube switching"
+      - "Drive / Mellow mode"
+      - "Amp-in-a-box design"
+
+    best_for:
+      - "Giving solid-state amps tube feel"
+      - "Post Rock"
+      - "Neo Soul"
+
+    signal_chain_position: "pre_amp_gain"
+    swiss_things_assignment: "loop_1"
+
+    research_file: "shared/equipment_database/pedals/roshi_blacklon.yaml"
+    notes: "訊號鏈2 Blackface 管機模擬，讓 JC-22 有管機感"
+
+  - id: "twa_source_code"
+    brand: "TWA (Totally Wycked Audio)"
+    model: "Source Code Overdrive"
+    type: "overdrive"
+    subtype: "tubescreamer_evolution"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 299
+      currency: "USD"
+
+    features:
+      - "Tube Screamer evolution"
+      - "Bite Control (harmonic shaping)"
+      - "18V headroom"
+      - "Mid-focused"
+
+    best_for:
+      - "Classic Rock"
+      - "TS-style mid boost"
+      - "High headroom overdrive"
+
+    signal_chain_position: "pre_amp_gain"
+    swiss_things_assignment: "loop_1"
+
+    research_file: "shared/equipment_database/pedals/twa_source_code.yaml"
+    notes: "訊號鏈2 TS Evolution，Classic Rock 時需要 TS 中頻開啟"
+
+  - id: "odl1cs"
+    brand: "Free the Tone"
+    model: "ODL-1-CS Overdrive"
+    type: "overdrive"
+    subtype: "dumble_style"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 425
+      currency: "USD"
+
+    features:
+      - "Dumble-style overdrive"
+      - "Dual channel (Clean/Drive)"
+      - "14-16V operation"
+      - "ROCK mode"
+
+    best_for:
+      - "Fusion"
+      - "High-end overdrive tones"
+      - "Larry Carlton / Robben Ford style"
+
+    signal_chain_position: "pre_amp_gain"
+    swiss_things_assignment: "loop_1"
+
+    research_file: "shared/equipment_database/pedals/odl1cs.yaml"
+    notes: "訊號鏈2 Dumble 高階音色，Fusion 經典"
+
+  # ============================================================
+  # DELAY (1)
+  # ============================================================
+
+  - id: "ft1y"
+    brand: "Free the Tone"
+    model: "FT-1Y Flight Time Digital Delay"
+    type: "delay"
+    subtype: "digital"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 400
+      currency: "USD"
+
+    features:
+      - "Realtime BPM Analyzer"
+      - "Digital/Analog modes"
+      - "HOLD function"
+      - "Tap tempo"
+
+    best_for:
+      - "Precision BPM sync"
+      - "Post Rock ambient layers"
+      - "Jazz subtle delays"
+
+    signal_chain_position: "fx_loop_or_post_gain"
+    swiss_things_assignment: "loop_2"
+
+    research_file: "shared/equipment_database/pedals/ft1y.yaml"
+    notes: "兩條訊號鏈共用，Realtime BPM Analyzer 自動偵測節奏"
+
+  # ============================================================
+  # REVERB (2)
+  # ============================================================
+
+  - id: "nucleo"
+    brand: "Cornerstone"
+    model: "Nucleo"
+    type: "reverb"
+    subtype: "stereo_reverb"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 350
+      currency: "USD"
+
+    features:
+      - "Nuclear reactor impulse response"
+      - "Stereo output"
+      - "Transformer-isolated output"
+      - "Long decay (up to 90s)"
+      - "Freeze function"
+
+    best_for:
+      - "Ambient"
+      - "Post Rock"
+      - "Unique room sound"
+      - "Stereo imaging"
+
+    signal_chain_position: "fx_loop_or_post_gain"
+    swiss_things_assignment: "loop_2"
+
+    research_file: "shared/equipment_database/pedals/nucleo.yaml"
+    notes: "兩條訊號鏈共用，Stereo 主 Reverb，核電廠反應爐空間感"
+
+  - id: "aasb"
+    brand: "Lichtlaerm Audio"
+    model: "As Above So Below Shimmer Reverb"
+    type: "reverb"
+    subtype: "shimmer_octave"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 225
+      currency: "USD"
+
+    features:
+      - "Shimmer reverb"
+      - "Octave up / Octave down / Both"
+      - "Cinematic soundscapes"
+      - "Freeze function"
+
+    best_for:
+      - "Post Rock"
+      - "Ambient"
+      - "Drone"
+      - "Shimmer layers"
+
+    signal_chain_position: "fx_loop_or_post_gain"
+    swiss_things_assignment: "loop_2"
+
+    research_file: "shared/equipment_database/pedals/aasb.yaml"
+    notes: "訊號鏈2特殊音景，雙向八度 Shimmer/Drone，天堂與地底碰撞"
+
+# ============================================================
+# 統計資訊
+# ============================================================
+
+stats:
+  total_pedals: 12
+  active: 12
+  sold: 0
+
+  by_type:
+    compressor: 2
+    eq: 1
+    overdrive: 5
+    delay: 1
+    reverb: 2
+
+  by_swiss_things_assignment:
+    before_input: 3  # Always-on pedals
+    loop_1: 5        # Gain pedals (unbuffered)
+    loop_2: 3        # Time/Mod pedals (buffered)
+
+  total_cost:
+    amount: 3344  # 不含 PRS Horsemeat 價格
+    currency: "USD"
+    note: "PRS Horsemeat 價格待補充"

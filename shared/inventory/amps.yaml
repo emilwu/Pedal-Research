@@ -1,0 +1,152 @@
+# 音箱清單 - Amp Inventory
+# 此檔案記錄當前擁有的所有音箱
+# 由 Inventory Manager Skill 管理
+
+version: 1.0
+last_updated: 2025-12-30
+created: 2025-12-30
+source: "migrated from 2025-v3-signal-chain project"
+
+amps:
+  - id: "tone_king_imperial_mkii"
+    brand: "Tone King"
+    model: "Imperial MKII"
+    full_name: "Tone King Imperial MKII Preamp"
+    type: "tube_preamp"
+    status: "active"
+    acquired_date: null
+
+    # 規格
+    channels:
+      - "Clean"
+      - "Lead"
+    power: "preamp_only"  # 這是 preamp，非 power amp
+    speaker: null
+    wattage: null
+
+    # 特性
+    features:
+      - "Tube preamp"
+      - "FX Send/Return (Effects Loop)"
+      - "Mid-Bite switch"
+      - "Rhythm/Lead channels"
+      - "Professional recording preamp"
+
+    # Effects Loop
+    has_fx_loop: true
+    fx_loop_type: "series"
+
+    # 使用建議
+    best_for:
+      - "Recording"
+      - "4-Cable Method"
+      - "Professional tone shaping"
+
+    # 適合音樂風格
+    suitable_styles:
+      - "Jazz"
+      - "Blues"
+      - "Rock"
+      - "Fusion"
+      - "Post Rock"
+
+    # 訊號鏈配置
+    signal_chain_method: "4cm"  # 4-Cable Method
+
+    research_file: "shared/equipment_database/amps/tone_king_imperial_mkii.yaml"
+    notes: "專業 tube preamp，有 FX loop 適合 4CM 配置，主要用於錄音"
+
+  - id: "roland_jc22"
+    brand: "Roland"
+    model: "JC-22 Jazz Chorus"
+    full_name: "Roland JC-22 Jazz Chorus"
+    type: "solid_state_combo"
+    status: "active"
+    acquired_date: null
+
+    # 規格
+    channels:
+      - "Single channel"
+    power: "combo"
+    speaker: "2x 6.5 inch"
+    wattage: 30
+
+    # 特性
+    features:
+      - "Built-in stereo chorus"
+      - "Clean headroom"
+      - "Classic Jazz Chorus tone"
+      - "BRIGHT switch"
+      - "No effects loop"
+
+    # Effects Loop
+    has_fx_loop: false
+    fx_loop_type: null
+
+    # 使用建議
+    best_for:
+      - "Jazz"
+      - "Neo Soul"
+      - "Funk"
+      - "Clean tones"
+      - "Stereo chorus"
+
+    # 適合音樂風格
+    suitable_styles:
+      - "Jazz"
+      - "Neo Soul"
+      - "Funk"
+      - "Pop Rock"
+      - "Clean styles"
+
+    # 訊號鏈配置
+    signal_chain_method: "pre_amp_only"  # 所有效果器放在 amp 之前
+
+    # 內建效果
+    built_in_effects:
+      - effect: "chorus"
+        type: "stereo"
+        controls:
+          - "SPEED"
+          - "DEPTH"
+
+    research_file: "shared/equipment_database/amps/roland_jc22.yaml"
+    notes: "經典 Jazz Chorus 晶體機，無 FX loop，所有效果器需放在前級，內建 stereo chorus"
+
+# ============================================================
+# 統計資訊
+# ============================================================
+
+stats:
+  total_amps: 2
+  active: 2
+
+  by_type:
+    tube_preamp: 1
+    solid_state_combo: 1
+
+  has_fx_loop: 1
+  no_fx_loop: 1
+
+# ============================================================
+# 使用建議
+# ============================================================
+
+usage_recommendations:
+  signal_chain_1:
+    amp: "roland_jc22"
+    reason: "無 FX loop，適合 Jazz/Neo Soul/Funk clean 音色"
+    styles:
+      - "Jazz"
+      - "Neo Soul"
+      - "Funk"
+      - "Pop Rock"
+
+  signal_chain_2:
+    amp: "tone_king_imperial_mkii"
+    reason: "有 FX loop，適合 4CM 配置，適合 Post Rock/Fusion"
+    styles:
+      - "Post Rock"
+      - "Fusion"
+      - "Ambient"
+      - "Rock"

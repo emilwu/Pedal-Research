@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch"
+      "WebSearch",
+      "Bash(claude-code --version)",
+      "Bash(code --list-extensions:*)",
+      "Bash(\"/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code\" --list-extensions --show-versions)",
+      "Bash(tree:*)"
     ]
   }
 }

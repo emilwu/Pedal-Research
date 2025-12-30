@@ -1,0 +1,186 @@
+# 吉他清單 - Guitar Inventory
+# 此檔案記錄當前擁有的所有吉他
+# 由 Inventory Manager Skill 管理
+
+version: 1.0
+last_updated: 2025-12-30
+created: 2025-12-30
+source: "migrated from 2025-v3-signal-chain project"
+
+guitars:
+  - id: "esp_eclipse_ctm"
+    brand: "ESP"
+    model: "Eclipse CTM"
+    full_name: "ESP Eclipse CTM/E"
+    year: null  # 未知年份
+
+    # 拾音器資訊
+    pickup_neck: "EMG JH-N"
+    pickup_bridge: "EMG JH-B"
+    pickup_type: "active_humbucker"
+    pickup_set: "EMG JH HET SET"
+    output_level: "high"
+
+    # 琴身資訊
+    body_wood: "Honduras Mahogany + Hard Maple Top"
+    body_type: "solid"
+    neck_wood: "Honduras Mahogany"
+    neck_construction: "set_neck"
+    fingerboard_wood: "Ebony"
+    scale_length: "24.75"
+
+    # 使用狀態
+    status: "active"
+    acquired_date: null
+
+    # 適用音樂風格
+    best_for:
+      - "Rock"
+      - "Metal"
+      - "Heavy"
+      - "Modern Rock"
+
+    # 相關資料檔案
+    research_file: "shared/equipment_database/guitars/esp_eclipse_ctm.yaml"
+
+    notes: "高輸出主動式拾音器，適合 Rock 和 Heavy tones"
+
+  - id: "esp_throbber_ctm"
+    brand: "ESP"
+    model: "Throbber-CTM"
+    full_name: "ESP Throbber-CTM"
+    year: null
+
+    # 拾音器資訊
+    pickup_neck: "Seymour Duncan APH-1n"
+    pickup_bridge: "Seymour Duncan TB-APH-1b"
+    pickup_type: "passive_humbucker"
+    pickup_set: "Seymour Duncan Alnico Pro Humbucker"
+    output_level: "medium"
+
+    # 琴身資訊
+    body_wood: "Honduras Mahogany"
+    body_type: "semi_hollow"
+    neck_wood: "Mahogany"
+    neck_construction: "set_neck"
+    fingerboard_wood: "Ebony"
+    scale_length: "24.75"
+
+    # 特殊設計
+    special_features:
+      - "Sound Reservoir 空腔設計"
+      - "半空心結構"
+
+    # 使用狀態
+    status: "active"
+    acquired_date: null
+
+    # 適用音樂風格
+    best_for:
+      - "Jazz"
+      - "Blues"
+      - "Classic Rock"
+      - "Versatile"
+
+    # 相關資料檔案
+    research_file: "shared/equipment_database/guitars/esp_throbber_ctm.yaml"
+
+    notes: "半空心設計，溫暖 PAF 風格拾音器，適合 Jazz 和 Blues"
+
+  - id: "greco_te500"
+    brand: "Greco"
+    model: "Spacey Sounds TE-500"
+    full_name: "Greco Spacey Sounds TE-500 Thinline"
+    year: null
+
+    # 拾音器資訊（改裝）
+    pickup_neck: "Lindy Fralin Wide Range Humbucker"
+    pickup_bridge: "Lindy Fralin Wide Range Humbucker"
+    pickup_type: "passive_widerange_humbucker"
+    pickup_set: "Lindy Fralin WideRange (改裝)"
+    output_level: "medium"
+
+    # 琴身資訊
+    body_wood: "Ash"
+    body_type: "semi_hollow_thinline"
+    neck_wood: "Maple"
+    neck_construction: "bolt_on"
+    fingerboard_wood: "Maple"
+    scale_length: "25.5"
+
+    # 使用狀態
+    status: "active"
+    acquired_date: null
+
+    # 適用音樂風格
+    best_for:
+      - "Jazz"
+      - "Neo Soul"
+      - "Funk"
+      - "Vintage"
+      - "Warm tones"
+
+    # 相關資料檔案
+    research_file: "shared/equipment_database/guitars/greco_te500.yaml"
+
+    notes: "改裝 Lindy Fralin Wide Range 拾音器，溫暖復古音色"
+
+  - id: "fender_tokyo_thinline"
+    brand: "Fender"
+    model: "Made in Japan Flagship Tokyo Editions Telecaster Thinline"
+    full_name: "Fender Made in Japan Flagship Tokyo Editions Telecaster® Thinline"
+    year: null
+
+    # 拾音器資訊
+    pickup_neck: "Momose VT-1 single-coil"
+    pickup_bridge: "Momose VT-1 single-coil"
+    pickup_type: "single_coil"
+    pickup_set: "Momose VT-1 pickups"
+    output_level: "medium"
+
+    # 琴身資訊
+    body_wood: "Ash"
+    body_type: "semi_hollow_thinline"
+    neck_wood: "Maple"
+    neck_construction: "bolt_on"
+    fingerboard_wood: "Maple"
+    scale_length: "25.5"
+
+    # 使用狀態
+    status: "active"
+    acquired_date: null
+
+    # 適用音樂風格
+    best_for:
+      - "Classic Tele tones"
+      - "Country"
+      - "Blues"
+      - "Funk"
+      - "Clean"
+
+    # 相關資料檔案
+    research_file: "shared/equipment_database/guitars/fender_tokyo_thinline.yaml"
+
+    notes: "經典 Telecaster 音色，Momose VT-1 單線圈拾音器"
+
+# 統計資訊
+stats:
+  total_guitars: 4
+  active: 4
+  sold: 0
+  stored: 0
+
+  by_pickup_type:
+    active_humbucker: 1
+    passive_humbucker: 1
+    widerange_humbucker: 1
+    single_coil: 1
+
+  by_output_level:
+    high: 1
+    medium: 3
+    low: 0
+
+  by_body_type:
+    solid: 1
+    semi_hollow: 3

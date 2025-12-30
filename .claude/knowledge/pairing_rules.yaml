@@ -1,0 +1,464 @@
+# 配對規則庫 - Pairing Rules Database
+# 此檔案定義吉他、效果器、音樂風格的配對邏輯
+# 由 Guitar-Pedal Pairing Skill 使用
+
+version: 1.0
+last_updated: 2025-12-30
+created: 2025-12-30
+
+# ============================================================
+# 音樂風格 → 效果器需求
+# ============================================================
+
+music_style_requirements:
+  Jazz:
+    compressor:
+      preference: ["optical", "fet", "transparent_vca"]
+      ratio: "low"  # 2:1 to 4:1
+      mix: "70-100%"
+      notes: "保持動態，避免過度壓縮"
+
+    overdrive:
+      preference: ["transparent", "warm", "low_gain"]
+      gain_level: "low"
+      bypass_default: true
+      notes: "主要使用 clean，OD 僅在 Blues 時輕微使用"
+
+    eq:
+      adjustment: "subtle"
+      focus_freq: [800, 3200]  # 提升中頻溫暖度
+      boost: "+0 to +3dB"
+
+    delay:
+      type: ["digital", "analog"]
+      time: "1/4 note"
+      feedback: "2-3 repeats"
+      mix: "15-25%"
+      notes: "短 delay，subtle articulation"
+
+    reverb:
+      type: ["room", "hall"]
+      decay: "short_to_medium"
+      mix: "20-30%"
+      notes: "自然空間感，不要過於 wet"
+
+  Neo_Soul:
+    compressor:
+      preference: ["vca", "optical", "transparent"]
+      ratio: "medium"  # 3:1 to 6:1
+      mix: "80-100%"
+      notes: "平滑動態，但保持撥弦 attack"
+
+    overdrive:
+      preference: ["warm", "medium_gain", "stackable"]
+      gain_level: "low_to_medium"
+      stacking: true
+      notes: "溫暖 OD 疊加，創造甜美音色"
+
+    eq:
+      adjustment: "warm"
+      focus_freq: [800, 1500]
+      boost: "+3 to +6dB"
+      notes: "提升中頻，溫暖音色"
+
+    delay:
+      type: ["digital", "analog"]
+      time: "1/4 to 1/2 note"
+      feedback: "3-5 repeats"
+      mix: "25-40%"
+      notes: "中等 delay，增加空間感"
+
+    reverb:
+      type: ["room", "hall", "plate"]
+      decay: "medium"
+      mix: "30-50%"
+      notes: "溫暖 ambient 氛圍"
+
+  Funk:
+    compressor:
+      preference: ["vca", "fast_attack"]
+      ratio: "medium_to_high"  # 4:1 to 8:1
+      mix: "100%"
+      notes: "緊實壓縮，控制動態範圍"
+
+    overdrive:
+      preference: ["clean_boost", "transparent"]
+      gain_level: "clean"
+      notes: "Clean boost for punch，不需要 overdrive"
+
+    eq:
+      adjustment: "scooped_or_balanced"
+      focus_freq: [100, 3200]
+      boost: "+3 to +6dB"
+      notes: "低頻 punch + 高頻 clarity"
+
+    delay:
+      type: ["minimal"]
+      notes: "通常不使用或關閉"
+
+    reverb:
+      type: ["minimal"]
+      notes: "通常不使用或關閉"
+
+  Post_Rock:
+    compressor:
+      preference: ["fet", "sustain_oriented"]
+      ratio: "medium"
+      mix: "70-80%"  # 保留一些動態
+      notes: "增加 sustain 和延音"
+
+    overdrive:
+      preference: ["stacking", "amp_simulator", "medium_to_high_gain"]
+      gain_level: "medium_to_high"
+      stacking: true
+      notes: "多層次破音疊加，建構音牆"
+
+    eq:
+      adjustment: "thick"
+      focus_freq: [100, 400]
+      boost: "+0 to +3dB"
+      notes: "增加厚度和低頻"
+
+    delay:
+      type: ["digital", "analog"]
+      time: "1/2 to 1/1 note"
+      feedback: "high"  # 建構 pad
+      mix: "40-70%"
+      features: ["hold", "tap_tempo"]
+      notes: "長 delay with HOLD，建構 ambient pad"
+
+    reverb:
+      type: ["shimmer", "long_decay", "ambient"]
+      decay: "long_to_very_long"
+      mix: "50-90%"
+      features: ["freeze", "octave"]
+      notes: "多層次音景，shimmer + 核電廠空間感"
+
+  Fusion:
+    compressor:
+      preference: ["transparent", "optical", "fet"]
+      ratio: "low_to_medium"
+      mix: "70-90%"
+      notes: "保持動態，輕微控制峰值"
+
+    overdrive:
+      preference: ["dumble_style", "transparent", "high_headroom"]
+      gain_level: "medium"
+      notes: "Dumble-style for Larry Carlton / Robben Ford tone"
+
+    eq:
+      adjustment: "balanced"
+      focus_freq: [800, 2000]
+      boost: "+0 to +3dB"
+
+    delay:
+      type: ["digital", "analog"]
+      time: "1/4 note"
+      feedback: "2-4 repeats"
+      mix: "20-35%"
+
+    reverb:
+      type: ["room", "plate"]
+      decay: "short_to_medium"
+      mix: "20-40%"
+
+# ============================================================
+# 吉他特性 → 效果器調整
+# ============================================================
+
+guitar_characteristics:
+  # 依據拾音器類型
+  pickup_type:
+    active_humbucker:
+      output_level: "high"
+      compressor_adjustment:
+        input_level: "lower"  # 降低壓縮器輸入
+        ratio: "-1"  # 降低壓縮比
+        notes: "主動拾音器已有內建壓縮效果"
+
+      overdrive_adjustment:
+        gain: "-1"  # 降低 gain
+        notes: "高輸出已有足夠 drive，避免過度失真"
+
+      eq_adjustment:
+        mid_cut: true
+        freq: [800, 3200]
+        amount: "-1 to -3dB"
+        notes: "主動拾音器中頻較強，可能需要 cut"
+
+    passive_humbucker:
+      output_level: "medium"
+      compressor_adjustment:
+        input_level: "medium"
+        ratio: "medium"
+        notes: "標準設定"
+
+      overdrive_adjustment:
+        gain: "medium"
+        notes: "標準設定"
+
+      eq_adjustment:
+        balanced: true
+        notes: "平衡設定"
+
+    widerange_humbucker:
+      output_level: "medium"
+      compressor_adjustment:
+        input_level: "medium"
+        notes: "Wide Range 有獨特中頻特性"
+
+      overdrive_adjustment:
+        gain: "low_to_medium"
+        preference: ["warm", "vintage"]
+        notes: "適合溫暖 vintage overdrive"
+
+      eq_adjustment:
+        warm_boost: true
+        freq: [800, 1500]
+        amount: "+2 to +4dB"
+        notes: "提升溫暖度"
+
+    single_coil:
+      output_level: "medium_to_low"
+      compressor_adjustment:
+        input_level: "higher"
+        ratio: "+1"  # 增加壓縮比
+        notes: "單線圈需要更多壓縮控制動態"
+
+      overdrive_adjustment:
+        gain: "medium"
+        preference: ["transparent", "open"]
+        notes: "保持單線圈清晰度"
+
+      eq_adjustment:
+        bass_boost: true
+        freq: [100, 400]
+        amount: "+2 to +4dB"
+        notes: "補足低頻，單線圈較薄"
+
+  # 依據琴身類型
+  body_type:
+    solid:
+      notes: "標準設定"
+
+    semi_hollow:
+      compressor_adjustment:
+        notes: "半空心需要溫和壓縮"
+        preference: ["optical", "fet", "warm"]
+
+      reverb_adjustment:
+        decay: "-10%"  # 降低 decay
+        notes: "半空心本身有共鳴，reverb 適度即可"
+
+      feedback_warning: true
+      notes: "注意高音量 feedback 風險"
+
+# ============================================================
+# 音箱特性 → 訊號鏈配置
+# ============================================================
+
+amp_characteristics:
+  has_fx_loop:
+    method: "4cm"  # 4-Cable Method
+    pre_amp_effects:
+      - "compressor"
+      - "eq"
+      - "overdrive"
+      - "distortion"
+      - "boost"
+
+    fx_loop_effects:
+      - "delay"
+      - "reverb"
+      - "modulation"  # Chorus, Phaser, Flanger
+
+    notes: "使用 4CM，gain 效果放前級，time/mod 效果放 FX loop"
+
+  no_fx_loop:
+    method: "pre_amp_only"
+    all_effects_pre_amp: true
+    order:
+      - "compressor"
+      - "eq"
+      - "overdrive"
+      - "modulation"
+      - "delay"
+      - "reverb"
+
+    notes: "所有效果器放在 amp 之前，依標準訊號鏈順序"
+
+  tube_amp:
+    characteristics:
+      - "warm"
+      - "natural_compression"
+      - "harmonic_richness"
+
+    overdrive_recommendation:
+      - "可利用音箱本身 gain"
+      - "效果器可作為 boost 或 tone shaping"
+
+  solid_state_amp:
+    characteristics:
+      - "clean_headroom"
+      - "transparent"
+      - "需要效果器增添溫暖度"
+
+    overdrive_recommendation:
+      - "考慮 amp_in_a_box 類型效果器"
+      - "增添管機特性"
+
+# ============================================================
+# Swiss Things 路由規則
+# ============================================================
+
+swiss_things_routing:
+  before_input:
+    # Always-on pedals 必須在 Swiss Things INPUT 之前
+    pedal_types:
+      - "compressor"
+      - "eq"
+      - "preamp"
+      - "buffer"
+
+    notes: "這些效果器需要 always-on，放在 Swiss Things 之前"
+
+  loop_1:
+    # Unbuffered loop - Gain section
+    pedal_types:
+      - "boost"
+      - "overdrive"
+      - "distortion"
+      - "fuzz"
+      - "octave_fuzz"
+
+    characteristics:
+      - "unbuffered"
+      - "true_bypass"
+      - "保留 vintage 效果器特性"
+
+    order_suggestion:
+      - "octave"
+      - "fuzz"
+      - "overdrive"
+      - "distortion"
+      - "boost"
+
+    notes: "破音效果器放此 loop，無緩衝保留音色特性"
+
+  loop_2:
+    # Buffered loop - Time/Modulation section
+    pedal_types:
+      - "delay"
+      - "reverb"
+      - "chorus"
+      - "phaser"
+      - "flanger"
+      - "tremolo"
+
+    characteristics:
+      - "buffered"
+      - "適合 time-based 效果"
+
+    order_suggestion:
+      - "modulation"  # Chorus, Phaser, Flanger
+      - "delay"
+      - "reverb"
+
+    special_feature:
+      mute_function: "Loop 2 空接時可作為 MUTE 功能"
+
+    notes: "Time/Mod 效果器放此 loop，buffered 適合這些效果"
+
+# ============================================================
+# 配對優先順序邏輯
+# ============================================================
+
+pairing_priority:
+  # 當有多個選擇時，依據以下優先順序決定
+  compressor_selection:
+    - factor: "music_style"
+      weight: 0.4
+
+    - factor: "guitar_pickup_type"
+      weight: 0.3
+
+    - factor: "desired_tone_character"
+      weight: 0.3
+
+  overdrive_selection:
+    - factor: "music_style"
+      weight: 0.5
+
+    - factor: "amp_type"
+      weight: 0.3
+
+    - factor: "guitar_character"
+      weight: 0.2
+
+  # 配對決策樹範例
+  decision_tree_example:
+    condition: "music_style == Jazz && guitar_output == medium && body_type == semi_hollow"
+    result:
+      compressor: "Cali76 FET"  # 溫暖 FET 適合 Jazz
+      compressor_reason: "FET 溫暖特性 + semi-hollow 需要溫和壓縮"
+      overdrive: "Sweet Honey"
+      overdrive_reason: "溫暖低增益，bypass 為主"
+      overdrive_bypass: true
+
+# ============================================================
+# 常見問題配對表
+# ============================================================
+
+common_pairings:
+  - guitar: "ESP Eclipse CTM (EMG active, high output)"
+    music_style: "Rock"
+    recommendation:
+      compressor: "Empress MKII (transparent)"
+      compressor_settings:
+        input: "1-2 LED (lower)"
+        ratio: "2:1 (lower)"
+      overdrive: "Morning Glory or TWA Source Code"
+      notes: "高輸出需要透明壓縮，降低 gain避免過度失真"
+
+  - guitar: "ESP Throbber-CTM (SD APH-1, medium output, semi-hollow)"
+    music_style: "Jazz"
+    recommendation:
+      compressor: "Cali76 FET"
+      compressor_settings:
+        in: "5-6 LED"
+        dry: "70%"
+      overdrive: "Sweet Honey (mostly bypassed)"
+      notes: "FET 溫暖 + semi-hollow 共鳴 = 完美 Jazz 組合"
+
+  - guitar: "Greco TE-500 (Lindy Fralin, medium output)"
+    music_style: "Neo Soul"
+    recommendation:
+      compressor: "Empress MKII"
+      compressor_settings:
+        ratio: "3:1"
+        mix: "80-100%"
+      overdrive: "Sweet Honey + PRS Horsemeat (stacked)"
+      eq: "PA-1QG (+3dB boost, warm 800Hz)"
+      notes: "溫暖 OD 疊加，EQ 補足音量"
+
+  - guitar: "Fender Tokyo Thinline (single-coil, medium output)"
+    music_style: "Funk"
+    recommendation:
+      compressor: "Empress MKII"
+      compressor_settings:
+        ratio: "4:1 (higher)"
+        mix: "100%"
+      overdrive: "Clean boost only (PA-1QG LEVEL)"
+      notes: "單線圈需要更多壓縮，Funk 主要 clean boost"
+
+# ============================================================
+# 版本資訊
+# ============================================================
+
+version_history:
+  - version: "1.0"
+    date: "2025-12-30"
+    changes:
+      - "初始版本"
+      - "基於 2025-v3-signal-chain 專案經驗建立"
+    notes: "此規則庫會隨著實際使用經驗持續更新"
