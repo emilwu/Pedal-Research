@@ -1,0 +1,198 @@
+# Free the Tone PA-1QG Programmable Analog 10 Band EQ
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "pa1qg"
+  brand: "Free the Tone"
+  model: "PA-1QG Programmable Analog 10 Band EQ"
+  full_name: "Free the Tone PA-1QG Programmable Analog 10 Band Equalizer (Guitar)"
+  type: "eq"
+  subtype: "parametric_graphic"
+  country: "Japan"
+  release_year: 2018
+  development_time: "10+年研發"
+
+# 價格資訊
+price:
+  msrp: 425
+  currency: "USD"
+  tier: "high_end"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"
+    current: "200mA"
+    note: "不建議Daisy Chain"
+
+  eq_type: "10-Band Programmable Graphic EQ"
+
+  frequency_bands:
+    - "50Hz"
+    - "100Hz"
+    - "200Hz"
+    - "400Hz"
+    - "800Hz"
+    - "1.5kHz"
+    - "2.5kHz"
+    - "3.5kHz"
+    - "7kHz"
+    - "10kHz"
+
+  adjustment_range: "±12 dB per band"
+
+  presets:
+    total: 99
+    quick_access: "1-4"
+    midi_access: "全部可透過MIDI"
+
+  midi:
+    support: true
+    features:
+      - "Program Change"
+      - "Control Change"
+      - "MIDI Channel可設定 (ALL/1-16/OFF)"
+
+  controls:
+    - name: "Cursor Keys"
+      function: "選擇頻段或Volume"
+    - name: "PARAMETER Encoder"
+      function: "調整選定參數"
+    - name: "PRESET Switch"
+      function: "切換預設1-4"
+    - name: "ON/OFF Switch"
+      function: "效果開關"
+    - name: "SAVE Switch"
+      function: "儲存預設"
+
+  display:
+    equalizer: "即時顯示EQ曲線"
+    level: "顯示音量設定"
+
+  bypass: "Buffered Bypass (HTS Circuit)"
+
+# 音色特性
+tonal_characteristics:
+  architecture: "全類比訊號路徑 + 數位參數控制"
+  hts_circuit: "確保效果開關時音色質感一致"
+  frequency_selection: "針對吉他音域特別優化"
+  transparency: "高品質類比音色"
+
+# 特殊功能
+special_features:
+  preset_volume_control:
+    description: "每預設獨立音量 (0-127)"
+    unity_gain: 100
+    max_boost: "+12dB (設定為127)"
+    use_case: "可作為Preset-based Volume Controller"
+
+  hts_circuit:
+    full_name: "Holistic Tonal Solution"
+    features:
+      - "全面管理高品質訊號"
+      - "解決傳統Bypass音色差異"
+      - "確保效果開關時音色質感一致"
+
+  clean_boost:
+    via: "LEVEL control"
+    description: "可透過LEVEL設定實現Clean Boost功能"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "需要多組EQ預設"
+    - "多把吉他切換 (每把獨立EQ)"
+    - "現場演出 (快速預設切換)"
+    - "不同曲風切換"
+    - "Solo Boost (透過LEVEL設定)"
+    - "MIDI整合系統"
+    - "Guitar-specific EQ"
+    - "Preset switching"
+
+  signal_chain_position: "可置於任何位置 (HTS Circuit確保品質)"
+
+  preset_strategy:
+    presets_1_4: "快速存取,常用音色"
+    presets_5_20: "不同吉他專用EQ"
+    presets_21_40: "不同音樂風格"
+    presets_41_60: "Solo Boost變化"
+    presets_61_99: "實驗與特殊用途"
+
+  multi_guitar_example:
+    preset_1:
+      guitar: "Telecaster"
+      setting: "增加低頻與中頻"
+    preset_2:
+      guitar: "Stratocaster"
+      setting: "削減冰冷感"
+    preset_3:
+      guitar: "Les Paul"
+      setting: "控制過多中頻"
+    preset_4:
+      guitar: "Hollowbody"
+      setting: "削減Feedback頻率"
+
+# 阻抗特性
+impedance:
+  input:
+    inst: "1MΩ"
+    line: "300kΩ"
+    switchable: true
+  output: "min. 10kΩ"
+  max_input:
+    inst: "+4dBu"
+    line: "+14dBu"
+
+# 評價
+review_summary:
+  pros:
+    - "類比音質優異"
+    - "99預設充足"
+    - "HTS Circuit"
+    - "MIDI完整"
+    - "可作Volume Controller"
+    - "10-band parametric EQ"
+    - "Buffered output"
+
+  cons:
+    - "價格較高"
+    - "學習曲線陡"
+    - "需時間建立預設庫"
+
+  conclusion: "高階Programmable EQ標竿,類比音色+數位便利完美結合"
+
+# 搭配建議
+pairing:
+  guitars:
+    best_for:
+      - "多把吉他切換使用者"
+      - "需要為每把吉他建立專用EQ的玩家"
+
+  music_styles:
+    excellent:
+      - "需要多組EQ預設的演出"
+      - "現場演出 (快速切換)"
+      - "錄音室應用"
+      - "MIDI整合系統"
+
+# 訊號鏈配置
+signal_chain:
+  position: "always_on_pre_amp"
+  swiss_things_assignment: "before_input"
+  notes: "可程式化 EQ，為每把吉他建立專用 preset，附 Clean Boost 功能"
+
+# 參考資料來源
+sources:
+  - "Free the Tone 官方網站"
+  - "產品手冊"
+  - "Premier Guitar"
+  - "MusicRadar"
+  - "Perfect Circuit"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

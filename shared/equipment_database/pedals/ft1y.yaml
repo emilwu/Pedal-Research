@@ -1,0 +1,204 @@
+# Free the Tone FT-1Y Flight Time Digital Delay
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "ft1y"
+  brand: "Free the Tone"
+  model: "FT-1Y Flight Time Digital Delay"
+  full_name: "Free the Tone Flight Time FT-1Y Digital Delay"
+  type: "delay"
+  subtype: "digital"
+  country: "Japan"
+  release_year: 2014
+  successor: "FT-2Y (2024)"
+
+# 價格資訊
+price:
+  tier: "high_end_digital_delay"
+  msrp: 400
+  currency: "USD"
+
+# 核心技術規格
+technical_specs:
+  power:
+    ft1y: "12V DC, 400mA"
+    ft2y: "9V DC, 400mA"
+
+  dsp: "32-bit High-Precision DSP"
+
+  presets:
+    total: 99
+    user: 90
+    factory: 9
+
+  delay_type: "Digital Delay (無模擬/建模)"
+
+  signal_path:
+    dry: "全類比"
+    delay: "數位處理"
+    mixing: "內部類比混音"
+
+# 創新功能 (世界首創)
+innovative_features:
+  realtime_bpm_analyzer:
+    year: 2014
+    description: "世界首創 Realtime BPM Analyzer"
+    features:
+      - "即時分析演奏速度"
+      - "自動微調延遲時間至實際BPM"
+      - "工作範圍: Tap輸入BPM的±20%"
+
+  delay_time_offset:
+    description: "世界首創 Delay Time Offset"
+    features:
+      - "可偏移延遲時間相對於設定BPM"
+      - "每預設獨立設定"
+      - "使延遲音更易聽見或創造不同感覺"
+
+# 音色特性
+tonal_characteristics:
+  delay_quality: "清晰、高保真、精準 (等同經典Rack延遲)"
+  hts_circuit: "效果開關時音色質感一致"
+
+  filters:
+    lpf:
+      name: "Low-Pass Filter"
+      function: "創造溫暖延遲音"
+    hpf:
+      name: "High-Pass Filter"
+      function: "保持清晰度,避免低頻混濁"
+
+  modulation:
+    range: "從優美調變到極端Siren Noise"
+
+# 特殊功能
+special_features:
+  hold_function:
+    description: "即使效果關閉,按外部踏板可觸發儲存的延遲音"
+    use_case: "可在儲存延遲音上繼續演奏"
+
+  rec_and_repeat:
+    description: "可錄製並循環播放"
+    note: "預設延遲效果施加於錄音與演奏音"
+
+  trail_function:
+    description: "切換預設時保留前一個延遲音"
+    modes:
+      - "自然的效果切換"
+      - "可設定為關閉 (立即切換)"
+
+  phase_invert:
+    description: "反轉延遲音相位,解決被其他樂器掩蓋問題"
+
+  subdivision_function:
+    description: "基於BPM定義延遲節拍數"
+
+  tap_preferred_mode:
+    description: "切換預設後保留最後Tap輸入的速度"
+
+# 連接規格
+connectivity:
+  input_output: "Standard 1/4\" Phone Jack"
+  hold: "外部踏板輸入"
+  midi: "IN/OUT (DIN 5-pin)"
+
+  impedance:
+    input: "min. 500kΩ"
+
+  max_input:
+    inst: "+2dBm"
+    line: "+13dBm"
+
+  stereo: false
+  note: "無立體聲輸出 (單聲道)"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "錄音室級延遲音質需求"
+    - "需要BPM同步的現場演出"
+    - "複雜延遲設定需要多預設"
+    - "MIDI整合系統"
+    - "創意延遲效果實驗"
+    - "Precision BPM sync"
+    - "Post Rock ambient layers"
+    - "Jazz subtle delays"
+
+  music_styles:
+    - "Jazz"
+    - "Neo Soul"
+    - "Fusion"
+    - "Post Rock"
+    - "Pop Rock"
+    - "Ambient"
+
+  features:
+    - "Realtime BPM Analyzer"
+    - "Digital/Analog modes"
+    - "HOLD function"
+    - "Tap tempo"
+
+# 使用技巧
+usage_tips:
+  realtime_bpm_analyzer:
+    steps:
+      - "Tap Tempo輸入大概速度"
+      - "開始演奏"
+      - "BPM Analyzer自動微調至實際演奏速度"
+
+  delay_time_offset:
+    steps:
+      - "設定基本BPM"
+      - "調整Offset參數"
+      - "正值→延遲略長, 負值→延遲略短"
+
+  hold_function_creative:
+    steps:
+      - "連接外部踏板"
+      - "演奏樂句"
+      - "按Hold踏板儲存延遲音"
+      - "關閉效果,需要時按Hold觸發"
+      - "在延遲音上繼續演奏"
+
+# 評價
+review_summary:
+  pros:
+    - "音質優異(等同Rack)"
+    - "BPM Analyzer創新實用"
+    - "99預設"
+    - "多創意功能"
+    - "MIDI完整"
+    - "Realtime BPM Analyzer 自動偵測節奏"
+
+  cons:
+    - "複雜(學習曲線陡)"
+    - "無立體聲輸出(單聲道)"
+    - "價格高"
+
+  conclusion: "被稱為延遲的終極解決方案(單聲道), 專業音樂家與錄音師首選"
+
+# 阻抗特性
+impedance:
+  input: "min. 500kΩ (高阻抗)"
+  output: "min. 1kΩ (低阻抗負載)"
+
+# 訊號鏈配置
+signal_chain:
+  position: "fx_loop_or_post_gain"
+  swiss_things_assignment: "loop_2"
+  notes: "兩條訊號鏈共用，Realtime BPM Analyzer 自動偵測節奏"
+
+# 參考資料來源
+sources:
+  - "Free the Tone 官方網站"
+  - "產品手冊"
+  - "Premier Guitar"
+  - "Perfect Circuit"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

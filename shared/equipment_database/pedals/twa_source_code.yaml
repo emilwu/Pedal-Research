@@ -1,0 +1,151 @@
+# TWA Source Code Overdrive
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "twa_source_code"
+  brand: "TWA (Totally Wycked Audio)"
+  model: "Source Code Overdrive"
+  full_name: "TWA Source Code - Next-Gen Tube Screamer Evolution"
+  type: "overdrive"
+  subtype: "tubescreamer_evolution"
+  designer: "Susumu Tamura (原始 TS808 創造者)"
+  design_approach: "TS808 的終極進化版本"
+  country: "USA"
+  manufacturing: "Handmade in USA"
+
+# 價格資訊
+price:
+  msrp: 299
+  currency: "USD"
+  tier: "high_end_boutique"
+
+# 核心技術規格
+technical_specs:
+  power:
+    external: "9VDC"
+    internal: "18V operation via internal voltage regulator"
+    note: "內部升壓至 18V"
+
+  controls:
+    - name: "Level"
+      function: "輸出音量"
+    - name: "Drive"
+      function: "增益量控制"
+    - name: "Tone"
+      function: "音色控制"
+    - name: "Bite"
+      function: "調整偶次/奇次諧波平衡 (新增核心創新)"
+
+  special_features:
+    - "Bite control: 調整偶次/奇次諧波平衡"
+    - "+6dB boost circuit"
+    - "Multi-transistor input buffer"
+    - "Magic IC OpAmp"
+
+  bypass: "True Bypass"
+
+# Bite Control (核心創新)
+bite_control:
+  name: "BITE"
+  function: "調整 odd/even-order harmonics 平衡"
+  range:
+    min: "Symmetrical clipping (對稱削波)"
+    max: "Asymmetrical clipping (不對稱削波)"
+  tonal_impact: "從平滑到 high-gain tube amp 感覺"
+  description: "遊戲規則改變者 - 提供前所未有的諧波控制"
+
+# 音色特性
+tonal_characteristics:
+  frequency:
+    low: "比傳統 TS 更飽滿"
+    mid: "保留 TS 特色中頻,但更平衡"
+    high: "更開放,較不刺耳"
+
+  dynamics:
+    pick_sensitivity: "高"
+    volume_sensitivity: "高"
+    compression: "適中 (可透過 Bite 調整)"
+
+  gain:
+    breakup_point: "可調"
+    gain_range: "Low to High (比 TS808 更廣)"
+    harmonics: "可透過 Bite 從偶次到奇次調整"
+
+# 18V Operation 優勢
+voltage_advantages:
+  headroom: "更大 headroom"
+  dynamics: "更好的動態範圍"
+  clarity: "更清晰的音色"
+
+# 與 TS808/TS9 比較
+comparisons:
+  vs_ts808:
+    headroom: "顯著增加"
+    gain_range: "更廣"
+    harmonic_control: "Bite 提供前所未有的控制"
+    transparency: "更透明,較少中頻堆疊"
+    buffer: "全新 multi-transistor design"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "Rock"
+    - "Blues"
+    - "Fusion"
+    - "Modern styles"
+    - "Classic Rock"
+    - "TS-style mid boost"
+    - "High headroom overdrive"
+
+  versatility: "幾乎所有需要 TS-style OD 的場合"
+
+  signal_chain_position: "Signal chain 前段或中段"
+
+  stacking:
+    ability: "與其他 pedal 疊加優異"
+
+  settings:
+    bite_starting_point: "從 12 點鐘開始調整"
+
+  features:
+    - "Tube Screamer evolution"
+    - "Bite Control (harmonic shaping)"
+    - "18V headroom"
+    - "Mid-focused"
+
+# 阻抗特性
+impedance:
+  input: "High (multi-transistor buffer)"
+  output: "Low (buffer 輸出)"
+  buffer: "Always-on multi-transistor design"
+
+# 評價
+review_summary:
+  pros:
+    - "Ultimate evolution of the Tube Screamer"
+    - "Bite control 是遊戲規則改變者"
+    - "18V operation 提供顯著優勢"
+    - "由原創者設計,具有權威性"
+
+  quote: "Ultimate evolution of the Tube Screamer"
+
+# 訊號鏈配置
+signal_chain:
+  position: "pre_amp_gain"
+  swiss_things_assignment: "loop_1"
+  notes: "訊號鏈2 TS Evolution，Classic Rock 時需要 TS 中頻開啟"
+
+# 參考資料來源
+sources:
+  - "TWA (Totally Wycked Audio) 官方網站"
+  - "Susumu Tamura 設計資料"
+  - "Premier Guitar"
+  - "Reverb"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

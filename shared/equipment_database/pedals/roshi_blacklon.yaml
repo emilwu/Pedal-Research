@@ -1,0 +1,168 @@
+# Roshi Pedals Blacklon Amp-in-a-Box
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "roshi_blacklon"
+  brand: "Roshi"
+  model: "Blacklon Amp-in-a-Box"
+  full_name: "Roshi Pedals Blacklon Amp-in-a-Box"
+  type: "overdrive"
+  subtype: "amp_simulator"
+  amp_simulation: "Fender Blackface AB763"
+  design_philosophy: "如同腳下有台音箱"
+  country: "Japan"
+
+# 價格資訊
+price:
+  msrp: 29700
+  currency: "JPY"
+  usd_equivalent: 200
+  tier: "mid_range"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "DC9V"
+    max_voltage: "10V"
+    warning: "不可超過 10V - 會損壞"
+
+  controls:
+    - name: "Volume"
+      function: "輸出音量"
+    - name: "Gain"
+      function: "增益量控制"
+    - name: "Tone"
+      function: "音色控制"
+
+  switches:
+    - name: "6L6/6V6 Mode Toggle"
+      function: "模擬真空管類型"
+    - name: "Mellow/Drive Mode Toggle"
+      function: "音色特性切換"
+
+# 音色特性
+tonal_characteristics:
+  core_features:
+    - "豐富低頻與高頻分離感並存"
+    - "適度 Compression 的 Clean tone"
+    - "失真質感如音箱般 破裂 (edgy attack)"
+    - "極度透明,能反映音箱特性"
+
+  natural_drive:
+    - "Compression 感與 Overload 失真"
+    - "低頻/高頻適度削減 (Blackface 特色)"
+    - "清晰不混濁"
+
+  dynamics:
+    pick_sensitivity: "極高"
+    volume_sensitivity: "極高"
+    compression: "可調 (類似真空管音箱)"
+
+# 6L6/6V6 Mode 差異
+tube_mode:
+  "6l6gt":
+    position: "左"
+    features:
+      - "更大 headroom"
+      - "低頻延伸更好"
+      - "適合 Heavy riff"
+      - "廣闊頻率範圍"
+      - "適合搭配 Fuzz pedals"
+
+  "6v6gt":
+    position: "右"
+    features:
+      - "Neo Soul 風格 mellow tone"
+      - "類似 Fuzz Face + Crunch amp"
+      - "較溫暖柔和"
+
+# Mellow/Drive Mode 差異
+tone_mode:
+  mellow:
+    position: "左"
+    features:
+      - "豐富低頻"
+      - "較少失真"
+      - "Tone 控制較溫和"
+
+  drive:
+    position: "右"
+    features:
+      - "削減低頻 (避免泥濘)"
+      - "更多失真"
+      - "Tone 控制更激進"
+      - "更寬廣音色調整範圍"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "Giving solid-state amps tube feel"
+    - "Post Rock"
+    - "Neo Soul"
+    - "Blues"
+    - "Clean to Crunch tones"
+
+  mode_specific:
+    "6l6":
+      - "Heavy Rock"
+      - "搭配 Fuzz"
+    "6v6":
+      - "Neo Soul"
+      - "Jazz"
+      - "Smooth tones"
+
+  special_use:
+    jc_amp: "JC 等電晶體音箱也能獲得真空管感"
+
+  signal_chain_position: "Signal chain 前段"
+
+  value_proposition: "在電晶體音箱上特別有價值,可作為 amp替代 使用"
+
+  features:
+    - "Blackface amp simulation"
+    - "6L6 / 6V6 tube switching"
+    - "Drive / Mellow mode"
+    - "Amp-in-a-box design"
+
+# 使用注意事項
+warnings:
+  voltage:
+    limit: "僅能使用 DC9V"
+    damage: "超過 10V 會損壞"
+
+  mode_switching:
+    behavior: "6L6/6V6 切換後約 30 秒旋鈕挙動不穩定 (正常現象)"
+
+# 阻抗特性
+impedance:
+  input: "~1MΩ (預估)"
+  output: "~10-50kΩ (預估)"
+
+# 評價
+review_summary:
+  pros:
+    - "最接近音箱質感的踏板"
+    - "模擬 Fender Blackface 特性成功"
+    - "4 種模式組合提供極大彈性"
+    - "在日本設計師群體中已有實戰驗證"
+
+  modes: "4種模式組合: 6L6/6V6 × Mellow/Drive"
+
+# 訊號鏈配置
+signal_chain:
+  position: "pre_amp_gain"
+  swiss_things_assignment: "loop_1"
+  notes: "訊號鏈2 Blackface 管機模擬，讓 JC-22 有管機感"
+
+# 參考資料來源
+sources:
+  - "RoShi Pedals 官方網站"
+  - "日本效果器評測"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

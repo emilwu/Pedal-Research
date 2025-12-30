@@ -1,0 +1,216 @@
+# Cornerstone Nucleo Stereo Reverb
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "nucleo"
+  brand: "Cornerstone"
+  model: "Nucleo"
+  full_name: "Cornerstone Nucleo Stereo Reverb"
+  type: "reverb"
+  subtype: "stereo_reverb"
+  country: "Italy"
+  manufacturing: "義大利手工"
+  design_partner: "Paul Davids (荷蘭吉他手/YouTuber)"
+  release_year: 2024
+  development_time: "3年開發"
+  inspiration: "奧地利Zwentendorf核電廠自然殘響"
+  engine: "M7 Cortex Engine"
+
+# 價格資訊
+price:
+  msrp: 350
+  currency: "USD"
+  tier: "high_end"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"
+    note: "不含變壓器"
+
+  reverb_engine: "數位, M7 Cortex Engine"
+
+  reverb_modes:
+    - name: "Room"
+      description: "親密反射空間 (控制室)"
+    - name: "Hall"
+      description: "寬廣大廳 (冷卻室)"
+    - name: "Reactor"
+      description: "神秘大氣空間 (反應爐核心)"
+
+  voicing_options:
+    - name: "Normal"
+      description: "清晰、現代、精準"
+    - name: "Vintage"
+      description: "溫暖、Wow and Flutter"
+    - name: "Lo-Fi"
+      description: "復古、粗糙"
+
+  presets:
+    onboard: 3
+    midi: 128
+
+  decay_time: "最長90秒 (epic decay)"
+
+  size:
+    dimensions: "94x119x42mm"
+    weight: "450g"
+
+# 音色特性
+tonal_characteristics:
+  overall_tone: "寬廣、豐富、大氣、有機、會呼吸"
+  space: "從親密到無限"
+
+  reactor_mode:
+    features:
+      - "神秘、大氣的殘響"
+      - "巨大、膨脹的聲音"
+      - "創造電影般音景"
+      - "靈感來自真實核電廠空間"
+
+  features:
+    - "Nuclear reactor impulse response"
+    - "Stereo output"
+    - "Transformer-isolated output"
+    - "Long decay (up to 90s)"
+    - "Freeze function"
+
+# 特殊功能
+special_features:
+  freeze:
+    description: "凍結當前殘響尾音"
+    features:
+      - "可在凍結音上繼續演奏"
+      - "Latch Mode可平滑和弦轉換"
+      - "Freeze-Pitch調整凍結音高"
+
+  modulation_and_effects:
+    mod:
+      description: "從細微調變到完整調變景觀"
+    air:
+      description: "Shimmer高八度效果 (或低八度)"
+    flux:
+      description: "顆粒質感、Geiger Counter風格隨機聲響"
+
+  usb_audio_interface:
+    description: "可作為電腦音訊介面"
+    features:
+      - "直接錄製Reverb效果"
+
+# 控制功能
+controls:
+  - name: "BLEND/VOLUME"
+    function: "乾濕混合/音量"
+  - name: "MOD/RATE"
+    function: "調變深度/速度"
+  - name: "AIR/PITCH"
+    function: "Shimmer/音高"
+  - name: "FLUX/SPEED"
+    function: "顆粒效果/速度"
+  - name: "DECAY/PRE-D"
+    function: "殘響長度/Pre-Delay"
+  - name: "TONE/DIFF"
+    function: "音色/Diffusion"
+  - name: "FREEZE-PITCH/FREEZE-VOLUME"
+    function: "凍結音高/音量"
+
+  note: "每個旋鈕都有第二功能 (透過Mode切換)"
+
+# 連接規格
+connectivity:
+  input: "6.3mm TRS Stereo Jack (Mono/Stereo)"
+  outputs: "2x 6.3mm Jack (L+R Stereo)"
+  right_output: "Transformer-Isolated (避免Ground Loop)"
+  midi: "In/Out (3.5mm TRS)"
+  usb: "USB-C (Audio Interface功能)"
+  stereo: true
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "Ambient"
+    - "Post Rock"
+    - "Unique room sound"
+    - "Stereo imaging"
+    - "Ambient音景創造"
+    - "電影般質感"
+    - "Post Rock, Shoegaze, Worship, Ambient"
+    - "創意音色設計"
+    - "Pad底層建構"
+
+  signal_chain_position: "通常置於Delay之後,最後階段空間效果"
+
+  settings:
+    basic_room:
+      mode: "Room"
+      voicing: "Normal"
+      blend: "30-40%"
+      decay: "短至中"
+      mod_air_flux: "最小"
+
+    ambient_reactor:
+      mode: "Reactor"
+      voicing: "Vintage/Lo-Fi"
+      blend: "60-80%"
+      decay: "長(60-90秒)"
+      mod: "中"
+      air: "中至高"
+      flux: "中"
+
+    freeze_pad:
+      mode: "任何模式"
+      blend: "高"
+      decay: "長"
+      technique: "演奏和弦 → 按Freeze → 在上面繼續演奏"
+
+    shimmer:
+      mode: "Hall/Reactor"
+      blend: "50-70%"
+      decay: "長"
+      air: "高"
+      mod: "細微"
+      flux: "低至中"
+
+# 評價
+review_summary:
+  pros:
+    - "音色令人驚艷活潑"
+    - "靈感來自真實空間"
+    - "Voicing選項多樣"
+    - "Freeze實用"
+    - "USB Interface"
+    - "MIDI完整"
+    - "手工品質優良"
+    - "Right Output Transformer-Isolated (避免Ground Loop)"
+
+  cons:
+    - "價格較高"
+    - "學習曲線(功能豐富)"
+
+  conclusion: "被稱為夢想中的Reverb,取代BigSky等大型Reverb"
+
+# 阻抗特性
+impedance:
+  input: "Stereo TRS (適合高阻抗樂器)"
+  output: "Stereo (L+R), Right Output Transformer-Isolated"
+
+# 訊號鏈配置
+signal_chain:
+  position: "fx_loop_or_post_gain"
+  swiss_things_assignment: "loop_2"
+  notes: "兩條訊號鏈共用，Stereo 主 Reverb，核電廠反應爐空間感"
+
+# 參考資料來源
+sources:
+  - "Cornerstone Music Gear 官方網站"
+  - "Paul Davids 官網與視頻"
+  - "Premier Guitar"
+  - "Perfect Circuit"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

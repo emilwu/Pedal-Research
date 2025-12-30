@@ -1,0 +1,175 @@
+# Free the Tone Overdriveland ODL-1-CS
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "odl1cs"
+  brand: "Free the Tone"
+  model: "ODL-1-CS Overdrive"
+  full_name: "Free the Tone Overdriveland ODL-1-CS (Custom Shop Version)"
+  type: "overdrive"
+  subtype: "dumble_style"
+  designer: "Yuki Hayashi (20+ years Dumble 維修經驗)"
+  design_approach: "捕捉 Dumble Overdrive Special 的質感"
+  country: "Japan"
+
+# 價格資訊
+price:
+  msrp: 425
+  currency: "USD"
+  tier: "high_end_boutique"
+  standard_version: 350-380
+
+# 核心技術規格
+technical_specs:
+  power:
+    external: "DC9V"
+    internal_boost: "10-19V variable (CS版本) / 固定14.5V (Standard)"
+    current: "95mA (需200mA以上供電能力)"
+    note: "不支援電池 (高電流消耗)"
+
+  dual_channel:
+    normal:
+      circuit: "無 clipping diodes/LEDs"
+      controls: ["NOR LEVEL", "TONE", "GAIN"]
+      switches: ["EQ ON/GLASS", "ROCK/JAZZ"]
+      features: "豐富諧波,即使在 clean 設定下"
+    drive:
+      circuit: "Dedicated drive circuit module"
+      controls: ["DRV LEVEL", "DRIVE", "PUSH", "HI CUT"]
+      position: "在 Normal Channel 之前"
+      features: "Custom module (CS版本更敏感)"
+
+  switches:
+    eq_glass:
+      - name: "EQ ON"
+        function: "啟動 Tone circuit"
+      - name: "GLASS"
+        function: "Bypass Tone circuit (類似 Blackface Fender Vibroverb 的 Bright switch, 玻璃般清晰音色)"
+
+    rock_jazz:
+      - name: "ROCK"
+        function: "增加 gain, 略削減低頻 (避免 amp 過載), 適合 Rock 音色塑造"
+      - name: "JAZZ"
+        function: "降低整體 gain, 強調低頻豐富度, 適合 Jazz 音色"
+
+  voltage_switching:
+    dc9v: "直接從 9V 供電"
+    intps_vari:
+      standard: "固定 14.5V"
+      custom_shop: "10-19V 可調"
+      effect: "改變 clipping point,劇烈改變音色"
+
+  hts_circuit:
+    full_name: "Holistic Tonal Solution"
+    features:
+      - "不同於傳統 buffer"
+      - "最大化吉他音色特性"
+      - "平衡 音色 與 低噪音"
+      - "輸出與輸入同相位"
+
+  bypass: "Buffered Bypass (HTS circuit, always-on)"
+
+  size:
+    dimensions: "97mm(D) × 120mm(W) × 51mm(H)"
+    weight: "約 420g (不含電池)"
+
+# Custom Shop vs Standard 差異
+cs_differences:
+  custom_module:
+    description: "CS 使用不同零件,更敏感反應"
+  voltage_adjustment:
+    standard: "固定 14.5V"
+    cs: "10-19V 連續調整"
+  tone:
+    description: "CS 版本更細膩、更敏感"
+
+# 音色特性
+tonal_characteristics:
+  core_features:
+    - "Dumble 特有的諧波豐富度"
+    - "Clean 也帶有輕微失真質感"
+    - "Amp-like 反應,如同音箱有意識般回應"
+    - "跨弦平衡 (1-6/7弦)"
+
+  frequency:
+    adjustable: "可透過 GLASS/EQ ON 大幅調整"
+    rock_mode: "略減低頻"
+    jazz_mode: "強調低頻"
+
+  dynamics:
+    pick_sensitivity: "極高 (Dumble 特性)"
+    volume_sensitivity: "極高"
+    compression: "Dumble-style"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "Blues"
+    - "Jazz"
+    - "Fusion"
+    - "Rock"
+    - "Larry Carlton / Robben Ford style"
+    - "High-end overdrive tones"
+
+  reference_artists:
+    - "Larry Carlton"
+    - "Robben Ford"
+    - "Eric Johnson"
+    - "SRV"
+    - "John Mayer"
+
+  signal_chain_position: "Signal chain 前段"
+
+  settings:
+    voltage_experiment: "CS 版本可調 10-19V 找到個人喜好"
+    battery_use: "使用電池時設定 DC9V mode (Int.PS 耗電快)"
+
+  features:
+    - "Dumble-style overdrive"
+    - "Dual channel (Clean/Drive)"
+    - "14-16V operation"
+    - "ROCK mode"
+
+# 阻抗特性
+impedance:
+  input: "500kΩ or higher"
+  output: "10kΩ or higher"
+
+# 相關型號
+related_models:
+  odl_1a_cs:
+    description: "加入 channel control terminal (外部切換)"
+    battery: "不支援電池 (高電流消耗)"
+
+# 評價
+review_summary:
+  pros:
+    - "成功捕捉 Dumble 音箱質感"
+    - "CS 版本電壓調整功能極有價值"
+    - "HTS circuit 提供優異訊號完整性"
+    - "開發耗時長,經過嚴格測試"
+    - "Dumble 音色但踏板尺寸"
+
+  development:
+    note: "開發耗時長,經過嚴格測試"
+
+# 訊號鏈配置
+signal_chain:
+  position: "pre_amp_gain"
+  swiss_things_assignment: "loop_1"
+  notes: "訊號鏈2 Dumble 高階音色，Fusion 經典"
+
+# 參考資料來源
+sources:
+  - "Free the Tone 官方網站"
+  - "產品手冊"
+  - "Yuki Hayashi 設計資料"
+  - "Premier Guitar"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

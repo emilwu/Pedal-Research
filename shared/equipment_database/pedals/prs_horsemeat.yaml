@@ -1,0 +1,163 @@
+# PRS Horsemeat Transparent Overdrive
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "prs_horsemeat"
+  brand: "PRS"
+  model: "Horsemeat Transparent Overdrive"
+  full_name: "PRS Horsemeat Transparent Overdrive"
+  type: "overdrive"
+  subtype: "klon_style_transparent"
+  designer: "Paul Reed Smith"
+  design_approach: "從零設計 (非 clone), Klon-inspired but original"
+  country: "USA"
+  manufacturing: "Designed and Made in Maryland, USA"
+
+# 價格資訊
+price:
+  msrp: 279
+  currency: "USD"
+  tier: "mid_high_end_boutique"
+  note: "部分零售商有降價到 £99"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"
+    current: "16mA"
+
+  controls:
+    - name: "Level"
+      function: "輸出音量"
+    - name: "Gain"
+      function: "從 clean boost 到 medium-high OD"
+    - name: "Voice"
+      function: "核心音色塑造 (從 saturated meaty distortion 到 glassy singing overdrive)"
+    - name: "Treble"
+      function: "高頻 cut/boost (2-band EQ)"
+    - name: "Bass"
+      function: "低頻 cut/boost (2-band EQ)"
+
+  bypass: "True Bypass"
+
+  diodes: "Germanium Diodes (提供溫暖而不刺耳的音色)"
+
+  design_features:
+    - "Extremely transparent"
+    - "Mid-frequency enhancement"
+    - "Can be used as clean boost"
+    - "High Headroom Design (比典型 horse-themed OD 更多 headroom)"
+    - "Frequency Boost (低頻與高頻都有提升)"
+
+# 音色特性
+tonal_characteristics:
+  design_goal: "透明,不染色,amp-like"
+
+  frequency:
+    low: "溫暖、飽滿 (Germanium 特性)"
+    mid: "豐富、厚實 (harmonic midrange richness)"
+    high: "不刺耳,但保留清晰度"
+
+  dynamics:
+    pick_sensitivity: "高"
+    volume_sensitivity: "高"
+    compression: "適中 (Germanium 特性)"
+
+  gain:
+    breakup_point: "可調"
+    gain_range: "Clean boost to Medium-high gain"
+    harmonics: "Germanium 偶次諧波豐富"
+
+# Voice Control 特性
+voice_control:
+  name: "VOICE"
+  description: "核心秘密武器"
+  range: "從 saturated 到 glassy 的連續變化"
+  impact: "影響整體音色質感與飽和度"
+  note: "需要時間習慣,但提供極大彈性"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "Transparent boost"
+    - "Stacking with other overdrives"
+    - "Adding clarity"
+    - "Smooth tube-esque tones"
+    - "Clean boost"
+    - "Lead/Rhythm hybrid"
+
+  music_styles:
+    excellent:
+      - "Blues"
+      - "Rock"
+      - "Jazz"
+    note: "非常溫暖,如果 rig 已經偏暗需注意 Treble 設定"
+
+  signal_chain_position: "Signal chain 前段或作為 always-on"
+
+  settings:
+    treble_tip: "如果 rig 偏暗,保持 Treble 較高"
+    voice_tip: "需要實驗找到甜蜜點"
+
+  stacking:
+    ability: "與其他 pedals 疊加優異"
+    boost_use: "可作為 clean boost 推動其他 OD"
+    always_on: "適合作為 always-on pedal"
+
+# 阻抗特性
+impedance:
+  input: "~1MΩ (標準)"
+  output: "~10-50kΩ (預估)"
+
+# 與其他踏板比較
+comparisons:
+  vs_klon:
+    similarities:
+      - "透明度"
+      - "midrange richness"
+    differences:
+      - "Germanium (vs Klon's mixed diodes)"
+      - "更多 EQ 控制 (2-band)"
+      - "Voice control (Klon 沒有)"
+      - "更溫暖 (較不 Klon)"
+
+  vs_others:
+    description: "結合 Timmy, Blues Driver, Klon, OCD 的優點"
+    eq_control: "比標準 Klon clone 更多音色塑造能力"
+    vs_shod: "類似 SHOD (Sweet Honey Overdrive) 但更 hairy"
+
+# 評價
+review_summary:
+  pros:
+    - "真正從零設計,非 Klon clone"
+    - "Voice control 是關鍵差異化功能"
+    - "Germanium 提供溫暖、tube-like 音色"
+    - "PRS 吉他同等級的製造品質"
+    - "Through-hole soldering (使用最佳音色零件)"
+    - "堅固金屬機箱"
+
+  cons:
+    - "可能對某些 rig 太溫暖"
+
+  quote: "Horsemeat eats the world's horse-themed overdrives for lunch - PRS"
+
+# 訊號鏈配置
+signal_chain:
+  position: "pre_amp_gain"
+  swiss_things_assignment: "loop_1"
+  notes: "V3.0 新增，取代 Colosseum Klon Side，訊號鏈1透明 Boost"
+
+# 參考資料來源
+sources:
+  - "PRS 官方網站"
+  - "Premier Guitar"
+  - "Reverb"
+  - "Equipboard"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

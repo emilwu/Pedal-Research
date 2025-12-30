@@ -1,0 +1,195 @@
+# Empress Guitar Compressor MKII
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "empress_mkii"
+  brand: "Empress Effects"
+  model: "Guitar Compressor MKII"
+  full_name: "Empress Guitar Compressor MKII"
+  type: "compressor"
+  subtype: "vca"
+  country: "Canada"
+  release_year: 2020
+  original_release: 2011
+
+# 價格資訊
+price:
+  msrp: 219
+  currency: "USD"
+  tier: "mid_high_end"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"
+    current: "100mA"
+    battery: false
+
+  compression:
+    type: "FET"
+    characteristic: "極度透明"
+    ratio_options: ["2:1", "4:1", "10:1"]
+    attack: "可調"
+    release: "50ms ~ 1 second"
+    frequency_response: "完全平坦至20Hz低頻響應"
+
+  controls:
+    - name: "INPUT"
+      function: "輸入增益 → 觸發壓縮閾值"
+    - name: "OUTPUT"
+      function: "輸出電平補償 (大量增益可作Boost)"
+    - name: "ATTACK"
+      function: "壓縮啟動速度"
+    - name: "RELEASE"
+      function: "壓縮恢復速度 (50ms-1s)"
+    - name: "MIX"
+      function: "平行壓縮混合"
+    - name: "TONE"
+      function: "Tilt EQ (500Hz中心)"
+    - name: "RATIO"
+      function: "2:1 / 4:1 / 10:1 切換"
+    - name: "SIDECHAIN HPF"
+      function: "高通濾波器切換"
+
+  visual_feedback:
+    type: "雙LED"
+    indicators: ["Input Level", "Gain Reduction"]
+
+  bypass: "True Bypass"
+
+  size:
+    note: "約為原版一半大小"
+
+# 音色特性
+tonal_characteristics:
+  compression_type: "FET - 透明、音樂性"
+  coloration: "接近零 - 保留原始樂器音色"
+
+  frequency:
+    low: "緊實 (不過度肥厚)"
+    mid: "自然 (不突出)"
+    high: "清晰 (不刺耳)"
+
+  dynamics:
+    pick_sensitivity: "極高"
+    volume_sensitivity: "極高"
+    compression_character: "高度敏感,保留撥弦細節"
+    tone_character: "增加存在感而非重量感"
+
+# MKII 新增功能
+mkii_features:
+  tilt_eq:
+    center_frequency: "500Hz"
+    clockwise: "提升高頻/削減低頻"
+    counter_clockwise: "提升低頻/削減高頻"
+    noon_position: "平坦響應 (Detent)"
+
+  sidechain_hpf:
+    options:
+      - position: "left"
+        frequency: "120Hz"
+        best_for: "6弦吉他"
+      - position: "center"
+        frequency: "OFF"
+        best_for: "全頻段"
+      - position: "right"
+        frequency: "240Hz"
+        best_for: "Bass或更強低頻控制"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "需要透明動態控制"
+    - "Clean Tone演奏"
+    - "Jazz, Neo Soul, Fusion"
+    - "錄音應用 (極度透明)"
+    - "Fretless Bass (自然Mwah增強)"
+
+  signal_chain_position: "Dirt Chain結尾 或 Always On使用"
+
+  settings:
+    transparent:
+      input: "輕微觸發(1-2 LED)"
+      output: "Unity"
+      attack: "中"
+      release: "中"
+      mix: "高"
+      tone: "正午"
+      ratio: "2:1"
+      hpf: "OFF或120Hz"
+
+    clean_acoustic:
+      input: "低至中"
+      output: "Unity"
+      attack: "慢"
+      release: "中至快"
+      mix: "80-100%"
+      tone: "正午或略高頻"
+      ratio: "2:1或4:1"
+      hpf: "OFF"
+
+    funk_rhythm:
+      input: "中"
+      output: "略高"
+      attack: "快"
+      release: "快至中"
+      mix: "70-90%"
+      tone: "略高頻"
+      ratio: "4:1"
+      hpf: "120Hz"
+
+# 阻抗特性
+impedance:
+  input: "高阻抗 (適合被動/主動拾音器)"
+  output: "低阻抗"
+
+# 評價
+review_summary:
+  pros:
+    - "極度透明"
+    - "Tilt EQ實用"
+    - "Sidechain HPF對Bass有價值"
+    - "完整控制"
+    - "安靜無雜訊"
+
+  cons:
+    - "不夠「有氛圍」(通常是優點)"
+    - "僅三種Ratio"
+    - "控制較複雜"
+
+  conclusion: "頂級透明壓縮器黃金標準,與Diamond/Origin Effects並列"
+
+# 搭配建議
+pairing:
+  guitars:
+    best_for:
+      - "被動拾音器吉他"
+      - "主動拾音器吉他"
+      - "Fretless Bass"
+
+  music_styles:
+    excellent:
+      - "Jazz"
+      - "Neo Soul"
+      - "Funk"
+      - "Clean Tones"
+    good:
+      - "Fusion"
+      - "錄音應用"
+
+# 參考資料來源
+sources:
+  - "Empress Effects 官方網站"
+  - "產品手冊"
+  - "Premier Guitar"
+  - "MusicRadar"
+  - "Reverb"
+  - "Sweetwater"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

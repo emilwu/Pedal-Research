@@ -1,0 +1,181 @@
+# Origin Effects Cali76 FET Compressor
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "cali76_fet"
+  brand: "Origin Effects"
+  model: "Cali76 FET Compressor"
+  full_name: "Origin Effects Cali76 FET Compressor"
+  type: "compressor"
+  subtype: "fet"
+  country: "United Kingdom"
+  manufacturing: "英國手工製造"
+  release_year: 2024
+
+# 價格資訊
+price:
+  msrp: 369
+  currency: "USD"
+  tier: "high_end_boutique"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"
+    internal_boost: "9V→24V"
+    headroom: "大量Headroom"
+    battery: false
+    note: "僅變壓器,不支援電池"
+
+  compression:
+    type: "FET (1176風格)"
+    characteristic: "全類比 FET 壓縮"
+    threshold: "固定閾值設計"
+    attack: "可調 (最快為全順時針)"
+    release: "69.5ms ~ 398ms"
+    ratio: "固定 (1176風格)"
+
+  controls:
+    - name: "IN"
+      function: "設定訊號電平 → 更多壓縮"
+    - name: "OUT"
+      function: "輸出電平補償 + Boost"
+    - name: "ATTACK"
+      function: "壓縮啟動速度"
+    - name: "RELEASE"
+      function: "壓縮恢復速度 (69.5-398ms)"
+    - name: "RATIO"
+      function: "壓縮比例選擇"
+    - name: "DRY"
+      function: "乾濕混合 (平行壓縮)"
+
+  visual_feedback:
+    type: "10-LED增益衰減指示器"
+    scale: "dB刻度"
+
+  bypass: "Buffered Bypass (電子切換,低雜訊)"
+
+  size:
+    dimensions: "約140x76x51mm"
+    comparison: "類似Boss尺寸"
+
+# 音色特性
+tonal_characteristics:
+  compression_type: "FET - 超快速瞬態響應"
+  coloration: "輕微 - 溫暖中頻與高頻,圓潤音色"
+
+  frequency:
+    low: "飽滿、緊實"
+    mid: "溫暖、甜美、圓潤"
+    high: "平滑、存在感 (略少於Compact Deluxe的光澤)"
+
+  dynamics:
+    character: "超快速、精準、富彈性"
+    parallel_compression: "DRY控制實現紐約式平行壓縮"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "錄音室品質動態控制"
+    - "Jazz, Neo Soul, Funk - 清音動態管理"
+    - "Lead Guitar - 延音與持續性"
+    - "平行壓縮技術"
+    - "Clean Tone增強"
+    - "Post Rock"
+    - "Blues"
+    - "Rock"
+    - "Sustaining leads"
+
+  signal_chain_position: "前段(Overdrive前) 或 後段(Overdrive後)"
+
+  settings:
+    transparent:
+      in: "低至中"
+      out: "Unity"
+      attack: "慢"
+      release: "中至快"
+      ratio: "低至中"
+      dry: "70-100%"
+
+    sustain_lead:
+      in: "中至高"
+      out: "提升"
+      attack: "快至中"
+      release: "慢"
+      ratio: "高"
+      dry: "50-80%"
+      description: "增強延音(Lead/Solo)"
+
+    funk_rhythm:
+      in: "中"
+      out: "Unity或略高"
+      attack: "快"
+      release: "中至快"
+      ratio: "中至高"
+      dry: "60-80%"
+
+# 阻抗特性
+impedance:
+  input: "高阻抗 (適合被動/主動拾音器)"
+  output: "低阻抗"
+
+# 評價
+review_summary:
+  pros:
+    - "卓越製造品質"
+    - "溫暖音色"
+    - "10-LED實用"
+    - "安靜無雜訊"
+    - "1176-style FET compression"
+    - "Warm coloration"
+    - "Dry mix control"
+    - "Sustain enhancement"
+
+  cons:
+    - "價格高"
+    - "控制複雜"
+    - "底部螺絲突出"
+
+  conclusion: "業界頂級1176風格踏板壓縮器,音色匹配Large Format Cali76"
+
+# 搭配建議
+pairing:
+  guitars:
+    best_for:
+      - "被動拾音器吉他"
+      - "主動拾音器吉他"
+
+  music_styles:
+    excellent:
+      - "Post Rock"
+      - "Jazz"
+      - "Neo Soul"
+      - "Funk"
+      - "Blues"
+      - "Rock"
+    good:
+      - "Clean Tones"
+      - "錄音應用"
+
+# 訊號鏈配置
+signal_chain:
+  position: "always_on_pre_amp"
+  swiss_things_assignment: "before_input"
+  notes: "溫暖 FET 染色壓縮，增加 sustain 適合 Post Rock"
+
+# 參考資料來源
+sources:
+  - "Origin Effects 官方網站"
+  - "產品手冊"
+  - "Premier Guitar"
+  - "MusicRadar"
+  - "Reverb"
+  - "Sweetwater"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

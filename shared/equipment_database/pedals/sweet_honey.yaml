@@ -1,0 +1,156 @@
+# Mad Professor Sweet Honey Overdrive Deluxe
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "sweet_honey"
+  brand: "Mad Professor"
+  model: "Sweet Honey Overdrive Deluxe"
+  full_name: "Mad Professor Sweet Honey Overdrive Deluxe"
+  type: "overdrive"
+  subtype: "transparent_warm"
+  circuit_basis: "Honey Bee circuit evolution"
+
+# 價格資訊
+price:
+  msrp: 220
+  currency: "USD"
+  tier: "mid_high_end"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC (centre negative) or 9V Battery"
+    current: "5mA"
+    battery: true
+
+  controls:
+    - name: "Volume"
+      function: "輸出音量"
+    - name: "Drive"
+      function: "增益量控制"
+    - name: "Focus"
+      function: "調整動態響應與整體 EQ"
+    - name: "Treble"
+      function: "後級高頻控制 (post-gain)"
+    - name: "Bass"
+      function: "前級低頻控制 (pre-gain)"
+
+  bypass: "True Bypass"
+
+# 音色特性
+tonal_characteristics:
+  gain_type: "Low-Medium Gain Overdrive"
+  design_approach: "Touch-sensitive, Medium gain amplifier-like overdrive"
+  tone_goal: "Warm, natural tone with dynamic control"
+
+  frequency:
+    low: "可調整 (Bass 控制在 pre-gain)"
+    mid: "溫暖、飽滿"
+    high: "可調整 (Treble 控制在 post-gain)"
+
+  dynamics:
+    pick_sensitivity: "極高"
+    volume_sensitivity: "高"
+    compression: "適中且可調"
+
+  gain:
+    breakup_point: "可調 (透過 Focus)"
+    gain_range: "Low to Medium (比 Tube Screamer 稍低)"
+    harmonics: "溫暖、豐富,偏偶次諧波"
+
+# Focus 控制特性
+focus_control:
+  name: "FOCUS"
+  description: "調整動態響應與整體 EQ"
+  ccw:
+    setting: "逆時針"
+    behavior: "需要更用力彈奏才產生失真"
+    tone: "音色較柔和"
+    best_for: "Jazz/Blues"
+  cw:
+    setting: "順時針"
+    behavior: "更早產生失真"
+    tone: "帶有輕微高頻提升"
+    best_for: "Classic Rock"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "Jazz"
+    - "Blues"
+    - "Post Rock"
+    - "Neo Soul"
+    - "Funk"
+    - "Warm overdrive"
+
+  not_suitable_for:
+    - "High-gain Modern Rock"
+    - "Metal"
+
+  signal_chain_position: "Signal chain 前段 (在 compressor, EQ 之後)"
+
+  stacking:
+    description: "與其他 overdrive 疊加效果優異"
+
+  recommended_settings:
+    general:
+      volume: "3 點鐘"
+      drive: "12 點鐘"
+      focus: "1-2 點鐘"
+
+  features:
+    - "Honey Bee circuit evolution"
+    - "FOCUS control"
+    - "Warm, sweet tone"
+    - "Low to medium gain"
+
+# 阻抗特性
+impedance:
+  input: "~1MΩ (標準)"
+  output: "~10-50kΩ (預估)"
+
+# 與其他踏板比較
+comparisons:
+  vs_sweet_honey_standard:
+    difference: "Deluxe 版本增加獨立 Bass/Treble 控制,提供更多音色塑造能力"
+
+  vs_tube_screamer:
+    transparency: "更開放、更透明"
+    dynamics: "動態範圍更大"
+
+  vs_klon_style:
+    tone: "更溫暖"
+    mids: "較少中頻突出"
+
+# 評價
+review_summary:
+  pros:
+    - "極度觸鍵敏感,動態控制優異"
+    - "適合「always-on」使用模式"
+    - "特別受 Post-Rock 音樂人喜愛"
+    - "獨立 Bass/Treble 控制提供更多音色塑造能力"
+
+  alternative:
+    name: "Joyo Sweet Baby"
+    description: "較便宜的替代選擇"
+
+# 訊號鏈配置
+signal_chain:
+  position: "pre_amp_gain"
+  swiss_things_assignment: "loop_1"
+  notes: "訊號鏈1核心溫暖 OD，Neo Soul 甜蜜點"
+
+# 參考資料來源
+sources:
+  - "Mad Professor 官方網站"
+  - "產品手冊"
+  - "Premier Guitar"
+  - "Reverb"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"

@@ -1,0 +1,200 @@
+# Lichtlaerm Audio As Above So Below Shimmer Reverb
+# 效果器詳細技術資料
+# 資料來源: projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+
+version: 1.0
+last_updated: 2025-12-30
+
+# 基本資訊
+basic_info:
+  id: "aasb"
+  brand: "Lichtlaerm Audio"
+  model: "As Above So Below Shimmer Reverb"
+  full_name: "Lichtlaerm Audio As Above So Below - Cinematic Octave Divider Reverb"
+  type: "reverb"
+  subtype: "shimmer_octave"
+  country: "Germany"
+  city: "Berlin"
+  release_year: 2024
+  prototype_year: 2018
+  design: "雙向八度 (高八度+低八度)"
+
+# 價格資訊
+price:
+  msrp: 225
+  currency: "USD"
+  tier: "mid_high_end"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC Only"
+    current: "150mA"
+    note: "僅支援9V"
+
+  reverb_type: "數位Shimmer Reverb + 八度分頻器"
+
+  octave_modes:
+    - name: "Above"
+      description: "高八度 (天使般、飄浮)"
+    - name: "Below"
+      description: "低八度 (深沉、Drone)"
+    - name: "Both"
+      description: "雙向八度 (天堂與地底碰撞)"
+
+  controls:
+    - name: "LEVEL"
+      function: "總輸出電平 (最高+6dB Boost)"
+    - name: "MIX"
+      function: "乾濕混合 (0-100%)"
+    - name: "DECAY"
+      function: "殘響長度"
+    - name: "DAMPEN"
+      function: "高頻衰減 (Vintage Bloom or Glassy Shimmer)"
+    - name: "X Control"
+      function: "依模式而定: Above/Below Mode=Pre-Delay, Both Mode=低八度音量"
+    - name: "Y Control"
+      function: "依模式而定: Above/Below Mode=八度音量, Both Mode=高八度音量"
+
+  stereo: false
+  note: "Mono輸出 (無Stereo)"
+
+# 音色特性
+tonal_characteristics:
+  overall_tone: "寬廣、豐富、電影般、洞穴般、膨脹"
+
+  above_high_octave: "天使般、閃爍、飄浮如光環"
+  below_low_octave: "深沉、Drone、Sub-Octave,可時間偏移"
+  both_dual: "詭異和聲豐富度、洗刷質感"
+
+  dampen_control:
+    smooth_highs: "Vintage Bloom"
+    preserve_highs: "Glassy Shimmer"
+
+  features:
+    - "Shimmer reverb"
+    - "Octave up / Octave down / Both"
+    - "Cinematic soundscapes"
+    - "Freeze function"
+
+# 特殊功能
+special_features:
+  freeze:
+    description: "按住Freeze Footswitch"
+    features:
+      - "殘響無限延續"
+      - "創造Ambient Pad (Glacial, Eternal質感)"
+
+  fx_loop:
+    send_return: true
+    description: "將殘響路由至外部效果器"
+    features:
+      - "扭曲、調變殘響尾音"
+      - "創造獨特實驗性音色"
+
+  expression_pedal:
+    input: true
+    control: "Y Control (八度音量)"
+    description: "即時控制高/低八度淡入淡出"
+
+# 連接規格
+connectivity:
+  input_output: "1/4\" Phone Jack (Mono)"
+  send_return: "FX Loop"
+  expression: "Expression Pedal Input"
+  ramp_footswitch: "Ramp功能踏板輸入"
+
+# 使用建議
+usage_recommendations:
+  best_for:
+    - "Post Rock"
+    - "Ambient"
+    - "Drone"
+    - "Shimmer layers"
+    - "Ambient音景"
+    - "Cinematic Soundscapes"
+    - "Post Rock, Shoegaze, Worship"
+    - "高增益音色 (特別設計)"
+    - "Shimmer Lead, Drone底層"
+
+  music_styles:
+    post_rock: "天堂般Shimmer"
+    metal: "搭配高增益失真 (專門設計)"
+    ambient: "無限音景"
+    doom: "Sub-Octave Drone"
+
+  settings:
+    basic_shimmer_above:
+      mode: "Above"
+      mix: "50-70%"
+      decay: "中至長"
+      dampen: "中性至略暗"
+      x_predelay: "低至中"
+      y_octave: "中至高"
+
+    drone_below:
+      mode: "Below"
+      mix: "60-80%"
+      decay: "長"
+      dampen: "略暗"
+      x_predelay: "中至高"
+      y_octave: "高"
+
+    dual_octave_both:
+      mode: "Both"
+      mix: "70-90%"
+      decay: "長至無限"
+      x_low_octave: "中"
+      y_high_octave: "中至高"
+
+    ambient_pad_freeze:
+      mode: "任何模式"
+      mix: "高"
+      decay: "長"
+      technique: "演奏和弦 → 按住Freeze → 在Pad上繼續演奏"
+
+    high_gain:
+      mode: "Above/Both"
+      mix: "40-60%"
+      decay: "中"
+      dampen: "略暗 (控制高頻刺耳)"
+
+# 評價
+review_summary:
+  pros:
+    - "雙向八度獨特"
+    - "音色電影般"
+    - "可搭配高增益"
+    - "Freeze實用"
+    - "FX Loop創意"
+    - "Expression輸入"
+    - "價格合理"
+
+  cons:
+    - "Mono輸出(無Stereo)"
+    - "僅支援9V DC"
+    - "X/Y功能依模式而異(可能混淆)"
+
+  conclusion: "被稱為夢想中的Shimmer Reverb,適合Ambient與Metal玩家"
+
+# 阻抗特性
+impedance:
+  input: "標準吉他Pedal阻抗 (高阻抗)"
+  output: "標準輸出"
+  bypass: "Smart Relay Bypass Technology (Buffered, Spillover可切換)"
+
+# 訊號鏈配置
+signal_chain:
+  position: "fx_loop_or_post_gain"
+  swiss_things_assignment: "loop_2"
+  notes: "訊號鏈2特殊音景，雙向八度 Shimmer/Drone，天堂與地底碰撞"
+
+# 參考資料來源
+sources:
+  - "Lichtlaerm Audio 官方網站"
+  - "Premier Guitar"
+  - "Perfect Circuit"
+  - "Delicious Audio"
+
+data_collected: 2025-12-13
+data_reliability: "高 (多方驗證)"
