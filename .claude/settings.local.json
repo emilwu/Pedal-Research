@@ -9,7 +9,8 @@
       "Bash(wc:*)",
       "WebFetch(domain:empresseffects.com)",
       "WebFetch(domain:www.earthquakerdevices.com)",
-      "WebFetch(domain:www.sweetwater.com)"
+      "WebFetch(domain:www.sweetwater.com)",
+      "WebFetch(domain:www.roland.com)"
     ]
   }
 }

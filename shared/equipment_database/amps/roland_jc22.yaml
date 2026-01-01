@@ -1,8 +1,9 @@
 # Roland JC-22 Jazz Chorus
 # 音箱詳細技術資料
 
-version: 1.0
+version: 2.0
 last_updated: 2026-01-02
+correction_note: "修正版本 - JC-22 確實有 STEREO FX LOOP (Send + Stereo Return)"
 
 # 基本資訊
 basic_info:
@@ -12,7 +13,7 @@ basic_info:
   full_name: "Roland JC-22 Jazz Chorus"
   series: "Jazz Chorus"
   type: "solid_state_combo"
-  made_in: "Indonesia or China (請補充)"
+  made_in: "Indonesia or China"
 
 # 價格資訊
 price:
@@ -24,10 +25,10 @@ price:
 # 核心規格
 technical_specs:
   power: "30 watts"
-  speaker_configuration: "2x 6.5 inch speakers"
+  speaker_configuration: "2x 6.5 inch (16cm) speakers"
   speaker_type: "Roland custom speakers"
   stereo: true
-  impedance: "8 ohms (預估)"
+  impedance: "預估 8 ohms"
 
   channels: 1
   channel_type: "Single channel"
@@ -36,12 +37,12 @@ technical_specs:
   preamp_type: "Solid-state"
 
   dimensions:
-    width: "16.02 inches (407 mm)"
-    depth: "8.07 inches (205 mm)"
-    height: "12.80 inches (325 mm)"
-    weight: "17.20 lbs (7.8 kg)"
+    width: "18.15 inches (461 mm)"
+    depth: "9.41 inches (239 mm)"
+    height: "13.31 inches (338 mm)"
+    weight: "26.46 lbs (12 kg)"
 
-  power_consumption: "40W (預估)"
+  power_consumption: "43W"
 
 # 控制面板
 controls:
@@ -73,22 +74,98 @@ controls:
 # 輸入/輸出
 inputs_outputs:
   inputs:
-    - name: "INPUT 1"
-      type: "1/4 inch jack"
-      impedance: "1 MΩ (high impedance)"
+    - name: "INPUT L/MONO"
+      type: "1/4 inch phone jack"
+      impedance: "1 MΩ"
+      level: "-10 dBu"
+      note: "可單獨使用 (mono) 或與 INPUT R 一起使用 (stereo)"
 
-    - name: "INPUT 2"
-      type: "1/4 inch jack"
-      impedance: "1 MΩ (high impedance)"
-      note: "較低靈敏度，適合 active pickups"
+    - name: "INPUT R"
+      type: "1/4 inch phone jack"
+      impedance: "1 MΩ"
+      level: "-10 dBu"
+      note: "Stereo input，與 L/MONO 一起使用"
 
   outputs:
-    - name: "RECORDING OUT / PHONES"
-      type: "Stereo 1/8 inch (3.5mm) jack"
-      level: "Line level / headphone level"
-      features: "Stereo output with speaker simulation"
+    - name: "LINE OUT L/MONO"
+      type: "1/4 inch phone jack"
+      level: "Line level"
+      note: "可單獨使用 (mono) 或與 LINE OUT R 一起使用 (stereo)"
 
-  note: "無 FX Send/Return (No effects loop)"
+    - name: "LINE OUT R"
+      type: "1/4 inch phone jack"
+      level: "Line level"
+      note: "Stereo line output"
+
+    - name: "PHONES"
+      type: "Stereo 1/4 inch phone jack"
+      level: "Headphone level"
+      features: "Stereo headphone output"
+
+  fx_loop:
+    - name: "EFFECT LOOP SEND"
+      type: "1/4 inch phone jack"
+      level: "Line level"
+      note: "Mono send to external effects"
+
+    - name: "EFFECT RETURN L/MONO"
+      type: "1/4 inch phone jack"
+      impedance: "11 kΩ (mono) / 22 kΩ (stereo)"
+      level: "-10 dBu"
+      note: "可單獨使用 (mono) 或與 RETURN R 一起使用 (stereo)"
+
+    - name: "EFFECT RETURN R"
+      type: "1/4 inch phone jack"
+      impedance: "22 kΩ (stereo)"
+      level: "-10 dBu"
+      note: "**STEREO RETURN** - 配合 L/MONO 使用可達成真正 stereo FX loop"
+
+  other_connectors:
+    - name: "FOOT SWITCH (CHORUS)"
+      type: "1/4 inch phone jack"
+      function: "External footswitch for chorus on/off"
+
+    - name: "FOOT SWITCH (REVERB)"
+      type: "1/4 inch phone jack"
+      function: "External footswitch for reverb on/off"
+
+# Effects Loop 詳細說明
+fx_loop_details:
+  has_fx_loop: true
+  type: "Stereo effects loop (mono send, stereo return)"
+  modes:
+    - "Series (串聯)"
+    - "Parallel (並聯)"
+
+  operation:
+    series_mode:
+      description: "效果器完全插入訊號路徑"
+      signal_flow: "Preamp → FX Send → External Effects → FX Return (Stereo) → Power Amp → Speakers"
+      use_case: "標準 FX loop 使用，time-based effects"
+
+    parallel_mode:
+      description: "效果器訊號與 dry 訊號混合"
+      signal_flow: "Preamp → (Dry signal + FX loop signal) → Power Amp → Speakers"
+      use_case: "保留 dry signal，混合 wet effects"
+
+  stereo_capability:
+    send: "Mono"
+    return: "**Stereo (L/MONO + R)**"
+    benefit: "可使用 stereo effects (delay, reverb) 並充分發揮 JC-22 的 stereo speakers"
+
+  control:
+    switch: "EFFECT LOOP switch (Series/Parallel)"
+
+  connection_examples:
+    mono_effect:
+      description: "連接 mono 效果器"
+      connection: "SEND → Mono Effect → RETURN L/MONO"
+      note: "只使用 L/MONO return，音箱會 mono 輸出"
+
+    stereo_effect:
+      description: "連接 stereo 效果器 (例: Nucleo, FT-1Y, AASB)"
+      connection: "SEND → Stereo Effect Input → Stereo Effect L Out → RETURN L/MONO, Stereo Effect R Out → RETURN R"
+      note: "**完整 stereo，左右聲道分別輸出到 JC-22 的兩個 speakers**"
 
 # 內建效果
 built_in_effects:
@@ -106,6 +183,11 @@ built_in_effects:
       - "Shimmer and movement"
 
     historical_note: "Jazz Chorus series 以 chorus 效果聞名，源自 1970s JC-120"
+
+  reverb:
+    type: "Built-in reverb"
+    control: "REVERB knob"
+    note: "內建 reverb 效果"
 
 # 音色特性
 tonal_characteristics:
@@ -157,7 +239,8 @@ best_for:
   notes:
     - "JC-22 專為 clean tone 設計"
     - "Overdrive 需透過 pedals 達成"
-    - "無 FX loop，所有 pedals 需放在 amp 前面"
+    - "**有 stereo FX loop，time-based effects 可放在 FX loop 中**"
+    - "Gain pedals 仍建議放在 amp 前面"
 
 # 與效果器搭配建議
 pedal_pairing:
@@ -185,18 +268,27 @@ pedal_pairing:
       - "Blacklon 在 JC-22 上特別有價值 (amp-in-a-box)"
 
   time_based:
-    placement: "必須放在 amp 前面 (無 FX loop)"
+    placement_option_1: "**放在 FX loop (推薦，可使用 stereo)**"
+    placement_option_2: "放在 amp 前面 (傳統方式)"
     excellent:
-      - "FT-1Y (Delay)"
-      - "Nucleo (Reverb)"
-      - "AASB (Shimmer Reverb)"
+      - "FT-1Y (Delay) - **可用 stereo FX loop**"
+      - "Nucleo (Stereo Reverb) - **強烈建議用 stereo FX loop**"
+      - "AASB (Shimmer Reverb) - **可用 stereo FX loop**"
     notes:
-      - "Time-based effects 放在 OD 之後"
-      - "無 FX loop 是限制，但對 clean tone 影響較小"
+      - "**JC-22 有 stereo FX loop，time-based effects 可充分發揮 stereo 能力**"
+      - "Stereo effects 放在 FX loop 可獲得最佳 stereo imaging"
+      - "FX loop 可選 Series 或 Parallel mode"
 
   signal_chain_order:
-    order: "Guitar → Compressor → EQ → Gain pedals → Time-based → JC-22"
-    example: "Guitar → Empress MKII → PA-1QG → [Sweet Honey] → [FT-1Y, Nucleo] → JC-22"
+    order_with_fx_loop: "Guitar → Compressor → EQ → Gain pedals → JC-22 Input → [FX Loop: Stereo Time-based effects] → JC-22 Speakers"
+    example_with_fx_loop: |
+      Guitar → Empress MKII → PA-1QG → [Sweet Honey]
+        → JC-22 INPUT
+        → JC-22 FX SEND → [FT-1Y, Nucleo (Stereo)] → JC-22 FX RETURN (Stereo)
+        → JC-22 Power Amp → Stereo Speakers
+
+    order_without_fx_loop: "Guitar → Compressor → EQ → Gain pedals → Time-based → JC-22 Input"
+    note: "**使用 FX loop 可獲得完整 stereo 效果**"
 
 # Blacklon + JC-22 特殊配對
 blacklon_pairing:
@@ -232,28 +324,48 @@ comparisons:
   vs_tone_king_imperial_mkii:
     differences:
       - "JC-22: Solid-state vs Imperial: Tube preamp"
-      - "JC-22: No FX loop vs Imperial: Has FX loop"
+      - "JC-22: **Stereo FX loop** vs Imperial: Mono FX loop"
       - "JC-22: Full combo amp vs Imperial: Preamp only"
       - "JC-22: Live performance vs Imperial: Recording-focused"
       - "JC-22: Ultra-clean vs Imperial: Tube warmth"
 
+    similarities:
+      - "**Both have FX loops**"
+      - "Both excellent pedal platforms"
+
     use_cases:
-      - "JC-22: 舞台演出, jazz/funk clean tones, chorus effects"
+      - "JC-22: 舞台演出, jazz/funk clean tones, **stereo FX loop**, chorus effects"
       - "Imperial: 錄音, 4CM, tube tone"
 
 # 推薦訊號鏈
 signal_chain_recommendations:
-  chain_1:
-    name: "Jazz / Neo Soul (訊號鏈1 - 基於你的設置)"
+  chain_1_updated:
+    name: "Jazz / Neo Soul (訊號鏈1 - 使用 JC-22 stereo FX loop)"
+    signal_flow: |
+      Guitar (Throbber-CTM or Greco TE-500)
+        → Empress MKII (輕度壓縮)
+        → PA-1QG (吉他專用 EQ preset)
+        → Swiss Things Loop 1 [Horsemeat, Sweet Honey, Morning Glory]
+        → JC-22 INPUT
+        → JC-22 FX SEND
+        → Swiss Things Loop 2 [FT-1Y, Nucleo (Stereo)]
+        → JC-22 FX RETURN L/R (Stereo)
+        → JC-22 Power Amp → Stereo Speakers
+    fx_loop_mode: "Series"
+    chorus_setting: "ON, moderate speed/depth"
+    notes: "**充分發揮 Nucleo stereo reverb + JC-22 stereo speakers**"
+
+  chain_1_traditional:
+    name: "Jazz / Neo Soul (傳統方式 - 不使用 FX loop)"
     signal_flow: |
       Guitar (Throbber-CTM or Greco TE-500)
         → Empress MKII (輕度壓縮)
         → PA-1QG (吉他專用 EQ preset)
         → Swiss Things Loop 1 [Horsemeat, Sweet Honey, Morning Glory]
         → Swiss Things Loop 2 [FT-1Y, Nucleo]
-        → JC-22
+        → JC-22 INPUT
     chorus_setting: "ON, moderate speed/depth"
-    notes: "完美 Neo Soul 設置"
+    notes: "傳統方式，但 Nucleo stereo 能力無法發揮"
 
   chain_2:
     name: "Funk (with Fender Thinline)"
@@ -280,10 +392,16 @@ signal_chain_recommendations:
 
 # 使用注意事項
 notes:
-  no_fx_loop:
-    limitation: "無 effects loop"
-    impact: "所有效果器必須放在 amp 前面"
-    workaround: "對 clean amp 影響較小，time-based effects 仍可用"
+  stereo_fx_loop:
+    feature: "**JC-22 有 stereo FX loop (mono send, stereo return)**"
+    advantage: "可充分發揮 stereo effects 的能力"
+    recommendation:
+      - "將 stereo delay/reverb 放在 FX loop"
+      - "Nucleo, FT-1Y, AASB 等 stereo effects 強烈建議使用 FX loop"
+      - "Gain pedals (OD/distortion) 仍建議放在 amp 前面"
+    modes:
+      - "Series mode: 標準 FX loop 使用"
+      - "Parallel mode: 混合 dry/wet signals"
 
   stereo_chorus:
     usage: "內建 stereo chorus 是 JC 系列招牌"
@@ -312,19 +430,23 @@ pros_cons:
   pros:
     - "Legendary clean tone"
     - "Built-in stereo chorus (JC 招牌)"
+    - "**Stereo FX loop (mono send, stereo return) - 可充分發揮 stereo effects**"
+    - "Series/Parallel FX loop 切換"
+    - "Stereo inputs (INPUT L/MONO, R)"
+    - "Stereo line outputs (LINE OUT L/MONO, R)"
     - "Extremely reliable (solid-state)"
     - "Low maintenance"
     - "Affordable ($399 MSRP)"
-    - "Compact size (適合小空間)"
+    - "Compact size for a stereo amp"
     - "True stereo (2 speakers)"
     - "Excellent pedal platform"
 
   cons:
-    - "No effects loop (限制 time-based effects 放置)"
     - "No overdrive (必須用 pedals)"
     - "Solid-state (無 tube warmth，但可用 Blacklon 彌補)"
     - "Limited tonal shaping (需依賴 pedals)"
-    - "較重 (17.2 lbs)"
+    - "較重 (26.46 lbs / 12 kg)"
+    - "FX loop send 是 mono (但 return 是 stereo)"
 
 # 歷史與傳承
 heritage:
@@ -349,11 +471,51 @@ famous_users:
 
   note: "JC-22 繼承 JC-120 legacy，適合相同音樂風格"
 
+# Buffer++ + JC-22 Stereo 配置建議
+buffer_plus_plus_pairing:
+  description: "使用 Empress Buffer++ 串接 JC-22 stereo FX loop 達成完整 stereo rig"
+
+  configuration:
+    signal_flow: |
+      Guitar
+        → [Always-on pedals: Compressor, EQ]
+        → Buffer++ Input 1
+        → Buffer++ Loop 1 [Gain pedals: Horsemeat, Sweet Honey, etc.]
+        → Buffer++ Output → JC-22 INPUT
+        → JC-22 FX SEND
+        → Buffer++ Loop 2 Input
+        → Buffer++ Loop 2 [Stereo effects: FT-1Y, Nucleo, AASB]
+        → Buffer++ Loop 2 Output L → JC-22 FX RETURN L
+        → Buffer++ Loop 2 Output R → JC-22 FX RETURN R
+        → JC-22 Power Amp → Stereo Speakers
+
+  advantages:
+    - "**完整發揮 Nucleo stereo reverb 能力**"
+    - "**充分利用 JC-22 stereo FX loop**"
+    - "Buffer++ Loop 2 可配置為 stereo mode"
+    - "Buffer++ 提供 12 種路由模式靈活性"
+    - "2 inputs 可快速切換吉他"
+    - "Input metering 避免削波"
+
+  comparison_vs_swiss_things:
+    swiss_things:
+      limitation: "Swiss Things Loop 2 是 mono，無法充分發揮 Nucleo stereo"
+      workaround: "需將 Nucleo stereo outputs 直接接到 JC-22 FX Return L/R"
+
+    buffer_plus_plus:
+      advantage: "Buffer++ Loop 2 支援 stereo，可完美串接 JC-22 stereo FX loop"
+      result: "Nucleo stereo → Buffer++ Loop 2 (stereo) → JC-22 FX Return (stereo) = 完整 stereo chain"
+
+  jc22_fx_loop_mode: "Series (標準 FX loop 使用)"
+
+  note: "這正是用戶提出的配置想法 - 完全可行且極度推薦！"
+
 # 參考資料來源
 sources:
-  - "Roland 官方網站"
-  - "JC-22 產品手冊"
+  - "Roland 官方網站 (https://www.roland.com/us/products/jc-22/)"
+  - "JC-22 產品手冊 (https://static.roland.com/assets/media/pdf/JC-22_eng02_W.pdf)"
+  - "Sweetwater JC-22 規格頁面 (https://www.sweetwater.com/store/detail/JC-22--roland-jc-22-jazz-chorus-30-watt-2x6.5-inch-stereo-combo-amp)"
   - "Jazz Chorus series 歷史資料"
 
 data_collected: 2026-01-02
-data_reliability: "高 (大部分規格已確認)"
+data_reliability: "高 (已確認 stereo FX loop 規格)"
