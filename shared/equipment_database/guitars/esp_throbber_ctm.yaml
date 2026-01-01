@@ -1,0 +1,275 @@
+# ESP Throbber-CTM
+# 吉他詳細技術資料
+
+version: 1.0
+last_updated: 2026-01-02
+
+# 基本資訊
+basic_info:
+  id: "esp_throbber_ctm"
+  brand: "ESP"
+  model: "Throbber-CTM"
+  full_name: "ESP Throbber-CTM"
+  series: "Custom Shop"
+  made_in: "Japan"
+  year: null  # 未知年份
+
+# 價格資訊
+price:
+  msrp: null  # 請補充
+  currency: "USD"
+  tier: "high_end_custom"
+
+# 琴身規格
+body:
+  wood: "Honduras Mahogany"
+  construction: "Semi-hollow with Sound Reservoir chamber"
+  type: "semi_hollow"
+  shape: "Single cutaway with unique body shape"
+  finish: null  # 請補充
+  binding: "Multi-ply binding (預估)"
+
+  special_features:
+    - name: "Sound Reservoir"
+      description: "ESP 專利空腔設計，提供半空心音色特性"
+      effect: "增加 resonance 和 sustain，溫暖音色"
+
+# 琴頸規格
+neck:
+  wood: "Mahogany"
+  construction: "set_neck"
+  profile: null  # 請補充
+  scale_length: "24.75 inch"
+  frets: "22 frets (預估)"
+  fret_material: null  # 請補充
+  nut_width: null  # 請補充
+  nut_material: null  # 請補充
+
+# 指板規格
+fingerboard:
+  wood: "Ebony"
+  radius: null  # 請補充
+  inlays: null  # 請補充
+
+# 拾音器配置
+pickups:
+  neck:
+    model: "Seymour Duncan APH-1n (Alnico Pro Humbucker Neck)"
+    type: "passive_humbucker"
+    output: "medium"
+    magnets: "Alnico II"
+    characteristics:
+      - "Vintage PAF-style tone"
+      - "Warm, balanced output"
+      - "Smooth, rich harmonics"
+      - "Excellent for jazz and blues"
+
+  bridge:
+    model: "Seymour Duncan TB-APH-1b (Alnico Pro Humbucker Trembucker Bridge)"
+    type: "passive_humbucker"
+    output: "medium"
+    magnets: "Alnico II"
+    characteristics:
+      - "Vintage PAF-style tone"
+      - "Balanced, articulate"
+      - "Warm mids, clear highs"
+      - "Trembucker spacing for wider string spacing"
+
+  pickup_set:
+    name: "Seymour Duncan Alnico Pro Humbucker Set"
+    description: "Vintage PAF-inspired passive humbuckers"
+    designed_for: "Jazz, Blues, Classic Rock, versatile tones"
+    era: "Vintage-voiced modern pickups"
+
+  controls:
+    - "Volume (Neck)"
+    - "Volume (Bridge)"
+    - "Tone (Neck)"
+    - "Tone (Bridge)"
+    - "3-way pickup selector"
+
+# 硬體規格
+hardware:
+  bridge: null  # 請補充 (Tune-o-matic style 預估)
+  tailpiece: null  # 請補充 (Stop bar 預估)
+  tuners: null  # 請補充
+  hardware_finish: null  # 請補充
+
+# 電子系統
+electronics:
+  type: "passive"
+  battery: "None (passive pickups)"
+  wiring: "Standard humbucker wiring (預估)"
+
+# 音色特性
+tonal_characteristics:
+  core_tone: "Warm, resonant, vintage PAF character with semi-hollow airiness"
+
+  frequency:
+    low: "Warm, full bass (semi-hollow 特性)"
+    mid: "Rich, woody midrange (Mahogany + semi-hollow)"
+    high: "Smooth, singing highs (Alnico II)"
+
+  dynamics:
+    pick_sensitivity: "Very high (passive pickups + semi-hollow)"
+    volume_sensitivity: "Very high (guitar volume knob 極度靈敏)"
+    compression: "Low (natural, open dynamics)"
+
+  output_level: "Medium (vintage-style output)"
+  resonance: "High (semi-hollow body 提供 acoustic-like resonance)"
+  feedback_potential: "Medium (semi-hollow 在高音量時可能 feedback)"
+
+# 適用音樂風格
+best_for:
+  excellent:
+    - "Jazz"
+    - "Blues"
+    - "Neo Soul"
+    - "Funk"
+    - "Classic Rock"
+  good:
+    - "Post Rock"
+    - "Indie Rock"
+    - "Country (with right settings)"
+  not_ideal:
+    - "Heavy Metal (輸出不夠高)"
+    - "Modern high-gain styles (feedback 問題)"
+
+# 與效果器配對建議
+pedal_pairing:
+  overdrive:
+    excellent:
+      - "Warm overdrives (Sweet Honey)"
+      - "Transparent overdrives (Horsemeat, Morning Glory)"
+      - "Dumble-style (ODL-1-CS)"
+    good:
+      - "Amp simulators (Blacklon)"
+      - "Low-medium gain ODs"
+    avoid:
+      - "High gain pedals (可能 feedback)"
+
+  compressor:
+    recommendation:
+      - "Empress MKII (transparent, preserves dynamics)"
+      - "輕度設定，保留動態"
+    notes:
+      - "Semi-hollow 本身已經有自然 compression"
+      - "避免過度壓縮，會失去 semi-hollow 的開放感"
+
+  reverb_delay:
+    excellent:
+      - "適合 ambient/post-rock 音色"
+      - "Semi-hollow + reverb = 極度空間感"
+
+  special_notes:
+    - "Passive pickups 中等輸出，不會削波"
+    - "Morning Glory Bright Cut 建議依需求調整"
+    - "Semi-hollow 在高音量時注意 feedback"
+
+# 適合搭配的音箱
+amp_pairing:
+  excellent:
+    - "Clean amps (Roland JC-22, Fender Blackface)"
+    - "Low-medium gain amps (Tone King Imperial)"
+    - "Tube amps (發揮 semi-hollow 溫暖特性)"
+  good:
+    - "Solid-state amps with pedals"
+
+  special_notes:
+    - "Semi-hollow + clean amp = 極佳 jazz tone"
+    - "避免過度 gain，會失去 semi-hollow 清晰度"
+
+# 使用注意事項
+notes:
+  feedback:
+    - "Semi-hollow 在高音量時可能 feedback"
+    - "可使用 feedback suppressor 或降低音量"
+    - "舞台演出時注意音箱方向"
+
+  maintenance:
+    - "Ebony 指板需要定期保養"
+    - "Mahogany 對濕度敏感"
+    - "Semi-hollow 結構較脆弱，運輸時需小心"
+
+  setup:
+    - "Set neck 設計，可能需要專業調整"
+    - "24.75 吋 scale，適合較低弦距設定"
+    - "Trembucker spacing (bridge pickup)"
+
+# 與庫存其他吉他比較
+comparisons:
+  vs_eclipse_ctm:
+    differences:
+      - "Throbber: Passive vs Eclipse: Active"
+      - "Throbber: Semi-hollow vs Eclipse: Solid body"
+      - "Throbber: Medium output vs Eclipse: High output"
+      - "Throbber: Jazz/Blues vs Eclipse: Modern metal"
+      - "Throbber: High dynamics vs Eclipse: Compressed"
+
+  vs_greco_te500:
+    similarities:
+      - "Both semi-hollow"
+      - "Both medium output"
+      - "Both warm tones"
+    differences:
+      - "Throbber: Set neck vs Greco: Bolt-on"
+      - "Throbber: PAF humbucker vs Greco: WideRange humbucker"
+      - "Throbber: 24.75吋 vs Greco: 25.5吋"
+
+  vs_fender_thinline:
+    similarities:
+      - "Both semi-hollow/thinline"
+      - "Both versatile"
+    differences:
+      - "Throbber: Humbucker vs Fender: Single-coil"
+      - "Throbber: Warmer vs Fender: Brighter"
+
+# 推薦訊號鏈
+signal_chain_recommendations:
+  chain_1:
+    name: "Neo Soul / Jazz"
+    pedals:
+      - "Empress MKII (輕度壓縮, 保留動態)"
+      - "Horsemeat (clean boost, VOICE 在 mellow)"
+      - "Sweet Honey (溫暖主音色, FOCUS 逆時針)"
+    amp: "Roland JC-22 (clean)"
+    notes: "訊號鏈1的完美吉他"
+
+  chain_2:
+    name: "Blues"
+    pedals:
+      - "Cali76 FET (增加 sustain)"
+      - "Morning Glory (transparent crunch)"
+      - "Sweet Honey (solo, warm OD)"
+    amp: "Tone King Imperial MKII"
+
+  chain_3:
+    name: "Post Rock / Ambient"
+    pedals:
+      - "Blacklon (6V6 + Mellow, 管機底色)"
+      - "Morning Glory (輕度 OD)"
+      - "FT-1Y (Delay)"
+      - "Nucleo (Stereo Reverb)"
+    amp: "任何 clean amp"
+    notes: "Semi-hollow + reverb = 極度空間感"
+
+  always_on:
+    recommendation:
+      - "PA-1QG EQ (建立 Throbber 專用 preset)"
+      - "Empress MKII (輕度壓縮)"
+
+# 適合的音樂家參考
+reference_artists:
+  style_similar:
+    - "Larry Carlton (semi-hollow + jazz)"
+    - "Robben Ford (semi-hollow + blues)"
+    - "B.B. King (semi-hollow + blues) - 雖然用 ES-335"
+
+# 參考資料來源
+sources:
+  - "ESP Guitars 官方網站"
+  - "Seymour Duncan 官方資料"
+  - "User manual (如有)"
+
+data_collected: 2026-01-02
+data_reliability: "中 (部分規格需要補充)"

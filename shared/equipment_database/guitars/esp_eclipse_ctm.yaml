@@ -1,0 +1,225 @@
+# ESP Eclipse CTM/E
+# 吉他詳細技術資料
+
+version: 1.0
+last_updated: 2026-01-02
+
+# 基本資訊
+basic_info:
+  id: "esp_eclipse_ctm"
+  brand: "ESP"
+  model: "Eclipse CTM/E"
+  full_name: "ESP Eclipse CTM/E"
+  series: "Custom Shop"
+  made_in: "Japan"
+  year: null  # 未知年份
+
+# 價格資訊
+price:
+  msrp: null  # 請補充
+  currency: "USD"
+  tier: "high_end_custom"
+
+# 琴身規格
+body:
+  wood: "Honduras Mahogany with Hard Maple Top"
+  construction: "Mahogany body with carved maple top"
+  type: "solid"
+  shape: "Single cutaway (Les Paul style)"
+  finish: null  # 請補充
+  binding: "Multi-ply binding (預估)"
+
+# 琴頸規格
+neck:
+  wood: "Honduras Mahogany"
+  construction: "set_neck"
+  profile: null  # 請補充
+  scale_length: "24.75 inch"
+  frets: "22 frets (預估)"
+  fret_material: null  # 請補充
+  nut_width: null  # 請補充
+  nut_material: null  # 請補充
+
+# 指板規格
+fingerboard:
+  wood: "Ebony"
+  radius: null  # 請補充
+  inlays: null  # 請補充
+
+# 拾音器配置
+pickups:
+  neck:
+    model: "EMG JH-N (James Hetfield Signature)"
+    type: "active_humbucker"
+    output: "high"
+    magnets: "Ceramic (EMG 特性)"
+    characteristics:
+      - "Tight, aggressive tone"
+      - "High output"
+      - "Clear articulation"
+      - "Low noise (active)"
+
+  bridge:
+    model: "EMG JH-B (James Hetfield Signature)"
+    type: "active_humbucker"
+    output: "high"
+    magnets: "Ceramic (EMG 特性)"
+    characteristics:
+      - "Extreme output"
+      - "Tight bass response"
+      - "Aggressive high-end"
+      - "Ideal for heavy riffing"
+
+  pickup_set:
+    name: "EMG JH HET SET"
+    description: "James Hetfield Signature active pickup set"
+    designed_for: "Heavy metal, high-gain tones"
+
+  controls:
+    - "Volume (Neck)"
+    - "Volume (Bridge)"
+    - "Tone (Neck)"
+    - "Tone (Bridge)"
+    - "3-way pickup selector"
+
+# 硬體規格
+hardware:
+  bridge: null  # 請補充 (Tune-o-matic style 預估)
+  tailpiece: null  # 請補充 (Stop bar 預估)
+  tuners: null  # 請補充
+  hardware_finish: null  # 請補充
+
+# 電子系統
+electronics:
+  type: "active"
+  battery: "9V (EMG active pickups)"
+  battery_life: "3000+ hours (EMG 典型)"
+  preamp: "EMG active preamp"
+
+# 音色特性
+tonal_characteristics:
+  core_tone: "High output, aggressive, modern metal"
+
+  frequency:
+    low: "Tight, controlled bass (不泥濘)"
+    mid: "Aggressive, cutting midrange"
+    high: "Clear, articulate highs"
+
+  dynamics:
+    pick_sensitivity: "Medium (active pickups 壓縮動態)"
+    volume_sensitivity: "Medium"
+    compression: "High (active pickup 特性)"
+
+  output_level: "Very high (active pickups)"
+  noise_level: "Very low (active pickups 低噪音)"
+
+# 適用音樂風格
+best_for:
+  excellent:
+    - "Heavy Metal"
+    - "Thrash Metal"
+    - "Modern Rock"
+    - "Hard Rock"
+  good:
+    - "Alternative Rock"
+    - "Punk Rock"
+  not_ideal:
+    - "Jazz (輸出過高)"
+    - "Blues (缺乏動態)"
+    - "Vintage tones (active pickups)"
+
+# 與效果器配對建議
+pedal_pairing:
+  overdrive:
+    excellent:
+      - "Transparent overdrives (Morning Glory, Horsemeat)"
+      - "需要 input pad 的 pedals"
+    good:
+      - "High headroom overdrives (Source Code, ODL-1-CS)"
+    avoid:
+      - "High gain pedals (輸出已經很高)"
+
+  compressor:
+    recommendation: "不太需要 (active pickups 已經壓縮)"
+    if_use: "輕度設定，避免過度壓縮"
+
+  special_notes:
+    - "EMG active pickups 輸出高，注意 pedal input 削波"
+    - "建議使用有 input pad 的 buffer (如 Empress Buffer++)"
+    - "Morning Glory Bright Cut 建議 OFF (保留高頻)"
+
+# 適合搭配的音箱
+amp_pairing:
+  excellent:
+    - "High gain amps (Mesa Boogie, Peavey 5150)"
+    - "Modern metal amps"
+  good:
+    - "Clean amps with pedal gain (Tone King, JC-22)"
+    - "需要 tight bass response 的 amps"
+
+# 使用注意事項
+notes:
+  battery:
+    - "使用 9V 電池供電 EMG active pickups"
+    - "記得拔掉導線以節省電池 (active pickups 會耗電)"
+    - "電池壽命約 3000+ 小時"
+
+  maintenance:
+    - "Ebony 指板需要定期保養"
+    - "Honduras Mahogany 對濕度敏感"
+
+  setup:
+    - "Set neck 設計，可能需要專業調整"
+    - "24.75 吋 scale，適合較低弦距設定"
+
+# 與庫存其他吉他比較
+comparisons:
+  vs_throbber_ctm:
+    differences:
+      - "Eclipse: Active vs Throbber: Passive"
+      - "Eclipse: Solid body vs Throbber: Semi-hollow"
+      - "Eclipse: High output vs Throbber: Medium output"
+      - "Eclipse: Modern metal vs Throbber: Jazz/Blues"
+
+  vs_greco_te500:
+    differences:
+      - "Eclipse: Set neck vs Greco: Bolt-on"
+      - "Eclipse: Humbucker vs Greco: WideRange Humbucker"
+      - "Eclipse: 24.75吋 vs Greco: 25.5吋"
+
+  vs_fender_thinline:
+    differences:
+      - "Eclipse: Humbucker vs Fender: Single-coil"
+      - "Eclipse: High output vs Fender: Medium output"
+      - "Eclipse: Rock/Metal vs Fender: Country/Funk"
+
+# 推薦訊號鏈
+signal_chain_recommendations:
+  chain_1:
+    name: "Modern Rock"
+    pedals:
+      - "Horsemeat (clean boost, VOICE 在 glassy)"
+      - "Morning Glory (rhythm crunch, Bright Cut OFF)"
+      - "Source Code (solo, BITE 調整諧波)"
+    amp: "Tone King Imperial MKII or JC-22"
+
+  chain_2:
+    name: "Heavy Metal"
+    pedals:
+      - "Horsemeat (transparent boost)"
+      - "Source Code (high gain, BITE 在 asymmetrical)"
+    amp: "High gain amp or Tone King Lead channel"
+
+  always_on:
+    recommendation:
+      - "PA-1QG EQ (建立 ESP Eclipse 專用 preset)"
+      - "Horsemeat (clean boost, 增加 clarity)"
+
+# 參考資料來源
+sources:
+  - "ESP Guitars 官方網站"
+  - "EMG Pickups 官方資料"
+  - "User manual (如有)"
+
+data_collected: 2026-01-02
+data_reliability: "中 (部分規格需要補充)"

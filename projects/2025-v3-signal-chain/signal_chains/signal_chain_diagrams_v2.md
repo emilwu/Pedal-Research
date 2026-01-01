@@ -758,7 +758,12 @@ graph TB
             OD["ODL-1-CS<br/>Dumble"]
         end
 
-        subgraph Row4["Row 4 - Time-Based"]
+        subgraph Row4["Row 4 - Amps"]
+            TK["ToneKing<br/>Preamp Pedal"]
+            JC["Roland<br/>JC22"]
+        end
+
+        subgraph Row5["Row 4 - Time-Based"]
             FT["FT-1Y<br/>Delay"]
             AA["AASB<br/>Shimmer"]
             NU["Nucleo<br/>Reverb"]
@@ -778,7 +783,8 @@ graph TB
     MG --> TW
     TW --> OD
     OD -.Return.-> SW
-    SW --> FT
+    SW -.Amps.-> TK
+    TK -.4 Cable Method.-> FT
     FT --> AA
     AA --> NU
 

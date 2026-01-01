@@ -1,0 +1,355 @@
+# Tone King Imperial MKII Preamp
+# 音箱詳細技術資料
+
+version: 1.0
+last_updated: 2026-01-02
+
+# 基本資訊
+basic_info:
+  id: "tone_king_imperial_mkii"
+  brand: "Tone King"
+  model: "Imperial MKII"
+  full_name: "Tone King Imperial MKII Preamp"
+  type: "tube_preamp"
+  category: "preamp_pedal"
+  made_in: "USA"
+
+# 價格資訊
+price:
+  msrp: null  # 請補充 (預估 $600-800 USD)
+  currency: "USD"
+  tier: "high_end_preamp"
+
+# 核心規格
+technical_specs:
+  type: "Tube preamp pedal"
+  channels: 2
+  channel_names:
+    - "Rhythm (Clean)"
+    - "Lead"
+
+  tubes:
+    preamp_tubes: "12AX7 (預估)"
+    tube_count: null  # 請補充
+
+  power:
+    voltage: null  # 請補充
+    current: null  # 請補充
+    type: "AC adapter (預估) or power supply"
+
+  size:
+    width: null  # 請補充
+    depth: null  # 請補充
+    height: null  # 請補充
+    weight: null  # 請補充
+
+# 通道規格
+channels:
+  rhythm:
+    name: "Rhythm (Clean Channel)"
+    description: "Clean channel with tube warmth"
+    controls:
+      - "Volume"
+      - "Treble"
+      - "Mid"
+      - "Bass"
+    characteristics:
+      - "Clean tube preamp tone"
+      - "Warm, open clean"
+      - "Excellent headroom"
+      - "Responds to guitar volume"
+
+  lead:
+    name: "Lead Channel"
+    description: "Overdrive/lead channel"
+    controls:
+      - "Volume"
+      - "Gain"
+      - "Treble"
+      - "Mid"
+      - "Bass"
+    characteristics:
+      - "Tube overdrive"
+      - "British-voiced (預估)"
+      - "Responsive to picking dynamics"
+
+  shared_controls:
+    - name: "Mid-Bite Switch"
+      description: "Adjusts midrange character"
+      effect: "Adds or reduces mid-frequency presence"
+
+# Effects Loop
+fx_loop:
+  has_fx_loop: true
+  type: "series"
+  position: "post-preamp, pre-power amp"
+  jacks:
+    - "FX Send"
+    - "FX Return"
+
+  buffered: true  # 預估
+  level: "Line level (預估)"
+
+  usage:
+    - "4-Cable Method (4CM) with guitar amp"
+    - "Time-based effects (delay, reverb) in FX loop"
+    - "Professional recording chain"
+
+# 輸入/輸出
+inputs_outputs:
+  inputs:
+    - name: "Input"
+      type: "1/4 inch jack"
+      impedance: "High impedance (預估 1MΩ)"
+
+  outputs:
+    - name: "Output"
+      type: "1/4 inch jack"
+      level: "Line level (預估)"
+      impedance: "Low impedance (預估 1kΩ)"
+
+    - name: "FX Send"
+      type: "1/4 inch jack"
+      level: "Line level"
+
+    - name: "FX Return"
+      type: "1/4 inch jack"
+      level: "Line level"
+
+# 音色特性
+tonal_characteristics:
+  preamp_type: "Tube preamp"
+  circuit: "All-tube signal path"
+
+  clean_channel:
+    character: "Warm, open, touch-sensitive"
+    frequency: "Full-range, not colored"
+    dynamics: "Excellent touch response"
+    headroom: "High"
+
+  lead_channel:
+    character: "British-style tube overdrive (預估)"
+    frequency: "Mid-focused (可調)"
+    gain_range: "Low to high gain"
+    dynamics: "Touch-sensitive tube compression"
+
+  overall:
+    transparency: "Natural tube warmth without excessive coloration"
+    eq: "Responsive 3-band EQ (Treble, Mid, Bass)"
+    mid_bite: "Mid-Bite switch provides tonal flexibility"
+
+# 適用音樂風格
+best_for:
+  excellent:
+    - "Jazz"
+    - "Blues"
+    - "Rock"
+    - "Fusion"
+    - "Post Rock"
+    - "Recording"
+  good:
+    - "任何需要專業 tube preamp 的場合"
+  notes:
+    - "特別適合 4-Cable Method (4CM)"
+    - "錄音室標準 tube preamp"
+
+# 使用方式
+usage_methods:
+  method_1:
+    name: "Direct to Audio Interface (Recording)"
+    signal_flow: "Guitar → Imperial MKII → Audio Interface"
+    usage: "錄音使用，不需要 power amp"
+    notes: "需要 cabinet simulation or IR loader"
+
+  method_2:
+    name: "4-Cable Method (4CM) with Guitar Amp"
+    signal_flow: |
+      Guitar → Imperial MKII Input
+      Imperial MKII Output → Guitar Amp Input
+      Guitar Amp FX Send → Imperial MKII FX Return
+      Imperial MKII FX Send → [Time-based effects] → Guitar Amp FX Return
+    usage: "使用 Imperial MKII preamp + Guitar Amp power section"
+    notes: "可在 FX loop 中放 delay/reverb"
+
+  method_3:
+    name: "Into Power Amp"
+    signal_flow: "Guitar → Imperial MKII → Power Amp → Speaker Cabinet"
+    usage: "使用外部 power amp"
+    notes: "完整的 amp 替代方案"
+
+  method_4:
+    name: "Front of Amp (Preamp Pedal)"
+    signal_flow: "Guitar → Imperial MKII → Guitar Amp Input"
+    usage: "當作 preamp pedal 使用"
+    notes: "疊加在 guitar amp 前面"
+
+# 與效果器搭配建議
+pedal_pairing:
+  pre_preamp:
+    excellent:
+      - "Compressors (Empress MKII, Cali76)"
+      - "EQ (PA-1QG)"
+      - "Clean boost (Horsemeat)"
+    notes:
+      - "Always-on pedals 放在 Imperial MKII 之前"
+
+  in_fx_loop:
+    excellent:
+      - "Delay (FT-1Y)"
+      - "Reverb (Nucleo, AASB)"
+      - "Modulation (chorus, flanger)"
+    notes:
+      - "Time-based effects 放在 FX loop"
+
+  not_recommended:
+    - "Overdrive pedals (Imperial MKII 已經是 preamp)"
+    - "除非特殊疊加需求"
+
+# 4-Cable Method (4CM) 說明
+four_cable_method:
+  description: "4-Cable Method allows using Imperial MKII preamp with guitar amp power section"
+
+  cables:
+    cable_1:
+      from: "Guitar"
+      to: "Imperial MKII Input"
+      purpose: "Guitar signal into preamp"
+
+    cable_2:
+      from: "Imperial MKII Output"
+      to: "Guitar Amp Input"
+      purpose: "Preamp output to amp input"
+
+    cable_3:
+      from: "Guitar Amp FX Send"
+      to: "Imperial MKII FX Return"
+      purpose: "Tap signal from amp for effects"
+
+    cable_4:
+      from: "Imperial MKII FX Send"
+      to: "Guitar Amp FX Return"
+      purpose: "Return effects to amp power section"
+
+  advantages:
+    - "使用 Imperial MKII tube preamp 音色"
+    - "使用 guitar amp power section"
+    - "FX loop 中可放 time-based effects"
+    - "完整的專業訊號路徑"
+
+  requirements:
+    - "Guitar amp 必須有 FX Send/Return"
+    - "需要 4 條訊號線"
+
+# 適合搭配的吉他
+guitar_pairing:
+  excellent:
+    - "所有庫存吉他皆適合"
+    - "Throbber-CTM (jazz/blues tube tone)"
+    - "Greco TE-500 (vintage tube warmth)"
+    - "Fender Thinline (clean tube tone)"
+  good:
+    - "ESP Eclipse (high output, 需注意 gain staging)"
+
+# 錄音應用
+recording_applications:
+  direct_recording:
+    description: "Direct to interface, 無需 power amp"
+    requirements:
+      - "Cabinet simulation or IR loader"
+      - "Audio interface with line input"
+    advantages:
+      - "Professional tube preamp tone"
+      - "Silent recording"
+      - "Consistent tone"
+
+  reamping:
+    description: "可用於 reamping"
+    workflow: "DI guitar → DAW → Imperial MKII → Re-record"
+
+# 與庫存音箱比較
+comparisons:
+  vs_roland_jc22:
+    differences:
+      - "Imperial: Tube preamp vs JC-22: Solid-state"
+      - "Imperial: Has FX loop vs JC-22: No FX loop"
+      - "Imperial: Preamp only vs JC-22: Full amp"
+      - "Imperial: Recording-focused vs JC-22: Live amp"
+    use_cases:
+      - "Imperial: 錄音, 4CM, professional applications"
+      - "JC-22: Live performance, clean jazz/funk tones"
+
+# 推薦訊號鏈
+signal_chain_recommendations:
+  chain_1:
+    name: "Recording Chain (Direct)"
+    signal_flow: |
+      Guitar → [Always-on: Compressor, EQ]
+           → Imperial MKII
+           → [Optional: Cabinet Sim/IR]
+           → Audio Interface
+    notes: "錄音專用，不需要 power amp"
+
+  chain_2:
+    name: "4-Cable Method with Power Amp"
+    signal_flow: |
+      Guitar → [Always-on pedals]
+           → Imperial MKII Input
+           → Imperial MKII Output → Power Amp Input
+           → Imperial MKII FX Send → [Delay, Reverb] → Power Amp FX Return
+    notes: "使用 Imperial preamp + 外部 power amp"
+
+  chain_3:
+    name: "訊號鏈2 (Post Rock/Fusion) - 基於你的設置"
+    pedals:
+      pre_imperial:
+        - "Empress MKII or Cali76 (compressor)"
+        - "PA-1QG (EQ)"
+        - "Swiss Things Loop 1 [Blacklon, Source Code, ODL-1-CS]"
+      in_fx_loop:
+        - "Swiss Things Loop 2 [FT-1Y, Nucleo, AASB]"
+    notes: "Imperial MKII 提供 tube preamp，FX loop 放 time-based effects"
+
+# 使用注意事項
+notes:
+  tubes:
+    - "Tube preamp 需要定期更換真空管"
+    - "12AX7 管壽命約 10000+ 小時"
+    - "管子老化會影響音色"
+
+  maintenance:
+    - "定期清潔接點"
+    - "避免過度震動 (tube microphonics)"
+
+  setup:
+    - "4CM 設定需要正確接線"
+    - "注意 FX loop level matching"
+
+  power:
+    - "使用穩定的電源供應"
+    - "避免與數位設備共用電源 (噪音)"
+
+# 優缺點
+pros_cons:
+  pros:
+    - "Professional tube preamp quality"
+    - "Dual channel (Clean/Lead)"
+    - "Built-in FX loop"
+    - "4-Cable Method capability"
+    - "Excellent for recording"
+    - "Mid-Bite switch adds tonal flexibility"
+    - "Made in USA"
+
+  cons:
+    - "需要 cabinet sim for direct recording"
+    - "Tube maintenance required"
+    - "較高價位 (preamp pedal)"
+    - "不是 full amp (需要 power amp or interface)"
+
+# 參考資料來源
+sources:
+  - "Tone King 官方網站"
+  - "Imperial MKII 產品手冊 (如有)"
+  - "用戶評價"
+
+data_collected: 2026-01-02
+data_reliability: "中 (部分規格需要補充)"

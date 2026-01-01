@@ -6,7 +6,10 @@
       "Bash(code --list-extensions:*)",
       "Bash(\"/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code\" --list-extensions --show-versions)",
       "Bash(tree:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "WebFetch(domain:empresseffects.com)",
+      "WebFetch(domain:www.earthquakerdevices.com)",
+      "WebFetch(domain:www.sweetwater.com)"
     ]
   }
 }

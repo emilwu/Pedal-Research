@@ -1,0 +1,307 @@
+# Fender Made in Japan Flagship Tokyo Editions Telecaster Thinline
+# 吉他詳細技術資料
+
+version: 1.0
+last_updated: 2026-01-02
+
+# 基本資訊
+basic_info:
+  id: "fender_tokyo_thinline"
+  brand: "Fender"
+  model: "Made in Japan Flagship Tokyo Editions Telecaster Thinline"
+  full_name: "Fender Made in Japan Flagship Tokyo Editions Telecaster® Thinline"
+  series: "Made in Japan Flagship - Tokyo Editions"
+  made_in: "Japan"
+  era: "Modern (2020s)"
+  year: null  # 請補充確切年份
+
+# 價格資訊
+price:
+  msrp: null  # 請補充 (預估 $1500-2000 USD)
+  currency: "USD"
+  tier: "mid_high_end"
+
+# 琴身規格
+body:
+  wood: "Ash"
+  construction: "Semi-hollow thinline (with f-hole)"
+  type: "semi_hollow_thinline"
+  shape: "Telecaster Thinline"
+  finish: null  # 請補充
+  binding: null  # 請補充
+
+  special_features:
+    - name: "F-hole"
+      description: "單 f-hole 設計，經典 Thinline 特色"
+      effect: "增加 acoustic resonance 和 airiness"
+
+# 琴頸規格
+neck:
+  wood: "Maple"
+  construction: "bolt_on"
+  profile: "Modern C or Vintage U (MIJ Flagship, 請補充)"
+  scale_length: "25.5 inch (標準 Fender scale)"
+  frets: "22 frets"
+  fret_material: "Medium jumbo frets (預估)"
+  nut_width: "1.650 inch (42mm, 標準 Tele)"
+  nut_material: "Bone or synthetic (請補充)"
+
+# 指板規格
+fingerboard:
+  wood: "Maple"
+  radius: "9.5 inch (Modern Fender standard)"
+  inlays: "Dot inlays (白色 dot)"
+
+# 拾音器配置
+pickups:
+  neck:
+    model: "Momose VT-1 Single-coil (Neck)"
+    type: "single_coil"
+    output: "medium"
+    magnets: "Alnico V (預估)"
+    characteristics:
+      - "Classic Telecaster neck tone"
+      - "Clear, articulate"
+      - "Vintage-voiced"
+      - "Warm yet bright"
+
+  bridge:
+    model: "Momose VT-1 Single-coil (Bridge)"
+    type: "single_coil"
+    output: "medium"
+    magnets: "Alnico V (預估)"
+    characteristics:
+      - "Classic Telecaster twang"
+      - "Clear, cutting highs"
+      - "Articulate attack"
+      - "Vintage-style output"
+
+  pickup_set:
+    name: "Momose VT-1 Pickups"
+    description: "High-quality Japanese single-coil pickups by Momose"
+    designed_for: "Classic Telecaster tones, Country, Blues, Funk, Clean"
+    manufacturer: "Momose (日本高端吉他品牌)"
+
+  controls:
+    - "Volume (共用)"
+    - "Tone (共用)"
+    - "3-way pickup selector"
+
+# 硬體規格
+hardware:
+  bridge: "Telecaster-style 3-saddle bridge (預估)"
+  tailpiece: "Through-body stringing"
+  tuners: "Vintage-style tuners (MIJ quality)"
+  hardware_finish: "Chrome (預估)"
+
+  quality_note: "MIJ Flagship series 使用高品質硬體"
+
+# 電子系統
+electronics:
+  type: "passive"
+  battery: "None (passive pickups)"
+  wiring: "Standard Telecaster wiring"
+  switch: "3-way blade switch"
+
+# 音色特性
+tonal_characteristics:
+  core_tone: "Classic Telecaster tone with semi-hollow airiness"
+
+  frequency:
+    low: "Moderate bass (single-coil + semi-hollow)"
+    mid: "Clear, articulate midrange"
+    high: "Bright, twangy highs (Classic Tele character)"
+
+  dynamics:
+    pick_sensitivity: "Very high (single-coil + semi-hollow)"
+    volume_sensitivity: "Very high (guitar volume knob 極度靈敏)"
+    compression: "Very low (natural, open single-coil)"
+
+  output_level: "Medium (vintage-style single-coil)"
+  resonance: "High (semi-hollow thinline)"
+  twang: "Very high (classic Telecaster)"
+
+  character:
+    - "Classic Telecaster twang"
+    - "Semi-hollow airiness"
+    - "Clear, articulate attack"
+    - "Bright, cutting tone"
+    - "Excellent clarity"
+
+# 適用音樂風格
+best_for:
+  excellent:
+    - "Country"
+    - "Blues"
+    - "Funk"
+    - "Pop"
+    - "Clean styles"
+  good:
+    - "Jazz (with neck pickup)"
+    - "Classic Rock"
+    - "Indie Rock"
+    - "Reggae"
+  not_ideal:
+    - "Heavy Metal (single-coil 輸出不夠)"
+    - "High-gain styles (single-coil noise)"
+
+# 與效果器配對建議
+pedal_pairing:
+  overdrive:
+    excellent:
+      - "Morning Glory (保留 Tele clarity, Bright Cut ON)"
+      - "Horsemeat (transparent boost)"
+      - "Sweet Honey (增加溫暖度)"
+    good:
+      - "Blacklon (Tele + Blackface = classic)"
+      - "Source Code (Tele + TS = classic rock)"
+    notes:
+      - "Single-coil 已經很 bright，避免過度高頻 OD"
+      - "Morning Glory Bright Cut 建議 ON (削減高頻)"
+
+  compressor:
+    recommendation:
+      - "Empress MKII (控制 single-coil 動態)"
+      - "Cali76 FET (增加 sustain)"
+    notes:
+      - "Single-coil 動態極大，compressor 很有用"
+      - "可幫助平衡 neck/bridge pickup 輸出差異"
+
+  eq:
+    recommendation:
+      - "PA-1QG 建立 Fender Thinline 專用 preset"
+      - "可能需要略減高頻 (single-coil bright)"
+
+  noise:
+    notes:
+      - "Single-coil 拾音器有 60Hz hum"
+      - "使用 noise gate 或避免高 gain"
+
+  special_notes:
+    - "Semi-hollow 在高音量時注意 feedback"
+    - "Single-coil 適合 clean 和 low-medium gain"
+
+# 適合搭配的音箱
+amp_pairing:
+  excellent:
+    - "Clean amps (Roland JC-22, Fender Deluxe Reverb)"
+    - "Fender Blackface/Silverface"
+    - "Vox AC-series (Tele + Vox = classic)"
+  good:
+    - "Tone King Imperial (clean channel)"
+    - "Marshall (Tele into Marshall = Keith Richards)"
+
+  special_notes:
+    - "Tele + clean amp = 經典配對"
+    - "Semi-hollow Tele + Blackface = vintage country heaven"
+
+# 使用注意事項
+notes:
+  mij_quality:
+    - "Made in Japan Flagship series 品質極高"
+    - "日本製造工藝精良"
+    - "Momose pickups 是高品質日本拾音器"
+
+  single_coil:
+    - "Single-coil 拾音器有 60Hz hum (正常現象)"
+    - "避免靠近變壓器、電腦螢幕等電磁干擾源"
+    - "可使用 hum-cancelling pedals"
+
+  maintenance:
+    - "Maple 指板需要定期清潔"
+    - "Ash 琴身對濕度敏感"
+    - "Semi-hollow 結構較脆弱"
+
+  setup:
+    - "Bolt-on neck 可調整 neck angle"
+    - "25.5 吋 scale，適合標準 Tele 設定"
+    - "3-saddle bridge 可能需要 intonation 調整"
+
+# 與庫存其他吉他比較
+comparisons:
+  vs_greco_te500:
+    similarities:
+      - "Both semi-hollow thinline Telecasters"
+      - "Similar body construction (Ash, f-hole)"
+      - "Same scale length (25.5\")"
+    differences:
+      - "Fender: Single-coil vs Greco: WideRange Humbucker"
+      - "Fender: Brighter vs Greco: Warmer"
+      - "Fender: Modern MIJ vs Greco: Vintage"
+      - "Fender: More twang vs Greco: More warmth"
+
+  vs_eclipse_ctm:
+    differences:
+      - "完全不同風格"
+      - "Fender: Single-coil, clean styles vs Eclipse: Humbucker, high-gain"
+      - "Fender: Bright, twangy vs Eclipse: Warm, compressed"
+
+  vs_throbber_ctm:
+    differences:
+      - "Fender: Single-coil vs Throbber: Humbucker"
+      - "Fender: Brighter, twangier vs Throbber: Warmer"
+      - "Fender: Bolt-on vs Throbber: Set neck"
+
+# 推薦訊號鏈
+signal_chain_recommendations:
+  chain_1:
+    name: "Funk / Clean"
+    pedals:
+      - "Empress MKII (控制動態)"
+      - "PA-1QG (Fender 專用 EQ preset)"
+      - "Horsemeat (clean boost, 需要時)"
+    amp: "Roland JC-22 (clean, chorus ON)"
+    notes: "完美 funk 吉他"
+
+  chain_2:
+    name: "Country / Blues"
+    pedals:
+      - "Cali76 FET (增加 sustain)"
+      - "Morning Glory (vintage crunch, Bright Cut ON)"
+    amp: "Blacklon (Blackface sim) → any amp"
+    notes: "經典 country Tele tone"
+
+  chain_3:
+    name: "Classic Rock"
+    pedals:
+      - "Morning Glory (foundational crunch)"
+      - "Source Code (solo, TS + Tele = classic)"
+    amp: "任何 amp"
+    notes: "Keith Richards style (Tele + OD)"
+
+  always_on:
+    recommendation:
+      - "PA-1QG EQ (Fender 專用 preset)"
+      - "Empress MKII (控制 single-coil 動態)"
+
+# 適合的音樂家參考
+reference_artists:
+  classic:
+    - "Keith Richards (Tele + overdrive)"
+    - "Danny Gatton (Tele master)"
+    - "Albert Collins (Tele blues)"
+  modern:
+    - "Nile Rodgers (Tele funk)"
+    - "Bill Frisell (Tele jazz)"
+
+# Momose VT-1 Pickups 特性
+momose_vt1_pickups:
+  description: "High-quality Japanese single-coil pickups"
+  manufacturer: "Momose (日本高端吉他品牌)"
+
+  characteristics:
+    - "Vintage-voiced Telecaster tone"
+    - "Clear, articulate"
+    - "Balanced output"
+    - "Classic Tele twang with modern clarity"
+
+  quality_note: "Momose 是日本知名高端吉他品牌，拾音器品質極佳"
+
+# 參考資料來源
+sources:
+  - "Fender 官方網站"
+  - "Made in Japan Flagship series 資料"
+  - "Momose Guitars 資料"
+
+data_collected: 2026-01-02
+data_reliability: "中 (部分規格需要補充)"

@@ -1,0 +1,301 @@
+# Greco Spacey Sounds TE-500 Thinline
+# 吉他詳細技術資料
+
+version: 1.0
+last_updated: 2026-01-02
+
+# 基本資訊
+basic_info:
+  id: "greco_te500"
+  brand: "Greco"
+  model: "Spacey Sounds TE-500"
+  full_name: "Greco Spacey Sounds TE-500 Thinline"
+  series: "Spacey Sounds"
+  made_in: "Japan"
+  era: "Vintage (預估 1970s-1980s)"
+  year: null  # 未知確切年份
+
+# 價格資訊
+price:
+  msrp: null  # Vintage 琴，無 MSRP
+  current_value: null  # 市場價格變動
+  currency: "USD"
+  tier: "vintage_collectible"
+
+# 琴身規格
+body:
+  wood: "Ash"
+  construction: "Semi-hollow thinline (with f-hole)"
+  type: "semi_hollow_thinline"
+  shape: "Telecaster-style thinline"
+  finish: null  # 請補充
+  binding: null  # 請補充
+
+  special_features:
+    - name: "F-hole"
+      description: "單 f-hole 設計，提供 semi-hollow 音色"
+      effect: "增加 acoustic resonance"
+
+# 琴頸規格
+neck:
+  wood: "Maple"
+  construction: "bolt_on"
+  profile: "Telecaster-style (預估)"
+  scale_length: "25.5 inch (標準 Fender scale)"
+  frets: "21 或 22 frets (預估)"
+  fret_material: null  # 請補充
+  nut_width: "1.65 inch (Tele standard, 預估)"
+  nut_material: null  # 請補充
+
+# 指板規格
+fingerboard:
+  wood: "Maple"
+  radius: "7.25 inch or 9.5 inch (Vintage Tele style, 預估)"
+  inlays: "Dot inlays (預估)"
+
+# 拾音器配置 (改裝)
+pickups:
+  neck:
+    model: "Lindy Fralin Wide Range Humbucker (Neck)"
+    type: "passive_widerange_humbucker"
+    output: "medium"
+    magnets: "Alnico V"
+    characteristics:
+      - "Vintage Tele Wide Range tone"
+      - "Clear, bell-like highs"
+      - "Warm, full lows"
+      - "Excellent clarity and articulation"
+      - "PAF-like warmth with Tele clarity"
+
+  bridge:
+    model: "Lindy Fralin Wide Range Humbucker (Bridge)"
+    type: "passive_widerange_humbucker"
+    output: "medium"
+    magnets: "Alnico V"
+    characteristics:
+      - "Twangy yet warm"
+      - "Clear, defined highs"
+      - "Vintage Tele character"
+      - "More output than single-coil but still clear"
+
+  pickup_set:
+    name: "Lindy Fralin WideRange Humbucker Set (改裝)"
+    description: "Handwound Wide Range Humbuckers, 忠實重現 1970s Fender Wide Range 音色"
+    designed_for: "Jazz, Country, Funk, Neo Soul, Vintage Tele tones"
+    original_pickups: null  # 原廠拾音器未知
+    modification_date: null  # 改裝日期未知
+
+  controls:
+    - "Volume (Neck)"
+    - "Volume (Bridge)"
+    - "Tone (共用)"
+    - "3-way pickup selector"
+
+# 硬體規格
+hardware:
+  bridge: "Telecaster-style bridge (預估)"
+  tailpiece: "Through-body or top-load (預估)"
+  tuners: "Vintage-style tuners (預估)"
+  hardware_finish: "Chrome (預估)"
+
+# 電子系統
+electronics:
+  type: "passive"
+  battery: "None (passive pickups)"
+  wiring: "Standard Telecaster wiring (預估)"
+
+# 音色特性
+tonal_characteristics:
+  core_tone: "Warm, vintage Tele character with Wide Range clarity and semi-hollow resonance"
+
+  frequency:
+    low: "Full, warm bass (Ash + semi-hollow + WideRange)"
+    mid: "Rich, woody midrange (Maple neck + Ash body)"
+    high: "Clear, bell-like highs (WideRange 特性)"
+
+  dynamics:
+    pick_sensitivity: "Very high (passive WideRange + semi-hollow)"
+    volume_sensitivity: "Very high (vintage-style controls)"
+    compression: "Low (natural, open)"
+
+  output_level: "Medium (vintage-style output)"
+  resonance: "High (semi-hollow thinline 特性)"
+  twang: "Medium-high (Tele DNA 保留)"
+
+  character:
+    - "Vintage Telecaster warmth"
+    - "Wide Range clarity"
+    - "Semi-hollow airiness"
+    - "Ash body brightness"
+    - "Maple neck snap"
+
+# 適用音樂風格
+best_for:
+  excellent:
+    - "Jazz"
+    - "Neo Soul"
+    - "Funk"
+    - "Country (with right settings)"
+    - "Blues"
+    - "Vintage tones"
+  good:
+    - "Classic Rock"
+    - "Indie Rock"
+    - "Pop"
+  not_ideal:
+    - "Heavy Metal (輸出不夠)"
+    - "Modern high-gain (vintage character)"
+
+# 與效果器配對建議
+pedal_pairing:
+  overdrive:
+    excellent:
+      - "Sweet Honey (極佳配對，溫暖疊加溫暖)"
+      - "Morning Glory (保留 Tele clarity)"
+      - "Horsemeat (transparent boost)"
+    good:
+      - "ODL-1-CS (Dumble + Tele = classic)"
+      - "Blacklon (Tele + Blackface sim = vintage heaven)"
+    notes:
+      - "避免過度溫暖 OD，可能過於 muddy"
+      - "Tele + WideRange 已經很溫暖"
+
+  compressor:
+    recommendation:
+      - "Empress MKII (極度透明)"
+      - "輕度設定，保留 Tele attack"
+    notes:
+      - "WideRange 本身動態大，compressor 可幫助平衡"
+
+  eq:
+    recommendation:
+      - "PA-1QG 建立 Greco 專用 preset"
+      - "可能需要略減低頻 (Ash + semi-hollow 低頻豐富)"
+
+  special_notes:
+    - "Lindy Fralin WideRange 極度溫暖清晰"
+    - "Semi-hollow 在高音量時注意 feedback"
+    - "Morning Glory Bright Cut 可依需求調整"
+
+# 適合搭配的音箱
+amp_pairing:
+  excellent:
+    - "Clean amps (Roland JC-22)"
+    - "Fender Blackface (Tele 經典配對)"
+    - "Vintage-voiced amps"
+  good:
+    - "Tone King Imperial (tube warmth)"
+
+  special_notes:
+    - "Semi-hollow Tele + clean amp = 極佳 jazz/neo soul tone"
+    - "Tele DNA + WideRange = 既有 twang 又有 warmth"
+
+# 使用注意事項
+notes:
+  vintage:
+    - "Vintage 琴，可能需要定期維護"
+    - "Greco 是日本品牌，1970s-1980s 品質極佳"
+    - "Bolt-on neck 可能需要定期調整"
+
+  modification:
+    - "已改裝 Lindy Fralin WideRange (高品質改裝)"
+    - "保留原廠拾音器可能有收藏價值"
+
+  maintenance:
+    - "Maple 指板需要定期清潔"
+    - "Ash 琴身對濕度敏感"
+    - "Semi-hollow 結構較脆弱"
+
+  setup:
+    - "Bolt-on neck 可能需要 shim 調整"
+    - "25.5 吋 scale，適合標準 Tele 設定"
+    - "Vintage-style hardware 可能需要升級"
+
+# 與庫存其他吉他比較
+comparisons:
+  vs_fender_thinline:
+    similarities:
+      - "Both semi-hollow thinline Telecasters"
+      - "Similar body construction"
+      - "Similar scale length (25.5\")"
+    differences:
+      - "Greco: WideRange Humbucker vs Fender: Single-coil"
+      - "Greco: Vintage vs Fender: Modern Japanese"
+      - "Greco: 更溫暖 vs Fender: 更 bright"
+
+  vs_throbber_ctm:
+    similarities:
+      - "Both semi-hollow"
+      - "Both medium output"
+      - "Both warm tones"
+    differences:
+      - "Greco: Bolt-on vs Throbber: Set neck"
+      - "Greco: Tele shape vs Throbber: LP-style"
+      - "Greco: 25.5\" vs Throbber: 24.75\""
+      - "Greco: WideRange vs Throbber: PAF"
+
+# 推薦訊號鏈
+signal_chain_recommendations:
+  chain_1:
+    name: "Neo Soul / Funk"
+    pedals:
+      - "Empress MKII (輕度壓縮)"
+      - "PA-1QG (Greco 專用 EQ preset)"
+      - "Sweet Honey (溫暖主音色)"
+    amp: "Roland JC-22 (clean)"
+    notes: "完美 Neo Soul 吉他"
+
+  chain_2:
+    name: "Jazz"
+    pedals:
+      - "Empress MKII"
+      - "Sweet Honey (極低 gain)"
+      - "或不用 OD，直接進 clean amp"
+    amp: "Roland JC-22 or Tone King clean"
+    notes: "WideRange + semi-hollow = 極佳 jazz tone"
+
+  chain_3:
+    name: "Vintage Country / Blues"
+    pedals:
+      - "Horsemeat (clean boost)"
+      - "Morning Glory (vintage crunch)"
+    amp: "Blacklon (Blackface sim) → any amp"
+    notes: "Tele + Blackface sim = classic vintage tone"
+
+  always_on:
+    recommendation:
+      - "PA-1QG EQ (Greco 專用 preset，可能需要略減低頻)"
+      - "Empress MKII (輕度壓縮，控制動態)"
+
+# 適合的音樂家參考
+reference_artists:
+  pickup_similar:
+    - "Seth Lover WideRange users"
+    - "Vintage Tele Deluxe players"
+  style_similar:
+    - "Neo Soul guitarists"
+    - "Jazz fusion players (semi-hollow Tele)"
+
+# Lindy Fralin WideRange 特性
+lindy_fralin_widerange:
+  description: "Handwound reproduction of 1970s Fender Wide Range Humbuckers"
+  designer: "Lindy Fralin"
+
+  characteristics:
+    - "Alnico V magnets"
+    - "Clear, articulate highs"
+    - "Warm, full lows"
+    - "PAF-like warmth with Tele clarity"
+    - "Higher output than single-coil but still clear"
+
+  vs_original:
+    note: "Lindy Fralin 忠實重現 1970s Wide Range 音色，使用 Alnico V (原廠用 CuNiFe)"
+
+# 參考資料來源
+sources:
+  - "Greco Guitars 歷史資料"
+  - "Lindy Fralin Pickups 官方資料"
+  - "Vintage Telecaster 參考"
+
+data_collected: 2026-01-02
+data_reliability: "中 (vintage 琴部分規格推測)"
