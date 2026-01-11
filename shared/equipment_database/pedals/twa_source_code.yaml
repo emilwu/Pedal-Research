@@ -137,7 +137,12 @@ review_summary:
 # 訊號鏈配置
 signal_chain:
   position: "pre_amp_gain"
-  swiss_things_assignment: "loop_1"
+
+  signal_routing:
+    current_router: "swiss_things"
+    legacy_swiss_things: "loop_1"
+    planned_buffer_plus_plus: "loop_1"
+    migration_notes: "Routing remains same (loop_1 on both routers)"
   notes: "訊號鏈2 TS Evolution，Classic Rock 時需要 TS 中頻開啟"
 
 # 參考資料來源

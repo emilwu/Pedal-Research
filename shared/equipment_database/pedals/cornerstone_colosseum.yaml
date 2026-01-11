@@ -215,7 +215,13 @@ review_summary:
 # 訊號鏈配置
 signal_chain:
   position: "pre_amp_gain"
-  swiss_things_assignment: "N/A (V3.0 已移除)"
+
+  signal_routing:
+    current_router: "n/a"
+    legacy_swiss_things: "loop_1"
+    planned_buffer_plus_plus: "n/a"
+    migration_notes: "Pedal removed in V3.0 - replaced by PRS Horsemeat + JHS Morning Glory"
+
   notes: "V2.0 核心效果器,V3.0 改用單功能效果器取代"
   removal_reason: "簡化訊號鏈,用 PRS Horsemeat + JHS Morning Glory V3 取代"
 
