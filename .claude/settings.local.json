@@ -16,8 +16,7 @@
       "Bash(mkdir:*)",
       "WebFetch(domain:www.freethetone.com)",
       "Bash(grep:*)",
-      "Bash(find:*)",
-      "Bash(git -C /Users/emilwu/VSCode/Pedal-Research status --short)"
+      "Bash(find:*)"
     ]
   }
 }

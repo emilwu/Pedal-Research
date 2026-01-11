@@ -183,7 +183,13 @@ pairing:
 # 訊號鏈配置
 signal_chain:
   position: "always_on_pre_amp"
-  swiss_things_assignment: "before_input"
+
+  signal_routing:
+    current_router: "swiss_things"
+    legacy_swiss_things: "before_input"
+    planned_buffer_plus_plus: "before_router"
+    migration_notes: "Always-on before signal router (before_input → before_router)"
+
   notes: "可程式化 EQ，為每把吉他建立專用 preset，附 Clean Boost 功能"
 
 # 參考資料來源
