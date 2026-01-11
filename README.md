@@ -1,8 +1,8 @@
 # Pedal Research - 吉他效果器研究與訊號鏈管理系統
 
-**版本:** 2.0
-**最後更新:** 2025-12-30
-**系統狀態:** ✅ 已建立核心架構
+**版本:** 2.1
+**最後更新:** 2026-01-11
+**系統狀態:** ✅ 系統完整運作中
 
 ---
 
@@ -96,7 +96,7 @@ Q4: 是否啟用預算分析？
 
 ## 核心 Skills
 
-### Inventory Manager Skill
+### 1. Inventory Manager Skill
 **用途:** 管理動態設備清單
 **功能:**
 - 新增設備
@@ -104,9 +104,7 @@ Q4: 是否啟用預算分析？
 - 更新設備資訊
 - 查詢 Inventory
 
----
-
-### Guitar-Pedal Pairing Logic Skill
+### 2. Guitar-Pedal Pairing Logic Skill
 **用途:** 計算最佳效果器配對
 **輸入:**
 - 吉他特性 (拾音器類型、輸出等級、琴身類型)
@@ -120,6 +118,41 @@ Q4: 是否啟用預算分析？
 - Delay/Reverb 配置
 
 **核心邏輯:** 參考 `.claude/knowledge/pairing_rules.yaml`
+
+### 3. Equipment Optimizer Skill
+**用途:** 設備功能分析與優化建議
+**功能:**
+- 功能重疊檢測
+- 替換建議
+- 使用率優化
+
+### 4. Budget Analyzer Skill
+**用途:** 財務分析與成本優化
+**功能:**
+- 成本分析
+- 投資回報率評估
+- 預算友好替代方案
+
+### 5. Implementation Planner Skill
+**用途:** 升級實施計畫
+**功能:**
+- 升級時程安排
+- 優先順序規劃
+- 風險評估
+
+### 6. Technical Deep-Dive Skill
+**用途:** 深度技術分析
+**功能:**
+- 阻抗匹配分析
+- 訊號路徑驗證
+- 技術規格深度解析
+
+### 7. Usage Examples Generator Skill
+**用途:** 生成實用範例
+**功能:**
+- YAML → 實用範例轉化
+- 控制介面說明
+- 使用情境建議
 
 ---
 
@@ -318,22 +351,40 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 
 ---
 
-## 下一步
+## 系統狀態
 
-### 待建立的 Agents/Skills
+### ✅ 已完成
 
-- [ ] Project Initializer Agent (`.claude/agents/0_project-initializer.md`)
-- [ ] Inventory Manager Skill (`.claude/skills/inventory-manager.md`)
-- [ ] Pedal Research Agent (`.claude/agents/1_pedal-researcher.md`)
-- [ ] Guitar-Pedal Pairing Skill (`.claude/skills/guitar-pedal-pairing.md`)
-- [ ] Signal Chain Builder Agent (`.claude/agents/2_signal-chain-builder.md`)
+#### Agents (3個)
+- ✅ Project Initializer Agent (`.claude/agents/0_project-initializer.md`)
+- ✅ Pedal Research Agent (`.claude/agents/1_pedal-researcher.md`)
+- ✅ Signal Chain Builder Agent (`.claude/agents/2_signal-chain-builder.md`)
 
-### 待建立的 Knowledge Base
+#### Skills (7個)
+- ✅ Inventory Manager Skill (`.claude/skills/inventory-manager.md`)
+- ✅ Guitar-Pedal Pairing Skill (`.claude/skills/guitar-pedal-pairing.md`)
+- ✅ Equipment Optimizer Skill (`.claude/skills/equipment-optimizer.md`)
+- ✅ Budget Analyzer Skill (`.claude/skills/budget-analyzer.md`)
+- ✅ Implementation Planner Skill (`.claude/skills/implementation-planner.md`)
+- ✅ Technical Deep-Dive Skill (`.claude/skills/technical-deep-dive.md`)
+- ✅ Usage Examples Generator Skill (`.claude/skills/usage-examples-generator.md`)
+
+#### Knowledge Base
+- ✅ pairing_rules.yaml (配對規則庫)
+- ✅ signal_chain_fundamentals.md (訊號鏈基礎知識)
+
+#### Equipment Database
+- ✅ 27+ 效果器完整 YAML 數據庫
+- ✅ 4 把吉他數據
+- ✅ 2 台音箱數據
+- ✅ 配件數據
+
+### 📝 待建立的 Knowledge Base
 
 - [ ] music_style_reference.md
 - [ ] impedance_guide.md
 
-### 待測試
+### 🧪 待測試
 
 - [ ] 完整工作流程測試
 - [ ] 新專案建立流程
@@ -386,6 +437,6 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 
 ---
 
-**系統狀態:** ✅ 核心架構已建立，Agents/Skills 待實作
+**系統狀態:** ✅ 系統完整運作中
 
-**最後更新:** 2025-12-30
+**最後更新:** 2026-01-11
