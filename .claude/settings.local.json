@@ -20,7 +20,8 @@
       "Bash(for file in budget-analyzer.md equipment-optimizer.md inventory-manager.md usage-examples-generator.md)",
       "Bash(do sed -i '' 's|shared/inventory/|projects/\\\\[current_project\\\\]/inventory/|g' \"$file\")",
       "Bash(done)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(ls:*)"
     ]
   }
 }
