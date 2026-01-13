@@ -30,7 +30,7 @@
 
 **知識來源:**
 - `projects/[current_project]/inventory/pedals.yaml` (價格資訊)
-- `shared/equipment_database/pedals/*.yaml` (詳細規格)
+- `shared/equipment_database/pedals/specs/*.yaml` (詳細規格)
 - Equipment Optimizer Skill 的優化建議
 
 ---

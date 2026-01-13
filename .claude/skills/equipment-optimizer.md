@@ -26,7 +26,7 @@
 
 **知識來源:**
 - `projects/[current_project]/inventory/pedals.yaml`
-- `shared/equipment_database/pedals/*.yaml`
+- `shared/equipment_database/pedals/specs/*.yaml`
 - `.claude/knowledge/pairing_rules.yaml`
 
 ---
@@ -84,7 +84,7 @@ input:
 
 ```
 For each pedal in current_configuration:
-    Read: shared/equipment_database/pedals/{pedal_id}.yaml
+    Read: shared/equipment_database/pedals/specs/{pedal_id}.yaml
 
     Extract:
     - type (compressor, overdrive, delay, reverb)

@@ -19,8 +19,8 @@
 5. 提供設定建議與故障排除
 
 **知識來源:**
-- `shared/equipment_database/pedals/*.yaml` (技術規格)
-- `projects/*/research/*.md` (研究文件)
+- `shared/equipment_database/pedals/specs/*.yaml` (技術規格)
+- `shared/equipment_database/pedals/research/*.md` (研究文件)
 - `.claude/knowledge/pairing_rules.yaml` (配對規則)
 - `projects/[current_project]/inventory/music_styles.yaml` (音樂風格資料)
 
@@ -41,8 +41,8 @@
 ```yaml
 input:
   pedal_id: "ff1y"
-  yaml_path: "shared/equipment_database/pedals/ff1y.yaml"
-  research_path: "projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md"
+  yaml_path: "shared/equipment_database/pedals/specs/ff1y.yaml"
+  research_path: "shared/equipment_database/pedals/research/ff1y_v1.md"
 
   additional_context:
     user_music_styles:
@@ -544,8 +544,8 @@ Step 8: 生成使用範例文件 (可選)
 User: "根據 FF-1Y 的 YAML 建立使用範例"
 
 Claude:
-  Step 1: 讀取 shared/equipment_database/pedals/ff1y.yaml
-  Step 2: 讀取 projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+  Step 1: 讀取 shared/equipment_database/pedals/specs/ff1y.yaml
+  Step 2: 讀取 shared/equipment_database/pedals/research/ff1y_v1.md
   Step 3: 讀取 projects/[current_project]/inventory/music_styles.yaml
   Step 4: 讀取 projects/[current_project]/inventory/guitars.yaml, amps.yaml
 

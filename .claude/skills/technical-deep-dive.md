@@ -19,7 +19,7 @@
 5. 潛在問題識別與解決方案
 
 **知識來源:**
-- `shared/equipment_database/pedals/*.yaml` (技術規格)
+- `shared/equipment_database/pedals/specs/*.yaml` (技術規格)
 - `.claude/knowledge/signal_chain_fundamentals.md`
 - Signal Chain Builder 的訊號鏈配置
 

@@ -91,7 +91,7 @@
 ### Step 2: 檢查是否已有研究資料
 
 ```
-檢查路徑: shared/equipment_database/pedals/
+檢查路徑: shared/equipment_database/[type]/research/
 
 ID = brand_model_normalized
 範例: "strymon_bigsky"
@@ -254,7 +254,7 @@ Post Rock: 5/5 - "長 decay shimmer reverb 完美適合 Post Rock 音景"
 
 #### 6.1 Markdown 報告 (人類閱讀)
 
-檔案路徑: `shared/equipment_database/[type]/[brand]_[model]_v[N].md`
+檔案路徑: `shared/equipment_database/[type]/research/[brand]_[model]_v[N].md`
 
 **結構:**
 
@@ -385,7 +385,7 @@ Post Rock: 5/5 - "長 decay shimmer reverb 完美適合 Post Rock 音景"
 
 #### 6.2 YAML 資料 (AI 處理) **[必須生成]**
 
-檔案路徑: `shared/equipment_database/[type]/[brand]_[model].yaml`
+檔案路徑: `shared/equipment_database/[type]/specs/[brand]_[model].yaml`
 
 **注意：**
 - YAML 文件名稱**不包含**版本號 (例: `strymon_bigsky.yaml`，不是 `strymon_bigsky_v1.yaml`)
@@ -481,8 +481,8 @@ sources:
 ✅ 研究報告已生成！
 
 檔案:
-- shared/equipment_database/[type]/[brand]_[model]_v[N].md
-- shared/equipment_database/[type]/[brand]_[model].yaml
+- shared/equipment_database/[type]/research/[brand]_[model]_v[N].md
+- shared/equipment_database/[type]/specs/[brand]_[model].yaml
 
 是否要將 [Brand] [Model] 加入專案 Inventory？
 
