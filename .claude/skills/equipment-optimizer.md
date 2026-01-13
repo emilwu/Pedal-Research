@@ -25,7 +25,7 @@
 5. 替代方案建議
 
 **知識來源:**
-- `shared/inventory/pedals.yaml`
+- `projects/[current_project]/inventory/pedals.yaml`
 - `shared/equipment_database/pedals/*.yaml`
 - `.claude/knowledge/pairing_rules.yaml`
 

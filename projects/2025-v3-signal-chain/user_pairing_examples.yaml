@@ -1,0 +1,63 @@
+# User-Specific Pairing Examples
+# 此檔案包含專案特定的器材配對範例
+# 從 pairing_rules.yaml common_pairings 提取
+
+version: 1.0
+created: 2026-01-13
+last_updated: 2026-01-13
+source: "extracted from pairing_rules.yaml during refactoring"
+
+# ============================================================
+# 專案特定配對範例
+# ============================================================
+
+common_pairings:
+  - guitar: "ESP Eclipse CTM (EMG active, high output)"
+    music_style: "Rock"
+    recommendation:
+      compressor: "Empress MKII (transparent)"
+      compressor_settings:
+        input: "1-2 LED (lower)"
+        ratio: "2:1 (lower)"
+      overdrive: "Morning Glory or TWA Source Code"
+      notes: "高輸出需要透明壓縮，降低 gain避免過度失真"
+
+  - guitar: "ESP Throbber-CTM (SD APH-1, medium output, semi-hollow)"
+    music_style: "Jazz"
+    recommendation:
+      compressor: "Cali76 FET"
+      compressor_settings:
+        in: "5-6 LED"
+        dry: "70%"
+      overdrive: "Sweet Honey (mostly bypassed)"
+      notes: "FET 溫暖 + semi-hollow 共鳴 = 完美 Jazz 組合"
+
+  - guitar: "Greco TE-500 (Lindy Fralin, medium output)"
+    music_style: "Neo Soul"
+    recommendation:
+      compressor: "Empress MKII"
+      compressor_settings:
+        ratio: "3:1"
+        mix: "80-100%"
+      overdrive: "Sweet Honey + PRS Horsemeat (stacked)"
+      eq: "PA-1QG (+3dB boost, warm 800Hz)"
+      notes: "溫暖 OD 疊加，EQ 補足音量"
+
+  - guitar: "Fender Tokyo Thinline (single-coil, medium output)"
+    music_style: "Funk"
+    recommendation:
+      compressor: "Empress MKII"
+      compressor_settings:
+        ratio: "4:1 (higher)"
+        mix: "100%"
+      overdrive: "Clean boost only (PA-1QG LEVEL)"
+      notes: "單線圈需要更多壓縮，Funk 主要 clean boost"
+
+# ============================================================
+# 使用說明
+# ============================================================
+
+notes: |
+  這些配對範例基於專案特定的器材。
+  當建立新專案時，可以選擇是否繼承這些範例。
+  這些範例可作為參考，但 Agents 會根據通用 pairing_rules.yaml 進行動態配對計算。

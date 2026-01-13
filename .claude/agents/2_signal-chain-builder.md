@@ -45,7 +45,7 @@
 #### Q1: 選擇吉他
 
 ```
-讀取: shared/inventory/guitars.yaml
+讀取: projects/[current_project]/inventory/guitars.yaml
 
 顯示:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -54,79 +54,76 @@
 
 Q1: 請選擇要使用的吉他:
 
-1. ESP Eclipse CTM
-   - 拾音器: EMG JH-B / JH-N (active_humbucker)
+1. [Guitar A]
+   - 拾音器: [Pickup Type A] (active_humbucker)
    - 輸出: High
    - 琴身: Solid
 
-2. ESP Throbber-CTM
-   - 拾音器: Seymour Duncan APH-1 (passive_humbucker)
+2. [Guitar B]
+   - 拾音器: [Pickup Type B] (passive_humbucker)
    - 輸出: Medium
    - 琴身: Semi-hollow
 
-3. Greco TE-500
-   - 拾音器: Lindy Fralin Wide Range
+3. [Guitar C]
+   - 拾音器: [Pickup Type C] (wide_range_humbucker)
    - 輸出: Medium
    - 琴身: Semi-hollow Thinline
 
-4. Fender Tokyo Thinline
-   - 拾音器: Momose VT-1 (single_coil)
+4. [Guitar D]
+   - 拾音器: [Pickup Type D] (single_coil)
    - 輸出: Medium
    - 琴身: Semi-hollow Thinline
 
-請輸入編號 (1-4):
+請輸入編號 (1-N):
 ```
 
 儲存用戶選擇:
 ```yaml
 selected_guitar:
-  id: "esp_throbber_ctm"
-  brand: "ESP"
-  model: "Throbber-CTM"
+  id: "[guitar_id from inventory]"
+  brand: "[Brand]"
+  model: "[Model]"
   # ... 完整資料
 ```
 
 #### Q2: 選擇音箱
 
 ```
-讀取: shared/inventory/amps.yaml
+讀取: projects/[current_project]/inventory/amps.yaml
 
 顯示:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Q2: 請選擇要使用的音箱:
 
-1. Tone King Imperial MKII
+1. [Amp A] [Model A]
    - 類型: Tube preamp
    - FX Loop: Yes (支援 4-Cable Method)
    - 適合: Jazz, Blues, Rock, Fusion, Post Rock
 
-2. Roland JC-22
+2. [Amp B] [Model B]
    - 類型: Solid-state combo
    - FX Loop: No (所有效果器放前級)
    - 適合: Jazz, Neo Soul, Funk, Pop Rock, Clean tones
    - 特色: 內建 Stereo Chorus
 
-請輸入編號 (1-2):
+請輸入編號 (1-N):
 ```
 
 #### Q3: 選擇音樂風格
 
 ```
-讀取: shared/inventory/music_styles.yaml
+讀取: projects/[current_project]/music_styles.yaml
 
 顯示:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Q3: 請選擇主要音樂風格:
 
-1. Jazz (Priority 1, 使用率 80%)
-2. Neo Soul (Priority 2, 使用率 70%)
-3. Funk (Priority 3, 使用率 60%)
-4. Post Rock (Priority 4, 使用率 40%)
-5. Fusion (Priority 5, 使用率 30%)
-6. Pop Rock (Priority 6, 使用率 30%)
-7. Rock (Priority 7, 使用率 20%)
+1. [Style 1] (Priority 1, 使用率 X%)
+2. [Style 2] (Priority 2, 使用率 Y%)
+3. [Style 3] (Priority 3, 使用率 Z%)
+...
 
-請輸入編號 (1-7):
+請輸入編號 (1-N):
 ```
 
 ---
@@ -141,7 +138,7 @@ guitar_data = load_guitar_data(selected_guitar_id)
 amp_data = load_amp_data(selected_amp_id)
 
 # 3. 載入所有可用效果器
-available_pedals = load_inventory("shared/inventory/pedals.yaml")
+available_pedals = load_inventory("projects/[current_project]/inventory/pedals.yaml")
 
 # 4. 載入音樂風格特性
 music_style_data = load_music_style(selected_style)
@@ -193,42 +190,42 @@ else:
 **4CM 範例:**
 
 ```
-🎸 ESP Throbber-CTM (Neck Pickup)
+🎸 [Selected Guitar] ([Pickup Position])
   ↓
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 【Pre-Amp Effects】
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   ↓
-① Origin Effects Cali76 FET
-   Settings: IN 5-6 LED, RATIO 1176, DRY 70%
+① [FET Compressor]
+   Settings: INPUT [level], RATIO [setting], DRY [%]
   ↓
-② Free the Tone PA-1QG
-   Preset: "Throbber Jazz"
-   Settings: LEVEL +3dB, EQ warm 800Hz
+② [Parametric EQ Pedal]
+   Preset: "[Guitar] [Style]"
+   Settings: LEVEL [dB], EQ [description]
   ↓
-③ Mad Professor Sweet Honey (BYPASSED)
-   Settings: DRIVE 9 o'clock, FOCUS 12 o'clock
+③ [Warm Low-Gain Overdrive] (BYPASSED)
+   Settings: DRIVE [position], [Control] [position]
   ↓
-🎛️ Tone King Imperial MKII Input
-   Settings: Clean Channel, Volume 4-5
+🎛️ [Tube Amp] Input
+   Settings: Clean Channel, Volume [level]
   ↓
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-【Imperial MKII Preamp Processing】
+【[Amp Name] Preamp Processing】
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   ↓
-🎛️ Imperial MKII FX Send
+🎛️ [Amp Name] FX Send
   ↓
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 【FX Loop Effects】
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   ↓
-④ Free the Tone FF-1Y
-   Settings: Digital, 1/4 note, 15-25% mix
+④ [Digital Delay Pedal]
+   Settings: Digital, 1/4 note, [%] mix
   ↓
-⑤ Cornerstone Nucleo
-   Settings: Room mode, 30-40% decay
+⑤ [Ambient Reverb Pedal]
+   Settings: Room mode, [%] decay
   ↓
-🎛️ Imperial MKII FX Return → Output
+🎛️ [Amp Name] FX Return → Output
 ```
 
 #### 5.2 詳細設定說明
@@ -244,17 +241,17 @@ else:
 ```markdown
 ## Expected Tone Characteristics
 
-- **Clean Headroom:** Excellent (Cali76 gentle + Imperial clean)
-- **Warmth:** High (APH-1 passive + FET compression)
+- **Clean Headroom:** Excellent ([Compressor] gentle + [Amp] clean)
+- **Warmth:** High ([Pickup type] + [Compressor type] compression)
 - **Articulation:** Excellent (Low compression + short delay)
 - **Dynamics:** Natural (DRY mix preserves attack)
 
 ## Playing Tips
 
-1. 使用頸拾音器獲得溫暖 Jazz chord tone
+1. 使用頸拾音器獲得溫暖 [Style] chord tone
 2. 吉他 volume 降至 7-8 可獲得極 clean 音色
-3. Sweet Honey 僅在需要 Blues breakup 時開啟
-4. FF-1Y 時間調整至歌曲 BPM (使用 tap tempo)
+3. [Overdrive] 僅在需要 breakup 時開啟
+4. [Delay] 時間調整至歌曲 BPM (使用 tap tempo)
 ```
 
 ---
@@ -270,14 +267,14 @@ else:
 結構:
 
 ```markdown
-# Signal Chain: Jazz - ESP Throbber-CTM - Tone King Imperial MKII v1
+# Signal Chain: [Style] - [Guitar] - [Amp] v[N]
 
-**Version:** 1.0
-**Created:** 2025-12-30
-**Guitar:** ESP Throbber-CTM
-**Amp:** Tone King Imperial MKII
-**Music Style:** Jazz
-**Method:** 4-Cable Method (4CM)
+**Version:** [N].0
+**Created:** [date]
+**Guitar:** [Guitar Brand] [Guitar Model]
+**Amp:** [Amp Brand] [Amp Model]
+**Music Style:** [Style]
+**Method:** 4-Cable Method (4CM) / Pre-Amp Only
 
 ## Signal Flow Diagram
 [ASCII 圖表]
@@ -302,48 +299,46 @@ else:
 結構:
 
 ```yaml
-version: 1.0
-created: 2025-12-30
+version: [N].0
+created: [date]
 
 config:
   guitar:
-    id: "esp_throbber_ctm"
-    model: "ESP Throbber-CTM"
-    pickup_used: "neck"
-    output_level: "medium"
+    id: "[guitar_id from inventory]"
+    model: "[Guitar Brand] [Guitar Model]"
+    pickup_used: "[position]"
+    output_level: "[level]"
 
   amp:
-    id: "tone_king_imperial_mkii"
-    model: "Tone King Imperial MKII"
-    channel: "clean"
-    fx_loop_used: true
+    id: "[amp_id from inventory]"
+    model: "[Amp Brand] [Amp Model]"
+    channel: "[channel]"
+    fx_loop_used: [true/false]
 
-  music_style: "Jazz"
-  method: "4cm"
+  music_style: "[Style]"
+  method: "4cm / pre_amp_only"
 
 signal_chain:
   pre_amp:
-    - position: 1
-      pedal_id: "cali76_fet"
-      pedal_name: "Origin Effects Cali76 FET"
-      bypass_state: "on"
+    - position: [N]
+      pedal_id: "[id from inventory]"
+      pedal_name: "[Brand] [Model]"
+      bypass_state: "on/off"
       settings:
-        in: "5-6 LED"
-        ratio: "1176"
-        dry: "70%"
+        [control]: "[value]"
+        [control]: "[value]"
 
-  fx_loop:
-    - position: 4
-      pedal_id: "ft1y"
+  fx_loop:  # if method == "4cm"
+    - position: [N]
+      pedal_id: "[id from inventory]"
       bypass_state: "on"
       settings:
-        mode: "digital"
-        time: "1/4 note"
+        [control]: "[value]"
 
 tone_characteristics:
-  clean_headroom: "excellent"
-  warmth: "high"
-  articulation: "excellent"
+  clean_headroom: "excellent/good/fair"
+  warmth: "high/medium/low"
+  articulation: "excellent/good/fair"
 ```
 
 ---

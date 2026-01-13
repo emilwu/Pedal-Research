@@ -21,7 +21,8 @@
 ## Working Directory
 
 ```
-Base Directory: /Users/emilwu/Projects/Pedal-Research
+Base Directory: [project_root]
+Note: project_root will be determined automatically based on the current working directory
 ```
 
 ---
@@ -30,90 +31,153 @@ Base Directory: /Users/emilwu/Projects/Pedal-Research
 
 ### Step 1: 偵測專案狀態
 
-檢查 `shared/inventory/` 目錄是否存在：
+檢查 `projects/` 目錄並尋找現有專案：
 
 ```bash
-if [ -d "shared/inventory" ] && [ -f "shared/inventory/guitars.yaml" ]; then
-    # 這是現有專案
-    狀態 = "existing_project"
+# 檢查 projects/ 目錄中是否有專案
+if [ -d "projects" ] && [ -n "$(ls -A projects/)" ]; then
+    # 有現有專案
+    狀態 = "has_existing_projects"
+    列出所有專案目錄
 else
-    # 這是新專案
-    狀態 = "new_project"
+    # 完全新開始
+    狀態 = "no_projects"
 fi
 ```
 
 ---
 
-### Step 2A: 現有專案流程
+### Step 2A: 有現有專案的流程
 
-如果 `狀態 == "existing_project"`:
+如果 `狀態 == "has_existing_projects"`:
 
-1. **讀取 Inventory**
-   ```yaml
-   - Read: shared/inventory/guitars.yaml
-   - Read: shared/inventory/pedals.yaml
-   - Read: shared/inventory/amps.yaml
-   - Read: shared/inventory/music_styles.yaml
+1. **列出所有專案**
    ```
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎸 Pedal Research System - 專案選擇
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-2. **顯示當前 Inventory 摘要**
-   ```
-   ✅ 發現現有專案！
+   發現現有專案：
 
-   當前設備清單：
-   - 吉他: [N] 把
-   - 效果器: [N] 顆
-   - 音箱: [N] 台
-   - 音樂風格: [N] 種
+   1. 2025-v3-signal-chain
+      - 建立日期: 2025-12-30
+      - 器材: 4 吉他, 12 效果器, 2 音箱
+      - 最後使用: 2026-01-10
 
-   最後更新: [last_updated date]
-   ```
+   2. my-jazz-setup
+      - 建立日期: 2025-11-15
+      - 器材: 2 吉他, 6 效果器, 1 音箱
+      - 最後使用: 2025-12-01
 
-3. **詢問使用者**
-   ```
    請選擇操作：
 
-   1. 繼續使用現有設備清單
-   2. 更新設備清單（新增/移除設備）
-   3. 建立新專案（新的專案目錄）
+   1. 繼續使用現有專案 (選擇專案編號)
+   2. 建立新專案（空白）
+   3. 建立新專案（繼承自現有專案）
 
    請輸入選項編號 (1/2/3):
    ```
 
-4. **根據選擇執行**
-   - **選項 1**: 直接進入主選單
-   - **選項 2**: 呼叫 `Inventory Manager Skill` 進行更新
-   - **選項 3**: 執行 Step 2B（新專案流程）
+2. **選項 1: 繼續使用現有專案**
+   ```
+   請選擇專案編號:
+
+   → 讀取專案資料
+   → 顯示主選單
+   ```
+
+3. **選項 2: 建立新專案（空白）**
+   ```
+   執行 Step 2C（新專案建立流程）
+   ```
+
+4. **選項 3: 建立新專案（繼承）**
+   ```
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🔄 專案繼承設定
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   選擇要繼承的來源專案 (輸入編號):
+
+   → 顯示專案列表
+   → 使用者選擇 (例: 1)
+
+   選擇要繼承的內容（可複選）：
+
+   □ 器材清單 (Inventory)
+   □ 音樂偏好 (Music Styles)
+   □ 配置 (Signal Chains) *需同時選擇器材清單和音樂偏好
+
+   ⚠️ 注意：
+   - 繼承「配置」需要同時繼承「器材清單」和「音樂偏好」
+   - 配置是基於特定器材和風格建立的
+
+   請輸入選項（例：1,2 或 1,2,3）:
+
+   [驗證邏輯]
+   if 選擇配置 and not (器材清單 and 音樂偏好):
+       提示錯誤：繼承配置需要同時繼承器材清單和音樂偏好
+       重新詢問
+
+   [執行繼承]
+   → 建立新專案目錄
+   → 複製選定的檔案
+   → 建立 project_meta.yaml 並記錄 inherited_from
+   → 提示完成
+   ```
 
 ---
 
-### Step 2B: 新專案流程
+### Step 2B: 沒有任何專案的流程
 
-如果 `狀態 == "new_project"`:
+如果 `狀態 == "no_projects"`:
 
-1. **建立目錄結構**
-   ```bash
-   mkdir -p shared/inventory
-   mkdir -p shared/equipment_database/guitars
-   mkdir -p shared/equipment_database/pedals
-   mkdir -p shared/equipment_database/amps
-   mkdir -p shared/templates
+```
+歡迎使用 Pedal Research 系統！
+
+這是全新的開始，讓我們建立第一個專案。
+
+執行 Step 2C（新專案建立流程）
+```
+
+---
+
+### Step 2C: 新專案建立流程
+
+**適用於**：
+- 沒有任何專案時（首次使用）
+- 用戶選擇「建立新專案（空白）」
+
+1. **詢問專案名稱**
+   ```
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎸 建立新專案
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   請輸入專案名稱（例：my-jazz-setup, 2026-spring-tour）:
+
+   [驗證]
+   - 不可包含特殊字元
+   - 不可與現有專案重名
    ```
 
-2. **收集設備清單（透過問答）**
+2. **建立目錄結構**
+   ```bash
+   mkdir -p projects/[project_name]/inventory
+   mkdir -p projects/[project_name]/signal_chains
+   mkdir -p projects/[project_name]/research
+   ```
+
+3. **收集設備清單（透過問答）**
 
    #### Q1: 吉他清單
    ```
-   歡迎使用 Pedal Research 系統！
-
-   讓我們先建立你的設備清單。
-
    Q1: 請列出你擁有的吉他（每行一把，格式：品牌 型號）
 
    範例：
-   ESP Eclipse CTM
-   Fender Stratocaster
-   Gibson Les Paul
+   [Brand A] [Model X]  (Active Humbucker, Solid Body)
+   [Brand B] [Model Y]  (Passive Humbucker, Semi-hollow)
+   [Brand C] [Model Z]  (Single-coil, Solid Body)
 
    請輸入（輸入 'done' 完成）：
    ```
@@ -125,9 +189,9 @@ fi
    Q2: 請列出你擁有的效果器（每行一顆，格式：品牌 型號）
 
    範例：
-   Empress Compressor MKII
-   Strymon BigSky
-   JHS Morning Glory
+   [Brand A] [Compressor Model]
+   [Brand B] [Reverb Model]
+   [Brand C] [Overdrive Model]
 
    請輸入（輸入 'done' 完成）：
    ```
@@ -137,16 +201,26 @@ fi
    Q3: 請列出你擁有的音箱（每行一台，格式：品牌 型號）
 
    範例：
-   Tone King Imperial MKII
-   Roland JC-22
-   Fender Deluxe Reverb
+   [Brand A] [Tube Amp Model]  (with FX Loop)
+   [Brand B] [Solid-state Amp]  (no FX Loop)
 
    請輸入（輸入 'done' 完成）：
    ```
 
-   #### Q4: 音樂風格偏好
+   #### Q4: Accessories 清單（可選）
    ```
-   Q4: 請選擇你主要演奏的音樂風格（可複選，用逗號分隔）
+   Q4: 請列出你擁有的 accessories（每行一個，格式：品牌 型號）
+
+   範例：
+   [Brand A] [Patchbay Model]
+   [Brand B] [Buffer Model]
+
+   請輸入（輸入 'done' 或 'skip' 跳過）：
+   ```
+
+   #### Q5: 音樂風格偏好
+   ```
+   Q5: 請選擇你主要演奏的音樂風格（可複選，用逗號分隔）
 
    1. Jazz
    2. Neo Soul
@@ -163,11 +237,11 @@ fi
    請輸入編號（例：1,2,3）：
    ```
 
-3. **建立 Inventory YAML 檔案**
+4. **建立 Inventory YAML 檔案**
 
    使用收集到的資料，建立基礎 YAML 檔案：
 
-   **guitars.yaml**:
+   **projects/[project_name]/inventory/guitars.yaml**:
    ```yaml
    version: 1.0
    last_updated: [current_date]
@@ -175,7 +249,7 @@ fi
    source: "initialized by Project Initializer Agent"
 
    guitars:
-     - id: "[brand]_[model_normalized]"  # 例: esp_eclipse_ctm
+     - id: "[brand]_[model_normalized]"
        brand: "[Brand]"
        model: "[Model]"
        full_name: "[Brand] [Model]"
@@ -188,9 +262,13 @@ fi
        acquired_date: null
        research_file: null
        notes: "Initialized, awaiting detailed research"
+
+   stats:
+     total: [N]
+     active: [N]
    ```
 
-   **pedals.yaml**:
+   **projects/[project_name]/inventory/pedals.yaml**:
    ```yaml
    version: 1.0
    last_updated: [current_date]
@@ -212,9 +290,13 @@ fi
          currency: "USD"
        research_file: null
        notes: "Initialized, awaiting detailed research"
+
+   stats:
+     total: [N]
+     by_type: {}
    ```
 
-   **amps.yaml**:
+   **projects/[project_name]/inventory/amps.yaml**:
    ```yaml
    version: 1.0
    last_updated: [current_date]
@@ -232,9 +314,37 @@ fi
        status: "active"
        research_file: null
        notes: "Initialized, awaiting detailed research"
+
+   stats:
+     total: [N]
    ```
 
-   **music_styles.yaml**:
+   **projects/[project_name]/inventory/accessories.yaml**:
+   ```yaml
+   version: 1.0
+   last_updated: [current_date]
+   created: [current_date]
+   source: "initialized by Project Initializer Agent"
+
+   accessories:
+     - id: "[brand]_[model_normalized]"
+       brand: "[Brand]"
+       model: "[Model]"
+
+       type: null  # patchbay_module/buffer/switcher/etc
+       status: "active"
+       price:
+         amount: null
+         currency: "USD"
+       research_file: null
+       notes: "Initialized, awaiting detailed research"
+
+   stats:
+     total: [N]
+     by_type: {}
+   ```
+
+   **projects/[project_name]/music_styles.yaml**:
    ```yaml
    version: 1.0
    last_updated: [current_date]
@@ -248,7 +358,7 @@ fi
        notes: "User selected style"
    ```
 
-4. **詢問是否需要詳細資料收集**
+5. **詢問是否需要詳細資料收集**
    ```
    ✅ 基礎設備清單已建立！
 
@@ -264,30 +374,35 @@ fi
    請選擇 (1/2):
    ```
 
-5. **執行選擇**
+6. **執行選擇**
    - **選項 1**: 為每個設備觸發 `Pedal Research Agent`（循環處理）
-   - **選項 2**: 跳過，進入主選單
+   - **選項 2**: 跳過，進入 Step 3
 
 ---
 
 ### Step 3: 建立專案元資料
 
-建立 `shared/project_meta.yaml`:
+建立 `projects/[project_name]/project_meta.yaml`:
 
 ```yaml
 version: 1.0
 created: [current_date]
 last_accessed: [current_date]
+name: "[project_name]"
+description: "[optional]"
 
-system:
-  name: "Pedal Research System"
-  version: "2.0"
+# 如果是繼承專案，記錄來源
+inherited_from:
+  project: "[source_project]"  # null if not inherited
+  inherited_items: []  # ["inventory", "music_styles", "signal_chains"]
 
 statistics:
   total_guitars: [N]
   total_pedals: [N]
   total_amps: [N]
+  total_accessories: [N]
   total_styles: [N]
+  total_signal_chains: 0
 
 history:
   - date: [current_date]
@@ -398,11 +513,12 @@ history:
 
 此 Agent 會建立/更新以下檔案：
 
-- `shared/inventory/guitars.yaml`
-- `shared/inventory/pedals.yaml`
-- `shared/inventory/amps.yaml`
-- `shared/inventory/music_styles.yaml`
-- `shared/project_meta.yaml`
+- `projects/[project_name]/inventory/guitars.yaml`
+- `projects/[project_name]/inventory/pedals.yaml`
+- `projects/[project_name]/inventory/amps.yaml`
+- `projects/[project_name]/inventory/accessories.yaml`
+- `projects/[project_name]/music_styles.yaml`
+- `projects/[project_name]/project_meta.yaml`
 
 ---
 
@@ -433,7 +549,7 @@ history:
 
 ## Example Execution
 
-### 範例 1: 新專案初始化
+### 範例 1: 首次使用（無任何專案）
 
 ```
 User: "開始新的效果器研究專案"
@@ -441,33 +557,42 @@ User: "開始新的效果器研究專案"
 Agent:
 歡迎使用 Pedal Research 系統！
 
-檢測到這是新專案，讓我們先建立你的設備清單。
+這是全新的開始，讓我們建立第一個專案。
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎸 建立新專案
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+請輸入專案名稱（例：my-jazz-setup, 2026-spring-tour）:
+
+User: my-first-setup
+
+Agent:
 Q1: 請列出你擁有的吉他（每行一把，格式：品牌 型號）
+
+範例：
+[Brand A] [Model X]  (Active Humbucker, Solid Body)
+[Brand B] [Model Y]  (Passive Humbucker, Semi-hollow)
+
 請輸入（輸入 'done' 完成）：
 
 User:
-ESP Eclipse CTM
-ESP Throbber-CTM
+[Guitar Brand] [Guitar Model A]
+[Guitar Brand] [Guitar Model B]
 done
 
 Agent:
 ✅ 已記錄 2 把吉他
 
 Q2: 請列出你擁有的效果器（每行一顆，格式：品牌 型號）
-請輸入（輸入 'done' 完成）：
-
-User:
-Empress Compressor MKII
-Origin Effects Cali76 FET
-done
+...
 
 [... 繼續收集 ...]
 
 Agent:
 ✅ 基礎設備清單已建立！
 
-當前設備清單：
+專案名稱: my-first-setup
 - 吉他: 2 把
 - 效果器: 2 顆
 - 音箱: 1 台
@@ -487,13 +612,44 @@ Agent:
 [顯示主選單]
 ```
 
-### 範例 2: 現有專案繼續
+### 範例 2: 有現有專案 - 繼續使用
 
 ```
 User: "開始工作"
 
 Agent:
-✅ 發現現有專案！
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎸 Pedal Research System - 專案選擇
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+發現現有專案：
+
+1. 2025-v3-signal-chain
+   - 建立日期: 2025-12-30
+   - 器材: 4 吉他, 12 效果器, 2 音箱
+   - 最後使用: 2026-01-10
+
+2. my-jazz-setup
+   - 建立日期: 2025-11-15
+   - 器材: 2 吉他, 6 效果器, 1 音箱
+   - 最後使用: 2025-12-01
+
+請選擇操作：
+
+1. 繼續使用現有專案 (選擇專案編號)
+2. 建立新專案（空白）
+3. 建立新專案（繼承自現有專案）
+
+請輸入選項編號 (1/2/3):
+
+User: 1
+
+Agent: 請選擇專案編號:
+
+User: 1
+
+Agent:
+✅ 載入專案: 2025-v3-signal-chain
 
 當前設備清單：
 - 吉他: 4 把
@@ -501,19 +657,67 @@ Agent:
 - 音箱: 2 台
 - 音樂風格: 7 種
 
-最後更新: 2025-12-30
+[顯示主選單]
+```
+
+### 範例 3: 建立新專案（繼承）
+
+```
+User: "建立新專案"
+
+Agent:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎸 Pedal Research System - 專案選擇
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+發現現有專案：
+
+1. 2025-v3-signal-chain
+2. my-jazz-setup
 
 請選擇操作：
-1. 繼續使用現有設備清單
-2. 更新設備清單（新增/移除設備）
-3. 建立新專案（新的專案目錄）
+1. 繼續使用現有專案
+2. 建立新專案（空白）
+3. 建立新專案（繼承自現有專案）
 
-請輸入選項編號 (1/2/3):
+User: 3
+
+Agent:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔄 專案繼承設定
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+選擇要繼承的來源專案 (輸入編號):
+
+1. 2025-v3-signal-chain
+2. my-jazz-setup
 
 User: 1
 
 Agent:
-✅ 載入現有設備清單完成！
+請輸入新專案名稱:
+
+User: 2026-rock-setup
+
+Agent:
+選擇要繼承的內容（可複選）：
+
+1. 器材清單 (Inventory)
+2. 音樂偏好 (Music Styles)
+3. 配置 (Signal Chains) *需同時選擇器材清單和音樂偏好
+
+請輸入選項（例：1,2 或 1,2,3）:
+
+User: 1,2
+
+Agent:
+✅ 專案建立完成！
+
+專案名稱: 2026-rock-setup
+繼承自: 2025-v3-signal-chain
+已繼承:
+  - 器材清單 (4 吉他, 12 效果器, 2 音箱)
+  - 音樂偏好 (7 種風格)
 
 [顯示主選單]
 ```

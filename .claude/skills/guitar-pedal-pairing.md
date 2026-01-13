@@ -36,31 +36,31 @@
 ```yaml
 input:
   guitar:
-    id: "esp_throbber_ctm"
-    brand: "ESP"
-    model: "Throbber-CTM"
+    id: "[guitar_id from inventory]"
+    brand: "[Guitar Brand]"
+    model: "[Guitar Model]"
     pickup_type: "passive_humbucker"
-    pickup_detail: "Seymour Duncan APH-1"
+    pickup_detail: "[Pickup Details]"
     output_level: "medium"
     body_type: "semi_hollow"
 
-  music_style: "Jazz"
+  music_style: "[Style Name]"
 
   available_equipment:
     compressors:
-      - id: "empress_mkii"
-        model: "Empress MKII"
+      - id: "[compressor_id_1]"
+        model: "[Compressor Model A]"
         subtype: "vca"
-      - id: "cali76_fet"
-        model: "Origin Effects Cali76 FET"
+      - id: "[compressor_id_2]"
+        model: "[Compressor Model B]"
         subtype: "fet"
 
     overdrives:
-      - id: "sweet_honey"
-        model: "Mad Professor Sweet Honey Deluxe"
+      - id: "[overdrive_id_1]"
+        model: "[Overdrive Model A]"
         subtype: "transparent_warm"
-      - id: "prs_horsemeat"
-        model: "PRS Horsemeat"
+      - id: "[overdrive_id_2]"
+        model: "[Overdrive Model B]"
         subtype: "klon_style_transparent"
 
     # ... 其他類型效果器
@@ -161,22 +161,22 @@ def select_compressor(available_compressors, music_style, guitar):
 
 ```yaml
 selected_compressor:
-  id: "cali76_fet"
-  model: "Origin Effects Cali76 FET"
+  id: "[compressor_id]"
+  model: "[Compressor Model] ([FET Compressor])"
   reason: |
-    FET 壓縮特性溫暖，非常適合 Jazz。
-    Semi-hollow 琴身需要溫和壓縮，FET 符合需求。
-    Cali76 的 Dry mix 功能可保留動態，完美適合 Jazz。
+    FET 壓縮特性溫暖，非常適合 [Music Style]。
+    [Body Type] 琴身需要溫和壓縮，FET 符合需求。
+    此壓縮器的 Dry mix 功能可保留動態，完美適合 [Music Style]。
 
   recommended_settings:
-    in: "5-6 LED"
-    attack: "fast"
-    release: "medium"
-    ratio: "1176 fixed (類似 4:1)"
-    dry_mix: "70%"
+    [control_1]: "[value]"
+    [control_2]: "[value]"
+    [control_3]: "[value]"
+    ratio: "[ratio description]"
+    dry_mix: "[%]"
     notes: |
-      - IN: 中等輸入（passive medium output）
-      - DRY: 70% 保留動態，符合 Jazz 需求
+      - [Control]: [Reasoning for this setting]
+      - DRY: [%] 保留動態，符合 [Music Style] 需求
 ```
 
 #### 4.2 Overdrive 選擇

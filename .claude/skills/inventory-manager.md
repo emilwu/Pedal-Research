@@ -9,7 +9,7 @@
 
 ## Skill Role
 
-你是 **Inventory Manager Skill**，負責管理 `shared/inventory/` 中的設備清單。
+你是 **Inventory Manager Skill**，負責管理 `projects/[current_project]/inventory/` 中的設備清單。
 
 你提供以下功能：
 1. 新增設備（Add）
@@ -23,7 +23,7 @@
 
 ```
 Base Directory: /Users/emilwu/Projects/Pedal-Research
-Inventory Path: shared/inventory/
+Inventory Path: projects/[current_project]/inventory/
 ```
 
 ---
@@ -61,7 +61,7 @@ Inventory Path: shared/inventory/
 
 3. **檢查是否已存在**
    ```yaml
-   # Read shared/inventory/[equipment_type]s.yaml
+   # Read projects/[current_project]/inventory/[equipment_type]s.yaml
    # 搜尋是否有相同 ID
 
    if ID exists:
@@ -184,7 +184,7 @@ Inventory Path: shared/inventory/
 
 6. **更新 Inventory 檔案**
    ```
-   - 讀取 shared/inventory/[equipment_type]s.yaml
+   - 讀取 projects/[current_project]/inventory/[equipment_type]s.yaml
    - 新增條目到 [equipment_type]s 列表
    - 更新 last_updated 欄位
    - 更新 stats 統計資訊
@@ -258,7 +258,7 @@ Inventory Path: shared/inventory/
 
 5. **執行移除**
    ```
-   - 從 shared/inventory/[equipment_type]s.yaml 移除條目
+   - 從 projects/[current_project]/inventory/[equipment_type]s.yaml 移除條目
    - 更新 last_updated
    - 更新 stats 統計資訊
    - 如果選擇刪除研究資料:
@@ -493,7 +493,7 @@ Inventory Path: shared/inventory/
 if YAML parsing error:
     ❌ 錯誤：無法讀取 Inventory 檔案
 
-    檔案: shared/inventory/[file].yaml
+    檔案: projects/[current_project]/inventory/[file].yaml
     錯誤: [error message]
 
     可能原因：
@@ -547,9 +547,9 @@ if normalized ID conflicts:
 
 此 Skill 會更新以下檔案：
 
-- `shared/inventory/guitars.yaml`
-- `shared/inventory/pedals.yaml`
-- `shared/inventory/amps.yaml`
+- `projects/[current_project]/inventory/guitars.yaml`
+- `projects/[current_project]/inventory/pedals.yaml`
+- `projects/[current_project]/inventory/amps.yaml`
 
 ---
 

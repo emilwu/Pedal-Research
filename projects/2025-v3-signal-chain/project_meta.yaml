@@ -1,0 +1,31 @@
+version: 1.0
+created: 2025-12-30
+last_accessed: 2026-01-13
+name: "2025-v3-signal-chain"
+description: "Main signal chain configuration project for 2025 V3 setup"
+
+# Inheritance info (null since this is the original project)
+inherited_from:
+  project: null
+  inherited_items: []
+
+# Statistics
+statistics:
+  total_guitars: 4
+  total_pedals: 13
+  total_amps: 2
+  total_accessories: 2  # RockBoard MOD 2 V2, MOD 3 V2
+  total_styles: 7
+  total_signal_chains: 0  # Will be updated as signal chains are created
+
+# History
+history:
+  - date: 2026-01-13
+    action: "Data migration: moved inventory from shared/ to project-specific directory"
+    agent: "Manual refactoring"
+    notes: "Part of project-ization refactoring to improve portability"
+
+  - date: 2025-12-30
+    action: "Project initialized"
+    agent: "Manual setup"
+    notes: "Initial project creation with V3 signal chain configuration"

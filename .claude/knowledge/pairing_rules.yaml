@@ -395,67 +395,32 @@ pairing_priority:
     - factor: "guitar_character"
       weight: 0.2
 
-  # 配對決策樹範例
+  # 配對決策樹範例（通用）
   decision_tree_example:
     condition: "music_style == Jazz && guitar_output == medium && body_type == semi_hollow"
     result:
-      compressor: "Cali76 FET"  # 溫暖 FET 適合 Jazz
+      compressor_type: "FET"
       compressor_reason: "FET 溫暖特性 + semi-hollow 需要溫和壓縮"
-      overdrive: "Sweet Honey"
+      overdrive_type: "Warm Low-Gain"
       overdrive_reason: "溫暖低增益，bypass 為主"
       overdrive_bypass: true
-
-# ============================================================
-# 常見問題配對表
-# ============================================================
-
-common_pairings:
-  - guitar: "ESP Eclipse CTM (EMG active, high output)"
-    music_style: "Rock"
-    recommendation:
-      compressor: "Empress MKII (transparent)"
-      compressor_settings:
-        input: "1-2 LED (lower)"
-        ratio: "2:1 (lower)"
-      overdrive: "Morning Glory or TWA Source Code"
-      notes: "高輸出需要透明壓縮，降低 gain避免過度失真"
-
-  - guitar: "ESP Throbber-CTM (SD APH-1, medium output, semi-hollow)"
-    music_style: "Jazz"
-    recommendation:
-      compressor: "Cali76 FET"
-      compressor_settings:
-        in: "5-6 LED"
-        dry: "70%"
-      overdrive: "Sweet Honey (mostly bypassed)"
-      notes: "FET 溫暖 + semi-hollow 共鳴 = 完美 Jazz 組合"
-
-  - guitar: "Greco TE-500 (Lindy Fralin, medium output)"
-    music_style: "Neo Soul"
-    recommendation:
-      compressor: "Empress MKII"
-      compressor_settings:
-        ratio: "3:1"
-        mix: "80-100%"
-      overdrive: "Sweet Honey + PRS Horsemeat (stacked)"
-      eq: "PA-1QG (+3dB boost, warm 800Hz)"
-      notes: "溫暖 OD 疊加，EQ 補足音量"
-
-  - guitar: "Fender Tokyo Thinline (single-coil, medium output)"
-    music_style: "Funk"
-    recommendation:
-      compressor: "Empress MKII"
-      compressor_settings:
-        ratio: "4:1 (higher)"
-        mix: "100%"
-      overdrive: "Clean boost only (PA-1QG LEVEL)"
-      notes: "單線圈需要更多壓縮，Funk 主要 clean boost"
+    notes: |
+      此為通用範例，實際配對會從 inventory 中選擇匹配的器材。
+      專案特定的配對範例請參考：projects/[project_name]/user_pairing_examples.yaml
 
 # ============================================================
 # 版本資訊
 # ============================================================
 
 version_history:
+  - version: "1.1"
+    date: "2026-01-13"
+    changes:
+      - "移除 common_pairings（已遷移到專案特定的 user_pairing_examples.yaml）"
+      - "通用化 decision_tree_example"
+      - "提升規則庫的可移植性"
+    notes: "此規則庫現在完全通用，可用於任何專案"
+
   - version: "1.0"
     date: "2025-12-30"
     changes:

@@ -1,0 +1,67 @@
+version: 1.0
+last_updated: 2026-01-13
+created: 2026-01-13
+source: "initialized during refactoring based on shared/equipment_database/accessories"
+
+accessories:
+  - id: "rockboard_mod2_v2"
+    brand: "RockBoard"
+    model: "MOD 2 V2"
+    full_name: "RockBoard MOD 2 V2 All-in-One Pedalboard Patchbay"
+    type: "patchbay_module"
+    subtype: "pedalboard_accessory"
+    status: "active"
+
+    price:
+      amount: 179
+      currency: "USD"
+      tier: "professional_accessory"
+
+    research_file: "shared/equipment_database/accessories/rockboard_mod2_v2.yaml"
+
+    usage:
+      purpose: "MIDI 控制 + 訊號線管理"
+      features:
+        - "4x TRS thru"
+        - "2x MIDI thru"
+        - "1x USB Type A thru"
+        - "DC power thru"
+        - "AC IEC thru"
+
+    notes: |
+      適合需要 MIDI 控制效果器的設置（PA-1QG, ODL-1-CS）。
+      優先用於前級效果器 pedalboard，與 Buffer++ 整合。
+
+  - id: "rockboard_mod3_v2"
+    brand: "RockBoard"
+    model: "MOD 3 V2"
+    full_name: "RockBoard MOD 3 V2 All-in-One Pedalboard Patchbay"
+    type: "patchbay_module"
+    subtype: "pedalboard_accessory"
+    status: "planned"
+
+    price:
+      amount: 189
+      currency: "USD"
+      tier: "professional_accessory"
+
+    research_file: "shared/equipment_database/accessories/rockboard_mod3_v2.yaml"
+
+    usage:
+      purpose: "XLR 輸出 + 訊號線管理"
+      features:
+        - "3x TRS thru"
+        - "3x XLR (2 male + 1 female)"
+        - "DC power thru"
+        - "AC IEC thru"
+
+    notes: |
+      適合需要 XLR 連接的設置（Tone King → Audio Interface）。
+      優先用於空間系 pedalboard 或整合音箱 XLR 輸出。
+
+stats:
+  total: 2
+  active: 1
+  planned: 1
+  by_type:
+    patchbay_module: 2

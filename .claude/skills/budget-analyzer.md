@@ -29,7 +29,7 @@
 6. 購買優先順序排序
 
 **知識來源:**
-- `shared/inventory/pedals.yaml` (價格資訊)
+- `projects/[current_project]/inventory/pedals.yaml` (價格資訊)
 - `shared/equipment_database/pedals/*.yaml` (詳細規格)
 - Equipment Optimizer Skill 的優化建議
 
@@ -642,7 +642,7 @@ budget_analysis:
 
 ```
 Error: Price not found for pedal 'from_yesterday'
-Solution: 補充 shared/inventory/pedals.yaml 中的價格資訊
+Solution: 補充 projects/[current_project]/inventory/pedals.yaml 中的價格資訊
 ```
 
 ### 錯誤 2: 回收估算不合理

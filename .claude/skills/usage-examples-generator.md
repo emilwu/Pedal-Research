@@ -22,7 +22,7 @@
 - `shared/equipment_database/pedals/*.yaml` (技術規格)
 - `projects/*/research/*.md` (研究文件)
 - `.claude/knowledge/pairing_rules.yaml` (配對規則)
-- `shared/inventory/music_styles.yaml` (音樂風格資料)
+- `projects/[current_project]/inventory/music_styles.yaml` (音樂風格資料)
 
 ---
 
@@ -546,8 +546,8 @@ User: "根據 FF-1Y 的 YAML 建立使用範例"
 Claude:
   Step 1: 讀取 shared/equipment_database/pedals/ff1y.yaml
   Step 2: 讀取 projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
-  Step 3: 讀取 shared/inventory/music_styles.yaml
-  Step 4: 讀取 shared/inventory/guitars.yaml, amps.yaml
+  Step 3: 讀取 projects/[current_project]/inventory/music_styles.yaml
+  Step 4: 讀取 projects/[current_project]/inventory/guitars.yaml, amps.yaml
 
   Step 5: 解析 YAML 控制項資料
     發現: controls 只有控制項名稱清單，缺少詳細參數

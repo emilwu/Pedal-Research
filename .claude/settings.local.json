@@ -16,7 +16,10 @@
       "Bash(mkdir:*)",
       "WebFetch(domain:www.freethetone.com)",
       "Bash(grep:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(for file in budget-analyzer.md equipment-optimizer.md inventory-manager.md usage-examples-generator.md)",
+      "Bash(do sed -i '' 's|shared/inventory/|projects/\\\\[current_project\\\\]/inventory/|g' \"$file\")",
+      "Bash(done)"
     ]
   }
 }

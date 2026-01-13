@@ -118,10 +118,10 @@ else:
 ### Step 3: 讀取 Inventory 以取得現有設備
 
 ```
-Read: shared/inventory/pedals.yaml
-Read: shared/inventory/guitars.yaml
-Read: shared/inventory/amps.yaml
-Read: shared/inventory/music_styles.yaml
+Read: projects/[current_project]/inventory/pedals.yaml
+Read: projects/[current_project]/inventory/guitars.yaml
+Read: projects/[current_project]/inventory/amps.yaml
+Read: projects/[current_project]/music_styles.yaml
 
 目的:
 - 與現有設備比較（功能重疊/互補分析）
@@ -202,29 +202,29 @@ Post Rock: 5/5 - "長 decay shimmer reverb 完美適合 Post Rock 音景"
 ```
 找出 Inventory 中同類型設備:
 
-範例: 研究 "Strymon BigSky" (Reverb)
+範例: 研究某個 Multi-Algorithm Reverb (假設)
 → 從 inventory 找出所有 type: "reverb"
-→ 比較:
-   - Cornerstone Nucleo
-   - Lichtlaerm AASB
+→ 比較: 假設 inventory 中有
+   - [Reverb Model A] (Ambient Reverb with IR)
+   - [Reverb Model B] (Compact Reverb)
 
 分析:
-- 功能重疊: BigSky 和 Nucleo 都有長 decay reverb
-- 功能互補: BigSky 提供 12 種 reverb 類型，Nucleo 只有單一核電廠 IR
-- 建議: BigSky 提供更多變化，但 Nucleo 的獨特性無法取代
+- 功能重疊: [New Reverb] 和 [Model A] 都有長 decay reverb
+- 功能互補: [New Reverb] 提供多種 reverb 類型，[Model A] 有獨特 IR
+- 建議: [New Reverb] 提供更多變化，但 [Model A] 的獨特性無法取代
 ```
 
 #### 5.3 吉他/音箱配對分析
 
 ```
 基於:
-- 使用者的吉他 (從 guitars.yaml)
-- 使用者的音箱 (從 amps.yaml)
+- 使用者的吉他 (從 projects/[current_project]/inventory/guitars.yaml)
+- 使用者的音箱 (從 projects/[current_project]/inventory/amps.yaml)
 - pairing_rules.yaml
 
 分析每把吉他與此效果器的配對:
-- ESP Eclipse CTM (EMG high output): 需要透明 compressor
-- ESP Throbber-CTM (SD APH-1 medium): 適合溫暖 compressor
+- [Guitar A] (Active Humbucker, high output): 需要透明 compressor
+- [Guitar B] (Passive Humbucker, medium output): 適合溫暖 compressor
 ```
 
 #### 5.4 價格資訊 (僅供參考)
@@ -396,90 +396,83 @@ Post Rock: 5/5 - "長 decay shimmer reverb 完美適合 Post Rock 音景"
 
 ```yaml
 version: 1.0
-created: 2025-12-30
-equipment_type: "pedal"  # or "guitar" or "amp"
+created: [date]
+equipment_type: "pedal"  # or "guitar" or "amp" or "accessory"
 
 basic_info:
-  brand: "Strymon"
-  model: "BigSky"
-  full_name: "Strymon BigSky Reverb"
-  type: "reverb"
-  subtype: "multi_algorithm"
+  brand: "[Brand]"
+  model: "[Model]"
+  full_name: "[Brand] [Model]"
+  type: "[type]"  # e.g. reverb, compressor, overdrive
+  subtype: "[subtype]"  # e.g. multi_algorithm, fet, transparent
 
 price:
-  msrp: 479
+  msrp: [amount]
   currency: "USD"
-  street_price: 449
+  street_price: [amount]
   note: "參考資訊，不影響配對決策"
 
 specs:
-  input_impedance: "1M ohm"
-  output_impedance: "100 ohm"
-  power_voltage: "9V DC"
-  power_current: "250 mA"
-  bypass_type: "buffered"
-  stereo: true
-  midi: true
+  input_impedance: "[value]"
+  output_impedance: "[value]"
+  power_voltage: "[voltage]"
+  power_current: "[current]"
+  bypass_type: "[type]"
+  stereo: [true/false]
+  midi: [true/false]
   dimensions:
-    width: 190
-    depth: 140
-    height: 60
+    width: [mm]
+    depth: [mm]
+    height: [mm]
     unit: "mm"
 
 music_style_compatibility:
   Jazz:
-    rating: 3
-    notes: "Shimmer不太適合傳統Jazz"
+    rating: [1-5]
+    notes: "[analysis]"
   Neo_Soul:
-    rating: 4
-    notes: "溫暖ambient適合Neo Soul"
-  Post_Rock:
-    rating: 5
-    notes: "完美的ambient layers"
+    rating: [1-5]
+    notes: "[analysis]"
+  # ... other styles from user's music_styles.yaml
 
 guitar_pairing:
-  - guitar_id: "esp_eclipse_ctm"
-    compatibility: "excellent"
-    notes: "高輸出需要buffered reverb"
+  - guitar_id: "[id from inventory]"
+    compatibility: "excellent/good/fair/poor"
+    notes: "[analysis]"
 
-  - guitar_id: "esp_throbber_ctm"
-    compatibility: "excellent"
-    notes: "semi-hollow共鳴 + ambient reverb"
+  - guitar_id: "[id from inventory]"
+    compatibility: "excellent/good/fair/poor"
+    notes: "[analysis]"
 
 amp_pairing:
-  - amp_id: "tone_king_imperial_mkii"
-    placement: "fx_loop"
-    compatibility: "excellent"
-
-  - amp_id: "roland_jc22"
-    placement: "pre_amp"
-    compatibility: "good"
-    notes: "可能過於wet，需調整mix"
+  - amp_id: "[id from inventory]"
+    placement: "fx_loop/pre_amp/either"
+    compatibility: "excellent/good/fair/poor"
+    notes: "[analysis]"
 
 comparison_with_owned:
-  - equipment_id: "nucleo"
-    equipment_name: "Cornerstone Nucleo"
-    overlap: "Both have long decay reverb"
-    complement: "BigSky提供12種類型，Nucleo獨特IR"
-    recommendation: "BigSky更versatile，Nucleo更unique"
-
+  - equipment_id: "[id from inventory]"
+    equipment_name: "[Brand] [Model]"
+    overlap: "[analysis]"
+    complement: "[analysis]"
+    recommendation: "[recommendation]"
 
 sources:
   official:
-    - url: "https://www.strymon.net/products/bigsky/"
+    - url: "[URL]"
       type: "product_page"
 
   youtube:
-    - title: "Strymon BigSky Review"
-      channel: "That Pedal Show"
-      views: 250000
-      subs: 500000
-      url: "..."
+    - title: "[Video Title]"
+      channel: "[Channel Name]"
+      views: [N]
+      subs: [N]
+      url: "[URL]"
 
   reviews:
-    - site: "Premier Guitar"
-      title: "Strymon BigSky Review"
-      url: "..."
+    - site: "[Site Name]"
+      title: "[Review Title]"
+      url: "[URL]"
 ```
 
 ### Step 7: 詢問是否加入 Inventory
@@ -488,10 +481,10 @@ sources:
 ✅ 研究報告已生成！
 
 檔案:
-- shared/equipment_database/pedals/strymon_bigsky_v1.md
-- shared/equipment_database/pedals/strymon_bigsky_v1.yaml
+- shared/equipment_database/[type]/[brand]_[model]_v[N].md
+- shared/equipment_database/[type]/[brand]_[model].yaml
 
-是否要將 Strymon BigSky 加入效果器清單？
+是否要將 [Brand] [Model] 加入專案 Inventory？
 
 1. 是（我已購買或計畫購買）
 2. 否（僅研究參考）
@@ -499,7 +492,7 @@ sources:
 請選擇 (1/2):
 ```
 
-- **If 1**: 呼叫 `Inventory Manager Skill` 新增
+- **If 1**: 呼叫 `Inventory Manager Skill` 新增到 `projects/[current_project]/inventory/`
 - **If 2**: 完成
 
 ---
