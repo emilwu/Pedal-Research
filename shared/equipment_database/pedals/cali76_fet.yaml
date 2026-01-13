@@ -165,7 +165,13 @@ pairing:
 # 訊號鏈配置
 signal_chain:
   position: "always_on_pre_amp"
-  swiss_things_assignment: "before_input"
+
+  signal_routing:
+    current_router: "swiss_things"
+    legacy_swiss_things: "before_input"
+    planned_buffer_plus_plus: "before_router"
+    migration_notes: "Always-on before signal router (before_input → before_router)"
+
   notes: "溫暖 FET 染色壓縮，增加 sustain 適合 Post Rock"
 
 # 參考資料來源

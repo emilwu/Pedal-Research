@@ -2,11 +2,13 @@
 # 此檔案記錄當前擁有的所有效果器
 # 由 Inventory Manager Skill 管理
 
-version: 2.0
-last_updated: 2026-01-02
+version: 2.1
+last_updated: 2026-01-11
 created: 2025-12-30
 source: "migrated from 2025-v3-signal-chain project"
 changelog:
+  - date: 2026-01-11
+    change: "Added dual routing fields (legacy Swiss Things + planned Buffer++) for migration readiness"
   - date: 2026-01-02
     change: "Added Empress Buffer++ - utility/buffer/router pedal (replacing Swiss Things)"
 
@@ -46,7 +48,12 @@ pedals:
       - "Professional recording"
 
     signal_chain_position: "signal_router_core"
-    buffer_plus_plus_assignment: "n/a (this is the router itself)"
+
+    signal_routing:
+      current_router: "swiss_things"  # Until Buffer++ is purchased
+      legacy_swiss_things: "n/a (will replace Swiss Things)"
+      planned_buffer_plus_plus: "n/a (this is the router itself)"
+      migration_status: "planned_upgrade"
 
     research_file: "shared/equipment_database/pedals/empress_buffer_plus_plus.yaml"
     notes: "強烈建議升級取代 Swiss Things - 可充分發揮 JC-22 和 Tone King 的 stereo FX loop 能力，2 inputs 快速換吉他，input metering 避免 EMG 削波"
@@ -85,7 +92,12 @@ pedals:
       - "Clean tones"
 
     signal_chain_position: "always_on_pre_amp"
-    swiss_things_assignment: "before_input"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "before_input"
+      planned_buffer_plus_plus: "before_router"
+      notes: "Always-on compressor before signal router"
 
     research_file: "shared/equipment_database/pedals/empress_mkii.yaml"
     notes: "極度透明的 VCA 壓縮，適合 Jazz 和 Neo Soul"
@@ -114,7 +126,12 @@ pedals:
       - "Sustaining leads"
 
     signal_chain_position: "always_on_pre_amp"
-    swiss_things_assignment: "before_input"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "before_input"
+      planned_buffer_plus_plus: "before_router"
+      notes: "Always-on compressor before signal router"
 
     research_file: "shared/equipment_database/pedals/cali76_fet.yaml"
     notes: "溫暖 FET 染色壓縮，增加 sustain 適合 Post Rock"
@@ -147,7 +164,12 @@ pedals:
       - "Preset switching"
 
     signal_chain_position: "always_on_pre_amp"
-    swiss_things_assignment: "before_input"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "before_input"
+      planned_buffer_plus_plus: "before_router"
+      notes: "Always-on EQ/boost before signal router"
 
     research_file: "shared/equipment_database/pedals/pa1qg.yaml"
     notes: "可程式化 EQ，為每把吉他建立專用 preset，附 Clean Boost 功能"
@@ -180,7 +202,12 @@ pedals:
       - "Warm overdrive"
 
     signal_chain_position: "pre_amp_gain"
-    swiss_things_assignment: "loop_1"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_1"
+      planned_buffer_plus_plus: "loop_1"
+      notes: "Gain pedal in switchable loop"
 
     research_file: "shared/equipment_database/pedals/sweet_honey.yaml"
     notes: "訊號鏈1核心溫暖 OD，Neo Soul 甜蜜點"
@@ -208,7 +235,12 @@ pedals:
       - "Adding clarity"
 
     signal_chain_position: "pre_amp_gain"
-    swiss_things_assignment: "loop_1"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_1"
+      planned_buffer_plus_plus: "loop_1"
+      notes: "Gain pedal in switchable loop"
 
     research_file: "shared/equipment_database/pedals/prs_horsemeat.yaml"
     notes: "V3.0 新增，取代 Colosseum Klon Side，訊號鏈1透明 Boost"
@@ -236,7 +268,12 @@ pedals:
       - "British tones"
 
     signal_chain_position: "pre_amp_gain"
-    swiss_things_assignment: "loop_1"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_1"
+      planned_buffer_plus_plus: "loop_1"
+      notes: "Gain pedal in switchable loop"
 
     research_file: "shared/equipment_database/pedals/morning_glory.yaml"
     notes: "V3.0 新增，取代 Colosseum BB Side，經典 BB 音色"
@@ -264,7 +301,12 @@ pedals:
       - "Neo Soul"
 
     signal_chain_position: "pre_amp_gain"
-    swiss_things_assignment: "loop_1"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_1"
+      planned_buffer_plus_plus: "loop_1"
+      notes: "Gain pedal in switchable loop"
 
     research_file: "shared/equipment_database/pedals/roshi_blacklon.yaml"
     notes: "訊號鏈2 Blackface 管機模擬，讓 JC-22 有管機感"
@@ -292,7 +334,12 @@ pedals:
       - "High headroom overdrive"
 
     signal_chain_position: "pre_amp_gain"
-    swiss_things_assignment: "loop_1"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_1"
+      planned_buffer_plus_plus: "loop_1"
+      notes: "Gain pedal in switchable loop"
 
     research_file: "shared/equipment_database/pedals/twa_source_code.yaml"
     notes: "訊號鏈2 TS Evolution，Classic Rock 時需要 TS 中頻開啟"
@@ -320,7 +367,12 @@ pedals:
       - "Larry Carlton / Robben Ford style"
 
     signal_chain_position: "pre_amp_gain"
-    swiss_things_assignment: "loop_1"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_1"
+      planned_buffer_plus_plus: "loop_1"
+      notes: "Gain pedal in switchable loop"
 
     research_file: "shared/equipment_database/pedals/odl1cs.yaml"
     notes: "訊號鏈2 Dumble 高階音色，Fusion 經典"
@@ -357,7 +409,12 @@ pedals:
       - "Stereo soundscapes"
 
     signal_chain_position: "fx_loop_or_post_gain"
-    swiss_things_assignment: "loop_2"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_2"
+      planned_buffer_plus_plus: "loop_2"
+      notes: "Time-based effects in stereo-capable loop (Buffer++ Loop 2 is stereo)"
 
     research_file: "shared/equipment_database/pedals/ff1y.yaml"
     notes: "兩條訊號鏈共用，雙延遲模組提供豐富創意延遲，Random Phase Modulation 世界首創"
@@ -391,7 +448,12 @@ pedals:
       - "Stereo imaging"
 
     signal_chain_position: "fx_loop_or_post_gain"
-    swiss_things_assignment: "loop_2"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_2"
+      planned_buffer_plus_plus: "loop_2"
+      notes: "Time-based effects in stereo-capable loop (Buffer++ Loop 2 is stereo)"
 
     research_file: "shared/equipment_database/pedals/nucleo.yaml"
     notes: "兩條訊號鏈共用，Stereo 主 Reverb，核電廠反應爐空間感"
@@ -420,7 +482,12 @@ pedals:
       - "Shimmer layers"
 
     signal_chain_position: "fx_loop_or_post_gain"
-    swiss_things_assignment: "loop_2"
+
+    signal_routing:
+      current_router: "swiss_things"
+      legacy_swiss_things: "loop_2"
+      planned_buffer_plus_plus: "loop_2"
+      notes: "Time-based effects in stereo-capable loop (Buffer++ Loop 2 is stereo)"
 
     research_file: "shared/equipment_database/pedals/aasb.yaml"
     notes: "訊號鏈2特殊音景，雙向八度 Shimmer/Drone，天堂與地底碰撞"
@@ -444,17 +511,26 @@ stats:
     reverb: 2
 
   by_signal_router:
-    # Note: Buffer++ replaces Swiss Things as the signal router
-    buffer_plus_plus:
-      loop_1: 6      # Gain pedals (configurable routing) - 6 overdrives
-      loop_2: 3      # Time/Mod pedals (stereo capable) - FF-1Y, Nucleo, AASB
-      before_router: 3  # Always-on pedals (Empress MKII, Cali76, PA-1QG)
+    current_status: "swiss_things"  # Until Buffer++ is purchased
+
+    routing_summary:
+      before_router: 3   # Compressors (2) + EQ (1)
+      loop_1: 6          # All overdrive/gain pedals
+      loop_2: 3          # Time-based effects (delay + reverbs)
 
     legacy_swiss_things:
-      note: "被 Buffer++ 取代 - Loop 2 mono 無法利用 JC-22/Tone King stereo FX loops"
-      before_input: 3
-      loop_1: 6
-      loop_2: 3
+      status: "active"
+      limitations: "Loop 2 is mono - cannot utilize JC-22/Tone King stereo FX loops"
+      before_input: 3    # Empress MKII, Cali76, PA-1QG
+      loop_1: 6          # All gain pedals
+      loop_2: 3          # FF-1Y, Nucleo, AASB (mono mode only)
+
+    planned_buffer_plus_plus:
+      status: "planned_upgrade"
+      advantages: "Loop 2 is stereo - full stereo capability for time-based effects"
+      before_router: 3   # Empress MKII, Cali76, PA-1QG
+      loop_1: 6          # All gain pedals
+      loop_2: 3          # FF-1Y, Nucleo, AASB (stereo mode enabled!)
 
   total_cost:
     current_pedals: 3344  # 不含 PRS Horsemeat 價格

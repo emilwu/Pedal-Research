@@ -202,7 +202,13 @@ impedance:
 # 訊號鏈配置
 signal_chain:
   position: "fx_loop_or_post_gain"
-  swiss_things_assignment: "loop_2"
+
+  signal_routing:
+    current_router: "swiss_things"
+    legacy_swiss_things: "loop_2"
+    planned_buffer_plus_plus: "loop_2"
+    migration_notes: "STEREO UPGRADE: Buffer++ Loop 2 is stereo (Swiss Things Loop 2 is mono)"
+
   notes: "兩條訊號鏈共用，Stereo 主 Reverb，核電廠反應爐空間感"
 
 # 參考資料來源

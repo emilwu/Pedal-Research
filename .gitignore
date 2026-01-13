@@ -1,37 +1,13 @@
 # macOS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
+**/.DS_Store
 
-# Editor
+# Editor files
+*.swp
+*~
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
-# Temporary files
-*.tmp
-*.temp
-.~*
-
-# Logs
-*.log
-
-# Node modules (if using Node.js tools)
-node_modules/
-
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-
-# Project specific
+# Backup files
 *.bak
 *.backup

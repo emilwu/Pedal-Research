@@ -1,26 +1,8 @@
 # Pedal Research - 吉他效果器研究與訊號鏈管理系統
 
-**版本:** 2.1 (Agents & Skills v1.1)
-**最後更新:** 2026-01-12
-**系統狀態:** ✅ 核心架構完成，所有 Agents & Skills 已實作
-
----
-
-## 版本歷史
-
-### v2.1 (2026-01-12) - Agents & Skills v1.1
-- ✅ 移除所有預算規劃相關功能
-- ✅ 價格資訊改為僅供參考
-- ✅ 決策完全基於技術特性和音樂風格適配性
-- ✅ Budget Analyzer 標記為獨立參考工具
-- ✅ Equipment Optimizer 移除成本最小化目標
-- ✅ Implementation Planner 專注於技術實施步驟
-
-### v2.0 (2025-12-30) - 系統重構
-- ✅ 建立完整的 AI Agents 架構
-- ✅ 實作所有核心 Skills
-- ✅ 建立 Knowledge Base
-- ✅ 歸檔前次專案 (2025-v3-signal-chain)
+**版本:** 2.1
+**最後更新:** 2026-01-11
+**系統狀態:** ✅ 系統完整運作中
 
 ---
 
@@ -75,7 +57,7 @@ Pedal-Research/
 
 ---
 
-### 1. Pedal Research Agent (v1.1)
+### 1. Pedal Research Agent
 **用途:** 研究新效果器，生成技術報告
 **觸發:** `"研究 [品牌] [型號]"`
 **功能:**
@@ -83,7 +65,6 @@ Pedal-Research/
 - 與 Inventory 中現有設備比較
 - 分析音樂風格適配性
 - 輸出 MD + YAML 報告
-- 記錄價格資訊（僅供參考，不影響決策）
 
 **Web Search 優先順序:**
 1. 官方產品網站
@@ -92,13 +73,9 @@ Pedal-Research/
 4. YouTube (TPS, JHS Pedals, Reverb, Premier Guitar)
 5. 用戶論壇
 
-**v1.1 變更:**
-- 價格資訊改為僅供參考
-- 移除預算分析決策邏輯
-
 ---
 
-### 2. Signal Chain Builder Agent (v1.1)
+### 2. Signal Chain Builder Agent
 **用途:** 建立訊號鏈配置
 **觸發:** `"建立訊號鏈配置"`
 **功能:**
@@ -106,25 +83,20 @@ Pedal-Research/
 - 從 Inventory 讀取可用設備
 - 使用 Pairing Logic Skill 計算最佳配對
 - 生成詳細訊號鏈配置 (MD + YAML)
-- 決策完全基於技術特性和音樂風格
 
 **問答流程:**
 ```
 Q1: 選擇吉他 (從 Inventory 動態讀取)
 Q2: 選擇音箱 (從 Inventory 動態讀取)
 Q3: 選擇音樂風格 (從 Inventory 動態讀取)
+Q4: 是否啟用預算分析？
 ```
-
-**v1.1 變更:**
-- 移除 Q4 預算分析問答
-- 移除 budget_enabled 參數
-- 配對決策不再考慮價格因素
 
 ---
 
-## 核心 Skills (v1.1)
+## 核心 Skills
 
-### 1. Inventory Manager Skill (v1.1)
+### 1. Inventory Manager Skill
 **用途:** 管理動態設備清單
 **功能:**
 - 新增設備
@@ -132,9 +104,7 @@ Q3: 選擇音樂風格 (從 Inventory 動態讀取)
 - 更新設備資訊
 - 查詢 Inventory
 
----
-
-### 2. Guitar-Pedal Pairing Logic Skill (v1.1)
+### 2. Guitar-Pedal Pairing Logic Skill
 **用途:** 計算最佳效果器配對
 **輸入:**
 - 吉他特性 (拾音器類型、輸出等級、琴身類型)
@@ -149,74 +119,40 @@ Q3: 選擇音樂風格 (從 Inventory 動態讀取)
 
 **核心邏輯:** 參考 `.claude/knowledge/pairing_rules.yaml`
 
-**v1.1 變更:**
-- 移除 budget_enabled 參數
-- 配對決策純基於技術特性
-
----
-
-### 3. Budget Analyzer Skill (v1.1)
-**用途:** 獨立參考工具，用於財務規劃
-**狀態:** ⚠️ 僅供參考使用
+### 3. Equipment Optimizer Skill
+**用途:** 設備功能分析與優化建議
 **功能:**
-- 計算總成本
-- 生成購買優先順序參考
-- 不會自動在主要工作流程中被調用
+- 功能重疊檢測
+- 替換建議
+- 使用率優化
 
-**v1.1 變更:**
-- 標記為獨立參考工具
-- 不再自動整合到 Agent 決策流程
-
----
-
-### 4. Equipment Optimizer Skill (v1.1)
-**用途:** 優化設備使用率
+### 4. Budget Analyzer Skill
+**用途:** 財務分析與成本優化
 **功能:**
-- 分析設備使用率
-- 識別功能重疊
-- 提供優化建議
+- 成本分析
+- 投資回報率評估
+- 預算友好替代方案
 
-**優化目標:**
-1. 最大化設備使用率
-2. 減少功能重疊
-3. 簡化訊號鏈
-
-**v1.1 變更:**
-- 移除 minimize_cost 優化目標
-- 專注於技術和使用率優化
-
----
-
-### 5. Implementation Planner Skill (v1.1)
-**用途:** 生成實施計畫
+### 5. Implementation Planner Skill
+**用途:** 升級實施計畫
 **功能:**
-- 分階段實施步驟
-- 購物清單（含參考價格）
-- Pedalboard 佈局設計
-- 測試驗證流程
+- 升級時程安排
+- 優先順序規劃
+- 風險評估
 
-**v1.1 變更:**
-- 移除預算規劃欄位
-- 價格改為參考價格
-- 專注於技術實施
-
----
-
-### 6. Technical Deep Dive Skill (v1.1)
+### 6. Technical Deep-Dive Skill
 **用途:** 深度技術分析
 **功能:**
-- 電路設計分析
-- 訊號路徑優化
-- 技術問題診斷
+- 阻抗匹配分析
+- 訊號路徑驗證
+- 技術規格深度解析
 
----
-
-### 7. Usage Examples Generator Skill (v1.1)
-**用途:** 生成實際使用範例
+### 7. Usage Examples Generator Skill
+**用途:** 生成實用範例
 **功能:**
-- 音樂風格配置範例
-- 設定參數參考
-- 實際應用場景
+- YAML → 實用範例轉化
+- 控制介面說明
+- 使用情境建議
 
 ---
 
@@ -271,17 +207,16 @@ Q3: 選擇音樂風格 (從 Inventory 動態讀取)
 #### 情境 1: 研究新效果器
 
 ```
-User: "研究 Strymon BigSky"
+User: "研究 Strymon BigSky，啟用預算分析"
 
-→ Pedal Research Agent (v1.1):
+→ Pedal Research Agent:
    1. 讀取 Inventory (發現已有 2 個 reverb)
    2. 研究 Strymon BigSky (官網、評測、YouTube)
    3. 與現有 reverb 比較 (Nucleo, AASB)
    4. 輸出報告:
       - data/research/pedals/strymon_bigsky_v1.md
       - data/research/pedals/strymon_bigsky_v1.yaml
-   5. 報告包含價格資訊（僅供參考）
-   6. 詢問: "是否加入 Inventory？"
+   5. 詢問: "是否加入 Inventory？"
 
 ✅ 完成！
 ```
@@ -293,7 +228,7 @@ User: "研究 Strymon BigSky"
 ```
 User: "建立訊號鏈配置"
 
-→ Signal Chain Builder Agent (v1.1):
+→ Signal Chain Builder Agent:
    Q1: "選擇吉他："
        1. ESP Eclipse CTM (EMG, high output)
        2. ESP Throbber-CTM (SD APH-1, medium)
@@ -312,12 +247,14 @@ User: "建立訊號鏈配置"
        ...
    A3: 1
 
-   → Agent 使用 Pairing Logic (v1.1):
+   Q4: "啟用預算分析？"
+   A4: 否
+
+   → Agent 使用 Pairing Logic:
       - 推薦 Cali76 FET (溫暖適合 Jazz + semi-hollow)
       - 推薦 Sweet Honey (低增益，bypass 為主)
       - 建立 PA-1QG "Throbber Jazz" preset
       - 使用 4CM (Imperial 有 FX loop)
-      - 決策完全基於技術特性與音樂風格
 
    → 輸出:
       - signal_chains/jazz_throbber_imperial_v1.md
@@ -414,35 +351,44 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 
 ---
 
-## 系統完成度
+## 系統狀態
 
-### ✅ 已完成的 Agents (v1.1)
+### ✅ 已完成
 
+#### Agents (3個)
 - ✅ Project Initializer Agent (`.claude/agents/0_project-initializer.md`)
 - ✅ Pedal Research Agent (`.claude/agents/1_pedal-researcher.md`)
 - ✅ Signal Chain Builder Agent (`.claude/agents/2_signal-chain-builder.md`)
 
-### ✅ 已完成的 Skills (v1.1)
-
+#### Skills (7個)
 - ✅ Inventory Manager Skill (`.claude/skills/inventory-manager.md`)
 - ✅ Guitar-Pedal Pairing Skill (`.claude/skills/guitar-pedal-pairing.md`)
-- ✅ Budget Analyzer Skill (`.claude/skills/budget-analyzer.md`) - 參考工具
 - ✅ Equipment Optimizer Skill (`.claude/skills/equipment-optimizer.md`)
+- ✅ Budget Analyzer Skill (`.claude/skills/budget-analyzer.md`)
 - ✅ Implementation Planner Skill (`.claude/skills/implementation-planner.md`)
-- ✅ Technical Deep Dive Skill (`.claude/skills/technical-deep-dive.md`)
+- ✅ Technical Deep-Dive Skill (`.claude/skills/technical-deep-dive.md`)
 - ✅ Usage Examples Generator Skill (`.claude/skills/usage-examples-generator.md`)
 
-### ✅ 已完成的 Knowledge Base
+#### Knowledge Base
+- ✅ pairing_rules.yaml (配對規則庫)
+- ✅ signal_chain_fundamentals.md (訊號鏈基礎知識)
 
-- ✅ pairing_rules.yaml (`.claude/knowledge/pairing_rules.yaml`)
-- ✅ signal_chain_fundamentals.md (`.claude/knowledge/signal_chain_fundamentals.md`)
+#### Equipment Database
+- ✅ 27+ 效果器完整 YAML 數據庫
+- ✅ 4 把吉他數據
+- ✅ 2 台音箱數據
+- ✅ 配件數據
 
-### 🔄 待完善
+### 📝 待建立的 Knowledge Base
 
-- [ ] music_style_reference.md (待建立)
-- [ ] impedance_guide.md (待建立)
+- [ ] music_style_reference.md
+- [ ] impedance_guide.md
+
+### 🧪 待測試
+
 - [ ] 完整工作流程測試
-- [ ] 新專案建立流程測試
+- [ ] 新專案建立流程
+- [ ] 現有專案延續流程
 
 ---
 
@@ -491,6 +437,6 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 
 ---
 
-**系統狀態:** ✅ 核心架構完成，所有 Agents & Skills 已實作 (v1.1)
+**系統狀態:** ✅ 系統完整運作中
 
-**最後更新:** 2026-01-12
+**最後更新:** 2026-01-11

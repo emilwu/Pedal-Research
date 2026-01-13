@@ -127,6 +127,48 @@
 
 ---
 
+## 專案後續更新
+
+### 🔥 2026-01-02: 重大設備規格修正與升級建議
+
+**重大發現:**
+- ✅ **Roland JC-22 規格修正** - 確認有 **Stereo FX Loop** (mono send, stereo L/R return)
+- ✅ **Tone King Imperial 規格確認** - 確認有 **Stereo FX Return** + **Stereo XLR Outputs**
+- ⚠️ **Swiss Things 限制** - Loop 2 是 **mono**，無法充分利用兩台設備的 stereo 能力
+
+**升級建議:**
+- 🔥 **強烈建議升級至 Empress Buffer++** ($299)
+  - Buffer++ Loop 2 支援 **stereo**，可充分發揮 JC-22 和 Tone King 的 stereo 能力
+  - 可完整利用 Nucleo stereo reverb
+  - 2 inputs 可快速切換 4 把吉他
+  - Input metering 避免 ESP Eclipse EMG 削波
+  - 賣掉 Swiss Things (約 $200-250) 後實際支出僅 $50-100
+
+**相關文檔:**
+- 詳細分析: `/analysis/buffer_plus_plus_vs_swiss_things_comparison.md` v2.0
+- 遷移指南: `/analysis/SIGNAL_ROUTING_MIGRATION_GUIDE.md`
+
+### 🎸 2026-01-08: Tone King Only 配置
+
+**新增配置:**
+- 建立了單 preamp pedal 配置: `signal_chains/signal_chain_toneking_only.md`
+- 使用 Empress Buffer++ Mode 5 實現雙訊號鏈切換
+- 新增 Boss CE-2W 補償 JC-22 的 Dimensional Space Chorus
+- 充分利用 Tone King Stereo FX Loop + XLR 錄音輸出
+
+### 📁 2026-01-11: 專案文件整理與歸檔
+
+**文件整理:**
+- ✅ 歸檔 YAML Coverage Report 到 `archived_versions/analysis/yaml_coverage_report_2026-01-03_archived.md`
+  - 記錄了 17 顆效果器 YAML 文件的 100% 覆蓋率達成
+  - 任務已完成，歸檔作為專案完成記錄
+- ✅ 確認所有專案文件組織完善
+  - 活躍配置：`signal_chains/signal_chain_toneking_only.md`
+  - 研究文件：`research/` (5 個文件)
+  - 歸檔版本：`archived_versions/` (完整的版本演進歷史)
+
+---
+
 **專案負責人:** Emil Wu
 **AI 協作:** Claude Code (Sonnet 4.5)
-**最後更新:** 2025-12-30
+**最後更新:** 2026-01-11
