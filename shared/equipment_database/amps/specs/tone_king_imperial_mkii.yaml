@@ -1,9 +1,9 @@
 # Tone King Imperial Tri-tube Preamp
 # 音箱/Preamp Pedal 詳細技術資料
 
-version: 2.0
-last_updated: 2026-01-02
-correction_note: "確認版本 - Imperial Preamp 有 STEREO FX Loop Return + STEREO XLR Outputs"
+version: 3.0
+last_updated: 2026-01-14
+correction_note: "重大更新 - 加入 Zero Watt Power Amp, Cabinet Simulation (15組 IR), 內建 Reverb/Tremolo"
 
 # 基本資訊
 basic_info:
@@ -14,10 +14,13 @@ basic_info:
   alternative_names:
     - "Imperial MKII Preamp"
     - "Imperial Preamp"
-  type: "tube_preamp"
-  category: "preamp_pedal"
+  type: "tube_preamp_amp_simulator"
+  subtype: "zero_watt_power_amp"
+  category: "preamp_pedal_with_cab_sim"
   made_in: "USA"
   tubes: "3x 12AX7 tubes"
+  features: "Preamp + Zero Watt Power Amp + Cabinet Simulation (15 IRs) + Stereo Reverb/Tremolo"
+  design_approach: "Exact Imperial MKII amp preamp section and phase inverter circuitry"
 
 # 價格資訊
 price:
@@ -27,7 +30,7 @@ price:
 
 # 核心規格
 technical_specs:
-  type: "Tube preamp pedal with DI"
+  type: "Tube preamp pedal with Zero Watt Power Amp, IR Cab Sim, and DI"
   channels: 2
   channel_names:
     - "Rhythm (Clean)"
@@ -36,7 +39,8 @@ technical_specs:
   tubes:
     preamp_tubes: "3x 12AX7"
     tube_count: 3
-    note: "Tri-tube design"
+    note: "Tri-tube design at high voltage"
+    phase_inverter: "Exact Imperial MKII amp phase inverter circuitry (uses one of three 12AX7 tubes)"
 
   power:
     voltage: "9-18V DC"
@@ -84,6 +88,117 @@ channels:
     - name: "Mid-Bite Switch"
       description: "Adjusts midrange character"
       effect: "Adds or reduces mid-frequency presence"
+
+# Zero Watt Power Amp
+zero_watt_power_amp:
+  has_power_amp_sim: true
+  description: "Built-in zero watt power amp simulation"
+  design: "Exact phase inverter circuitry of Imperial MKII amp"
+  tubes_used: "One of three 12AX7 tubes dedicated to phase inverter"
+
+  characteristics:
+    - "Authentically provides harmonic and dynamic content of Tone King poweramp section"
+    - "No external amplification required for recording"
+    - "Tube-driven power amp feel without speaker load"
+
+  software_controls:
+    - name: "HF Comp (High Frequency Compression)"
+      per_channel: true
+      editable: "Via Tone King Editor software"
+    - name: "Low-Pass Filter"
+      per_channel: true
+      editable: "Via Tone King Editor software"
+
+# Cabinet Simulation
+cabinet_simulation:
+  has_cab_sim: true
+  type: "Low latency Impulse Response (IR) technology"
+  bypassable: true
+  ir_count: 15
+  ir_brand: "OwnHammer"
+
+  control:
+    switch_type: "3-position CAB/IR select switch per channel"
+    programming: "Programmable via Tone King Editor software"
+    available_slots: 6
+    slots_per_channel: 3
+
+  factory_irs:
+    ir_1:
+      name: "OH 112 Imperial TK1660"
+      description: "Tone King 1660 speaker in Tone King Imperial 1x12 combo"
+      cab_type: "1x12"
+      speaker: "Tone King 1660"
+      mics: "Shure SM57, Neumann U87, Royer 121"
+      preamps: "1970s API 312 preamps"
+
+    ir_2:
+      name: "OH 212 Class A Blue"
+      description: "Celestion Blues from 1963 in Vox AC30 2x12 combo"
+      cab_type: "2x12"
+      speaker: "Celestion Blue (1963)"
+      amp: "Vox AC30"
+      mics: "Shure SM57, Neumann U87, Royer 121"
+      preamps: "1970s API 312 preamps"
+
+    ir_3:
+      name: "OH 412 Basketweave M25"
+      description: "Celestion G12M-25 speakers from 1971 in basket-weave 1960B 4x12 cabinet"
+      cab_type: "4x12"
+      speaker: "Celestion G12M-25 (1971)"
+      cab_model: "Marshall 1960B basket-weave"
+      mics: "Shure SM57, Telefunken MD421, Royer 121"
+
+  additional_irs:
+    count: 12
+    source: "Tone King Editor software (included)"
+    loading: "Easy to swap in and out of pedal's six available slots"
+
+  external_ir_compatibility:
+    description: "Can disengage onboard IR loader to use external IR loader or powered cabinet"
+    use_cases:
+      - "Use with external IR loader"
+      - "Use with powered cabinet"
+      - "Use with traditional speaker cabinet"
+
+# Built-in Effects
+built_in_effects:
+  reverb:
+    type: "Stereo convolution spring reverb"
+    programmable: true
+    per_channel: true
+
+  tremolo:
+    type: "Stereo tremolo"
+    programmable: true
+    per_channel: true
+
+# MIDI Control
+midi_control:
+  has_midi: true
+  connector: "MIDI 5-pin standard"
+  presets: 128
+  functions:
+    - "Program change"
+    - "Channel switching"
+    - "Effect routing"
+    - "Preset recall"
+
+# Software Control
+software_control:
+  has_software: true
+  name: "Tone King Editor"
+  platform: "Mac/PC"
+  connection: "USB-C"
+  powered_by: "Synergy"
+
+  functions:
+    - "IR library management"
+    - "Load custom IRs"
+    - "Swap IRs in/out of six available slots"
+    - "Edit HF Comp per channel"
+    - "Edit Low-Pass filter per channel"
+    - "Preset management (128 presets)"
 
 # Effects Loop
 fx_loop:
@@ -250,9 +365,14 @@ best_for:
 usage_methods:
   method_1:
     name: "Direct to Audio Interface (Recording)"
-    signal_flow: "Guitar → Imperial MKII → Audio Interface"
-    usage: "錄音使用，不需要 power amp"
-    notes: "需要 cabinet simulation or IR loader"
+    signal_flow: "Guitar → Imperial MKII (with IR cab sim) → Audio Interface (XLR or 1/4\")"
+    usage: "錄音使用，不需要 power amp 或外部 cab sim"
+    notes: "內建 15 組 OwnHammer IRs，可直接錄音"
+    advantages:
+      - "Zero watt power amp 提供真實管機動態"
+      - "15 組專業 IR 可選"
+      - "Stereo XLR 輸出直接進 interface"
+      - "內建 Reverb/Tremolo"
 
   method_2:
     name: "4-Cable Method (4CM) with Guitar Amp"
@@ -346,18 +466,29 @@ guitar_pairing:
 # 錄音應用
 recording_applications:
   direct_recording:
-    description: "Direct to interface, 無需 power amp"
+    description: "Direct to interface, 完整 amp-in-a-box solution"
     requirements:
-      - "Cabinet simulation or IR loader"
-      - "Audio interface with line input"
+      - "Audio interface with XLR or line input"
     advantages:
       - "Professional tube preamp tone"
+      - "Zero watt power amp 真實動態"
+      - "15 組 OwnHammer IRs 專業 cab sim"
+      - "內建 stereo reverb/tremolo"
       - "Silent recording"
       - "Consistent tone"
+      - "無需外部 cab sim"
+
+  stereo_recording:
+    description: "Stereo XLR outputs 立體聲錄音"
+    signal_flow: "Guitar → Imperial → Stereo effects (FX loop) → XLR L/R → Interface"
+    advantages:
+      - "完整立體聲錄音"
+      - "Stereo reverb/tremolo"
+      - "Stereo FX loop"
 
   reamping:
     description: "可用於 reamping"
-    workflow: "DI guitar → DAW → Imperial MKII → Re-record"
+    workflow: "DI guitar → DAW → Imperial MKII (with IR) → Re-record"
 
 # 與庫存音箱比較
 comparisons:
@@ -451,25 +582,54 @@ notes:
 # 優缺點
 pros_cons:
   pros:
-    - "Professional tube preamp quality"
+    - "Professional tube preamp quality (3x 12AX7 at high voltage)"
+    - "Zero watt power amp 真實動態"
+    - "15 組 OwnHammer IRs 專業 cab sim"
+    - "內建 stereo convolution spring reverb + tremolo"
     - "Dual channel (Clean/Lead)"
-    - "Built-in FX loop"
+    - "Stereo FX loop (mono send, stereo return)"
+    - "Stereo XLR outputs"
+    - "MIDI programmable (128 presets)"
+    - "USB-C software control (Tone King Editor)"
+    - "可載入自定義 IR"
     - "4-Cable Method capability"
+    - "Complete amp-in-a-box solution"
     - "Excellent for recording"
     - "Mid-Bite switch adds tonal flexibility"
     - "Made in USA"
 
   cons:
-    - "需要 cabinet sim for direct recording"
-    - "Tube maintenance required"
-    - "較高價位 (preamp pedal)"
-    - "不是 full amp (需要 power amp or interface)"
+    - "Tube maintenance required (12AX7)"
+    - "較高價位 ($599 USD)"
+    - "不是 full amp (沒有喇叭)"
+    - "需要 power amp 或 interface/PA for live use"
+    - "較大尺寸 (7.2\" x 5.7\" x 2.75\")"
 
 # 參考資料來源
 sources:
-  - "Tone King 官方網站"
-  - "Imperial MKII 產品手冊 (如有)"
-  - "用戶評價"
+  official:
+    - "Tone King 官方網站"
+    - url: "https://www.toneking.com/shop/pedals/tone-king-imperial-preamp/"
+    - "Tone King Imperial Preamp Instruction Manual (PDF)"
+    - url: "https://www.toneking.com/wp-content/uploads/2025/04/TONE-KING-IMPERIAL-PREAMP-INSTRUCTION-MANUAL-BOOKLET.pdf"
 
-data_collected: 2026-01-02
-data_reliability: "中 (部分規格需要補充)"
+  reviews:
+    - "Guitar World - Tone King Imperial Tri Tube Preamp review"
+    - url: "https://www.guitarworld.com/gear/amp-modeler-pedals/tone-king-imperial-tri-tube-preamp-review"
+    - "Premier Guitar - New Tone King Imperial Tri-tube Preamp Pedal Released Today"
+    - url: "https://www.premierguitar.com/news/tone-king-imperial"
+
+  retailers:
+    - "Sweetwater - Tone King Imperial Tri-tube Preamp and DI Pedal"
+    - url: "https://www.sweetwater.com/store/detail/ImperialPre--tone-king-imperial-tri-tube-preamp-and-di-pedal"
+    - "Thomann - Tone King Imperial Tri-Tube Preamp"
+    - url: "https://www.thomannmusic.com/tone_king_imperial_tri_tube_preamp.htm"
+    - "Andertons - Tone King Imperial Tube Preamp Pedal"
+    - url: "https://www.andertons.co.uk/tone-king-imperial-tube-preamp-pedal/"
+
+  specifications:
+    - "Manuals Plus - Tone King Imperial Tri Tube Preamp Instruction Manual"
+    - url: "https://manuals.plus/m/2dc02f220c9074214222118ab91f53f407121e9cde661fed834ab4385ef23f94"
+
+data_collected: 2026-01-14
+data_reliability: "高 (官方資料 + 多方驗證)"

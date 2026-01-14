@@ -2,7 +2,7 @@
 
 **版本:** 1.1
 **更新日期:** 2026-01-14
-**資料來源:** `shared/equipment_database/pedals/specs/dsm_dumblifier.yaml`
+**資料來源:** `shared/equipment_database/amps/specs/dsm_dumblifier.yaml`
 
 ---
 
@@ -923,7 +923,7 @@ Aux In ← Backing Tracks
 **下次更新計劃:** 追蹤更多用戶長期使用反饋與獨立評測
 
 **相關文件:**
-- `shared/equipment_database/pedals/specs/dsm_dumblifier.yaml` - The Dumblifier 完整技術規格
+- `shared/equipment_database/amps/specs/dsm_dumblifier.yaml` - The Dumblifier 完整技術規格
 - `shared/equipment_database/pedals/reports/morning_glory_report.md` - Bluesbreaker-style OD 參考
 - `shared/equipment_database/pedals/reports/cornerstone_colosseum_report.md` - Dual channel OD 參考
 

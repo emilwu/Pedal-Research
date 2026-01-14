@@ -11,10 +11,11 @@ basic_info:
   brand: "DSM/HUMBOLDT"
   model: "The Dumblifier"
   full_name: "DSM/HUMBOLDT The Dumblifier Overdrive Special"
-  type: "overdrive"
-  subtype: "amp_in_a_box"
+  type: "amp"
+  subtype: "zero_watt_power_amp"
   circuit_basis: "Dumble Overdrive Special 全類比模擬"
   design_approach: "基於 1970s Dumble ODS 實機分析的全類比放大器建模"
+  features: "Preamp + Zero Watt Power Amp + Cab Simulation"
   release_date: "2025-2026"
   status: "新品發售"
 
