@@ -1,0 +1,64 @@
+version: 1.0 (Pure Solid State)
+created: 2026-01-27
+
+config:
+  guitar:
+    id: "esp_throbber_ctm"
+    model: "ESP Throbber-CTM"
+    pickup_used: "mix"
+    output_level: "medium"
+
+  amp:
+    id: "roland_jc22"
+    model: "Roland JC-22 Jazz Chorus"
+    channel: "Single"
+    fx_loop_used: false # Using Front Inputs
+
+  music_style: "Neo-Soul / Post-Rock"
+  method: "frontend_stereo"
+
+signal_chain:
+  mono_section:
+    - position: 1
+      pedal_id: "pa1qg"
+      pedal_name: "Free the Tone PA-1QG"
+      bypass_state: "on"
+      settings:
+        level: "+3dB"
+    - position: 2
+      pedal_id: "empress_mkii"
+      pedal_name: "Empress Compressor MKII"
+      bypass_state: "on"
+    - position: 3
+      pedal_id: "prs_horsemeat"
+      pedal_name: "PRS Horsemeat"
+      bypass_state: "on"
+    - position: 4
+      pedal_id: "roshi_blacklon"
+      pedal_name: "Roshi Blacklon"
+      bypass_state: "on"
+      role: "Virtual Preamp"
+      settings:
+        mode: "6V6"
+    - position: 5
+      pedal_id: "odl1cs"
+      pedal_name: "Free the Tone ODL-1-CS"
+      bypass_state: "off"
+      role: "Lead Drive"
+
+  stereo_section:
+    - position: 1
+      pedal_id: "nucleo"
+      pedal_name: "Cornerstone Nucleo"
+      bypass_state: "on"
+      role: "Stereo Splitter + Reverb"
+    - position: 2
+      pedal_id: "ff1y"
+      pedal_name: "Free the Tone FF-1Y"
+      bypass_state: "on"
+      role: "Stereo Delay"
+
+tone_characteristics:
+  clean_headroom: "maximum"
+  warmth: "pedal_dependent"
+  articulation: "high"
