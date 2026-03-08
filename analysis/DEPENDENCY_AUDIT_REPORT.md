@@ -151,7 +151,7 @@ ALTERNATIVE (if size becomes a concern):
 
 **Location:**
 ```json
-"Bash(git -C /Users/emilwu/VSCode/Pedal-Research status --short)"
+"Bash(git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Research status --short)"
 ```
 
 **Impact:**
@@ -180,7 +180,7 @@ ALTERNATIVE (if size becomes a concern):
       "Bash(mkdir:*)",
       "Bash(grep:*)",
       "Bash(find:*)"
-      // REMOVED: "Bash(git -C /Users/emilwu/VSCode/Pedal-Research status --short)"
+      // REMOVED: "Bash(git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Research status --short)"
     ]
   }
 }
@@ -315,7 +315,7 @@ git commit -m "chore: remove .DS_Store and add to .gitignore"
 
 #### 1.2 Fix Configuration Path
 Edit `.claude/settings.local.json`:
-- Remove line: `"Bash(git -C /Users/emilwu/VSCode/Pedal-Research status --short)"`
+- Remove line: `"Bash(git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Research status --short)"`
 
 ### Priority 2: Medium Priority (Do Soon)
 
