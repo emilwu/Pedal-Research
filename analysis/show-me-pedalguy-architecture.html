@@ -189,7 +189,7 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
 <header>
   <div class="eyebrow">Workspace Inventory · /Users/emilwu/VSCode/PedalGuy</div>
   <h1>PedalGuy 四目錄架構</h1>
-  <p class="deck">四個 repo：一個唯讀知識庫、一個規劃中心、兩個各自帶 agent 系統的產品端。文件宣稱的架構大致成立，但 3/17 那次目錄改版留下了幾處還沒收斂的漂移。</p>
+  <p class="deck">四個 repo：一個唯讀知識庫、一個規劃中心、兩個各自帶 agent 系統的產品端。文件宣稱的架構大致成立，但 3/09 的目錄分流留下一顆還沒引爆的地雷——執行寫入的 command 檔案，從那天起就沒跟上過。</p>
   <div class="runmeta">
     <span>盤點日期 2026-09-09</span>
     <span>12 agents · 0 錯誤 · 161 tool calls</span>
@@ -423,7 +423,7 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
     <span class="eyebrow">最該先修的問題</span>
   </div>
 
-  <p>3/17 那次改版把設計與報告目錄從扁平結構改成 <code>web/</code> 與 <code>app/</code> 分流，但真正執行寫入的 command 檔案沒跟上。</p>
+  <p>設計與報告目錄在 <b>3/09</b> 就從扁平結構改成 <code>web/</code> 與 <code>app/</code> 分流，但真正執行寫入的 command 檔案沒跟上——而且是<b>從搬完的第一個小時起就沒跟上</b>。</p>
 
   <pre class="tree">Pedal-Web-Service-Planning/development/
 ├── <u>designs/</u>          <i>← design.md 第 38、55 行寫死的輸出路徑</i>
@@ -437,10 +437,20 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
     ├── designs/                        <b>10 份</b>              <i>← 實際落點</i>
     └── reports/                         <i>7 份</i></pre>
 
+  <h3 style="margin:26px 0 12px">git 時間線</h3>
+  <div class="flow">
+    <div class="step"><span class="k">3/09 23:27</span><span class="b"><code>549b1de</code> 把 13 份設計文件搬到 <code>development/web/designs/</code>；<code>e7f7e93</code> 同時搬 17 份報告到 <code>web/reports/</code>。<b>分流從這裡開始。</b><span class="art">git log --diff-filter=R — 全部 R100 純改名</span></span></div>
+    <div class="step"><span class="k">3/10 00:32</span><span class="b">舊 <code>Pedal-Web-Service-agent</code> repo 的快照，也就是今天還躺在根目錄的那個 zip。<code>design.md</code> 與 <code>architecture.md</code> <b>兩份都還寫著舊的</b> <code>development/designs/</code>——搬完不到一小時就已經對不上。<span class="art">unzip -p Pedal-Web-Service-agent.zip "*commands/design.md" → :38, :55</span></span></div>
+    <div class="step"><span class="k">3/16 00:14</span><span class="b"><code>95eada0</code> 一次新增 <b>20 份</b>設計文件，全部落在正確的 <code>web/designs/</code>。但當時 agent 的規則檔案<b>全都寫舊路徑</b>，所以這個正確落點不是來自 <code>design.md</code>。<span class="art">Co-Authored-By: Claude Opus 4.6</span></span></div>
+    <div class="step"><span class="k">3/17 21:30</span><span class="b"><code>43e1488</code> 把 agent repo 併進 Pedal-Web-Service。<code>design.md</code> 原封不動搬過來；<code>architecture.md</code> 只改了上半部對照表（第 25–27 行改新路徑），下半部 Agent Output Paths（第 41–45、61–63 行）維持舊路徑。<b>兩份檔案此後再也沒被修改過。</b><span class="art">git log -- .claude/commands/design.md → 只有這一筆</span></span></div>
+    <div class="step"><span class="k">3/17 之後</span><span class="b"><code>web/designs/</code> 底下<b>沒有再新增過任何 <code>/design</code> 產出</b>。唯一的新檔案是手寫的 <code>app-issuework-migration.md</code>；4/01 那筆是修改既有文件的 bug 記錄（M，不是 A）。<span class="art">git log --since='2026-03-17 21:30' --name-status</span></span></div>
+  </div>
+
   <div class="note">
-    <h3>時間線證明新路徑才是現行的</h3>
-    <p>舊扁平路徑的檔案全部停在 <b>3/9–3/12</b>，新分流路徑一路更新到 <b>3/18</b>，分水嶺正是 3/17 的「four-directory architecture」改版 commit。也就是說實際產出確實落在新路徑，<code>design.md</code> 裡寫死的舊路徑是<b>沒跟上的殘留</b>，不是現行規則。</p>
-    <p style="margin-bottom:0">風險在於：如果 agent 是照 <code>design.md</code> 的字面路徑執行，下一次跑 <code>/design</code> 就會把新文件寫回已經廢棄的 <code>development/designs/</code>，造成分裂。</p>
+    <h3>答案：這顆地雷還沒引爆過</h3>
+    <p>不是「agent 自己寫對了」，也不是「你手動搬的」，而是第三種可能：<b>自從帶著舊路徑的 <code>design.md</code> 進駐 Pedal-Web-Service（3/17 21:30），<code>/design</code> 一次都沒跑出新的設計文件。</b></p>
+    <p>3/16 那 20 份是在 agent 系統還住在獨立 repo 時產出的。當時它自己的 <code>design.md</code> 和 <code>architecture.md</code> 也全寫舊路徑，所以那次的正確落點來自該 session 的人為指示或現場觀察目錄結構，<b>不是來自 command 檔案</b>——這代表沒有任何機制在保證下次也會寫對。</p>
+    <p style="margin-bottom:0">結論：<b>下一次跑 <code>/design</code>，很可能就會寫進已經廢棄的 <code>development/designs/</code>。</b>這是還沒引爆的地雷，不是正在流血的傷口，但修的時機應該排在下一次跑 <code>/design</code> 之前。</p>
   </div>
 </section>
 
@@ -457,8 +467,8 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
       <tbody>
         <tr>
           <td><b>command 寫死舊路徑</b></td>
-          <td>兩個 repo 的 <code>design.md</code> 輸出路徑都沒有 web/app 分流，與實際落點不符</td>
-          <td class="ev">Pedal-Web-Service/.claude/commands/design.md:38,55<br>Pedal-App/.claude/commands/design.md:35,52</td>
+          <td>兩個 repo 的 <code>design.md</code> 輸出路徑都沒有 web/app 分流。自 3/09 分流起就沒跟上，但因為之後沒再跑過 <code>/design</code>，尚未造成實際損害</td>
+          <td class="ev">Pedal-Web-Service/.claude/commands/design.md:38,55<br>Pedal-App/.claude/commands/design.md:35,52<br>git log 顯示兩檔案僅 43e1488 一筆</td>
           <td><span class="sev hi">高</span></td>
         </tr>
         <tr>
@@ -504,14 +514,20 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
 
 <section>
   <div class="sechead">
-    <h2>還需要你確認的一件事</h2>
-    <span class="eyebrow">會影響修法</span>
+    <h2>該修什麼</h2>
+    <span class="eyebrow">下次跑 /design 之前</span>
   </div>
   <div class="q">
-    <h3>3/17 之後的 42 份設計文件，是 agent 自己寫到新路徑，還是你手動搬過去的？</h3>
-    <p>兩種情況的修法不同：</p>
-    <p style="margin-bottom:.5em"><b>如果是 agent 自己寫對了</b> — 代表 agent 讀 <code>architecture.md</code> / <code>CLAUDE.md</code> 的宣告路徑，覆蓋了 <code>design.md</code> 的字面指示。那 <code>design.md</code> 只是文件債，優先度中等。</p>
-    <p style="margin-bottom:0"><b>如果是你手動搬的</b> — 代表每次跑 <code>/design</code> 都會寫錯位置，你一直在手動補救。那就要立刻改 <code>design.md</code> 與 <code>architecture.md</code> 的輸出路徑，這是高優先度的 bug。</p>
+    <h3>四處硬編碼路徑，改完這個地雷就拆了</h3>
+    <p style="margin-bottom:.6em"><b>1 · 兩支 <code>design.md</code> 的輸出路徑</b><br>
+    <code>Pedal-Web-Service/.claude/commands/design.md</code> 第 38、55 行 → <code>development/web/designs/</code><br>
+    <code>Pedal-App/.claude/commands/design.md</code> 第 35、52 行 → <code>development/app/designs/</code></p>
+    <p style="margin-bottom:.6em"><b>2 · 兩支 <code>architecture.md</code> 的下半部</b><br>
+    Agent Output Paths 表格與 Output Paths 清單（Web 第 41–45、61–63 行；App 第 38–41、57–58 行）補上 <code>web/</code> 與 <code>app/</code> 分層，跟上半部對照表一致。</p>
+    <p style="margin-bottom:.6em"><b>3 · 切斷對 <code>agent-system-design.md</code> 的指引</b><br>
+    Web 的 <code>architecture.md</code> 第 136 行仍寫「有疑問時查閱」，但那份文件描述的是 3/17 已經廢除的獨立 agent repo 架構。要嘛更新它，要嘛把這行拿掉。</p>
+    <p style="margin-bottom:0"><b>4 · 順手處理根目錄兩個 zip</b><br>
+    <code>Pedal-Web-Service-agent.zip</code>、<code>Pedal-App-agent.zip</code>（3/17，共 573 KB）是合併前的舊 repo 備份。這次的證據鏈就是從 zip 裡挖出來的，確認不再需要後再刪。</p>
   </div>
 </section>
 
