@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+#
+# 跨 repo 路徑驗證
+#
+# 起因：2026-03-09 Planning 把 development/designs/ 分流為 web/ 與 app/，
+# 但兩個產品 repo 的 .claude/ 共 41 處硬編碼路徑沒跟上。8 天後才發現，
+# 期間 4 份文件被寫進廢棄路徑。人工維護索引在這個工作區失敗過一次。
+#
+# 這支 hook 檢查 staged 檔案裡指向 PedalGuy 工作區的絕對路徑是否真實存在。
+# 樣板變數（[module]、[id]、${VAR}）只驗證到最後一個固定目錄層。
+#
+# 安裝：git config core.hooksPath .githooks
+# 略過：git commit --no-verify
+#
+set -uo pipefail
+
+WORKSPACE="/Users/emilwu/VSCode/PedalGuy"
+FAIL=0
+
+# 只檢查會放路徑的文字檔
+STAGED=$(git diff --cached --name-only --diff-filter=ACM \
+  | grep -E '\.(md|json|ya?ml|ts|tsx|js|sh|prisma)$' || true)
+
+[ -z "$STAGED" ] && exit 0
+
+for f in $STAGED; do
+  [ -f "$f" ] || continue
+
+  # 歷史記錄不檢查：驗證報告與封存內容記錄的是「當時的狀態」，
+  # 其中的路徑可能刻意指向已不存在的東西（例如記錄某檔案不存在的證據）。
+  case "$f" in
+    */reports/*|*/archive/*|archive/*) continue ;;
+  esac
+
+  # 抽出指向工作區的絕對路徑。到空白、引號、反引號、括號為止
+  # 行內標記 path-check:skip 可豁免該行（用於「產出時才建立」的檔案）
+  grep -nE "${WORKSPACE}/" "$f" 2>/dev/null | grep -v 'path-check:skip' \
+    | grep -oE "^[0-9]+:|${WORKSPACE}/[^ \"'\`)（）、，]*" \
+    | paste -d: - - 2>/dev/null | sed 's/^\([0-9]*\)::/\1:/' \
+    | while IFS=: read -r lineno path; do
+    [ -z "${path:-}" ] && continue
+    # 去掉尾端標點
+    path="${path%%[.,;:]}"
+
+    # 樣板變數：截到變數所在段落之前的目錄。
+    # app-[module].md 要退回 designs/，不能停在 app- 這種半截檔名。
+    case "$path" in
+      *'['*|*'${'*|*'<'*|*'*'*)
+        path=$(printf '%s' "$path" | sed -E 's/(\[|\$\{|<|\*).*$//')
+        path="${path%/*}"
+        ;;
+    esac
+
+    [ -z "$path" ] && continue
+    [ "$path" = "$WORKSPACE" ] && continue
+
+    # 目標 repo 沒 clone 就跳過，不要因為環境不完整而擋人
+    repo="${path#$WORKSPACE/}"
+    repo="${repo%%/*}"
+    [ -d "${WORKSPACE}/${repo}" ] || continue
+
+    if [ ! -e "$path" ]; then
+      printf '  %s:%s\n    路徑不存在: %s\n' "$f" "$lineno" "$path" >&2
+      echo "FAIL" >> "${TMPDIR:-/tmp}/.pedalguy-pathcheck.$$"
+    fi
+  done
+done
+
+if [ -f "${TMPDIR:-/tmp}/.pedalguy-pathcheck.$$" ]; then
+  COUNT=$(wc -l < "${TMPDIR:-/tmp}/.pedalguy-pathcheck.$$" | tr -d ' ')
+  rm -f "${TMPDIR:-/tmp}/.pedalguy-pathcheck.$$"
+  {
+    echo ""
+    echo "✗ 發現 ${COUNT} 處失效的跨 repo 路徑，commit 已中止。"
+    echo ""
+    echo "  修正路徑後重新 commit，或用 git commit --no-verify 略過。"
+    echo ""
+  } >&2
+  exit 1
+fi
+
+exit 0
