@@ -1,0 +1,1013 @@
+<title>Buffer++ 對決 Swiss Things</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+:root{
+  --ground:#F3F5F6;
+  --panel:#FFFFFF;
+  --panel-2:#E9EDEF;
+  --line:#D2D9DD;
+  --line-soft:#E3E8EB;
+  --ink:#12171B;
+  --ink-2:#3D474E;
+  --muted:#6B767D;
+  --bpp:#0E8FA6;
+  --bpp-wash:#E2F1F4;
+  --st:#B8762A;
+  --st-wash:#F6EDDF;
+  --good:#2F7D52;
+  --bad:#B4433C;
+  --shadow:0 1px 0 rgba(18,23,27,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E1215;
+    --panel:#161B1F;
+    --panel-2:#1D2429;
+    --line:#2B333A;
+    --line-soft:#222A30;
+    --ink:#E6EBEE;
+    --ink-2:#B4BFC6;
+    --muted:#808C94;
+    --bpp:#3FC0D6;
+    --bpp-wash:#122C33;
+    --st:#DFA458;
+    --st-wash:#2B2118;
+    --good:#5FB584;
+    --bad:#E27C74;
+    --shadow:0 1px 0 rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E1215;
+  --panel:#161B1F;
+  --panel-2:#1D2429;
+  --line:#2B333A;
+  --line-soft:#222A30;
+  --ink:#E6EBEE;
+  --ink-2:#B4BFC6;
+  --muted:#808C94;
+  --bpp:#3FC0D6;
+  --bpp-wash:#122C33;
+  --st:#DFA458;
+  --st-wash:#2B2118;
+  --good:#5FB584;
+  --bad:#E27C74;
+  --shadow:0 1px 0 rgba(0,0,0,.3);
+}
+
+*{box-sizing:border-box}
+
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Source Serif 4","Songti TC",Georgia,serif;
+  font-size:16px;
+  line-height:1.68;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{
+  max-width:1060px;
+  margin:0 auto;
+  padding:0 28px 96px;
+}
+
+/* ---------- typography roles ---------- */
+.eyebrow{
+  font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+h1,h2,h3,.plate-name,.stat-k{
+  font-family:"Barlow Condensed","Heiti TC",system-ui,sans-serif;
+  text-wrap:balance;
+}
+h1{
+  font-size:clamp(42px,7vw,74px);
+  font-weight:700;
+  line-height:.94;
+  letter-spacing:.005em;
+  text-transform:uppercase;
+  margin:14px 0 0;
+}
+h2{
+  font-size:clamp(24px,3.4vw,33px);
+  font-weight:600;
+  line-height:1.06;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  margin:0;
+}
+h3{
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  margin:0;
+}
+p{margin:0 0 1em;max-width:66ch}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+
+.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ---------- header ---------- */
+header{
+  padding:64px 0 44px;
+  border-bottom:2px solid var(--ink);
+}
+.deck{
+  font-size:18px;
+  color:var(--ink-2);
+  max-width:60ch;
+  margin-top:22px;
+}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 26px;
+  margin-top:28px;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11.5px;
+  letter-spacing:.05em;
+  color:var(--muted);
+}
+
+/* ---------- section rhythm ---------- */
+section{padding-top:60px}
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:26px;
+}
+.sec-head .eyebrow{margin-left:auto;white-space:nowrap}
+
+/* ---------- party chips ---------- */
+.chip{
+  display:inline-block;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:10.5px;
+  font-weight:500;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border:1px solid currentColor;
+  white-space:nowrap;
+}
+.c-bpp{color:var(--bpp)}
+.c-st{color:var(--st)}
+
+/* ---------- unit plates ---------- */
+.plates{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-top:34px;
+}
+.plate{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-top:3px solid var(--accent);
+  padding:22px 22px 20px;
+  box-shadow:var(--shadow);
+}
+.plate.bpp{--accent:var(--bpp)}
+.plate.st{--accent:var(--st)}
+.plate-brand{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.plate-name{
+  font-size:32px;
+  font-weight:700;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  line-height:1.02;
+  margin:4px 0 2px;
+  color:var(--accent);
+}
+.plate-role{
+  font-size:14.5px;
+  color:var(--ink-2);
+  min-height:3.4em;
+}
+.plate-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line-soft);
+  border:1px solid var(--line-soft);
+  margin-top:16px;
+}
+.plate-stats div{
+  background:var(--panel);
+  padding:9px 10px;
+}
+.stat-k{
+  display:block;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.stat-v{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:15px;
+  font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- finding callout ---------- */
+.finding{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-left:4px solid var(--bpp);
+  padding:26px 28px;
+  margin-top:34px;
+}
+.finding h3{margin-bottom:10px;color:var(--bpp)}
+
+/* ---------- signal diagram ---------- */
+.diagram{
+  display:grid;
+  gap:18px;
+  margin-top:26px;
+}
+.path{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-top:3px solid var(--accent);
+  padding:18px 20px 20px;
+  overflow-x:auto;
+}
+.path.st{--accent:var(--st)}
+.path.bpp{--accent:var(--bpp)}
+.path-label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:16px;
+}
+.path-verdict{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11.5px;
+  letter-spacing:.05em;
+  margin-left:auto;
+  white-space:nowrap;
+}
+.chain{
+  display:flex;
+  align-items:center;
+  gap:0;
+  min-width:600px;
+}
+.node{
+  border:1px solid var(--line);
+  background:var(--panel-2);
+  padding:8px 12px;
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11.5px;
+  letter-spacing:.03em;
+  white-space:nowrap;
+  text-align:center;
+}
+.node.hot{
+  border-color:var(--accent);
+  color:var(--accent);
+  background:transparent;
+}
+.wire{
+  flex:1;
+  min-width:26px;
+  height:12px;
+  position:relative;
+}
+.wire::before,.wire::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;
+  height:1px;
+  background:var(--line);
+}
+.wire::before{top:5px}
+.wire::after{display:none}
+.wire.stereo::before{top:2px}
+.wire.stereo::after{display:block;top:9px}
+.wire.stereo::before,.wire.stereo::after{background:var(--bpp)}
+.wire-tag{
+  position:absolute;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:9.5px;
+  letter-spacing:.1em;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+/* ---------- spec table ---------- */
+.table-scroll{overflow-x:auto;border:1px solid var(--line);background:var(--panel)}
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:660px;
+  font-size:14.5px;
+}
+th,td{
+  padding:10px 14px;
+  text-align:left;
+  border-bottom:1px solid var(--line-soft);
+  vertical-align:top;
+}
+thead th{
+  font-family:"Barlow Condensed","Heiti TC",sans-serif;
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border-bottom:1px solid var(--ink);
+  background:var(--panel-2);
+  position:sticky;
+  top:0;
+}
+thead th.h-bpp{color:var(--bpp)}
+thead th.h-st{color:var(--st)}
+tbody tr:last-child td{border-bottom:none}
+td.spec,th.spec{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:12.5px;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.01em;
+}
+td.label{font-weight:600;white-space:nowrap}
+.win{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:10.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.win.bpp{color:var(--bpp)}
+.win.st{color:var(--st)}
+.win.tie{color:var(--muted)}
+tr.key td{background:var(--bpp-wash)}
+.yes{color:var(--good);font-weight:600}
+.no{color:var(--bad);font-weight:600}
+.na{color:var(--muted)}
+
+/* ---------- two-column panels ---------- */
+.duo{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-top:3px solid var(--accent);
+  padding:20px 22px 22px;
+}
+.card.bpp{--accent:var(--bpp)}
+.card.st{--accent:var(--st)}
+.card h3{color:var(--accent);margin-bottom:14px}
+.feat{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+.feat li{padding-left:0}
+.feat b{
+  display:block;
+  font-family:"Barlow Condensed","Heiti TC",sans-serif;
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.feat span{display:block;font-size:14px;color:var(--ink-2);line-height:1.5}
+
+/* pros / cons */
+.pc{display:grid;gap:16px;margin-top:16px}
+.pc h4{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  margin:0 0 8px;
+}
+.pc h4.p{color:var(--good)}
+.pc h4.c{color:var(--bad)}
+.pc ul{margin:0;padding-left:1.1em;display:grid;gap:5px;font-size:14.5px}
+.pc li{padding-left:2px}
+
+/* ---------- routing modes ---------- */
+.modes{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.mode{
+  background:var(--panel);
+  padding:14px 16px;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:12px;
+  align-items:start;
+}
+.mode .num{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:12px;
+  font-weight:700;
+  font-variant-numeric:tabular-nums;
+  color:var(--bpp);
+  padding-top:2px;
+}
+.mode b{
+  display:block;
+  font-family:"Barlow Condensed","Heiti TC",sans-serif;
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  line-height:1.15;
+}
+.mode span{display:block;font-size:13px;color:var(--muted);line-height:1.45}
+.mode-note{
+  font-size:14px;
+  color:var(--ink-2);
+  margin-top:14px;
+}
+
+/* ---------- decision lists ---------- */
+.decide{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-top:3px solid var(--accent);
+  padding:20px 22px 22px;
+}
+.decide.bpp{--accent:var(--bpp)}
+.decide.st{--accent:var(--st)}
+.decide h3{color:var(--accent);margin-bottom:6px}
+.decide .cond{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+.decide ol{margin:0;padding-left:1.3em;display:grid;gap:7px;font-size:14.5px}
+
+/* ---------- verdict ---------- */
+.verdict{
+  background:var(--ink);
+  color:var(--ground);
+  padding:38px 34px;
+  margin-top:26px;
+}
+.verdict h2{color:var(--ground);margin-bottom:16px}
+.verdict p{color:var(--ground);opacity:.86;max-width:64ch}
+.verdict .eyebrow{color:var(--ground);opacity:.55}
+.ledger{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.16);
+  margin-top:26px;
+}
+.ledger div{background:var(--ink);padding:14px 16px}
+.ledger .stat-k{color:var(--ground);opacity:.55}
+.ledger .stat-v{color:var(--ground);font-size:19px;font-weight:700}
+.exception{
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.18);
+  font-size:14.5px;
+  color:var(--ground);
+  opacity:.8;
+}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:64px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+  font-size:13.5px;
+  color:var(--muted);
+}
+footer a{color:var(--bpp)}
+footer p{max-width:72ch;margin-bottom:.7em}
+.scope{
+  background:var(--panel);
+  border:1px solid var(--line);
+  padding:16px 18px;
+  margin-bottom:20px;
+  font-size:14px;
+  color:var(--ink-2);
+}
+.scope b{
+  font-family:"JetBrains Mono",ui-monospace,monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:block;
+  margin-bottom:6px;
+}
+
+@media (max-width:760px){
+  .wrap{padding:0 18px 72px}
+  header{padding:44px 0 32px}
+  .plates,.duo{grid-template-columns:1fr}
+  .verdict{padding:28px 22px}
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">訊號路由器 · 取代評估</div>
+  <h1>Buffer++ 對決<br>Swiss Things</h1>
+  <p class="deck">兩台同價位、同樣掛著「兩個 loop + AB/Y + tuner out」招牌的訊號整合器。真正把它們分開的，是 Loop 2 究竟走 mono 還是 stereo——而這件事對已經買了 stereo 音箱的人來說，是決定性的。</p>
+  <div class="meta">
+    <span>來源：analysis/buffer_plus_plus_vs_swiss_things_comparison.md v2.0</span>
+    <span>分析日期：2026-01-02</span>
+    <span>兩台皆 $299</span>
+  </div>
+</header>
+
+<div class="plates">
+  <div class="plate bpp">
+    <div class="plate-brand">Empress Effects</div>
+    <div class="plate-name">Buffer++</div>
+    <p class="plate-role">「適應所有需求」。12 種路由模式、完整 stereo 訊號路徑、雙 input，把路由邏輯交給使用者配置。</p>
+    <div class="plate-stats">
+      <div><span class="stat-k">Inputs</span><span class="stat-v">2</span></div>
+      <div><span class="stat-k">Boost</span><span class="stat-v">30 dB</span></div>
+      <div><span class="stat-k">路由模式</span><span class="stat-v">12</span></div>
+    </div>
+  </div>
+  <div class="plate st">
+    <div class="plate-brand">EarthQuaker Devices</div>
+    <div class="plate-name">Swiss Things</div>
+    <p class="plate-role">「做好一件事」。Loop 1 unbuffered 給破音、Loop 2 buffered 給空間系，角色寫死，插上就對。</p>
+    <div class="plate-stats">
+      <div><span class="stat-k">Inputs</span><span class="stat-v">1</span></div>
+      <div><span class="stat-k">Boost</span><span class="stat-v">20 dB</span></div>
+      <div><span class="stat-k">路由模式</span><span class="stat-v">固定</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="finding">
+  <h3>關鍵前提：你的兩台音箱都有 Stereo FX Loop</h3>
+  <p><strong>Roland JC-22</strong>——stereo FX loop（mono send、stereo L/R return），Series/Parallel 可切換，後段是 2×6.5" stereo 喇叭。<strong>Tone King Imperial MKII</strong>——stereo FX return，外加 Left/Right 平衡 XLR 輸出。</p>
+  <p>這個前提把比較的重心整個移走了。原本 Swiss Things vs Buffer++ 是「簡單 vs 靈活」的偏好選擇；一旦音箱端已經是 stereo，Swiss Things 的 mono Loop 2 就不只是少一個功能，而是讓既有的 stereo 投資無法連上去。</p>
+</div>
+
+<section>
+  <div class="sec-head">
+    <h2>訊號路徑的差別</h2>
+    <span class="eyebrow">Loop 2 → 音箱 FX Loop</span>
+  </div>
+
+  <div class="diagram">
+    <div class="path st">
+      <div class="path-label">
+        <span class="chip c-st">Swiss Things</span>
+        <span class="path-verdict">Loop 2 = MONO，stereo return 只剩單邊</span>
+      </div>
+      <div class="chain">
+        <div class="node">Guitar</div>
+        <div class="wire"><span class="wire-tag">mono</span></div>
+        <div class="node hot">Loop 2 · Buffered</div>
+        <div class="wire"><span class="wire-tag">mono</span></div>
+        <div class="node">Nucleo 殘響</div>
+        <div class="wire"><span class="wire-tag">L only</span></div>
+        <div class="node">JC-22 FX Return L/R</div>
+        <div class="wire"><span class="wire-tag">同訊號</span></div>
+        <div class="node">Stereo 喇叭</div>
+      </div>
+    </div>
+
+    <div class="path bpp">
+      <div class="path-label">
+        <span class="chip c-bpp">Buffer++</span>
+        <span class="path-verdict">Send mono → Return STEREO，路徑貫通到喇叭</span>
+      </div>
+      <div class="chain">
+        <div class="node">Guitar</div>
+        <div class="wire"><span class="wire-tag">mono</span></div>
+        <div class="node hot">Loop 2 Send · Mono</div>
+        <div class="wire"><span class="wire-tag">mono</span></div>
+        <div class="node">Nucleo · Mono→Stereo</div>
+        <div class="wire stereo"><span class="wire-tag">L + R</span></div>
+        <div class="node hot">Loop 2 Return · Stereo</div>
+        <div class="wire stereo"><span class="wire-tag">L + R</span></div>
+        <div class="node">JC-22 FX Return L/R</div>
+        <div class="wire stereo"><span class="wire-tag">L + R</span></div>
+        <div class="node">Stereo 喇叭</div>
+      </div>
+    </div>
+  </div>
+  <p class="mode-note"><strong>注意：Buffer++ 的 loop send 本身是 mono</strong>，stereo 只存在於 return 端。實際做 mono→stereo 分歧的是 <strong>Cornerstone Nucleo</strong>（mono in / stereo out），Buffer++ 的價值在於它的 return 收得下 stereo 並一路送到輸出——這正是 Swiss Things 做不到的地方。完整路徑見 <span class="mono">signal_chains/signal_chain_jc22_frontend_stereo.md</span>（2026-01-27）。</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>規格對照</h2>
+    <span class="eyebrow">底色列 = 決定性差異</span>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th class="h-bpp">Empress Buffer++</th>
+          <th class="h-st">EQD Swiss Things</th>
+          <th>優勢</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="key">
+          <td class="label">Stereo 能力</td>
+          <td><span class="yes">完整 stereo 訊號路徑</span></td>
+          <td><span class="no">僅 mono</span></td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr class="key">
+          <td class="label">Loop 2 特性</td>
+          <td>可配置；send mono、<strong>return stereo</strong></td>
+          <td>Buffered，專給空間系，<strong>mono</strong></td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr class="key">
+          <td class="label">Inputs</td>
+          <td class="spec">2（可同時接兩把琴）</td>
+          <td class="spec">1</td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr>
+          <td class="label">Loop 1 特性</td>
+          <td>可配置（依路由模式）</td>
+          <td>Unbuffered，專給 dirt pedals</td>
+          <td><span class="win tie">各有取向</span></td>
+        </tr>
+        <tr>
+          <td class="label">路由模式</td>
+          <td class="spec">12 種</td>
+          <td class="spec">2-loop 固定設計</td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr>
+          <td class="label">Outputs</td>
+          <td class="spec">2（stereo）</td>
+          <td class="spec">2（A/B）</td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr>
+          <td class="label">Boost</td>
+          <td class="spec">30 dB</td>
+          <td class="spec">20 dB</td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr>
+          <td class="label">Input metering</td>
+          <td><span class="yes">有</span>，視覺化訊號強度</td>
+          <td><span class="no">無</span></td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr>
+          <td class="label">Input pads</td>
+          <td><span class="yes">有</span>，可切換衰減</td>
+          <td><span class="no">無</span></td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr>
+          <td class="label">Variable input loading</td>
+          <td><span class="yes">有</span>，模擬長線材音色</td>
+          <td><span class="no">無</span></td>
+          <td><span class="win bpp">Buffer++</span></td>
+        </tr>
+        <tr>
+          <td class="label">Expression pedal</td>
+          <td><span class="no">無</span></td>
+          <td><span class="yes">有</span>，音量控制</td>
+          <td><span class="win st">Swiss Things</span></td>
+        </tr>
+        <tr>
+          <td class="label">Flexi-Switch</td>
+          <td><span class="no">無</span></td>
+          <td><span class="yes">有</span>，latching / momentary</td>
+          <td><span class="win st">Swiss Things</span></td>
+        </tr>
+        <tr>
+          <td class="label">AB/Y 切換</td>
+          <td>有（多種模式）</td>
+          <td>有（transformer isolation）</td>
+          <td><span class="win tie">平手</span></td>
+        </tr>
+        <tr>
+          <td class="label">Transformer isolation</td>
+          <td><span class="yes">有</span></td>
+          <td><span class="yes">有</span></td>
+          <td><span class="win tie">平手</span></td>
+        </tr>
+        <tr>
+          <td class="label">Tuner out</td>
+          <td>有（silent mute）</td>
+          <td>有（buffered）</td>
+          <td><span class="win tie">平手</span></td>
+        </tr>
+        <tr>
+          <td class="label">價格</td>
+          <td class="spec">$299（原價 $399，25% off）</td>
+          <td class="spec">$299 MSRP</td>
+          <td><span class="win tie">同價</span></td>
+        </tr>
+        <tr>
+          <td class="label">尺寸</td>
+          <td class="spec na">未公開</td>
+          <td class="spec">121 × 144 × 57 mm</td>
+          <td><span class="win st">資料完整</span></td>
+        </tr>
+        <tr>
+          <td class="label">電流消耗</td>
+          <td class="spec na">未公開</td>
+          <td class="spec">15 mA</td>
+          <td><span class="win st">資料完整</span></td>
+        </tr>
+        <tr>
+          <td class="label">輸入 / 輸出阻抗</td>
+          <td class="spec na">未公開</td>
+          <td class="spec">1 MΩ / 1 kΩ</td>
+          <td><span class="win st">資料完整</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>各自的獨門功能</h2>
+    <span class="eyebrow">對方完全沒有的</span>
+  </div>
+  <div class="duo">
+    <div class="card bpp">
+      <h3>只有 Buffer++ 有</h3>
+      <ul class="feat">
+        <li><b>真正的 Stereo</b><span>完整 stereo 訊號路徑，保留 stereo delay／reverb 的空間感。</span></li>
+        <li><b>2 Inputs</b><span>兩把琴同時上線，腳踩切換，不必拔插線。</span></li>
+        <li><b>Input Metering</b><span>視覺化輸入強度，主動拾音器（EMG）不再盲踩削波。</span></li>
+        <li><b>Input Pads</b><span>可切換輸入衰減，吃得下 synth、active pickup、line level 的熱訊號。</span></li>
+        <li><b>Variable Input Loading</b><span>模擬長線材的高頻衰減，用來調 pickup 的溫暖度。</span></li>
+        <li><b>12 種路由模式</b><span>同一台機器對應演出、錄音、雙琴、雙音箱等不同需求。</span></li>
+        <li><b>30 dB Boost</b><span>比 Swiss Things 多 10 dB 的推力。</span></li>
+      </ul>
+    </div>
+    <div class="card st">
+      <h3>只有 Swiss Things 有</h3>
+      <ul class="feat">
+        <li><b>Expression Pedal Jack</b><span>直接接踏板做音量控制，省下一顆可能吸音的 volume pedal。</span></li>
+        <li><b>Flexi-Switch</b><span>Latching／momentary 雙模式，長踩瞬發、輕點鎖定。</span></li>
+        <li><b>專用 Loop 角色</b><span>Loop 1 unbuffered、Loop 2 buffered 寫死，依效果器類型插入即可，不會用錯。</span></li>
+        <li><b>完整公開規格</b><span>尺寸、電流、阻抗都有數字，pedalboard 空間與供電可以先算好。</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>優缺點</h2>
+    <span class="eyebrow">設計哲學的代價</span>
+  </div>
+  <div class="duo">
+    <div class="card bpp">
+      <h3>Buffer++</h3>
+      <div class="pc">
+        <div>
+          <h4 class="p">優點</h4>
+          <ul>
+            <li>極度靈活，一台涵蓋各種場景</li>
+            <li>完整 stereo，能接上 JC-22 與 Tone King 的 stereo FX loop</li>
+            <li>雙 input 支援樂器快速切換</li>
+            <li>Metering + pads，專業等級的輸入管理</li>
+            <li>Variable input loading 可微調音色</li>
+            <li>30 dB boost</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="c">缺點</h4>
+          <ul>
+            <li>要搞懂 12 種模式的差異，學習成本高</li>
+            <li>設定較複雜，現場臨時改路由容易出錯</li>
+            <li>沒有 expression pedal jack</li>
+            <li>沒有 Flexi-Switch</li>
+            <li>尺寸、電流、阻抗官方未公開，難事先規劃板面與供電</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card st">
+      <h3>Swiss Things</h3>
+      <div class="pc">
+        <div>
+          <h4 class="p">優點</h4>
+          <ul>
+            <li>簡單直覺，角色固定不會插錯</li>
+            <li>針對 dirt 與 time-based 效果器分別最佳化</li>
+            <li>Flexi-Switch 現場實用</li>
+            <li>Expression pedal 音量控制，避免額外 tone-suck</li>
+            <li>規格完整公開，好排板</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="c">缺點</h4>
+          <ul>
+            <li><strong>Loop 2 是 mono</strong>——浪費 JC-22 的 stereo FX loop</li>
+            <li>同樣浪費 Tone King 的 stereo FX loop 與 stereo XLR 輸出</li>
+            <li>Nucleo 的 stereo 殘響只能塌成 mono</li>
+            <li>無法做 stereo 錄音</li>
+            <li>只有 1 input，換琴要拔線</li>
+            <li>Loop 角色寫死，無法改變</li>
+            <li>無 input metering／pads，EMG 削波看不見</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>Buffer++ 的 12 種路由模式</h2>
+    <span class="eyebrow">編號依官方模式順序</span>
+  </div>
+  <div class="modes">
+    <div class="mode"><span class="num">01</span><div><b>Independent (Stereo) Loops</b><span>兩個完全獨立的 stereo loops — 完整 stereo 效果器鏈</span></div></div>
+    <div class="mode"><span class="num">02</span><div><b>Summed Loops</b><span>合併 Loop 1 與 Loop 2 訊號 — parallel effects</span></div></div>
+    <div class="mode"><span class="num">03</span><div><b>Loop In 1 Only</b><span>只用 Loop 1，Loop 2 bypass — 簡化訊號鏈</span></div></div>
+    <div class="mode"><span class="num">04</span><div><b>Independent / Summed 混合</b><span>獨立與合併並存 — 複雜路由需求</span></div></div>
+    <div class="mode"><span class="num">05</span><div><b>Loop Select</b><span>在 Loop 1 與 Loop 2 間切換 — A/B loop</span></div></div>
+    <div class="mode"><span class="num">06</span><div><b>Loop Sum Select</b><span>合併後再切換 — summed vs bypass</span></div></div>
+    <div class="mode"><span class="num">07</span><div><b>Momentary Loop Switching</b><span>瞬間啟動 loop — 類似 Flexi-Switch 的瞬發效果</span></div></div>
+    <div class="mode"><span class="num">08</span><div><b>Momentary Loop Sum</b><span>瞬間啟動合併 loops — 暫時性 parallel effects</span></div></div>
+    <div class="mode"><span class="num">09</span><div><b>Instrument Select · Mono Loops</b><span>兩個 input 切換，mono loops — 兩把吉他</span></div></div>
+    <div class="mode"><span class="num">10</span><div><b>Instrument Select · Summed</b><span>兩把吉他 + parallel effects</span></div></div>
+    <div class="mode"><span class="num">11</span><div><b>Instrument Select · Stereo</b><span>兩把吉他 + stereo effects</span></div></div>
+    <div class="mode"><span class="num">12</span><div><b>Separate Rigs, Shared Effects</b><span>兩個 input、分離 rig、共享效果器</span></div></div>
+  </div>
+  <p class="mode-note">相對地，Swiss Things 沒有「模式」的概念——Loop 1 unbuffered、Loop 2 buffered 是硬體寫死的。這是取捨而非缺陷：它換來的是永遠不會插錯。</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>與現有器材的相性</h2>
+    <span class="eyebrow">2025 v3 訊號鏈盤點</span>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>器材</th>
+          <th class="h-st">Swiss Things</th>
+          <th class="h-bpp">Buffer++</th>
+          <th>備註</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="key">
+          <td class="label">Roland JC-22</td>
+          <td><span class="no">Loop 2 mono 浪費 stereo FX loop</span></td>
+          <td><span class="yes">Loop 2 stereo 直上 FX loop</span></td>
+          <td>Buffer++ 完勝</td>
+        </tr>
+        <tr class="key">
+          <td class="label">Tone King Imperial</td>
+          <td><span class="no">同樣浪費 stereo FX loop 與 XLR</span></td>
+          <td><span class="yes">stereo XLR 錄音完整</span></td>
+          <td>Buffer++ 完勝</td>
+        </tr>
+        <tr class="key">
+          <td class="label">Nucleo（stereo 殘響）</td>
+          <td><span class="no">只能 mono</span></td>
+          <td><span class="yes">完整 stereo</span></td>
+          <td>Buffer++ 完勝</td>
+        </tr>
+        <tr>
+          <td class="label">AASB（shimmer 殘響）</td>
+          <td>只能 mono</td>
+          <td>可能支援 stereo</td>
+          <td>待確認 AASB 是否有 stereo 輸出</td>
+        </tr>
+        <tr>
+          <td class="label">FF-1Y（delay）</td>
+          <td><span class="yes">Loop 2 buffered 合適</span></td>
+          <td><span class="yes">可配置</span></td>
+          <td>兩者皆適合</td>
+        </tr>
+        <tr>
+          <td class="label">Gain pedals（6 顆）</td>
+          <td><span class="yes">Loop 1 unbuffered</span></td>
+          <td><span class="yes">可配置 unbuffered</span></td>
+          <td>兩者皆適合</td>
+        </tr>
+        <tr>
+          <td class="label">PA-1QG（EQ + boost）</td>
+          <td><span class="yes">適合 before input</span></td>
+          <td><span class="yes">適合 before router</span></td>
+          <td>兩者皆適合</td>
+        </tr>
+        <tr>
+          <td class="label">ESP Eclipse（EMG 主動）</td>
+          <td>可用，但看不到削波</td>
+          <td><span class="yes">Input pads 可避免削波</span></td>
+          <td>Buffer++ 較佳</td>
+        </tr>
+        <tr>
+          <td class="label">多把吉他切換</td>
+          <td><span class="no">只有 1 input</span></td>
+          <td><span class="yes">2 inputs</span></td>
+          <td>Buffer++ 優勢明顯</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>該選哪一台</h2>
+    <span class="eyebrow">條件式判斷</span>
+  </div>
+  <div class="duo">
+    <div class="decide bpp">
+      <h3>升級 Buffer++</h3>
+      <div class="cond">符合以下任一項</div>
+      <ol>
+        <li>想充分發揮 Nucleo 的 stereo 殘響</li>
+        <li>需要在兩把吉他間快速切換</li>
+        <li>需要更靈活的路由配置</li>
+        <li>需要 input metering 防止削波</li>
+        <li>想要 30 dB boost</li>
+        <li>需要 variable input loading 調線材音色</li>
+        <li>計畫未來擴展成 stereo rig</li>
+        <li>需要 input pads 對付 EMG 主動拾音器</li>
+      </ol>
+    </div>
+    <div class="decide st">
+      <h3>保留 Swiss Things</h3>
+      <div class="cond">符合以下全部才成立</div>
+      <ol>
+        <li>滿意目前的 mono 訊號鏈</li>
+        <li>不需要 Nucleo 的 stereo 能力</li>
+        <li>需要 expression pedal 音量控制</li>
+        <li>喜歡 unbuffered／buffered 的固定 loop 設計</li>
+        <li>不需要複雜的路由切換</li>
+        <li>不常在兩把吉他間切換</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="verdict">
+    <div class="eyebrow">結論</div>
+    <h2>建議升級 Buffer++</h2>
+    <p>Swiss Things 本身沒有做錯什麼——它把「兩個 loop、固定角色、現場好踩」這件事做得很好。問題出在它遇上的是一套已經 stereo 化的系統：JC-22 的 stereo 喇叭、Tone King 的 stereo XLR、Nucleo 的 stereo 殘響，全都卡在那個 mono Loop 2 前面。</p>
+    <p>換句話說，這不是「升級」，而是修正一次器材選擇的錯配。Buffer++ 涵蓋了 Swiss Things 除 expression pedal 與 Flexi-Switch 以外的全部功能，而且與同價位。</p>
+    <div class="ledger">
+      <div><span class="stat-k">購入 Buffer++</span><span class="stat-v">$299</span></div>
+      <div><span class="stat-k">售出 Swiss Things</span><span class="stat-v">$200–250</span></div>
+      <div><span class="stat-k">實際支出</span><span class="stat-v">$50–100</span></div>
+    </div>
+    <p class="exception">唯一例外：如果 expression pedal 音量控制對你是必要的，把 Swiss Things 留著當備用，而不是當主力路由器。原分析已不再推薦「兩者並用」——mono Loop 2 的限制會一路傳到訊號鏈末端。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="scope">
+    <b>比較範圍說明</b>
+    這份比較只涵蓋 Empress Buffer++ 與 EarthQuaker Devices Swiss Things 兩台。知識庫中並未對其他訊號分歧／路由器材（Lehle、Radial、Boss LS-2、One Control、Free The Tone loop switcher 等）做過市場調查，因此「Buffer++ 是唯一選擇」的結論成立範圍僅限這兩台之間的取捨。
+  </div>
+  <p>資料來源：Empress Effects 官方產品頁與支援文件、EarthQuaker Devices 官方頁、Sweetwater、Reverb、No Treble（2025-11-29 發表報導）。原始分析 <span class="mono">analysis/buffer_plus_plus_vs_swiss_things_comparison.md</span> v2.0，建立於 2026-01-02。</p>
+  <p>Buffer++ 的尺寸、電流消耗與輸入／輸出阻抗官方尚未公開，購入前建議向經銷商確認，以免板面或供電規劃出錯。</p>
+</footer>
+
+</div>
