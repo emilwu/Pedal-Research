@@ -22,26 +22,35 @@
 
 ```
 Pedal-Research/
-├── .claude/                  # AI Agents 與知識庫
-│   ├── agents/              # 專門的 AI Agents
-│   ├── skills/              # 可重用的 Skills
-│   └── knowledge/           # 核心知識庫
+├── .claude/                       # AI Agents、Skills、知識庫
+│   ├── agents/                   # 核心 Agents（0/1/2）
+│   ├── skills/                   # 可重用的 Skills
+│   └── knowledge/                # 配對規則、訊號鏈基礎
 │
-├── projects/                # 所有專案（可以有多個）
-│   └── 2025-v3-signal-chain/  # 前次專案（已完成）
+├── .githooks/                     # pre-commit、跨 repo 路徑驗證器
 │
-├── shared/                  # 跨專案共享資料
-│   ├── inventory/          # 當前設備清單（動態）
-│   │   ├── guitars.yaml
-│   │   ├── pedals.yaml
-│   │   ├── amps.yaml
-│   │   └── music_styles.yaml
-│   │
-│   ├── equipment_database/ # 設備完整資料庫
-│   └── templates/          # 文件模板
+├── analysis/                      # 跨專案設備分析／稽核／遷移報告
 │
-└── reference_docs/         # 通用參考文件
+├── projects/                      # 專案化訊號鏈配置（可有多個）
+│   └── 2025-v3-signal-chain/     # 目前的專案
+│       ├── inventory/            # 動態設備清單（吉他/效果器/音箱/配件）
+│       ├── analysis/             # 專案分析報告
+│       ├── research/             # 專案技術研究
+│       ├── signal_chains/        # 訊號鏈配置（MD + YAML）
+│       ├── prompts/              # 研究用 prompt 範本
+│       └── archived_versions/    # 已封存的舊版文件
+│
+├── shared/                        # 跨專案共享資料
+│   ├── equipment_database/       # 設備完整資料庫（pedals/guitars/amps/accessories）
+│   │   └── pedals/                # 各器材類型下皆有 specs/、reports/、examples/、archived/
+│   └── tone_theory/               # 音色理論、訊號鏈原理
+│
+└── reference_docs/                # 通用參考文件（PDF、評估框架）
 ```
+
+> 目前**沒有** shared/inventory/ 這個目錄。動態設備清單已改放在各專案底下，例如
+> `projects/2025-v3-signal-chain/inventory/`——同一份規則可能在不同專案有不同答案，
+> 因此不再放在跨專案共享的 `shared/` 之下。
 
 ---
 
@@ -89,7 +98,6 @@ Pedal-Research/
 Q1: 選擇吉他 (從 Inventory 動態讀取)
 Q2: 選擇音箱 (從 Inventory 動態讀取)
 Q3: 選擇音樂風格 (從 Inventory 動態讀取)
-Q4: 是否啟用預算分析？
 ```
 
 ---
@@ -193,7 +201,7 @@ Q4: 是否啟用預算分析？
    - "主要演奏的音樂風格："
 
 3. Agent 建立:
-   ✅ shared/inventory/*.yaml
+   ✅ projects/[新專案名]/inventory/*.yaml
    ✅ shared/equipment_database/
    ✅ projects/[新專案名]/
 
@@ -207,7 +215,7 @@ Q4: 是否啟用預算分析？
 #### 情境 1: 研究新效果器
 
 ```
-User: "研究 Strymon BigSky，啟用預算分析"
+User: "研究 Strymon BigSky"
 
 → Pedal Research Agent:
    1. 讀取 Inventory (發現已有 2 個 reverb)
@@ -246,9 +254,6 @@ User: "建立訊號鏈配置"
        2. Neo Soul (priority 2)
        ...
    A3: 1
-
-   Q4: "啟用預算分析？"
-   A4: 否
 
    → Agent 使用 Pairing Logic:
       - 推薦 Cali76 FET (溫暖適合 Jazz + semi-hollow)

@@ -6,77 +6,38 @@
 # 但兩個產品 repo 的 .claude/ 共 41 處硬編碼路徑沒跟上。8 天後才發現，
 # 期間 4 份文件被寫進廢棄路徑。人工維護索引在這個工作區失敗過一次。
 #
-# 這支 hook 檢查 staged 檔案裡指向 PedalGuy 工作區的絕對路徑是否真實存在。
-# 樣板變數（[module]、[id]、${VAR}）只驗證到最後一個固定目錄層。
+# 實際驗證邏輯在 verify-paths.py。這支只負責在 commit 時呼叫它。
 #
 # 安裝：git config core.hooksPath .githooks
 # 略過：git commit --no-verify
 #
+# 看整個 repo 的狀況：   .githooks/verify-paths.py --all
+# 看整個工作區的狀況：   .githooks/verify-paths.py --workspace
+#
 set -uo pipefail
 
-WORKSPACE="/Users/emilwu/VSCode/PedalGuy"
-FAIL=0
+HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VERIFIER="${HOOK_DIR}/verify-paths.py"
 
-# 只檢查會放路徑的文字檔
-STAGED=$(git diff --cached --name-only --diff-filter=ACM \
-  | grep -E '\.(md|json|ya?ml|ts|tsx|js|sh|prisma)$' || true)
-
-[ -z "$STAGED" ] && exit 0
-
-for f in $STAGED; do
-  [ -f "$f" ] || continue
-
-  # 歷史記錄不檢查：驗證報告與封存內容記錄的是「當時的狀態」，
-  # 其中的路徑可能刻意指向已不存在的東西（例如記錄某檔案不存在的證據）。
-  case "$f" in
-    */reports/*|*/archive/*|archive/*) continue ;;
-  esac
-
-  # 抽出指向工作區的絕對路徑。到空白、引號、反引號、括號為止
-  # 行內標記 path-check:skip 可豁免該行（用於「產出時才建立」的檔案）
-  grep -nE "${WORKSPACE}/" "$f" 2>/dev/null | grep -v 'path-check:skip' \
-    | grep -oE "^[0-9]+:|${WORKSPACE}/[^ \"'\`)（）、，]*" \
-    | paste -d: - - 2>/dev/null | sed 's/^\([0-9]*\)::/\1:/' \
-    | while IFS=: read -r lineno path; do
-    [ -z "${path:-}" ] && continue
-    # 去掉尾端標點
-    path="${path%%[.,;:]}"
-
-    # 樣板變數：截到變數所在段落之前的目錄。
-    # app-[module].md 要退回 designs/，不能停在 app- 這種半截檔名。
-    case "$path" in
-      *'['*|*'${'*|*'<'*|*'*'*)
-        path=$(printf '%s' "$path" | sed -E 's/(\[|\$\{|<|\*).*$//')
-        path="${path%/*}"
-        ;;
-    esac
-
-    [ -z "$path" ] && continue
-    [ "$path" = "$WORKSPACE" ] && continue
-
-    # 目標 repo 沒 clone 就跳過，不要因為環境不完整而擋人
-    repo="${path#$WORKSPACE/}"
-    repo="${repo%%/*}"
-    [ -d "${WORKSPACE}/${repo}" ] || continue
-
-    if [ ! -e "$path" ]; then
-      printf '  %s:%s\n    路徑不存在: %s\n' "$f" "$lineno" "$path" >&2
-      echo "FAIL" >> "${TMPDIR:-/tmp}/.pedalguy-pathcheck.$$"
-    fi
-  done
-done
-
-if [ -f "${TMPDIR:-/tmp}/.pedalguy-pathcheck.$$" ]; then
-  COUNT=$(wc -l < "${TMPDIR:-/tmp}/.pedalguy-pathcheck.$$" | tr -d ' ')
-  rm -f "${TMPDIR:-/tmp}/.pedalguy-pathcheck.$$"
+if [ ! -f "$VERIFIER" ]; then
   {
     echo ""
-    echo "✗ 發現 ${COUNT} 處失效的跨 repo 路徑，commit 已中止。"
-    echo ""
-    echo "  修正路徑後重新 commit，或用 git commit --no-verify 略過。"
+    echo "⚠ 找不到 ${VERIFIER}，路徑驗證未執行。"
+    echo "  這支 hook 需要與 verify-paths.py 放在同一個目錄。"
     echo ""
   } >&2
-  exit 1
+  exit 0
 fi
 
-exit 0
+if ! command -v python3 >/dev/null; then
+  {
+    echo ""
+    echo "⚠ 找不到 python3，路徑驗證未執行。"
+    echo "  安裝 Xcode Command Line Tools 後這支 hook 才會生效："
+    echo "    xcode-select --install"
+    echo ""
+  } >&2
+  exit 0
+fi
+
+exec python3 "$VERIFIER" --staged

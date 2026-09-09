@@ -4,6 +4,11 @@
 **Status:** ✅ Migration Complete
 **Version:** 2.1
 
+> **Current-state note (added later):** Left as originally written — accurate as
+> of 2026-01-11. shared/inventory/pedals.yaml, referenced below, was later moved
+> to `projects/2025-v3-signal-chain/inventory/pedals.yaml`; those references are
+> marked `path-check:skip` in place rather than rewritten.
+
 ---
 
 ## Overview
@@ -76,7 +81,7 @@ Dual routing fields that maintain both:
 ## Files Updated
 
 ### 1. Inventory File (1 file)
-**Location:** `shared/inventory/pedals.yaml`
+**Location:** `shared/inventory/pedals.yaml` <!-- path-check:skip 歷史狀態：已搬到 projects/2025-v3-signal-chain/inventory/pedals.yaml -->
 
 **Changes:**
 - Version bumped: 2.0 → 2.1
@@ -214,7 +219,7 @@ Guitar → [Before Router] → Buffer++ → [Loop 1] → [Loop 2] → Amp
   - [ ] Configure AASB for stereo operation
 
 - [ ] **Documentation Update**
-  - [ ] Update `shared/inventory/pedals.yaml`:
+  - [ ] Update `shared/inventory/pedals.yaml`: <!-- path-check:skip 歷史狀態：已搬到 projects/2025-v3-signal-chain/inventory/pedals.yaml -->
     - Change `current_router: "swiss_things"` to `"buffer_plus_plus"`
     - Update stats section to reflect active router
   - [ ] Update all equipment database files if needed
@@ -301,7 +306,7 @@ signal_routing:
 ## Related Documents
 
 - **Audit Report:** `analysis/DEPENDENCY_AUDIT_REPORT.md`
-- **Inventory:** `shared/inventory/pedals.yaml`
+- **Inventory:** `shared/inventory/pedals.yaml` <!-- path-check:skip 歷史狀態：已搬到 projects/2025-v3-signal-chain/inventory/pedals.yaml -->
 - **Equipment Database:** `shared/equipment_database/pedals/*.yaml`
 - **Pairing Rules:** `.claude/knowledge/pairing_rules.yaml`
 

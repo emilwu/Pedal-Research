@@ -4,6 +4,14 @@
 **當前狀態:** ✅ 系統完整運作中 + 文件組織已優化
 **Session:** 2026-01-11-001
 
+> **現況註記（後續補記）：** 本文件是 2026-01-11 當時的工作日誌，逐項記錄的路徑
+> 反映的是「當時」的目錄結構，之後有兩次結構調整讓部分路徑不再存在：
+> 1. shared/inventory/（guitars/pedals/amps/music_styles.yaml）已在專案化調整後
+>    搬到 `projects/2025-v3-signal-chain/inventory/`，shared/ 底下已無 inventory/。
+> 2. shared/equipment_database/&lt;type&gt;/*.yaml 在 2026-01-13 的重構後改為
+>    shared/equipment_database/&lt;type&gt;/specs/*.yaml（規格）與 .../reports/*.md（報告）兩層。
+> 以下維持原始記錄不改寫，僅在對應行標記 path-check:skip 並註明原因。
+
 ---
 
 ## 📋 當前進度總覽
@@ -18,7 +26,7 @@
 2. **目錄結構建立** ✅
    - `.claude/agents/`, `.claude/skills/`, `.claude/knowledge/`
    - `projects/2025-v3-signal-chain/`
-   - `shared/inventory/`, `shared/equipment_database/`
+   - `shared/inventory/`, `shared/equipment_database/` <!-- path-check:skip 歷史狀態：shared/inventory/ 已搬到 projects/2025-v3-signal-chain/inventory/ -->
 
 3. **前次專案整理** ✅
    - 所有分析報告移至 `projects/2025-v3-signal-chain/analysis/`
@@ -28,10 +36,10 @@
    - 建立專案 README
 
 4. **Shared Inventory 建立** ✅
-   - `shared/inventory/guitars.yaml` (4把吉他)
-   - `shared/inventory/pedals.yaml` (12顆效果器)
-   - `shared/inventory/amps.yaml` (2台音箱)
-   - `shared/inventory/music_styles.yaml` (7種音樂風格)
+   - `shared/inventory/guitars.yaml` (4把吉他) <!-- path-check:skip 歷史狀態：已搬到 projects/2025-v3-signal-chain/inventory/guitars.yaml -->
+   - `shared/inventory/pedals.yaml` (12顆效果器) <!-- path-check:skip 歷史狀態：已搬到 projects/2025-v3-signal-chain/inventory/pedals.yaml -->
+   - `shared/inventory/amps.yaml` (2台音箱) <!-- path-check:skip 歷史狀態：已搬到 projects/2025-v3-signal-chain/inventory/amps.yaml -->
+   - `shared/inventory/music_styles.yaml` (7種音樂風格) <!-- path-check:skip 歷史狀態：已搬到 projects/2025-v3-signal-chain/music_styles.yaml -->
 
 5. **Knowledge Base 建立** ✅
    - `.claude/knowledge/pairing_rules.yaml` (12KB - 配對規則庫)
@@ -369,7 +377,7 @@ buffer_plus_plus_pairing:
 
 #### 4. ✅ Tone King Imperial Stereo 確認
 
-**檔案:** `shared/equipment_database/amps/tone_king_imperial_mkii.yaml` v2.0
+**檔案:** `shared/equipment_database/amps/tone_king_imperial_mkii.yaml` v2.0 <!-- path-check:skip 歷史狀態：2026-01-13 重構後路徑為 shared/equipment_database/amps/specs/tone_king_imperial_mkii.yaml -->
 
 **用戶確認:** "ToneKing Preamp Pedal 的 FX-Loop 的 Return 也是立體聲，而他的輸出(XLR)也是"
 
@@ -473,15 +481,15 @@ stereo_capability:
 #### 新建檔案 (7)
 1. `analysis/overdrive_inventory_analysis.md` (18.5 KB)
 2. `analysis/buffer_plus_plus_vs_swiss_things_comparison.md` v1.0 → v2.0 (20.1 KB)
-3. `shared/equipment_database/guitars/esp_eclipse_ctm.yaml` (5.8 KB)
-4. `shared/equipment_database/guitars/esp_throbber_ctm.yaml` (7.5 KB)
-5. `shared/equipment_database/guitars/greco_te500.yaml` (8.4 KB)
-6. `shared/equipment_database/guitars/fender_tokyo_thinline.yaml` (8.5 KB)
+3. `shared/equipment_database/guitars/esp_eclipse_ctm.yaml` (5.8 KB) <!-- path-check:skip 歷史狀態：現為 shared/equipment_database/guitars/specs/esp_eclipse_ctm.yaml -->
+4. `shared/equipment_database/guitars/esp_throbber_ctm.yaml` (7.5 KB) <!-- path-check:skip 歷史狀態：現為 shared/equipment_database/guitars/specs/esp_throbber_ctm.yaml -->
+5. `shared/equipment_database/guitars/greco_te500.yaml` (8.4 KB) <!-- path-check:skip 歷史狀態：現為 shared/equipment_database/guitars/specs/greco_te500.yaml -->
+6. `shared/equipment_database/guitars/fender_tokyo_thinline.yaml` (8.5 KB) <!-- path-check:skip 歷史狀態：現為 shared/equipment_database/guitars/specs/fender_tokyo_thinline.yaml -->
 
 #### 更新檔案 (2)
-1. `shared/equipment_database/amps/roland_jc22.yaml` v1.0 → v2.0 (20.4 KB)
+1. `shared/equipment_database/amps/roland_jc22.yaml` v1.0 → v2.0 (20.4 KB) <!-- path-check:skip 歷史狀態：現為 shared/equipment_database/amps/specs/roland_jc22.yaml -->
    - 重大修正: 新增 stereo FX loop 完整規格
-2. `shared/equipment_database/amps/tone_king_imperial_mkii.yaml` v1.0 → v2.0 (13.2 KB)
+2. `shared/equipment_database/amps/tone_king_imperial_mkii.yaml` v1.0 → v2.0 (13.2 KB) <!-- path-check:skip 歷史狀態：現為 shared/equipment_database/amps/specs/tone_king_imperial_mkii.yaml -->
    - 確認 stereo FX return + stereo XLR outputs
 
 ---
@@ -631,7 +639,9 @@ projects/2025-v3-signal-chain/archived_versions/
 ├── analysis/ (5個過時分析文件)
 ├── signal_chains/ (3個過時訊號鏈配置)
 └── research/ (1個過時研究文件)
+```
 
+```
 shared/equipment_database/pedals/archived/
 └── ft1y_incorrect.yaml (過時的 FF-1Y 數據)
 ```

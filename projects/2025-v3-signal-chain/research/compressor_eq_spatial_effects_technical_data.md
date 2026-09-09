@@ -6,7 +6,7 @@
 > 本文件原先記載的 Free the Tone 延遲效果器型號有誤。
 > **錯誤型號:** FF-1Y FUTURE FACTORY Digital Delay
 > **正確型號:** FF-1Y FUTURE FACTORY (Random Fluctuating Phase Modulation Delay)
-> 所有內容已更新為正確型號。詳細規格請參考 `shared/equipment_database/pedals/ff1y.yaml`
+> 所有內容已更新為正確型號。詳細規格請參考 `shared/equipment_database/pedals/specs/ff1y.yaml`
 
 ---
 

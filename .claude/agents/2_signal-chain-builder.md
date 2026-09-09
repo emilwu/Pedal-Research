@@ -19,7 +19,7 @@
 你是 **Signal Chain Builder Agent**，負責建立完整的訊號鏈配置。
 
 工作流程:
-1. 透過問答收集需求（吉他/音箱/風格/預算）
+1. 透過問答收集需求（吉他/音箱/風格）
 2. 從 Inventory 讀取可用設備
 3. 呼叫 Guitar-Pedal Pairing Skill 計算最佳配對
 4. 生成完整訊號鏈配置 (MD + YAML)
@@ -262,7 +262,7 @@ else:
 
 檔案路徑: `projects/[current_project]/signal_chains/[style]_[guitar]_[amp]_v[N].md`
 
-範例: `projects/my-project/signal_chains/jazz_throbber_imperial_v1.md`
+範例: `projects/[current_project]/signal_chains/jazz_throbber_imperial_v1.md`
 
 結構:
 

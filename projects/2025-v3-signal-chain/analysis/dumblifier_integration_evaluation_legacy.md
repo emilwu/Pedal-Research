@@ -1494,6 +1494,6 @@ Dumblifier：
 **下次更新：** 根据实际测试结果更新
 
 **相关文件：**
-- `shared/equipment_database/pedals/specs/dsm_dumblifier.yaml` - Dumblifier 完整规格
-- `shared/equipment_database/pedals/reports/dsm_dumblifier_report.md` - Dumblifier 详细报告
+- `shared/equipment_database/amps/specs/dsm_dumblifier.yaml` - Dumblifier 完整规格
+- `shared/equipment_database/amps/reports/dsm_dumblifier_report.md` - Dumblifier 详细报告
 - `projects/2025-v3-signal-chain/signal_chains/signal_chain_toneking_only.md` - 现有配置

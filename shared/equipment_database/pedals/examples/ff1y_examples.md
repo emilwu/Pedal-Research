@@ -2,7 +2,7 @@
 
 **版本:** 1.0
 **更新日期:** 2026-01-11
-**資料來源:** `shared/equipment_database/pedals/ff1y.yaml`
+**資料來源:** `shared/equipment_database/pedals/specs/ff1y.yaml`
 
 ---
 
@@ -585,5 +585,5 @@ Guitar → Preamp → [FX Send Stereo] → FF-1Y (Series) → [FX Return Stereo]
 **下次更新計劃:** 補充實際手冊確認的旋鈕範圍與頻段參數
 
 **相關文件**:
-- `shared/equipment_database/pedals/ff1y.yaml` - FF-1Y 完整技術規格
+- `shared/equipment_database/pedals/specs/ff1y.yaml` - FF-1Y 完整技術規格
 - `projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md` - 空間系效果器技術資料

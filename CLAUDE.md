@@ -76,8 +76,12 @@
 | `shared/tone_theory/` | 音色理論、信號鏈原理 |
 | `.claude/knowledge/` | 配對規則 YAML、信號鏈基礎 |
 | `.claude/skills/` | L1 研究用 agent 技能 |
+| `.claude/agents/` | L1 研究用 agent 本體（0/1/2 號） |
 | `analysis/` | 設備分析報告 |
 | `projects/` | 專案特定配對設定 |
+| `projects/2025-v3-signal-chain/inventory/` | 動態設備清單實際位置（吉他/效果器/音箱/配件） |
+| `reference_docs/` | 通用參考文件（PDF、評估框架） |
+| `.githooks/` | pre-commit、跨 repo 路徑驗證器 |
 
 ---
 
@@ -99,10 +103,10 @@
 1. 本目錄有自己的 L1 agent 系統（`.claude/`），用於設備研究和配對分析。
 
 2. 若要進行 Web Service 開發，切換到：
-   `/Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service/`（Agent commands 在 `.claude/commands/`）
+   `/Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service/`（Agent commands 在 `Pedal-Web-Service/.claude/commands/`）
 
 3. 若要進行 App 開發，切換到：
-   `/Users/emilwu/VSCode/PedalGuy/Pedal-App/`（Agent commands 在 `.claude/commands/`）
+   `/Users/emilwu/VSCode/PedalGuy/Pedal-App/`（Agent commands 在 `Pedal-App/.claude/commands/`）
 
 4. 若要查看產品規格和設計文件：
    `/Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service-Planning/planning/`

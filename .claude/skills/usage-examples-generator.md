@@ -20,7 +20,7 @@
 
 **知識來源:**
 - `shared/equipment_database/pedals/specs/*.yaml` (技術規格)
-- `shared/equipment_database/pedals/research/*.md` (研究文件)
+- `shared/equipment_database/pedals/reports/*.md` (研究文件)
 - `.claude/knowledge/pairing_rules.yaml` (配對規則)
 - `projects/[current_project]/inventory/music_styles.yaml` (音樂風格資料)
 

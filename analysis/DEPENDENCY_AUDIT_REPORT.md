@@ -5,6 +5,13 @@
 **Project Size:** 5.6MB
 **Status:** ⚠️ Issues Found - Recommendations Provided
 
+> **Current-state note (added later):** This audit's findings and conclusions are
+> left as originally written — they were accurate as of 2026-01-11. Since then,
+> shared/inventory/ was moved to `projects/2025-v3-signal-chain/inventory/`, and
+> shared/equipment_database/&lt;type&gt;/*.yaml was restructured (2026-01-13) into
+> shared/equipment_database/&lt;type&gt;/specs/*.yaml + .../reports/*.md. Paths below
+> that reflect the pre-restructure layout are marked path-check:skip in place.
+
 ---
 
 ## Executive Summary
@@ -121,7 +128,9 @@ projects/2025-v3-signal-chain/archived_versions/
 ├── signal_chains/ (3 files)
 ├── research/ (1 file)
 └── analysis/ (5 files)
+```
 
+```
 shared/equipment_database/pedals/archived/
 └── ft1y_incorrect.yaml (1 file)
 ```
@@ -359,7 +368,7 @@ Research and add:
 ```
 
 #### 3.2 Document Data Schema
-Create `shared/YAML_SCHEMA.md` documenting:
+Create `shared/YAML_SCHEMA.md` documenting: <!-- path-check:skip 建議產出的檔案，撰寫時才會建立 -->
 - Required vs optional fields
 - Field naming conventions
 - Distinction between routing fields

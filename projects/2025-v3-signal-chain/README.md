@@ -120,10 +120,10 @@
 
 所有相關檔案已整理至 `projects/2025-v3-signal-chain/` 目錄。
 
-如需繼續此專案或建立基於此配置的新專案，請參考：
-- 訊號鏈最終配置: `signal_chains/signal_chain_v3.md`
-- 完整技術分析: `analysis/comprehensive_analysis_summary_v2.md`
-- Swiss Things 配置邏輯: `research/swiss_things_signal_routing_logic.md`
+如需繼續此專案或建立基於此配置的新專案，請參考（這幾份後續已搬進 `archived_versions/`）：
+- 訊號鏈最終配置: `archived_versions/signal_chains/signal_chain_v3.0_dual_amp_archived.md`
+- 完整技術分析: `archived_versions/analysis/comprehensive_analysis_summary_v2.0_dual_amp_archived.md`
+- Swiss Things 配置邏輯: `archived_versions/research/swiss_things_signal_routing_logic_archived.md`
 
 ---
 
