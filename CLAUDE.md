@@ -32,7 +32,7 @@
 
 ## 硬性規則
 
-**本目錄是唯讀的。** Web Service 的 Agent 系統（architect、builder、validator）不得寫入本目錄。
+**本目錄是唯讀的。** Web-Service 的 Agent（architect、frontend-builder、backend-builder、ai-integrator、validator、data-migrator）與 App 的 Agent（architect、app-builder、api-builder、validator）不得寫入本目錄。
 
 本目錄的資料被以下方式引用：
 - `data-migrator` agent 讀取 `shared/equipment_database/` 產生遷移腳本
