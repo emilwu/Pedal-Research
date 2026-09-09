@@ -524,13 +524,45 @@ footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-si
     <span class="eyebrow">2026-09-09 · 兩個分支</span>
   </div>
   <div class="q">
-    <h3>41 處硬編碼路徑，橫跨 11 個檔案</h3>
-    <p>原本只點名了 <code>design.md</code>，實際 grep 後發現 <code>build.md</code>、<code>validate.md</code>、<code>cycle.md</code>、<code>e2e.md</code>、<code>architecture.md</code> 全部中招。</p>
-    <p style="margin-bottom:.6em"><b><code>Pedal-Web-Service</code> · 分支 <code>fix/agent-output-paths</code> · <code>a03439e</code></b><br>
-    21 處 → <code>development/web/designs/</code>、<code>development/web/reports/</code>。另切斷兩處對已過時 <code>agent-system-design.md</code> 的指引：<code>design.md</code> 改讀 <code>prisma/schema.prisma</code> 取得 DB schema，<code>architecture.md</code> 改指向本 repo 的 <code>CLAUDE.md</code> 與 <code>Planning/planning/</code>。</p>
-    <p style="margin-bottom:.9em"><b><code>Pedal-App</code> · 分支 <code>fix/agent-output-paths</code> · <code>9d46355</code></b><br>
-    20 處 → <code>development/app/designs/</code>、<code>development/app/reports/</code>。另修正 <code>build.md</code> 指向已刪除的 <code>ios-api-research.md</code>，改為現存的 <code>ios-api.md</code>。</p>
-    <p style="margin-bottom:0"><b>兩個需要你知道的副作用：</b>其一，<code>BUG_REPORT.md</code> 從兩端共用一份改為分家（Web 端該檔目前不存在，將於首次 NO-GO 時建立）。其二，舊路徑下的 <b>7 個孤兒檔案我沒有動</b>——搬移它們會改變既有文件的引用，值得你自己決定要搬、要歸檔到 <code>archive/</code>、還是留著。</p>
+    <h3>四個 repo 全部修正並推送</h3>
+    <p style="margin-bottom:.6em"><b>1 · 41 處硬編碼路徑</b>（<code>a03439e</code> Web · <code>13b90b7</code> App）<br>
+    原本只點名 <code>design.md</code>，grep 後發現 <code>build.md</code>、<code>validate.md</code>、<code>cycle.md</code>、<code>e2e.md</code>、<code>architecture.md</code> 全部中招。另切斷兩處對 <code>agent-system-design.md</code> 的指引，並修正 <code>build.md</code> 指向已刪除的 <code>ios-api-research.md</code>。</p>
+    <p style="margin-bottom:.6em"><b>2 · 7 個孤兒檔案逐份分類歸位</b>（<code>6198a2e</code>）<br>
+    5 份純 Web 報告 → <code>web/reports/</code>；<code>terms-conditions.md</code> 是 Footer 服務條款子頁 → <code>web/designs/</code>；<code>account-deletion-validation.md</code> 第 41 行同時涵蓋 web cookie 與 app Bearer token，屬跨平台 → 兩邊各放一份副本。<code>development/designs/</code> 與 <code>development/reports/</code> 已清空刪除。</p>
+    <p style="margin-bottom:.6em"><b>3 · <code>agent-system-design.md</code> 封存</b>（<code>9598069</code>）<br>
+    645 行，描述已廢除的獨立 agent repo 架構。搬到 <code>archive/agent-system-v1/</code> 並加封存標頭。README 索引同步更新。</p>
+    <p style="margin-bottom:.9em"><b>4 · 兩處文件不一致</b>（<code>8c7fbf7</code> Research · <code>13b90b7</code> App）<br>
+    Research 的唯讀規則改用實際 agent 清單，並補上 App 端的 4 個 agent。App 的 architect 讀取範圍擴充至 <code>src/lib/</code>，對齊 7 處既有的越界引用。</p>
+    <p style="margin-bottom:0"><b>刻意未動：</b><code>web/designs/</code> 底下 4 份設計文件仍引用 <code>agent-system-design.md</code> 作為 Prisma model 出處。那是當時的設計記錄，改寫等同竄改歷史。現行 schema 權威來源是 <code>prisma/schema.prisma</code>。</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead">
+    <h2>兩個新發現</h2>
+    <span class="eyebrow">需要你決定</span>
+  </div>
+
+  <div class="note">
+    <h3>Planning 的 GitHub 預設分支指向空分支</h3>
+    <p><code>origin/main</code> 只有 1 筆 commit（<code>c27f134</code> "Initial commit"）。真正的 45 筆工作紀錄全在 <code>origin/master</code>。GitHub 的預設分支指標指在空的 <code>main</code> 上。</p>
+    <p style="margin-bottom:0"><b>任何人 clone <code>Pedal-Web-Service-Planning</code> 只會拿到一個空 repo。</b>其他三個 repo 沒有這個問題。修正需要改 GitHub repo 設定，我沒有動。</p>
+  </div>
+
+  <div class="note" style="margin-top:16px">
+    <h3>App 的 API 契約與後端實作脫節</h3>
+    <p><code>Pedal-App/app-context/api-reference.md</code> 是 App 端宣告的契約，被 Planning 與 Web-Service 兩邊讀取。<code>GET /api/user/profile</code> 有三處不符，均已逐行驗證：</p>
+    <div class="table-scroll" style="margin:12px 0">
+      <table>
+        <thead><tr><th>欄位</th><th>契約宣稱</th><th>後端實際</th></tr></thead>
+        <tbody>
+          <tr><td class="spec"><code>researchQuota</code></td><td class="ev">usedCount / freeLimit</td><td class="ev">used / limit</td></tr>
+          <tr><td class="spec"><code>credits</code></td><td class="ev">[{creditType, balance}] 陣列</td><td class="ev">{research, pairing_upgrade} 扁平物件</td></tr>
+          <tr><td class="spec"><code>theme</code></td><td class="ev">未列出</td><td class="ev">實際有回傳</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-bottom:0">證據：契約 <code>api-reference.md:369-377</code>；實作 <code>src/lib/db/user.ts:18-26</code> 與 <code>src/app/api/user/profile/route.ts:34-38</code>。<b>建議改契約，不要改後端</b>——App 的 <code>ProfileScreen</code> 已按後端實際格式寫好並驗證通過。改後端會破壞可運作的實作。</p>
   </div>
 </section>
 
