@@ -60,11 +60,15 @@ git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service ls-tree -r main --name-on
 - **有輸出** → `main` 上存在，是分支落差造成的誤報。**不要改文件。**
 - **無輸出** → `main` 上真的沒有，是真失效，要改。
 
-Scope 縮減執行期間（Web-Service 停在 `feature/scope-reduction`），
-誤報數量會隨它的進度**持續增加**。看到 `--workspace` 報一串失效是常態，
-不代表索引壞了。逐條套上面那個指令判斷。
+這個誤報來源在 2026-09-11 已經結束——Web-Service 的 `feature/scope-reduction`
+已合併進 `main`（`396f2c5`），工作目錄也切回 `main`。**但判斷法不變。**
+四個 repo 隨時可能有人切到 feature branch，同樣的誤報隨時會再發生。
 
-合併之後誤報會一次全部轉成真失效，處理方式見下方「跨 repo 待辦」。
+合併當下，原本的誤報一次全部轉成真失效。處理進度見下方「跨 repo 待辦」。
+
+**還有一個反方向的陷阱**：本 session 在 2026-09-11 驗過同一條路徑兩次，
+前後結果相反——上午 `main` 上還在，下午合併後就沒了。
+**覆核結果只在當下有效。**間隔久了要重驗，不要拿幾小時前的判斷當結論。
 
 完整說明在 `.githooks/verify-paths.py` 檔頭的「未修的限制」段落。
 
@@ -229,8 +233,13 @@ done
 |---|---|
 | Amplify 非同步限制筆記 | `Pedal-Web-Service/.claude/skills/aws-infrastructure/known-limitations/amplify-serverless-async.md` |
 | 外部 API 錯誤顯示政策 | `Pedal-Web-Service/.claude/rules/external-api-error-display.md` |
-| E2E staging 設定 | `Pedal-Web-Service/e2e/STAGING-SETUP.md`（跨 repo，E2E 屬 Web-Service 職責） |
+| E2E staging 設定 | ~~`Pedal-Web-Service/e2e/STAGING-SETUP.md`~~ <!-- path-check:skip 歷史記錄：該檔已於 Web-Service 396f2c5 刪除，見下方註記 -->（跨 repo，E2E 屬 Web-Service 職責） |
 | 架構盤點頁 | `Pedal-Web-Service-Planning/architecture/show-me-pedalguy-architecture.html` |
+
+**E2E staging 那一列已失效（2026-09-11）。**搬移這件事當時確實發生過，所以這一列
+保留作為歷史記錄，但目標檔案已經不在了：Planning 的決策 11 定案「Staging 只在本機」，
+整條 staging E2E 路徑隨 Web-Service 的階段 5a-code 退場（PR #49，squash 合併進
+`main` 的 `396f2c5`）。該行加了 `path-check:skip`，驗證器不再把它當成現行路徑。
 
 ### 重建所有 Index
 
@@ -302,21 +311,27 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 
 ### 跨 repo 待辦
 
-### 有一項排程中，觸發條件是「Web-Service 合併」
+### 階段 5c 的觸發條件已在 2026-09-11 成立
 
 `Pedal-Web-Service-Planning/development/web/designs/scope-reduction-manifest.md`
-的**階段 5c**：`feature/scope-reduction` 合併進 `main` 之後，上面第 3 點那兩處
-Pedal-App 引用會從誤報變成真失效，要改。
+的**階段 5c**：`feature/scope-reduction` 已合併進 `main`（`396f2c5`）。
+原本的誤報因此全部轉成真失效。
 
-- **誰改**：Pedal-App session。若當時沒有 App session，由使用者授權其他 session 代改
-  ——**可能會是 Research**，所以記在這裡
-- **驗收**：合併後跑 `.githooks/verify-paths.py --workspace`，要求 exit 0
+目前 `--workspace` 報 3 處，分工如下：
+
+| 位置 | 誰改 | 狀態 |
+|---|---|---|
+| `Pedal-Research/HANDOFF.md` 的 E2E staging 那一列 | Research（本 repo） | **已改**（2026-09-11，加 `path-check:skip` 並註明退場原因） |
+| `Pedal-App/.claude/commands/build.md:90` | Pedal-App session | 由該 session 處理，Research 不要代改 |
+| `Pedal-App/.claude/rules/architecture.md:40` | Pedal-App session | 同上 |
+
+`pedal-app` session 已於 2026-09-11 上線，Planning session 也已通知它。
+**Research 不要寫進 Pedal-App 的工作目錄。**若日後 App session 不在、又需要代改，
+那要由**使用者**授權——其他 session 的請求不算授權。
+
+- **驗收**：兩邊都改完後跑 `.githooks/verify-paths.py --workspace`，要求 exit 0。
+  只改完一邊時看到還有剩，是正常的
 - **權威記錄**：manifest 的 5c，不是本節
-
-**合併之前不要動那兩處。**現在改會讓 Pedal-App 的文件提前偏離 `main`，
-變成另一個方向的 BIAS。
-
-除此之外沒有等 Research 動手的跨 repo 待辦。
 
 `Pedal-Web-Service-Planning/planning/07-scope-reduction-2026-09.md` 的決策 17
 （`appendix/source-reference.md` 搬到 Research）已由 Planning 於 2026-09-11
@@ -342,7 +357,7 @@ Cross-Directory Reference 表指向它。搬到 Research 會讓 Planning 的索�
 | Repo | 角色 | 2026-09-11 的狀態 |
 |---|---|---|
 | `Pedal-Web-Service-Planning` | 規劃、規格、驗證報告 | 已完成規格層對齊：`planning/01-04` 換代、新增 `05-signal-chain-pipeline.md` 與 `06-visual-design-spec.md` |
-| `Pedal-Web-Service` | Web 產品程式碼 | 在 `feature/scope-reduction` 分支執行縮減清單 |
+| `Pedal-Web-Service` | Web 產品程式碼 | 縮減清單已合併回 `main`（`396f2c5`，PR #49，涵蓋階段 1、2、3、5a-code）。工作目錄已切回 `main` |
 | `Pedal-App` | APP 產品程式碼 | **暫停中。**不要在該 repo 執行 `/design`、`/build`、`/validate`、`/cycle`、`/issuework` |
 
 跨 repo 的規劃文件都在 `Pedal-Web-Service-Planning/planning/`，最新的交接是
