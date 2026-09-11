@@ -88,6 +88,29 @@ pickups:
     - "Tone (Bridge)"
     - "3-way pickup selector"
 
+  # 2026-09-11：這一把的問題比「檔位名稱查不到」更嚴重。
+  pickup_selector:
+    positions: null
+    position_names_status: "官方文件查無"
+    switch_count_disputed: true
+    dispute: |
+      本檔寫「3-way pickup selector」，但 ESP 品牌 Throbber 家族的官方規格**一律是 5-Way Lever PU Selector**：
+      - THROBBER-STD（拾音器正是本檔記載的 Seymour Duncan APH-1n / TB-APH-1b）→ 5-Way Lever PU Selector
+      - THROBBER（上位機種，ESP Custom Lab CL-P-H-2n/2b，¥470,000）→ 5-Way Lever PU Selector
+      - ESP Exhibition Limited Throbber CTM FL（經銷商規格，Psyclone HB）→ 5way Lever PU Selector
+      而「THROBBER-CTM」這個型號在 ESP 官網搜尋不到；站內搜尋只回傳副牌 Edwards 的 E-THROBBER-CTM
+      （拾音器是 SP90-1n + TB-59，不是 APH-1），它的規格寫「3 WAY Lever PU Selector」。
+    what_this_means: |
+      有兩種可能，本次無法判定：
+      (a) 實機確實是 3 檔（客製或個體差異），本檔的 3-way 是對的，只是查不到官方佐證；
+      (b) 本檔整筆條目寫錯型號。
+      **要看實機才能判定。在判定之前不要拿其他型號的規格覆蓋本檔。**
+    sources_checked:
+      - "espguitars.co.jp 站內搜尋 THROBBER-CTM — 只回傳 Edwards E-THROBBER-CTM"
+      - "Wayback Machine espguitars.co.jp/original/throbber/* 全部快照 — 只有 throbber.html 與 throbber_std.html"
+      - "ESP Original Series THROBBER-STD 與 THROBBER 官方規格頁"
+    do_not_guess: "Edwards E-THROBBER-CTM 是不同型號（不同拾音器），它的 3 WAY 不能直接套用到本檔"
+
 # 硬體規格
 hardware:
   bridge: null  # 請補充 (Tune-o-matic style 預估)

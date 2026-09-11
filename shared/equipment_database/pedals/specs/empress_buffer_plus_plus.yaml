@@ -33,7 +33,9 @@ technical_specs:
   inputs:
     count: 2
     type: "1/4 inch phone jack"
-    impedance: "High impedance (預估 1 MΩ)"
+    impedance:
+      in_1: "10kΩ – 1MΩ（由 in 1 loading 旋鈕可變）"
+      in_2: "1MΩ（固定）"
     features:
       - "Visual input metering (LED indicators)"
       - "Switchable input pads (處理熱訊號)"
@@ -66,38 +68,102 @@ technical_specs:
     description: "12 internal routing configurations"
 
   power:
-    voltage: "9V DC (預估)"
-    current: "TBD (需補充)"
-    type: "Standard 9V DC adapter (center negative, 預估)"
-    note: "需確認實際規格"
+    voltage: "9V DC center-negative"
+    current: "100mA minimum"
+    connector: "2.1mm barrel"
+    type: "Standard 9V DC adapter (center negative)"
+    # 2026-09-11：原本全是預估，已依官方手冊 rev04 補實。
 
   dimensions:
-    width: "TBD (需補充)"
-    depth: "TBD (需補充)"
-    height: "TBD (需補充)"
+    width: "3.5 in (88.9 mm)"
+    depth: "4.5 in (114.3 mm)"
+    height: "2 in (50.8 mm)"
     weight: "454g (1.0 lb)"
 
+  # 2026-09-11 補齊：原本 footswitch/knob/switch 三項的數量與功能全是 TBD。
+  # 依官方使用手冊 rev04 補實，並實際比對面板圖。
+  # 手冊：https://empresseffects.com/cdn/shop/files/BUPP_User_Manual_rev04_Web.pdf
   controls:
     footswitches:
-      count: "TBD (需補充, 預估 2-3 個)"
+      count: 1
+      note: "只有一個 footswitch，位於機身下緣正中央。它是多功能的，行為由 routing mode 與 fsw function 撥桿共同決定"
       functions:
-        - "Loop switching"
-        - "Boost activation"
-        - "Mode selection (預估)"
+        - "Boost 開關（Mode 1-5，fsw function 撥在 boost）"
+        - "A/B 與 A/Y 選擇（Mode 1-5）：Mode 1-3 選輸出、Mode 4 選 summed 或 independent loop return、Mode 5 選哪個 loop 餵兩個輸出"
+        - "Independent / Summed 輸出切換（Mode 6；此 mode 下 fsw function 撥桿無作用）"
+        - "Momentary loop 切換／loop sum（Mode 7-8，長按；放開回到 Loop 1）"
+        - "Instrument select 點踏切換（Mode 9-12）"
+        - "Silent Tuning（長按；Mode 7-8 的內建 footswitch 不支援）"
+        - "進入 Configuration Mode（開機時長按），點踏捲動 routing mode，長按存檔離開"
 
     knobs:
-      count: "TBD (需補充)"
-      functions:
-        - "Boost level"
-        - "Input loading"
-        - "其他控制 (需補充)"
+      count: 2
+      items:
+        - name: "boost"
+          location: "top panel, centre"
+          function: "clean boost 量，0 到 +30dB"
+          control_kind: "continuous"
+          note: "fsw function 撥在 a/b 或 a/y 且未指派外部開關給 boost 時，boost 恆為啟動；要無增益就逆時針轉到底"
+        - name: "in 1 loading"
+          location: "right side of enclosure (side-mounted)"
+          function: "調整 In 1 的輸入阻抗，順時針到底 1MΩ，逆時針降到 10kΩ，模擬長線材的高頻滾降"
+          control_kind: "continuous"
+          note: "只作用於 In 1。In 2 的阻抗固定 1MΩ"
 
     switches:
-      count: "TBD (需補充)"
-      functions:
-        - "Routing mode selection"
-        - "Input pad activation"
-        - "其他開關 (需補充)"
+      count: 6
+      layout: "頂板兩列：上排 4 個（in 1 pad、noise filter 1、in 2 pad、noise filter 2），下排 2 個（fsw function、out 2 polarity）。沒有 dip switch"
+      items:
+        - name: "in 1 pad"
+          positions: ["-6 dB", "0 dB", "-12 dB"]
+          function: "衰減 In 1 的輸入電平；中間位置不衰減"
+          control_kind: "discrete"
+        - name: "in 2 pad"
+          positions: ["-6 dB", "0 dB", "-12 dB"]
+          function: "衰減 In 2 的輸入電平；中間位置不衰減"
+          control_kind: "discrete"
+        - name: "noise filter 1"
+          positions: ["little", "none", "lots"]
+          function: "Loop 1 的 Dolby 式降噪量"
+          control_kind: "discrete"
+        - name: "noise filter 2"
+          positions: ["little", "none", "lots"]
+          function: "Loop 2 的 Dolby 式降噪量"
+          control_kind: "discrete"
+        - name: "fsw function"
+          positions: ["boost", "a/b", "a/y"]
+          function: "決定 footswitch 在 Mode 1-5 的行為；Mode 6-12 不使用。在 Configuration Mode 中改為指派外部開關（左=Boost、右=Silent Tuning、中=不指派）"
+          control_kind: "discrete"
+          source_conflict: "手冊 p.2 寫 Modes 1-6，但 p.5 與 Mode 6 專頁都寫該撥桿在 Mode 6 無作用。實際有效範圍是 Mode 1-5。兩種說法都是官方原文，此處不代為取捨，兩面都記"
+        - name: "out 2 polarity"
+          positions: ["normal", "inverted"]
+          function: "反轉 Out 2 的極性，處理雙音箱／stereo 設置的相位抵消"
+          control_kind: "discrete"
+
+    not_a_control:
+      - "routing mode 不是實體開關。12 種 mode 透過 Configuration Mode（開機長按 footswitch）選擇，原本 YAML 把它列在 switches.functions 是錯的"
+
+  # 面板實體配置（依手冊面板圖）
+  panel_layout:
+    jacks:
+      left_side: ["tuner out", "loop out 1", "loop out 2", "loop in 1", "loop in 2"]
+      right_side: ["in 1", "in 2", "out 1", "out 2 (transformer-isolated)"]
+      top_edge: ["DC in"]
+    leds:
+      mini_leds: 6
+      boost_led: 1
+      input_led_colors:
+        unlit: "無訊號"
+        green: "有訊號"
+        red: "削波"
+        orange: "input 未啟用（Mode 9-12）"
+
+  external_switch:
+    supported: true
+    type: "normally-open momentary"
+    assignable_to: ["Boost", "Silent Tuning"]
+    assigned_via: "Configuration Mode + fsw function 撥桿位置"
+    unknown: "要插哪個孔，手冊、官方產品頁、面板圖三者皆未指明，也沒說是 TS 還是 TRS"
 
 # 12 種路由模式詳細說明
 routing_modes_details:
@@ -511,14 +577,17 @@ upgrade_recommendation:
 
 # 參考資料
 sources:
+  - "官方使用手冊 rev04（第一順位來源）- https://empresseffects.com/cdn/shop/files/BUPP_User_Manual_rev04_Web.pdf"
   - "Empress Effects Official Website - https://empresseffects.com/products/buffer-plus-plus"
   - "Empress Buffer++ Support - https://empresseffects.com/blogs/support-buffer-plus-plus"
   - "No Treble Announcement - https://www.notreble.com/buzz/2025/11/29/empress-effects-announces-the-buffer-a-powerful-upgrade-for-complex-signal-chains/"
   - "Web research 2026-01-02"
 
-data_reliability: "中 - 部分規格需要補充 (dimensions, power, detailed controls)"
+data_reliability: "高 - controls、尺寸、電源、阻抗、面板配置皆已依官方使用手冊 rev04 補實（2026-09-11）"
 need_verification:
-  - "確切的尺寸規格"
-  - "電源電壓和電流需求"
-  - "Footswitch 和 knob 的詳細配置"
-  - "User manual 完整內容"
+  - "外接開關要插哪個孔：手冊、官方產品頁、面板圖三者皆未指明"
+  - "各插孔的實體規格（1/4\" TS 或 TRS）：手冊規格表未列插孔型式清單"
+  - "in 1 loading 旋鈕是否有段位或刻度標示：手冊未描述"
+  - "是否支援 9V 以外的供電：手冊只寫 9V DC / 100mA，未提也未否定其他電壓"
+  - "boost 的 bypass 方式與電路型式：手冊只寫 up to 30dB clean boost"
+  - "本檔 core_features.stereo_capability 寫「Loop 2 supports full stereo」，但手冊的插孔清單顯示每個 loop 各只有一個 out 與一個 in。這兩種說法怎麼調和，尚未查到官方明文，暫時兩面都留"

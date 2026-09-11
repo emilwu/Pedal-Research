@@ -69,6 +69,9 @@ technical_specs:
       - "Switch 4: Red channel DIST mode"
     trimpot:
       - "Treble Trimpot: 內部高頻微調"
+    jumper:
+      - "Channel order jumper: 切換兩通道的串接順序 (預設 Yellow → Red)"
+      # 同一個跳線也記在 channels_usage.stacking.order。
 
   options:
     - "Buffer bypass (+$45)"
@@ -133,7 +136,7 @@ dual_channel_strategy:
 
   stacking:
     description: "兩個通道可同時使用"
-    order: "Yellow → Red (可透過內部跳線切換)"
+    order: "Yellow → Red (可透過內部跳線切換)"  # 跳線已收進 internal_controls.jumper
 
   flexibility:
     - "可設定為兩種不同增益"

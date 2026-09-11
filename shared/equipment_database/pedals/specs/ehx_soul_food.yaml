@@ -42,6 +42,13 @@ technical_specs:
     - name: "Treble"
       function: "音色控制 (高頻 cut/boost)"
 
+  internal_controls:
+    dip_switches:
+      - name: "Bypass mode DIP switch"
+        function: "切換 True Bypass / Buffered Bypass"
+        # 同一個開關也記在 bypass.switch_location 與 buffer_function.switch_location。
+        # 依 CONTROLS_CONVENTION.md：要拆機殼才能調，所以進 internal_controls 而非 controls。
+
   special_features:
     - "Buffered/True Bypass 可切換 (內部 DIP switch)"
     - "Boosted power rails (18V internal)"
@@ -52,7 +59,7 @@ technical_specs:
     options:
       - "True Bypass"
       - "Buffered Bypass"
-    switch_location: "內部 DIP switch"
+    switch_location: "內部 DIP switch"  # 已收進上方 internal_controls
 
 # 音色特性
 tonal_characteristics:
@@ -98,7 +105,7 @@ klon_comparison:
 # Buffer 功能
 buffer_function:
   switchable: true
-  switch_location: "內部 DIP switch"
+  switch_location: "內部 DIP switch"  # 已收進 technical_specs.internal_controls
   quality: "優異"
   use_case: "適合長導線或多踏板系統"
   bypass_modes:

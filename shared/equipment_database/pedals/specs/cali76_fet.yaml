@@ -1,6 +1,10 @@
 # Origin Effects Cali76 FET Compressor
 # 效果器詳細技術資料
 # 資料來源: projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+# 2026-09-11 補充來源（第一順位）：
+#   官方 Owner's Manual V2.2 - https://origineffects.com/wp-content/uploads/2024/11/Origin-Effects-Cali76-FET-Compressor-Owners-Manual-V2-2.pdf
+#   官方 Getting Started Guide - https://origineffects.com/wp-content/uploads/2024/03/Origin-Effects-Cali76-FET-Compressor-Getting-Started-Guide-WEB.pdf
+#   官方產品頁 - https://origineffects.com/product/cali76-fet-compressor/
 
 version: 1.0
 last_updated: 2025-12-30
@@ -26,7 +30,8 @@ price:
 # 核心技術規格
 technical_specs:
   power:
-    voltage: "9V DC"
+    voltage: "9V DC, 2.1mm 中心負極"
+    current_draw: "200mA（手冊要求供應器 >200mA）"
     internal_boost: "9V→24V"
     headroom: "大量Headroom"
     battery: false
@@ -36,23 +41,45 @@ technical_specs:
     type: "FET (1176風格)"
     characteristic: "全類比 FET 壓縮"
     threshold: "固定閾值設計"
-    attack: "可調 (最快為全順時針)"
-    release: "69.5ms ~ 398ms"
-    ratio: "固定 (1176風格)"
+    attack: "0.2ms ~ 4.8ms，全順時針為最快（反向旋鈕）"
+    release: "69.5ms ~ 398ms，全順時針為最快"
+    ratio: "4:1 ~ 20:1 可調"
+    # 2026-09-11 修正：ratio 原本寫「固定 (1176風格)」，與同檔 controls 陣列
+    # 列出的 RATIO「壓縮比例選擇」自我矛盾。官方手冊 V2.2 p.7-8 明寫固定的是
+    # threshold 不是 ratio：「signals that exceed the fixed threshold」，
+    # RATIO 段則寫「ranges from a ratio of 4:1 all the way to 20:1」。
+    # threshold 那行本來就對，未動。
 
+  # 面板六旋鈕，上排 DRY / OUT / IN，下排 RATIO / ATTACK / RELEASE。
+  # 面板上沒有任何切換開關。2026-09-11 依官方手冊 V2.2 補上範圍與型態。
   controls:
     - name: "IN"
       function: "設定訊號電平 → 更多壓縮"
+      control_kind: "continuous"
     - name: "OUT"
       function: "輸出電平補償 + Boost"
+      control_kind: "continuous"
     - name: "ATTACK"
       function: "壓縮啟動速度"
+      control_kind: "continuous"
+      range: "0.2ms ~ 4.8ms"
+      direction: "全順時針 = 最快（與多數壓縮器相反）"
     - name: "RELEASE"
-      function: "壓縮恢復速度 (69.5-398ms)"
+      function: "壓縮恢復速度"
+      control_kind: "continuous"
+      range: "69.5ms ~ 398ms"
+      direction: "全順時針 = 最快"
     - name: "RATIO"
-      function: "壓縮比例選擇"
+      function: "壓縮比例，順時針增加"
+      control_kind: "continuous"
+      range: "4:1 ~ 20:1"
+      note: "這是連續範圍的兩個端點，不是 1176 錄音室機那種 4/8/12/20 四顆比例按鍵。官方面板圖顯示它與其他五個是同樣的圓形旋鈕"
+      caveat: "官方文件從未使用 continuous / stepped / detented 任一字眼。「無段」是從 min/max 措辭與範例圖指針任意角度推得的，不是官方明文"
     - name: "DRY"
       function: "乾濕混合 (平行壓縮)"
+      control_kind: "continuous"
+      unity_position: "約 2 點鐘"
+      max_boost: "全順時針 +9dB"
 
   visual_feedback:
     type: "10-LED增益衰減指示器"
@@ -61,8 +88,12 @@ technical_specs:
   bypass: "Buffered Bypass (電子切換,低雜訊)"
 
   size:
-    dimensions: "約140x76x51mm"
-    comparison: "類似Boss尺寸"
+    dimensions: "124 (L) x 64 (D) x 58 (H) mm，含旋鈕與開關"
+    weight: "553 g"
+    boxed: "135 x 90 x 85 mm / 661 g（盒裝，勿與未裝盒數值混用）"
+    # 2026-09-11 修正：原本寫「約140x76x51mm / 類似Boss尺寸」，兩者都與官方不符。
+    # 官方產品頁規格表與手冊 Appendix A 皆為 124 x 64 x 58 mm、553 g。
+    # 「類似 Boss 尺寸」一併移除：Boss compact 約 73 x 129 x 59 mm，軸向與數值都對不上。
 
 # 音色特性
 tonal_characteristics:
@@ -110,6 +141,7 @@ usage_recommendations:
       ratio: "高"
       dry: "50-80%"
       description: "增強延音(Lead/Solo)"
+      conflicts_with_official: "官方手冊 V2.2 的 RATIO 段建議「高比例配低 IN、低比例配高 IN」。本組是高 IN + 高 ratio，正好是官方說不要的組合。本檔不代為修改使用者自訂的 preset，只標註衝突"
 
     funk_rhythm:
       in: "中"
@@ -121,8 +153,8 @@ usage_recommendations:
 
 # 阻抗特性
 impedance:
-  input: "高阻抗 (適合被動/主動拾音器)"
-  output: "低阻抗"
+  input: "1 MΩ（高阻抗，適合被動/主動拾音器）"
+  output: "1 kΩ（低阻抗）"
 
 # 評價
 review_summary:

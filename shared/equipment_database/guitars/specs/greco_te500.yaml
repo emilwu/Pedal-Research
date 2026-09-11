@@ -91,6 +91,20 @@ pickups:
     - "Tone (共用)"
     - "3-way pickup selector"
 
+  # 2026-09-11：3 檔本身有原廠目錄佐證，但檔位名稱查不到。
+  pickup_selector:
+    switch_type_per_catalog: "1976 年目錄寫「3回路切替スイッチ」；1979 年目錄寫「3段切替スイッチ」"
+    positions: null
+    position_names_status: "原廠目錄查無。1970 年代 Greco 目錄的規格欄位格式本身就不含檔位說明"
+    sources_checked:
+      - "Greco 原廠 1976 年 Vol.5 目錄（April 1976）TE500N 條目 — 開關「3回路切替スイッチ」，控制「V.Tコントロール各1」，拾音器「ワイドレインジマイク×2」，¥50,000"
+      - "Greco 原廠 1979 年 Vol.10 目錄 TE500 條目 — 開關「3段切替スイッチ」，「ボリューム・コントロール×1／トーン・コントロール×1／PU-103ピックアップ×2」"
+    catalog_vs_this_guitar: |
+      兩份原廠目錄都寫 Volume×1、Tone×1（各一顆），但本檔 controls 寫 Volume (Neck) + Volume (Bridge) 兩顆。
+      本檔已記載這把琴的拾音器被改裝過（original_pickups: null）。若佈線同時被改動，
+      原廠目錄就不反映現況。**要看實機才能判定，本次不改。**
+    caveat: "這把琴拾音器已改裝（原廠為 ワイドレインジマイク／PU-103）。即使查到原廠檔位標示，也未必反映現況"
+
 # 硬體規格
 hardware:
   bridge: "Telecaster-style bridge (預估)"

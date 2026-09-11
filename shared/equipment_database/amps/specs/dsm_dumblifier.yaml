@@ -89,6 +89,11 @@ technical_specs:
         function: "開啟/關閉音箱模擬"
       - name: "Ground Lift Switch"
         function: "XLR 輸出接地提升開關"
+      - name: "Input Boost Switch"
+        function: "輸入增益提升開關"
+        location: "rear_panel"
+        # 同一個開關也記在 connectivity.inputs。
+        # 它在後面板，不在前面板，但不需拆機就能操作，所以算 controls。
 
     footswitches:
       - name: "Clean"
@@ -102,7 +107,7 @@ technical_specs:
     inputs:
       - "1/4\" Input"
       - "1/4\" Aux Input (for silent practice or backing tracks)"
-      - "Input Boost switch (rear panel)"
+      - "Input Boost switch (rear panel)"  # 已收進上方 controls.global_controls
     outputs:
       - "Dual 1/4\" TRS outputs (stereo, cab sim bypassable per channel)"
       - "Dual XLR DI outputs with cab sim"

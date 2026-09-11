@@ -42,9 +42,13 @@ technical_specs:
   delay_modules:
     count: 2
     routing_options:
-      - "Parallel (並聯)"
-      - "Series (串聯)"
-    description: "雙延遲模組可配置為並聯或串聯"
+      - "STEREO"
+      - "SERIES"
+    routing_switch: "長按 MODE switch 約 2 秒切換"
+    topology: "STEREO = 兩個延遲單元內部並聯；SERIES = 內部串聯"
+    # 2026-09-11 修正：原本寫 "Parallel (並聯)" / "Series (串聯)"。
+    # 面板實際絲印是 STEREO / SERIES。「並聯」是拓樸描述，不是面板標籤。
+    description: "雙延遲模組可配置為 STEREO（內部並聯）或 SERIES（內部串聯）"
 
   signal_path:
     dry: "全類比"
@@ -98,16 +102,151 @@ tonal_characteristics:
     soft_clipping: "可為延遲訊號添加諧波內容"
 
 # 控制參數
+# 2026-09-11 補齊：原本這塊自陳「詳細控制參數待手冊確認」，內容是一串模糊字串。
+# 依官方 Owner's Manual Ver 1.3（EN 與 JP 兩版交叉比對）補實。
+# 手冊：https://www.freethetone.com/upload/en/file/manual/effects/ff1y/FF-1Y_Manual_en.pdf
 controls:
-  # 詳細控制參數待手冊確認
-  main_controls:
-    - "Delay Time (×2 for dual delays)"
-    - "Feedback (×2)"
-    - "Mix"
-    - "EQ (3-band)"
-    - "Modulation controls"
-    - "Routing select"
-    - "Soft Clipping control"
+  # 「×2」是什麼意思：不是兩顆實體旋鈕
+  dual_unit_editing:
+    answer: "面板上只有一組控制。A/B 兩個延遲單元靠 A-DLY-B SEL 開關選擇要編輯哪一個（可選 A、B 或 A+B）"
+    parameter_storage: "多數參數的值 A/B 各自獨立儲存，但共用同一組面板控制來編輯"
+    no_dedicated_knobs: "Delay Time 沒有專屬實體旋鈕。Feedback 有一顆（FEEDBACK/EXT2，預設指派為 Feedback），它作用在 A-DLY-B SEL 當下選中的單元"
+    manual_quote: "Press this switch to select the delay unit (A, B, or A+B) whose setting is to be changed. When the LED is not lit, you cannot change the setting (except for some functions)."
+
+  knobs:
+    count: 5   # 4 個電位器 + 1 個旋轉編碼器
+    items:
+      - name: "MIX/EXT1"
+        default_assignment: "Mix"
+        assignable: true
+        note: "指派作用於 A-DLY-B SEL 選中的單元，且每個 preset 各自儲存"
+      - name: "FEEDBACK/EXT2"
+        default_assignment: "Feedback"
+        assignable: true
+        note: "同上"
+      - name: "SOFT CLIPPING LEVEL"
+        control_kind: "continuous"
+        note: "類比旋鈕，不進 preset"
+      - name: "SOFT CLIPPING GAIN"
+        control_kind: "continuous"
+        note: "類比旋鈕，不進 preset"
+      - name: "PARAMETER Encoder"
+        control_kind: "rotary_encoder"
+        function: "轉動改值，按下確認（ENTER）。邊按邊轉會以 10 階為單位加速"
+
+  tact_switches:
+    count: 14
+    items: ["PAN", "FUNC", "MOD", "OUTPUT", "EQ", "DLY", "A-DLY-B SEL", "A-DLY-B TAP SEL",
+            "PRESET", "SAVE", "SOFT CLIPPING ON", "STANDBY", "MODE", "DISP"]
+
+  footswitches:
+    count: 2
+    items: ["ON/OFF", "PRESET SELECT/TAP"]
+
+  other:
+    - name: "INPUT LEVEL slide switch"
+      location: "side"
+    - name: "MIDI IN/OUT switch"
+      location: "rear"
+
+  panel_count_note: "5 旋鈕 / 14 tact switch / 2 footswitch 是逐一清點手冊面板圖得到的。手冊沒有明文給總數"
+
+# 參數（透過 tact switch 選段、PARAMETER encoder 改值）
+parameters:
+  # 3-band EQ —— 原本只寫 "EQ (3-band)"，沒有旋鈕名稱
+  eq:
+    access: "EQ switch 循環切換 TREB / MID / BASS 三顆 LED，再用 PARAMETER encoder 改值"
+    bands:
+      - name: "TREBLE"
+        panel_label: "TREB"
+        frequency_points: ["1.5k", "2.0k", "3.5k"]
+        frequency_default: "2.0k"
+      - name: "MIDDLE"
+        panel_label: "MID"
+        frequency_points: ["500", "750", "1.0k"]
+        frequency_default: "750"
+      - name: "BASS"
+        panel_label: "BASS"
+        frequency_points: ["100", "200", "300"]
+        frequency_default: "200"
+    frequency_unit: "手冊參數表只印數字，沒有標單位。推定為 Hz，但屬推論，不寫成事實"
+    frequency_selection: "長按 EQ switch 約 2 秒進入，再用 EQ switch 選頻段、PARAMETER encoder 選頻率點。頻率點是全域設定，不隨 preset 儲存"
+    gain_range: "顯示值 -63 – Off – +63，等於 -15.0 dB 到 +15.0 dB，預設 Off"
+    naming_conflict: "手冊正文與參數表用 TREBLE / MIDDLE / BASS，同一份手冊的 Preset Parameter Sheet 卻用 EQ LOW / EQ FREQ LOW。EN 與 JP 版皆有此分歧，兩種寫法都是官方原文"
+    series_mode_limit: "Series 模式下 EQ 只作用於延遲單元 B；Stereo 模式下 A/B 各自獨立"
+
+  delay:
+    access: "DLY switch 循環切換 D.TIME / FB / TONE 三顆 LED"
+    delay_time:
+      range_parameter_table: "1 ms – 10.0 s"
+      range_body_text: "1 msec – 9,999 msec（約 10 秒）"
+      conflict_note: "兩個上限都是官方原文，手冊未說明何者為準。不代為取捨"
+      default: "1.00 sec"
+      storage: "A/B 各自儲存"
+    feedback:
+      range: "0 – 127"
+      default: 64
+    tone:
+      range: "-63 – Off – +63"
+      default: "Off"
+      storage: "A/B 各自儲存"
+      unknown: "手冊未說明它是 LPF、HPF 還是 tilt EQ，也沒給轉折頻率"
+
+  modulation:
+    access: "MOD switch 循環切換 DEPTH / RATE / RFPM 三顆 LED"
+    depth: { range: "0 – 99", default: 0, storage: "A/B 各自" }
+    rate:
+      range: "0 – 127"
+      default: 0
+      storage: "A/B 各自"
+      unknown: "只有 0-127 的相對值，官方未給 Hz 或 BPM"
+    rfpm:
+      values: ["On (r.On)", "Off (r.oF)"]
+      default: "On"
+      storage: "A/B 共用"
+      definition: "訊號跨過某個衰減位準時，相位隨機變化。Stereo 模式下效果最好"
+
+  soft_clipping:
+    knobs: ["LEVEL", "GAIN"]
+    switch: "SOFT CLIPPING ON"
+    preset_storage: "ON/OFF 進 preset（Stereo 模式只作用於 A、Series 模式只作用於 B）；LEVEL 與 GAIN 兩顆旋鈕不進 preset"
+    stereo_limit: "Stereo 模式下只作用於延遲單元 A。LEVEL 轉到最小（0）時沒有延遲聲輸出"
+    unknown: "LEVEL 與 GAIN 沒有數值範圍。官方參數表這兩列的範圍與初始值欄皆為「-」"
+
+  pan:
+    access: "PAN switch"
+    depth: { range: "0 – 99", default: 0 }
+    speed: { range: "0 – 127", default: 0 }
+    dual_role: "Stereo 模式下作用為 Panning，Series 模式下作用為 Tremolo"
+    series_mode_limit: "Series 模式下只作用於延遲單元 B"
+
+  func:
+    access: "FUNC switch"
+    subdivision:
+      values: 10
+      default: "Quarter note"
+      storage: "A/B 各自"
+      spelling_note: "第六個值在參數表印 Dotted Eighth note (08)，正文 p.12 印 (08.)"
+    trail:
+      values: ["On", "Off"]
+      storage: "A/B 共用"
+      default_conflict: "手冊自相矛盾：參數表 p.19 寫 Initial Value = Off，正文 p.12 寫「When \"On\" is displayed, the delay sound is retained (default)」。JP 版也有同一組矛盾。兩面都記，不取捨"
+
+  output:
+    mix_level: { range: "0 – 100", default: 90 }
+    output_level: { range: "-63 – 0", default: 0, storage: "A/B 共用" }
+    dry: { values: ["On", "Off"], default: "On" }
+    phase_invert:
+      access: "長按 OUTPUT switch 約 2 秒"
+      values: ["On (I.On) = 反相", "Off (I.oF) = 同相"]
+      default: "Off"
+      storage: "全域設定，不隨 preset 儲存"
+
+# 參數命名碰撞（資料庫層級要注意）
+parameter_name_collisions:
+  - "DEPTH 同時是 MODULATION 與 PAN 底下的參數"
+  - "RATE（MOD）與 SPEED（PAN）共用面板 LED 矩陣位置"
+  - "若以面板標籤當唯一鍵，上述兩組會互相覆蓋"
 
 # 特殊功能
 special_features:
@@ -137,9 +276,9 @@ connectivity:
     b_out: "1/4\" Phone Jack"
     note: "雙輸入/雙輸出配置"
 
-  ext_control: "1/4\" Phone Jack (EXT)"
+  ext_control: "1/4\" Phone Jack (EXT)；可接表情踏板（10kΩ–50kΩ）或 momentary switch，內建校正程序"
 
-  midi: "IN (DIN 5-pin)"
+  midi: "1 x DIN 5-pin，用機身後方的 MIDI IN/OUT 開關切換方向"
 
   impedance:
     input: "min. 500kΩ (高阻抗)"
@@ -288,9 +427,22 @@ comparison_with_ft1y:
 
 # 參考資料來源
 sources:
+  - "官方 Owner's Manual Ver 1.3 (EN)（第一順位）- https://www.freethetone.com/upload/en/file/manual/effects/ff1y/FF-1Y_Manual_en.pdf"
+  - "官方 Owner's Manual Ver 1.3 (JP) - 交叉比對用"
   - "Free the Tone 官方網站: https://www.freethetone.com/en/products/detail43/"
   - "產品規格頁面"
 
 data_collected: 2026-01-10
-data_reliability: "高 (官方資料)"
-data_note: "部分詳細參數 (如延遲時間範圍) 待手冊確認"
+data_updated: 2026-09-11
+data_reliability: "高 (官方手冊 Ver 1.3)"
+data_note: |
+  2026-09-11 依官方手冊補齊 controls 區塊。原本的「待手冊確認」已解除。
+  仍未解決的項目：
+  - EQ 頻率點的單位未在手冊印出（推定 Hz，不寫成事實）
+  - 延遲時間上限手冊內部有兩種寫法（參數表 10.0 s / 正文 9,999 msec），兩面都記
+  - TRAIL 預設值手冊內部矛盾（參數表 Off / 正文 On），兩面都記
+  - Soft Clipping 的 GAIN 與 LEVEL 沒有數值範圍
+  - TONE 參數的濾波器型態與轉折頻率未說明
+  - MODULATION 的 RATE 沒有 Hz 或 BPM 對照
+  - release_year 與 msrp 仍為 null（官方頁與手冊皆未記載）
+  - 面板控制件總數是清點面板圖得到的，建議日後以實機再確認

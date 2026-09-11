@@ -119,7 +119,9 @@ controls:
   - name: "FREEZE-PITCH/FREEZE-VOLUME"
     function: "凍結音高/音量"
 
-  note: "每個旋鈕都有第二功能 (透過Mode切換)"
+# 原本這行是 controls: 序列底下的 note: mapping key。
+# 序列與 mapping 混在同一層，YAML 無法解析，改成獨立的頂層鍵。
+controls_note: "每個旋鈕都有第二功能 (透過Mode切換)"
 
 # 連接規格
 connectivity:

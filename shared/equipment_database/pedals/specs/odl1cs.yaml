@@ -30,19 +30,71 @@ technical_specs:
     external: "DC9V"
     internal_boost: "10-19V variable (CS版本) / 固定14.5V (Standard)"
     current: "95mA (需200mA以上供電能力)"
-    note: "不支援電池 (高電流消耗)"
+    battery: "9V 鹼性電池 (006P)，連續使用約 3 小時；錳電池不可用"
+    battery_designation: "EN 手冊規格表印 6F22，JP 手冊印 6LF22（6LF22 才是鹼性的正確編號）"
+    # 2026-09-11 修正：原本寫「不支援電池 (高電流消耗)」，與官方 CS 手冊 ver 1.2 衝突。
+    # 手冊規格表明列「006P (9V) 6F22 battery (alkaline type)」與約 3 小時續航。
+    # 注意：本檔 related_models.odl_1a_cs 的「不支援電池」是對的，那是另一個型號
+    # （ODL-1A-CS 耗流 120mA，官方明文不支援電池）。不要一起改。
 
+  # 2026-09-11 補齊：七個通道控制原本只有名稱、沒有任何 function，
+  # PUSH 與 HI CUT 連型態都判斷不出來。以下依官方 CS 手冊 ver 1.2 補上。
+  # 手冊：https://www.freethetone.com/upload/file/manual/customshop/odl1cs/Manual_ODL_1_CS_ver_1_2_ENG.pdf
   dual_channel:
     normal:
       circuit: "無 clipping diodes/LEDs"
-      controls: ["NOR LEVEL", "TONE", "GAIN"]
+      controls:
+        - name: "NOR LEVEL"
+          function: "調整 NORMAL 通道的輸出位準"
+          control_kind: "continuous"
+          panel_form: "knob"
+        - name: "TONE"
+          function: "調整 NORMAL 通道電路的音色；只有在 EQ ON/GLASS 撥到 EQ ON 時才作用"
+          control_kind: "continuous"
+          panel_form: "knob"
+        - name: "GAIN"
+          function: "調整 NORMAL 通道電路的增益"
+          control_kind: "continuous"
+          panel_form: "knob"
       switches: ["EQ ON/GLASS", "ROCK/JAZZ"]
       features: "豐富諧波,即使在 clean 設定下"
     drive:
       circuit: "Dedicated drive circuit module"
-      controls: ["DRV LEVEL", "DRIVE", "PUSH", "HI CUT"]
+      controls:
+        - name: "DRV LEVEL"
+          function: "調整 DRIVE 通道的輸出位準"
+          control_kind: "continuous"
+          panel_form: "trim"   # 前面板小旋鈕，不是內部微調
+        - name: "DRIVE"
+          function: "調整 Drive 電路的增益"
+          control_kind: "continuous"
+          panel_form: "knob"
+        - name: "PUSH"
+          function: "設定從 Drive 電路送進 NORMAL 通道電路的訊號位準；順時針增加失真量與推進感。只在選擇 DRIVE 通道時作用"
+          control_kind: "continuous"
+          panel_form: "knob"   # 大旋鈕。不是按鈕，也不是 push-pull
+          note: "官方產品頁描述它控制的是感知音壓感，與 DRV LEVEL 的實際輸出音量是不同維度"
+        - name: "HI CUT"
+          function: "衰減 Drive 電路的高頻"
+          control_kind: "continuous"
+          panel_form: "trim"   # 前面板小旋鈕，不是撥桿開關
+          naming: "面板絲印 HI CUT；手冊內文稱 HIGH CUT trim；規格表稱 HI-CUT"
       position: "在 Normal Channel 之前"
       features: "Custom module (CS版本更敏感)"
+
+  # 前面板實體配置（依手冊 p.4 面板圖）
+  panel_layout:
+    large_knobs: ["NOR LEVEL", "TONE", "GAIN", "PUSH", "DRIVE"]
+    small_trims: ["DRV LEVEL", "HI CUT"]
+    mini_toggles: ["EQ ON/GLASS", "ROCK/JAZZ"]
+    footswitches: 2
+    note: "七個通道控制全部是連續型（旋鈕或 trim），沒有任何一個是離散檔位或開關"
+
+  # 官方未公布的項目，不要猜
+  undocumented:
+    - "七個控制全部沒有數值範圍：TONE 與 HI CUT 的轉折頻率、GAIN 與 DRIVE 的增益量、NOR/DRV LEVEL 的位準量、PUSH 的位準範圍，官方皆未公布"
+    - "DRV LEVEL 與 HI CUT 兩個 trim 是手指可轉還是需要螺絲起子，官方文件未說明"
+    - "PUSH 在 NORMAL 通道下是否完全無作用：手冊只寫「DRIVE 通道選擇時作用」，未明文否定 NORMAL 通道的行為"
 
   switches:
     eq_glass:
@@ -56,13 +108,24 @@ technical_specs:
         function: "增加 gain, 略削減低頻 (避免 amp 過載), 適合 Rock 音色塑造"
       - name: "JAZZ"
         function: "降低整體 gain, 強調低頻豐富度, 適合 Jazz 音色"
+      - note: "ROCK/JAZZ 是 NORMAL 通道的功能，但在 DRIVE 通道啟動時效果更明顯（官方手冊）"
 
   voltage_switching:
     dc9v: "直接從 9V 供電"
+    switch_naming:
+      custom_shop: "DC9V / VARI (VARIABLE) switch，搭配 Voltage Control trim"
+      standard: "DC9V / Int.PS switch，固定 14.5VDC，無 trim"
     intps_vari:
       standard: "固定 14.5V"
       custom_shop: "10-19V 可調"
       effect: "改變 clipping point,劇烈改變音色"
+    voltage_control_trim:
+      location: "rear_panel"   # 後面板，不拆機就能調，依 CONTROLS_CONVENTION.md 屬 controls
+      silkscreen: "DC10~19V"
+      control_kind: "continuous"
+      range: "逆時針到底 10VDC / 12 點鐘約 14VDC / 順時針到底 19VDC"
+      active_when: "DC9V/VARI 開關撥在 VARI 時才作用"
+      note: "這是外部可及的 trim，不是內部 trimpot"
 
   hts_circuit:
     full_name: "Holistic Tonal Solution"
@@ -175,6 +238,8 @@ sources:
   - "產品手冊"
   - "Yuki Hayashi 設計資料"
   - "Premier Guitar"
+  - "官方 CS 手冊 ver 1.2 (EN): https://www.freethetone.com/upload/file/manual/customshop/odl1cs/Manual_ODL_1_CS_ver_1_2_ENG.pdf"
+  - "官方標準版 ODL-1 手冊 ver 1.1 (EN): https://www.freethetone.com/upload/file/en/manual/effects/ODL_1/Manual_ODL_1_ver_1_1_ENG.pdf"
 
 data_collected: 2025-12-13
 data_reliability: "高 (多方驗證)"

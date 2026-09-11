@@ -1,6 +1,7 @@
 # 設備可調參數詞彙
 
 **產生日期**：2026-09-11
+**最後更新**：2026-09-11（補完七項資料缺口後回頭校正，見文末「2026-09-11 的缺口補齊結果」）
 **資料來源**：`shared/equipment_database/` 底下 26 份 spec YAML（效果器 17、吉他 4、音箱 3、配件 2）
 **用途**：供 Pedal-Web-Service-Planning 設計 `UserEquipment.settings` 與 `SignalChainItem.settings` 的 Json 結構時作為依據
 
@@ -56,7 +57,7 @@
 | Bass（低頻） | 3 | continuous | `Bass` | 文字描述「低頻 cut/boost」 |
 | Attack（壓縮啟動速度） | 2 | continuous | `ATTACK` | 未標範圍 |
 | Release（壓縮恢復速度） | 2 | continuous | `RELEASE` | `cali76_fet` 標 69.5-398ms；`empress_mkii` 標 50ms-1s |
-| Ratio（壓縮比） | 2 | discrete | `RATIO` | `empress_mkii` 列出 2:1／4:1／10:1；**`cali76_fet` 宣告是選擇但沒給檔位** |
+| Ratio（壓縮比） | 2 | **mixed** | `RATIO` | `empress_mkii` 是離散，列出 2:1／4:1／10:1；`cali76_fet` 是**連續**旋鈕，4:1 ~ 20:1（2026-09-11 依官方手冊 V2.2 查實。原本記為「宣告是選擇但沒給檔位」，那個判讀本身就是錯的） |
 | Input Gain／Threshold | 2 | continuous | `IN` `INPUT` | 未標範圍 |
 | Decay（殘響／延遲長度） | 2 | unknown | `DECAY` `DECAY/PRE-D` | 文字描述「長至無限」，無刻度 |
 | Pre-Delay（預延遲） | 2 | continuous | `X Control` `PRE-D` | 文字描述「低至中」，**未標時間單位** |
@@ -68,9 +69,18 @@
 
 離散或開關類 — `SIDECHAIN HPF`（120Hz／OFF／240Hz）、`Bright Cut Toggle`、`6L6/6V6 Mode Toggle`、`Mellow/Drive Mode Toggle`、`EQ ON / GLASS Switch`、`ROCK / JAZZ Switch`、`PRESET Switch`（1／2／3／4）、`ON/OFF Switch`
 
-連續類 — `Dampen`、`Rate/Speed`、`Diffusion`、`Clean Control`、`Clip Blender`、`Focus`、`Bite`、`Voice`、`Reverb Level`、`Delay Time`、`Feedback`、`EQ (3-band)`、`PARAMETER Encoder`
+連續類 — `Dampen`、`Rate/Speed`、`Diffusion`、`Clean Control`、`Clip Blender`、`Focus`、`Bite`、`Voice`、`Reverb Level`、`Delay Time`、`Feedback`、`PARAMETER Encoder`
 
-型態不明或資料不全 — `PUSH`、`HI CUT`（`odl1cs` drive channel，兩者皆無任何功能說明）、`Modulation controls`、`Soft Clipping control`、`SAVE Switch`、`Freeze`、`Cursor Keys`、`empress_buffer_plus_plus` 的整組 footswitches／knobs／switches（數量與功能皆為 TBD）
+`ff1y` 的 `EQ (3-band)` 於 2026-09-11 查實為 **TREBLE（面板絲印 TREB）／MIDDLE（MID）／BASS** 三段。每段各有三個可選中心頻率點，增益 -15.0 dB 到 +15.0 dB。三段都沒有專屬旋鈕，要用 EQ 開關選段、PARAMETER encoder 改值。
+
+型態不明或資料不全 — `SAVE Switch`、`Freeze`、`Cursor Keys`
+
+**2026-09-11 已解決**（原本列在這一段，現已依官方手冊補實）：
+
+- `odl1cs` 的 `PUSH` 與 `HI CUT` — 兩者皆為**連續**控制。PUSH 是大旋鈕，不是按鈕也不是 push-pull；HI CUT 是前面板小 trim，不是撥桿
+- `empress_buffer_plus_plus` — 1 個 footswitch、2 個旋鈕、6 個撥桿，全部有名稱與功能
+- `ff1y` 的 `Modulation controls` — 實為 DEPTH／RATE／RFPM 三個參數
+- `ff1y` 的 `Soft Clipping control` — 實為 LEVEL 與 GAIN 兩顆旋鈕，加一個 SOFT CLIPPING ON 開關
 
 ### 吉他（4 台）
 
@@ -78,7 +88,7 @@
 |---|---|---|---|---|
 | Volume | 7 個實例／4 台 | **unknown** | `Volume (Neck)` `Volume (Bridge)` `Volume (共用)` | 純名稱字串，**四份檔案都沒寫 controlKind、刻度、taper** |
 | Tone | 6 個實例／4 台 | **unknown** | `Tone (Neck)` `Tone (Bridge)` `Tone (共用)` | 同上 |
-| Pickup Selector Switch | 4 | discrete | `3-way pickup selector` | **四份檔案都沒寫出三個檔位的實際名稱** |
+| Pickup Selector Switch | 4 | discrete | `3-way pickup selector` | 2026-09-11 查證：**四把裡只有 `fender_tokyo_thinline` 查到官方檔位名稱**（Position 1 Bridge／2 Bridge+Neck／3 Neck）。其餘三把的官方文件一律不命名檔位，各檔已標註查過哪些來源。`esp_throbber_ctm` 另有更嚴重的問題，見下方 |
 
 四份檔案都完整讀過，`pickups.controls` 之外沒有其他使用者可調項目（沒有 coil-split、push-pull、主動 EQ）。
 
@@ -145,7 +155,8 @@
 連續旋鈕、有限檔位的離散開關、純二態開關三種混在同一份 controls 清單裡，來源檔案沒有統一的欄位標示方式。
 
 - `shared/equipment_database/pedals/specs/empress_mkii.yaml:52-56` — RATIO 與 SIDECHAIN HPF 明確列出檔位
-- `shared/equipment_database/pedals/specs/cali76_fet.yaml:52` — 同概念的 RATIO **只有「壓縮比例選擇」文字，沒有檔位列表**
+- ~~`shared/equipment_database/pedals/specs/cali76_fet.yaml:52` — 同概念的 RATIO 只有「壓縮比例選擇」文字，沒有檔位列表~~
+  **2026-09-11 解決**：它根本不是離散控制。官方手冊 V2.2 確認為連續旋鈕（4:1 ~ 20:1）。當時判定它「宣告是選擇」本身就是誤判——`function` 欄的「選擇」兩字不表示離散。
 - `shared/equipment_database/pedals/specs/morning_glory.yaml:37` — Bright Cut Toggle 的檔位不在 control 條目裡，要到另一個 `bright_cut` 區塊（`:66-77`）才找得到 `left_off.setting: "關閉"` 與 `right_on.setting: "開啟"`
 
 **忽略的話**：假設所有 discrete 控制都會在同一個地方寫出完整選項，會漏掉 `cali76_fet` 這種「宣告是離散但沒給檔位」與 `morning_glory` 這種「選項要去別的區塊反推」。兩者外觀相同但可信度完全不同。
@@ -243,19 +254,86 @@
 
 ---
 
-## Research 這邊自己該補的資料缺口
+## 2026-09-11 的缺口補齊結果
 
-以下是本 repo 的待辦，不是 Planning 的：
+原本列了七項缺口。以下是每一項的處理結果。
 
-1. `empress_buffer_plus_plus` 的 footswitches／knobs／switches 數量與功能全是 TBD，需要查手冊補齊
-2. `odl1cs` 的 7 個通道控制沒有任何功能說明，`PUSH` 與 `HI CUT` 功能不明
-3. 四把吉他的 pickup selector 都沒寫出三個檔位的實際名稱
-4. `cali76_fet` 的 RATIO 宣告是離散但沒給檔位
-5. `ff1y` 的 EQ (3-band) 未列出個別旋鈕名稱；Delay Time／Feedback 標了「×2」但沒說是否為 A/B 兩顆獨立旋鈕；該檔的 `data_note` 已自陳部分細節待手冊確認
-6. `roland_jc22` 的 REVERB 旋鈕與 `dsm_dumblifier` 的 Input Boost switch 應該收進各自的 controls 區塊
-7. 「controls 是否包含內部微調項」這條標準應該在資料庫層級明文定義，目前只是逐檔的隱性假設
+| # | 缺口 | 結果 |
+|---|---|---|
+| 1 | `empress_buffer_plus_plus` 的 footswitches／knobs／switches 數量與功能全是 TBD | **已補齊**（官方手冊 rev04） |
+| 2 | `odl1cs` 的 7 個通道控制沒有功能說明，`PUSH` 與 `HI CUT` 功能不明 | **已補齊**（官方 CS 手冊 ver 1.2） |
+| 3 | 四把吉他的 pickup selector 都沒寫出三個檔位的實際名稱 | **一把補齊、三把確認查不到** |
+| 4 | `cali76_fet` 的 RATIO 宣告是離散但沒給檔位 | **已補齊**，而且原判讀有誤（是連續不是離散） |
+| 5 | `ff1y` 的 EQ (3-band) 未列出個別旋鈕名稱；Delay Time／Feedback 的「×2」意義不明 | **已補齊**（官方手冊 Ver 1.3） |
+| 6 | `roland_jc22` 的 REVERB 與 `dsm_dumblifier` 的 Input Boost 應收進 controls 區塊 | **已收進** |
+| 7 | 「controls 是否包含內部微調項」的標準應在資料庫層級明文定義 | **已定義**，見 `CONTROLS_CONVENTION.md` |
 
----
+### 缺口 3 為什麼只補了一把
+
+四把琴查過官方產品頁、原廠目錄與官方手冊。結果是：
+
+- `fender_tokyo_thinline` — Fender 官方規格表明列三個檔位名稱。**已補進該檔**
+- `esp_eclipse_ctm` — ESP 從產品頁到 20 頁的 OWNER'S MANUAL 都只標開關型態（Toggle PU Selector），全書不命名檔位
+- `esp_throbber_ctm` — 同上，而且這個型號在 ESP 官網搜尋不到
+- `greco_te500` — 1976 與 1979 兩份原廠目錄都只寫「3回路切替スイッチ」「3段切替スイッチ」
+
+三把查不到的已在各自的 spec YAML 標成 `positions: null`，並列出**查過哪些來源**。那是查證結果，不是還沒查。**不要用「雙 humbucker 的 3-way 就是 Neck/Both/Bridge」這種常識推論填空。**
+
+## 需要看實機才能判定的三處衝突
+
+查證過程中發現三處官方規格與本庫記載不符。三處都可能是「實機被改裝過」而非「資料寫錯」，所以**本次一律不改，只標註**。
+
+### 1. `esp_throbber_ctm` 的 3-way vs 5-way（最嚴重）
+
+本庫寫 3-way。但 ESP 品牌 Throbber 家族的官方規格**一律是 5-Way Lever PU Selector**——包含拾音器與本檔完全相符的 THROBBER-STD（Seymour Duncan APH-1n／TB-APH-1b）。
+
+兩種可能：實機確實是 3 檔（客製或個體差異），或者整筆條目寫錯型號。詳見 `guitars/specs/esp_throbber_ctm.yaml` 的 `pickup_selector.dispute`。
+
+### 2. `esp_eclipse_ctm` 的 Tone 數量
+
+本庫 controls 列 `Tone (Neck)` 與 `Tone (Bridge)` 兩顆。ESP 官方（日本站與美國站）寫的是 **Master Tone 一顆**。
+
+這件事會連帶影響上面吉他表的「作用範圍在同一把琴內不一致」那張對照表——該表把本琴的 Tone 標為 per-pickup，依據就是本庫。
+
+### 3. `fender_tokyo_thinline` 的拾音器
+
+三方不一致：
+
+| 來源 | 說法 |
+|---|---|
+| Fender 官方規格表 | Seymour Duncan SP90-1 / SP90-1N Vintage P90 |
+| 本庫 spec YAML | 「Seymour Duncan SP90-1 Set (或 Lollar DC-90 Set)」 |
+| `projects/2025-v3-signal-chain/inventory/guitars.yaml:135-138` | **Momose VT-1 single-coil** |
+
+inventory 記的是現況、spec 記的是原廠規格——若拾音器被換過，兩者可以同時正確。但也可能是 inventory 記錯。
+
+## 官方文件自己矛盾、兩面都要記的地方
+
+以下每一組的兩種說法都是官方原文。本庫不代為取捨，兩面都記。
+
+| 設備 | 矛盾 |
+|---|---|
+| `ff1y` | 延遲時間上限：參數表 10.0 s vs 正文 9,999 msec |
+| `ff1y` | TRAIL 預設值：參數表 Off vs 正文「On (default)」 |
+| `ff1y` | EQ 低頻段命名：正文與參數表用 BASS，Preset Parameter Sheet 用 EQ LOW |
+| `empress_buffer_plus_plus` | fsw function 撥桿的有效範圍：手冊 p.2 寫 Modes 1-6，p.5 與 Mode 6 專頁寫該撥桿在 Mode 6 無作用 |
+| `odl1cs` | 電池型號：EN 規格表印 6F22（錳鋅編號），JP 印 6LF22（鹼性編號） |
+
+## 補齊後仍然查不到的項目
+
+這些是官方從未公布的，不是還沒查。各設備的 spec YAML 都有 `unknown` 或 `need_verification` 欄位記載：
+
+- `odl1cs` — 七個控制**全部沒有數值範圍**（轉折頻率、增益量、位準量皆未公布）
+- `empress_buffer_plus_plus` — 外接開關要插哪個孔，手冊、產品頁、面板圖三者皆無
+- `cali76_fet` — 官方從未使用 continuous／stepped／detented 任一字眼。「RATIO 無段」是從 min/max 措辭推得的合理推論，不是引文
+- `ff1y` — EQ 頻率點沒標單位（推定 Hz）；MODULATION 的 RATE 沒有 Hz 或 BPM 對照；TONE 的濾波器型態未說明
+- 四把吉他 — 都沒有任何官方文件提到面板上印有檔位字樣
+
+## 順帶修正的兩處
+
+1. **`odl1cs` 的電池支援**：原本寫「不支援電池 (高電流消耗)」，官方 CS 手冊明寫可用 9V 鹼性電池約 3 小時。已改。
+   **注意**：同檔 `related_models.odl_1a_cs` 的「不支援電池」是**對的**（ODL-1A-CS 耗流 120mA，官方明文不支援），不要一起改。
+2. **`cali76_fet` 的尺寸**：原本寫「約140x76x51mm / 類似Boss尺寸」，官方為 124 x 64 x 58 mm、553 g。已改，並移除 Boss 尺寸比喻（Boss compact 約 73 x 129 x 59 mm，軸向與數值都對不上）。
 
 ## 抽取過程中修正的三處
 

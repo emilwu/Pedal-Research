@@ -63,6 +63,12 @@ controls:
       range: "0-10"
       function: "Chorus depth control"
 
+  reverb:
+    - name: "REVERB"
+      function: "內建 reverb 音量控制"
+      # 同一顆旋鈕也記在 built_in_effects.reverb.control。
+      # 範圍未知：來源資料沒有給刻度，不補 range 欄位。
+
   switches:
     - name: "BRIGHT"
       function: "High-frequency boost"
@@ -186,7 +192,7 @@ built_in_effects:
 
   reverb:
     type: "Built-in reverb"
-    control: "REVERB knob"
+    control: "REVERB knob"  # 已收進上方 controls.reverb 區塊
     note: "內建 reverb 效果"
 
 # 音色特性
