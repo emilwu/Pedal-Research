@@ -78,6 +78,32 @@ done
 
 四個 md5 應該相同。不同就表示有人改了沒同步，或某個 repo 還沒 commit。
 
+**注意要比 `main`，不要比工作目錄。**2026-09-11 就發生過一次誤判：
+有人拿 Pedal-Web-Service 工作目錄的 md5 來比對，但它當時在 feature branch 上，
+該分支早於驗證器的修正，所以值不同——它的 `main` 其實是同步的。
+
+### 同步這支腳本的規範
+
+它會在每次 commit 執行，覆蓋別人的副本要謹慎。2026-09-11 定下的做法：
+
+1. **不要直接寫進別的 repo 的工作目錄。**把取檔指令給對方，由對方決定何時套。
+   對方可能正在那個工作目錄上工作。
+2. **套用前先確認程式邏輯沒變。**去掉模組 docstring 後比對 AST：
+
+   ```bash
+   python3 -c "
+   import ast,sys
+   def norm(p):
+       t=ast.parse(open(p).read())
+       if t.body and isinstance(t.body[0],ast.Expr) and isinstance(t.body[0].value,ast.Constant):
+           t.body=t.body[1:]
+       return ast.dump(t)
+   print('IDENTICAL' if norm(sys.argv[1])==norm(sys.argv[2]) else 'LOGIC DIFFERS')
+   " 舊檔 新檔
+   ```
+
+   相同就表示只改了註解，可以安心覆蓋。不同就要逐行看過再決定。
+
 **2026-09-11 的已知落差**：本檔的 docstring（已知限制、誤判來源那幾段）
 只同步到 Pedal-Research 與 Pedal-App。Pedal-Web-Service-Planning 與
 Pedal-Web-Service 兩份還是舊 docstring，程式邏輯相同、只差註解。
@@ -175,10 +201,21 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 
 ### 跨 repo 待辦
 
+**目前沒有等 Research 動手的跨 repo 待辦。**
+
 `Pedal-Web-Service-Planning/planning/07-scope-reduction-2026-09.md` 的決策 17
-（`appendix/source-reference.md` 搬到 Research）**仍未執行**。2026-09-10 的處理是
-把該檔 10 處路徑加上 `Pedal-Research/` 前綴讓它可被驗證，檔案本身留在 Planning。
-要不要真的搬，是 Planning 的決策。
+（`appendix/source-reference.md` 搬到 Research）已由 Planning 於 2026-09-11
+**決定不執行**。不要再等這件事的通知。
+
+理由是縮減改變了前提。決策 17 的動機是「索引與被索引者同 repo，消除同步漂移」，
+但 2026-09-10 已經用另一個方式解掉漂移——該檔 10 處路徑加上 `Pedal-Research/`
+前綴後，`verify-paths.py` 掃得到它們，漂移會在 commit 當下就被擋。
+
+反過來搬才有問題：那份索引是 Planning 的架構文件在消費的，`CLAUDE.md` 的
+Cross-Directory Reference 表指向它。搬到 Research 會讓 Planning 的索引依賴一個
+它不能寫入的唯讀 repo，之後每次更新都要跨 session 協調。
+
+權威記錄在 Planning 的 `07`。若那份文件還寫著「仍未執行」，以本節為準並提醒 Planning 更新。
 
 ---
 
