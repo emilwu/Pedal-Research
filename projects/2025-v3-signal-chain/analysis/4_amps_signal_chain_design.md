@@ -5,6 +5,12 @@
 **配置基础:** 4 个 Amps + 11 个 Pedals（最新全局优化）
 **使用场景优先级:** 家里练习 > 家中录音 > 演出 > 立体声
 
+> **现况注记（2026-09-11 查证）：本文为评估购入方案，"当前配置概述"所列 4 个 Amps 并非现有设备。**
+> 依权威来源 `projects/2025-v3-signal-chain/inventory/amps.yaml` 查证，实际 `total_amps: 2`，`active: 2`：
+> 目前实际拥有的只有 **Tone King Imperial MKII**（`tone_king_imperial_mkii`）与 **Roland JC-22 Jazz Chorus**（`roland_jc22`），两者状态均为 `status: "active"`。
+> 本文列入配置的 **DSM Dumblifier** 与 **De Cillia Special 25** 两台，不存在于 amps.yaml 库存中，是本文评估中假设购入的音箱，尚未购入。
+> 以下方案内容维持原文，供购置评估参考，不代表目前实际的音箱配置。
+
 ---
 
 ## 目录

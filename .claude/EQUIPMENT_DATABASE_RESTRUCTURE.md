@@ -5,6 +5,28 @@
 
 ---
 
+## 後續更正（本節之後才加註，原規劃內容不變）
+
+本文件是當時的規劃記錄，**內容維持原樣不修改**。但實際落地時，子目錄名與檔名慣例
+與下文規劃不同，記錄如下，避免讀者依本文件的路徑操作：
+
+- 子目錄名是 **`reports/`**，不是下文規劃的 `research/`。
+- 檔名是 **`[id]_report.md`**（例：`ff1y_report.md`、`cali76_fet_report.md`），
+  **不含版本號** `_v[N]`；下文「檔案命名規則」表格與各處範例路徑均已過時。
+  （版本資訊改記錄在報告內文的「版本」欄位，例如 `ff1y_report.md` 開頭的
+  `**版本:** 1.0`，而不是靠檔名疊版本。）
+- 以上兩點可用
+  `ls /Users/emilwu/VSCode/PedalGuy/Pedal-Research/shared/equipment_database/pedals/reports/`
+  核對。
+- 文末「進度追蹤」勾選狀態與實際落地一致（`reports/` 命名已在 Phase 5 隨 Agent
+  文檔一併更新），但清單本身不完整：「提交與推送」仍未打勾，且 Phase 4（建立初始
+  Research 報告）未列入這份追蹤清單——按規劃選擇的是「選項 A：暫不建立」，等待自然產出。
+
+下文規劃內容原樣保留，僅作歷史參考；規劃中提到的 `research/`、`_v[N].md`
+等路徑/檔名一律不代表現況。
+
+---
+
 ## 問題分析
 
 ### 當前狀況
@@ -199,7 +221,7 @@ mv pedals/examples/FF-1Y_Examples.md pedals/examples/ff1y_examples.md
 1. `.claude/agents/1_pedal-researcher.md`
    - 更新輸出路徑：
      - YAML: `shared/equipment_database/[type]/specs/[brand]_[model].yaml`
-     - MD: `shared/equipment_database/[type]/research/[brand]_[model]_v[N].md`
+     - MD: `shared/equipment_database/[type]/research/[brand]_[model]_v[N].md` <!-- path-check:skip 歷史規劃，實際落地為 reports/，見文首「後續更正」 -->
      - Examples: `shared/equipment_database/[type]/examples/[brand]_[model]_examples.md`
 
 2. `.claude/skills/usage-examples-generator.md`
@@ -281,13 +303,13 @@ ls shared/equipment_database/*/examples/*.md
 | `amps/*.yaml` | `amps/specs/*.yaml` | 2 |
 | `accessories/*.yaml` | `accessories/specs/*.yaml` | 2 |
 | `pedals/examples/FF-1Y_Examples.md` | `pedals/examples/ff1y_examples.md` | 1 |
-| (不存在) | `pedals/research/*.md` | 0 (待產出) |
+| (不存在) | `pedals/research/*.md` | 0 (待產出) <!-- path-check:skip 歷史規劃，實際落地為 pedals/reports/*.md --> |
 
 ### Agent 路徑更新
 
 | Agent/Skill | 舊路徑引用 | 新路徑引用 |
 |-------------|-----------|-----------|
-| Pedal Researcher | `shared/equipment_database/pedals/` | `specs/`, `research/` |
+| Pedal Researcher | `shared/equipment_database/pedals/` | `specs/`, `research/` <!-- path-check:skip 歷史規劃，實際落地為 reports/ --> |
 | Signal Chain Builder | `shared/equipment_database/pedals/` | `specs/` |
 | Pairing Skill | `shared/equipment_database/` | `specs/` |
 | Usage Examples Generator | `pedals/examples/` | `examples/` |
@@ -363,7 +385,7 @@ ls shared/equipment_database/*/examples/*.md
 
 **測試場景 2: 研究新器材**
 - 運行 Pedal Researcher
-- 確認產出到 `research/[brand]_[model]_v1.md`
+- 確認產出到 `research/[brand]_[model]_v1.md` <!-- path-check:skip 歷史規劃，實際落地為 reports/[brand]_[model]_report.md -->
 - 確認產出到 `specs/[brand]_[model].yaml`
 
 **測試場景 3: 產生使用範例**

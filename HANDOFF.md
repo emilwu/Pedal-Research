@@ -1,0 +1,204 @@
+# Pedal-Research 交接
+
+**最後更新**：2026-09-11
+
+這份文件記錄「只存在於某次對話、寫不進程式碼」的資訊。從本 repo 開工前先讀這份，
+再讀 `CLAUDE.md`。
+
+`CLAUDE.md` 講的是**規則**（角色、邊界、目錄結構）。這份講的是**現況與陷阱**。
+
+---
+
+## ⚠️ 最容易誤判的五件事
+
+### 1. 這個 repo 不做規劃
+
+本 repo 是知識庫：設備規格、配對規則、音色理論。**產品 scope 決策、模組設計文件、
+驗證報告都不在這裡做**，即使檔案最後會放進別的 repo 也一樣。
+
+2026-09-10 曾在本 repo 的 session 裡建立 `Pedal-Web-Service-Planning/planning/09-session-handoff-2026-09-10.md`
+並修改 `Pedal-Web-Service-Planning/planning/07-scope-reduction-2026-09.md`。
+檔案放在對的 repo，但**動作發生在錯的 session**。
+
+規劃動作要在 Planning repo 的 session 做。`CLAUDE.md` 的「誤入時的重導」表列了各種情境。
+
+### 2. 不要改別的 repo 正在被使用的工作目錄
+
+2026-09-10 與 09-11 兩次為了同步 `.githooks/verify-paths.py`，直接複製寫入其他三個
+repo 的工作目錄，事後才通知。當時 Pedal-Web-Service 有另一個 session 正在工作，
+它明確指出看得到寫入時間差。
+
+**正確做法是先問，或把 patch 內容給對方自己套。**四個 repo 各有自己的 session 在顧
+（Pedal-App 除外，它是暫停狀態）。
+
+### 3. 路徑驗證器會在對方切分支時誤報
+
+`.githooks/verify-paths.py` 用 `os.path.exists` 檢查對方 repo 的**工作目錄**。
+對方 checkout 到 feature branch 時，該分支上被刪除的檔案會讓本 repo 的跨 repo 引用誤報。
+
+**症狀是「路徑不存在」但 `main` 上其實有。遇到時先確認對方分支，不要急著改文件。**
+
+完整說明在 `.githooks/verify-paths.py` 檔頭的「未修的限制」段落。
+
+### 4. `analysis/` 裡有些是提案，不是現況
+
+`projects/2025-v3-signal-chain/analysis/` 底下有幾份文件以定論語氣描述「淘汰哪些效果器」
+「目前有四台音箱」，但那些是**評估提案，從未被採納進庫存**。
+
+**器材現況的唯一權威來源是 `projects/2025-v3-signal-chain/inventory/` 底下的
+`pedals.yaml`、`guitars.yaml`、`amps.yaml`、`accessories.yaml`。**
+任何分析報告與它衝突時，以 inventory 為準。
+
+### 5. `2025-v3-signal-chain` 標示「已完成並歸檔」，但後來還有新增
+
+該專案宣稱 2025-12-30 完成歸檔，但 `signal_chains/` 底下的
+`signal_chain_jc22_frontend_stereo.md` 是 2026-03-09 才 commit 進來的（`062cf75`），
+結構與 v3 不同。
+
+注意該檔內部的 `Created:` 欄位寫 2026-01-27，與 commit 日期對不上——那是作者手動
+填的建立日期。**以 git 的日期為準。**
+
+`signal_chains/` 目前同時存在兩份非歸檔設計，本 repo 的文件沒有說哪一份是最終版。
+詳見 `projects/2025-v3-signal-chain/README.md`。
+
+---
+
+## 路徑驗證器
+
+四個 repo 各一份 `.githooks/verify-paths.py`，`pre-commit` 是薄殼，實際邏輯在該檔。
+
+**要求是四個 repo 的 `main` 保持同步**，不是任何時刻的工作目錄都位元組相同——
+某個 repo checkout 到 feature branch 時，它的工作目錄本來就會落後。檢查方式：
+
+```bash
+for r in Pedal-Research Pedal-Web-Service Pedal-Web-Service-Planning Pedal-App; do
+  git -C "/Users/emilwu/VSCode/PedalGuy/$r" show main:.githooks/verify-paths.py | md5
+done
+```
+
+四個 md5 應該相同。不同就表示有人改了沒同步，或某個 repo 還沒 commit。
+
+**2026-09-11 的已知落差**：本檔的 docstring（已知限制、誤判來源那幾段）
+只同步到 Pedal-Research 與 Pedal-App。Pedal-Web-Service-Planning 與
+Pedal-Web-Service 兩份還是舊 docstring，程式邏輯相同、只差註解。
+兩邊各有自己的 session 在顧，等它們同步。
+
+### 安裝
+
+本機設定不隨 clone 帶走。新 clone 或換機器後，四個 repo 各跑一次：
+
+```bash
+git config core.hooksPath .githooks
+```
+
+沒跑的話 hook 靜默失效，不會有任何提示。
+
+### 依賴
+
+需要 `python3`。缺少時 hook 會印警告並放行，不會靜默失效。
+
+### 手動全庫重掃
+
+```bash
+.githooks/verify-paths.py --all        # 本 repo 所有受版控檔案
+.githooks/verify-paths.py --workspace  # 四個 repo
+```
+
+commit-time 的 hook 只擋「新增的」失效路徑，擋不住「既有路徑因為別的 repo 改動而失效」。
+後者只有手動全庫重掃抓得到。
+
+### 已知限制
+
+寫在 `.githooks/verify-paths.py` 的檔頭 docstring 裡，包含三個刻意不做的覆蓋缺口、
+工作目錄 vs 分支的誤報問題、以及改動程式前要知道的三類誤判排除與一個格式陷阱。
+**改動該程式前務必先讀那段。**
+
+---
+
+## 2026-09-09 到 09-11 做了什麼
+
+### 目錄結構重新劃分
+
+盤點結論是**四個 repo 的目錄骨架本身健全**——四份 `CLAUDE.md` 宣告的 39 個目錄路徑
+全部真實存在，不需要大改。真正放錯位置的只有 4 個檔案，已搬移：
+
+| 檔案 | 搬到 |
+|---|---|
+| Amplify 非同步限制筆記 | `Pedal-Web-Service/.claude/skills/aws-infrastructure/known-limitations/amplify-serverless-async.md` |
+| 外部 API 錯誤顯示政策 | `Pedal-Web-Service/.claude/rules/external-api-error-display.md` |
+| E2E staging 設定 | `Pedal-Web-Service/e2e/STAGING-SETUP.md`（跨 repo，E2E 屬 Web-Service 職責） |
+| 架構盤點頁 | `Pedal-Web-Service-Planning/architecture/show-me-pedalguy-architecture.html` |
+
+### 重建所有 Index
+
+全工作區 **84 處失效路徑修到 0**：Research 36、Planning 26、App 16、Web-Service 6。
+
+舊版 `pre-commit` 只檢查絕對路徑，它回報的「掃描為 0」是真的但沒有意義——
+失效的索引全部寫成相對路徑，舊版一個都看不到。換成 `verify-paths.py` 後才看見。
+
+2026-09-11 另修一處：`LINE_SUFFIX_RE` 原本只認單段行號，不認
+`file.yaml:63-66,77-81` 這種多段並列的引用。四個 repo 都已 commit。
+
+Pedal-App 的 commit `203b0a2` 刻意使用了 `--no-verify`，原因是上面第 3 點那個
+分支誤報，理由完整寫在該 commit message 裡。那是目前唯一一次刻意略過檢查。
+
+### 設備參數詞彙
+
+`shared/equipment_database/PARAMETER_VOCABULARY.md`（2026-09-11）。
+
+從 26 份設備 spec YAML 抽出可調參數詞彙、十條資料事實構成的限制、
+六個必須由 Planning 決定的問題。定位是**提供詞彙與限制，不提供 schema 設計**。
+
+Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是使用者自述資料，
+不查表、不參照規格庫。規格定義在
+`Pedal-Web-Service-Planning/planning/03-modules-specification.md` 第 8 節。
+
+---
+
+## Research 的待辦
+
+### 設備資料缺口（7 項）
+
+完整清單在 `shared/equipment_database/PARAMETER_VOCABULARY.md` 的
+「Research 這邊自己該補的資料缺口」章節。摘要：
+
+1. `empress_buffer_plus_plus` 的控制項數量與功能全是 TBD
+2. `odl1cs` 的 7 個通道控制沒有任何功能說明，`PUSH` 與 `HI CUT` 功能不明
+3. 四把吉他的 pickup selector 都沒寫出三個檔位的實際名稱
+4. `cali76_fet` 的 RATIO 宣告是離散但沒給檔位
+5. `ff1y` 的 EQ (3-band) 未列出個別旋鈕名稱
+6. `roland_jc22` 的 REVERB 旋鈕與 `dsm_dumblifier` 的 Input Boost switch 沒收進各自的 controls 區塊
+7. 「controls 是否包含內部微調項」這條標準沒有在資料庫層級明文定義
+
+**這 7 項的優先順序已降級。** 因為 `settings` 與規格庫解耦，它們不再擋住任何功能，
+只影響 `/gear/[id]` 的規格顯示——而規格缺漏在那裡會誠實顯示為「無資料」，不猜測。
+
+### 跨 repo 待辦
+
+`Pedal-Web-Service-Planning/planning/07-scope-reduction-2026-09.md` 的決策 17
+（`appendix/source-reference.md` 搬到 Research）**仍未執行**。2026-09-10 的處理是
+把該檔 10 處路徑加上 `Pedal-Research/` 前綴讓它可被驗證，檔案本身留在 Planning。
+要不要真的搬，是 Planning 的決策。
+
+---
+
+## 其他三個 repo 的現況
+
+以 git log 與實際檔案為準，下表只是方向指引。
+
+| Repo | 角色 | 2026-09-11 的狀態 |
+|---|---|---|
+| `Pedal-Web-Service-Planning` | 規劃、規格、驗證報告 | 已完成規格層對齊：`planning/01-04` 換代、新增 `05-signal-chain-pipeline.md` 與 `06-visual-design-spec.md` |
+| `Pedal-Web-Service` | Web 產品程式碼 | 在 `feature/scope-reduction` 分支執行縮減清單 |
+| `Pedal-App` | APP 產品程式碼 | **暫停中。**不要在該 repo 執行 `/design`、`/build`、`/validate`、`/cycle`、`/issuework` |
+
+跨 repo 的規劃文件都在 `Pedal-Web-Service-Planning/planning/`，最新的交接是
+`Pedal-Web-Service-Planning/planning/09-session-handoff-2026-09-10.md`。
+
+---
+
+## 隱性外部依賴
+
+`PedalGuy/.claude/settings.json` 的 Stop hook 依賴環境變數 `AGENT_TEAM_REPO`。
+新機器上若未設定 `~/.config/agent-team/env`，Stop hook 會直接失敗。
+四份 `CLAUDE.md` 都沒有記載這個依賴。

@@ -12,7 +12,7 @@
 
 1. **完整盤點所有設備**
    - 4 把吉他（ESP Eclipse CTM, ESP Throbber-CTM, Greco TE-500, Fender Tokyo Thinline）
-   - 12 顆效果器（2 Compressors, 2 EQs, 5 Overdrives, 1 Delay, 2 Reverbs）
+   - 12 顆效果器（2 Compressors, 1 EQ, 6 Overdrives, 1 Delay, 2 Reverbs，依 `inventory/pedals.yaml` stats 核實）
    - 2 台音箱（Tone King Imperial MKII, Roland JC-22）
 
 2. **設計兩條主要訊號鏈**
@@ -30,23 +30,25 @@
 
 ### 主要文件
 
-#### 分析報告（analysis/）
-- `comprehensive_analysis_summary_v2.md` - 完整分析報告，包含所有設備技術資料、配對分析、訊號鏈建議
-- `signal_chain_master_plan.md` - 訊號鏈總計畫
-- `swiss_things_integration_plan_v2.md` - Swiss Things 整合計畫
+> 以下六份原本是 V3.0 專案完成時（2025-12-30）的當時文件，**均已歸檔**，實際檔名與 120-126 行一致；此處補上完整路徑，勿再用舊檔名尋找。
 
-#### 訊號鏈配置（signal_chains/）
-- `signal_chain_v3.md` - **最終版訊號鏈配置**
+#### 分析報告（analysis/，已歸檔）
+- `archived_versions/analysis/comprehensive_analysis_summary_v2.0_dual_amp_archived.md` - 完整分析報告，包含所有設備技術資料、配對分析、訊號鏈建議（基於雙音箱配置，已被 2026-01-08 的 Toneking Only 配置取代）
+- `archived_versions/analysis/signal_chain_master_plan_v1.0_archived.md` - 訊號鏈總計畫（V1.0，已被後續版本取代）
+- `archived_versions/analysis/swiss_things_integration_plan_v2.0_dual_amp_archived.md` - Swiss Things 整合計畫（已由 Empress Buffer++ 方案取代）
+
+#### 訊號鏈配置（signal_chains/，V3.0 版本已歸檔）
+- `archived_versions/signal_chains/signal_chain_v3.0_dual_amp_archived.md` - V3.0 雙音箱版訊號鏈配置（2025-12-30 建立；已於 2026-01-08 被 Toneking Only 配置取代，且 2026-03-09 又新增了另一種設計，詳見下方「專案後續更新」）
   - 訊號鏈 1: Empress MKII → PA-1QG → Sweet Honey → PRS Horsemeat → JC-22 → FF-1Y → Nucleo
   - 訊號鏈 2: Cali76 FET → PA-1QG → Roshi Blacklon → Morning Glory → TWA Source Code → ODL-1-CS → Imperial → FF-1Y → AASB → Nucleo
-- `signal_chain_diagrams_v2.md` - 訊號鏈流程圖
+- `archived_versions/signal_chains/signal_chain_diagrams_v3.0_dual_amp_archived.md` - 訊號鏈流程圖（原始檔名為 `signal_chain_diagrams_v2.md`，但內容其實是 V3.0，命名為歷史遺留問題，見 `archived_versions/README.md`）
 
 #### 技術研究（research/）
 - `compressor_eq_spatial_effects_technical_data.md` - Compressor/EQ/空間系技術資料
 - `guitar_amp_pairing_guide.md` - 吉他音箱配對指南
 - `guitar_collection_analysis.md` - 吉他收藏分析
 - `overdrive_pedals_technical_data.md` - 破音效果器技術資料
-- `swiss_things_signal_routing_logic.md` - Swiss Things 路由邏輯完整文件
+- `archived_versions/research/swiss_things_signal_routing_logic_archived.md` - Swiss Things 路由邏輯完整文件（已於 2026-01-02 被 Empress Buffer++ 方案取代）
 
 ---
 
@@ -163,9 +165,23 @@
   - 記錄了 17 顆效果器 YAML 文件的 100% 覆蓋率達成
   - 任務已完成，歸檔作為專案完成記錄
 - ✅ 確認所有專案文件組織完善
-  - 活躍配置：`signal_chains/signal_chain_toneking_only.md`
+  - 活躍配置：`signal_chains/signal_chain_toneking_only.md`（**此為 2026-01-11 當時的狀態，2026-03-09 又新增了另一份設計，見下一則更新**）
   - 研究文件：`research/` (5 個文件)
   - 歸檔版本：`archived_versions/` (完整的版本演進歷史)
+
+### 🆕 2026-03-09: 新增 JC-22 Front-End Stereo 訊號鏈設計
+
+**新增檔案：**
+- `signal_chains/signal_chain_jc22_frontend_stereo.md`（含同名 `.yaml`），由 commit `062cf75` 加入
+  - git commit 日期為 **2026-03-09**；檔案內部標注的 `Created` 欄位寫的是 2026-01-27，兩個日期不一致，以 git commit 記錄為準
+- 標示版本為 v1.0，適用曲風為 Neo-Soul / Post-Rock，搭配吉他為 ESP Throbber-CTM / Greco TE-500
+
+**與既有設計的差異（僅陳述事實，不判斷何者為現行版本）：**
+- 音箱只用 **Roland JC-22**（不含 Tone King Imperial，與 2026-01-08 的 Toneking Only 配置不同；也不是雙音箱，與已歸檔的 V3.0 不同）
+- 採 **Front-End Stereo** 接法：效果器分兩段接進 Empress Buffer++（Loop 1 為單聲道 dynamics/drive、Loop 2 為立體聲空間效果），最終直接接進 JC-22 的 stereo L/R front inputs，不經過音箱的 FX Loop
+- 只有**一條**訊號流程，不像 Toneking Only 配置用 Buffer++ Loop 1/2 切換兩種音樂風格的訊號鏈
+
+**目前狀態：** 本專案於 2025-12-30 已宣告「完成並歸檔」，但 `signal_chains/` 目錄在那之後仍持續有新設計加入（2026-01-08 的 Toneking Only、2026-03-09 的 JC-22 Front-End Stereo）。截至本次更新，`signal_chains/` 下同時存在這兩份現行（非歸檔）設計，音箱配置與訊號路由方式互不相同，本文件不代為判斷孰為最終版，請讀者依實際使用需求自行比對兩份文件。
 
 ---
 

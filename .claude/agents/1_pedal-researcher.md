@@ -91,7 +91,7 @@
 ### Step 2: 檢查是否已有研究資料
 
 ```
-檢查路徑: shared/equipment_database/[type]/research/
+檢查路徑: shared/equipment_database/[type]/reports/
 
 ID = brand_model_normalized
 範例: "strymon_bigsky"
@@ -254,7 +254,7 @@ Post Rock: 5/5 - "長 decay shimmer reverb 完美適合 Post Rock 音景"
 
 #### 6.1 Markdown 報告 (人類閱讀)
 
-檔案路徑: `shared/equipment_database/[type]/research/[brand]_[model]_v[N].md`
+檔案路徑: `shared/equipment_database/[type]/reports/[brand]_[model]_report.md`
 
 **結構:**
 
@@ -481,7 +481,7 @@ sources:
 ✅ 研究報告已生成！
 
 檔案:
-- shared/equipment_database/[type]/research/[brand]_[model]_v[N].md
+- shared/equipment_database/[type]/reports/[brand]_[model]_report.md
 - shared/equipment_database/[type]/specs/[brand]_[model].yaml
 
 是否要將 [Brand] [Model] 加入專案 Inventory？
@@ -535,7 +535,9 @@ sources:
    - YAML 文件供後續 agents/skills 快速讀取，避免重複 research
    - 文件名稱: `[brand]_[model].yaml` (不含版本號)
    - 版本資訊記錄在 YAML 內部的 `version` 欄位
-   - Markdown 文件可包含版本號: `[brand]_[model]_v[N].md`
+   - Markdown 報告同樣不含文件版本號: `[brand]_[model]_report.md`
+     （若型號本身帶版本，例如 RockBoard MOD 2 V2，則寫成
+     `rockboard_mod2_v2_report.md`——那個 v2 是型號的一部分，不是文件版本）
 
 2. **客觀性**
    - 報告應客觀中立

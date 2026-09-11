@@ -7,8 +7,9 @@ PedalGuy 跨 repo 路徑驗證器
 兩個產品 repo 的 .claude/ 共 41 處硬編碼路徑沒跟上。8 天後才發現，
 期間 4 份文件被寫進廢棄路徑。人工維護索引在這個工作區失敗過一次。
 
-前一版 pre-commit 只檢查絕對路徑，抓不到 README 目錄樹與 repo 簡稱前綴
-的相對路徑。2026-09-10 的全庫盤點在那個缺口下找到 20 處失效索引。
+前一版 pre-commit 只檢查絕對路徑。它回報的「掃描為 0」是真的，但沒有意義——
+失效的索引全部寫成相對路徑，前一版一個都看不到。換掉之後的第一次全庫掃描
+（2026-09-10）找到 84 處失效路徑：Research 36、Planning 26、App 16、Web-Service 6。
 
 三種路徑都檢查：
   1. 絕對路徑        /Users/emilwu/VSCode/PedalGuy/<repo>/...
@@ -21,10 +22,53 @@ PedalGuy 跨 repo 路徑驗證器
   verify-paths.py --workspace   檢查四個 repo 所有受版控檔案
 
 豁免：
-  - 行內寫 path-check:skip     該行不檢查
+  - 行內寫 path-check:skip     該行不檢查（必須與路徑同一行）
   - 檔案位於 */reports/、*/archive/、*/archived_versions/  整份不檢查（歷史證據）
 
 離開碼：0 = 全部通過，1 = 有失效路徑，2 = 執行錯誤
+
+
+== 已知限制 ==
+
+以下三項是刻意不做的。做了會產生大量誤判而擋住正常 commit。
+
+1. 純文字路徑不檢查。只看反引號包起來的 token 與目錄樹項目。
+   README 裡寫成 `✅ shared/inventory/*.yaml` 這種沒有反引號的行掃不到。
+
+2. 裸的跨 repo 相對路徑掃不到。在 Pedal-App 寫 development/app/designs/ 時，
+   development 不是 App 的頂層目錄，本程式判定它不是路徑而跳過。
+   **寫索引時跨 repo 路徑一律要帶 repo 前綴**，否則就落進這個缺口。
+
+3. */reports/、*/archive/、*/archived_versions/ 底下的檔案整份不掃。
+
+
+== 未修的限制：工作目錄 vs 分支 ==
+
+本程式用 os.path.exists 檢查對方 repo 的「工作目錄」。當對方 checkout 到
+feature branch 時，該分支上被刪除的檔案會讓其他三個 repo 的跨 repo 引用
+全部誤報。症狀是「路徑不存在」但 main 上其實有。
+
+2026-09-11 的實例：Pedal-Web-Service 在 feature/scope-reduction 上刪除了
+src/app/api/mobile/，導致 Pedal-App 的 .claude/commands/build.md:90 與
+.claude/rules/architecture.md:40 兩處被誤報。該路徑在 main 上存在，
+Pedal-App 的引用是正確的。那次 commit（203b0a2）刻意使用 --no-verify，
+理由寫在 commit message 裡。
+
+**遇到這個症狀時先確認對方分支，不要急著改文件。**
+可能的修法是「工作目錄找不到就退而檢查對方的預設分支」，尚未實作。
+
+
+== 改動本程式前要知道的事 ==
+
+排除了三類長得像路徑但不是路徑的東西。改動時不要弄壞：
+  - git 分支名稱（archive/v0.3-commercial-planning 長得像目錄）
+  - 行號後綴（architecture.md:63、aws-deployment.md:892-901,905）
+  - 目錄樹項目後面的說明文字（只取第一個空白之前的 token）
+
+還有一個格式陷阱：**一個 code fence 裡不要放兩棵目錄樹**。
+解析器一次只認一個根路徑，第二棵樹的項目會被誤判成巢狀在第一棵樹底下。
+
+四個 repo 各一份，要求位元組相同。改動時四份都要同步。
 """
 
 import os

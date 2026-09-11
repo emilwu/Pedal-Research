@@ -2,6 +2,12 @@
 **日期:** 2026-01-14
 **分析目標:** 評估 De Cillia Single 25 / Special 25 對現有三個 Amp 的取代性與 Pedal Chain 簡化可能性
 
+> **現況註記（2026-09-11 查證）：本文「現有三個 Amp」為評估購入方案的假設前提，並非全部現有設備。**
+> 依權威來源 `projects/2025-v3-signal-chain/inventory/amps.yaml` 查證，實際 `total_amps: 2`，`active: 2`：
+> 目前實際擁有的只有 **Tone King Imperial MKII**（`tone_king_imperial_mkii`）與 **Roland JC-22**（`roland_jc22`），兩者狀態均為 `status: "active"`。
+> 本文列為「現有設備」之一的 **DSM/HUMBOLDT Dumblifier**，不存在於 amps.yaml 庫存中，屬本文評估情境中假設持有的音箱，尚未購入。
+> 以下分析內容維持原文，供評估參考，不代表目前實際的音箱配置。
+
 ---
 
 ## 目錄

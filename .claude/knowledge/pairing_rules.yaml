@@ -2,8 +2,8 @@
 # 此檔案定義吉他、效果器、音樂風格的配對邏輯
 # 由 Guitar-Pedal Pairing Skill 使用
 
-version: 1.0
-last_updated: 2025-12-30
+version: 1.1
+last_updated: 2026-01-13
 created: 2025-12-30
 
 # ============================================================

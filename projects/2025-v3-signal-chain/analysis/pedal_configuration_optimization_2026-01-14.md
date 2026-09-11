@@ -3,6 +3,13 @@
 **日期:** 2026-01-14
 **分析目標:** 淘汰 6 個 pedals 後，評估保留 pedals 如何最大化搭配四個 Amps，覆蓋所有音樂類型
 
+> **現況註記（2026-09-11 查證）：本文為 2026-01-14 的淘汰方案提案，截至查證時尚未被實際庫存採納。**
+> 依權威來源 `projects/2025-v3-signal-chain/inventory/pedals.yaml`（2026-01-11 更新）查證：
+> 本文列為「淘汰」的 Morning Glory V3、Cali76 FET、Roshi Blacklon 三顆，狀態仍是 `status: "active"`，並未從庫存移除。
+> 本文核心論點「KOT 可完全取代 Morning Glory」所指的 KOT（King of Tone）**未出現在庫存檔案中**，庫存裡沒有這顆效果器。
+> 庫存實際統計為 `total_pedals: 13`、`active: 12`、`planned: 1`（Empress Buffer++，尚未購入），並非本文結論所稱的「保留 11 個」。
+> 以下分析內容維持原文，僅供歷史決策參考，不代表目前的效果器配置現況。
+
 ---
 
 ## 目錄

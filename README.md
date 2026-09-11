@@ -1,7 +1,7 @@
 # Pedal Research - 吉他效果器研究與訊號鏈管理系統
 
-**版本:** 2.1
-**最後更新:** 2026-01-11
+**版本:** 2.2
+**最後更新:** 2026-09-10
 **系統狀態:** ✅ 系統完整運作中
 
 ---
@@ -310,7 +310,7 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 **EQ (1):**
 3. Free the Tone PA-1QG (10-band, 99 presets, MIDI)
 
-**Overdrives (5):**
+**Overdrives (6):**
 4. Mad Professor Sweet Honey Deluxe (warm, Neo Soul)
 5. PRS Horsemeat (Klon-style transparent boost)
 6. JHS Morning Glory V3 (Bluesbreaker)
@@ -379,10 +379,16 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 - ✅ signal_chain_fundamentals.md (訊號鏈基礎知識)
 
 #### Equipment Database
-- ✅ 27+ 效果器完整 YAML 數據庫
-- ✅ 4 把吉他數據
-- ✅ 2 台音箱數據
-- ✅ 配件數據
+
+以下是 `shared/equipment_database/` 底下**已研究並建檔**的設備數量，
+**不等於目前擁有的數量**。研究過但沒買、或買了又賣掉的設備，資料都會留著。
+目前擁有多少請看上方「當前設備清單」，權威來源是
+`projects/2025-v3-signal-chain/inventory/`。
+
+- ✅ 17 份效果器規格（目前擁有 12）
+- ✅ 4 份吉他規格（目前擁有 4）
+- ✅ 3 份音箱規格（目前擁有 2）
+- ✅ 2 份配件規格
 
 ### 📝 待建立的 Knowledge Base
 
@@ -444,4 +450,4 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 
 **系統狀態:** ✅ 系統完整運作中
 
-**最後更新:** 2026-01-11
+**最後更新:** 2026-09-10

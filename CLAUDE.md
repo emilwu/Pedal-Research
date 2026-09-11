@@ -4,6 +4,12 @@
 
 本目錄是 Pedal Web Service 的參考知識來源，包含設備技術規格、配對邏輯規則和音色理論。其他目錄的 Agent **僅可讀取，不可寫入**本目錄。
 
+> **開工前先讀 `HANDOFF.md`。**
+> 這份 `CLAUDE.md` 講的是**規則**（角色、邊界、目錄結構）。
+> `HANDOFF.md` 講的是**現況與陷阱**——哪些檔案會誤導你、路徑驗證器什麼時候會誤報、
+> 器材現況的權威來源是哪一份、以及最近三天四個 repo 發生了什麼。
+> 兩份都讀完再動手。
+
 ---
 
 ## 四目錄架構
@@ -82,6 +88,19 @@
 | `projects/2025-v3-signal-chain/inventory/` | 動態設備清單實際位置（吉他/效果器/音箱/配件） |
 | `reference_docs/` | 通用參考文件（PDF、評估框架） |
 | `.githooks/` | pre-commit、跨 repo 路徑驗證器 |
+
+### 關鍵檔案
+
+| 路徑 | 內容 | 什麼時候要讀 |
+|------|------|------|
+| `HANDOFF.md` | 現況、已知陷阱、跨 repo 待辦 | **每次開工前** |
+| `README.md` | 系統架構、Agents 與 Skills 清單、當前設備清單 | 需要了解本 repo 怎麼運作時 |
+| `projects/2025-v3-signal-chain/inventory/` | **器材現況的唯一權威來源。**與任何分析報告衝突時以它為準 | 任何需要知道「現在擁有什麼」的時候 |
+| `shared/equipment_database/PARAMETER_VOCABULARY.md` | 26 台設備的可調參數詞彙、十條資料限制 | 被問到設備參數、或 Planning 要設計 settings 結構時 |
+| `.githooks/verify-paths.py` | 路徑驗證器。檔頭 docstring 記錄了已知限制與誤判來源 | 驗證器誤報時、或要改動它之前 |
+
+`analysis/` 與 `projects/*/analysis/` 底下有幾份文件描述的是**評估提案，不是現況**。
+判斷器材現況一律回到 `inventory/`。細節見 `HANDOFF.md`。
 
 ---
 

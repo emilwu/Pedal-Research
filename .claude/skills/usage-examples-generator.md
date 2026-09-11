@@ -42,7 +42,7 @@
 input:
   pedal_id: "ff1y"
   yaml_path: "shared/equipment_database/pedals/specs/ff1y.yaml"
-  research_path: "shared/equipment_database/pedals/research/ff1y_v1.md"
+  research_path: "shared/equipment_database/pedals/reports/ff1y_report.md"
 
   additional_context:
     user_music_styles:
@@ -545,7 +545,7 @@ User: "根據 FF-1Y 的 YAML 建立使用範例"
 
 Claude:
   Step 1: 讀取 shared/equipment_database/pedals/specs/ff1y.yaml
-  Step 2: 讀取 shared/equipment_database/pedals/research/ff1y_v1.md
+  Step 2: 讀取 shared/equipment_database/pedals/reports/ff1y_report.md
   Step 3: 讀取 projects/[current_project]/inventory/music_styles.yaml
   Step 4: 讀取 projects/[current_project]/inventory/guitars.yaml, amps.yaml
 
