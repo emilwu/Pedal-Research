@@ -120,9 +120,9 @@ def truncate_template(path):
     return cut.rsplit("/", 1)[0]
 
 
-# 引用某檔案的某一行時會寫成 path.md:63 或 path.md:892-901。
-# 驗證的是檔案本身，行號要先拿掉。
-LINE_SUFFIX_RE = re.compile(r":\d+(?:-\d+)?$")
+# 引用某檔案的某幾行時會寫成 path.md:63、path.md:892-901，
+# 或多段並列的 path.yaml:63-66,77-81。驗證的是檔案本身，行號要先拿掉。
+LINE_SUFFIX_RE = re.compile(r":\d+(?:-\d+)?(?:,\s*\d+(?:-\d+)?)*$")
 
 
 def strip_trailing_punct(path):
