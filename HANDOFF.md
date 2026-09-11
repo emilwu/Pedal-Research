@@ -50,7 +50,9 @@ git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service ls-tree -r main --name-on
 2026-09-11 就發生過：清單寫下 7 分鐘後 Web-Service 又刪了 3 個檔案，
 兩處的清單立刻變成七處，而清單看起來像是窮盡的。
 
-改用這個判斷法，它不會過期：
+判斷法有兩層。**兩層都要做，只做第一層會出錯。**
+
+#### 第一層（空間）：用 git ref，不要用工作目錄
 
 ```bash
 # 把 --workspace 報的每一條路徑丟進去
@@ -60,15 +62,21 @@ git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service ls-tree -r main --name-on
 - **有輸出** → `main` 上存在，是分支落差造成的誤報。**不要改文件。**
 - **無輸出** → `main` 上真的沒有，是真失效，要改。
 
-這個誤報來源在 2026-09-11 已經結束——Web-Service 的 `feature/scope-reduction`
-已合併進 `main`（`396f2c5`），工作目錄也切回 `main`。**但判斷法不變。**
-四個 repo 隨時可能有人切到 feature branch，同樣的誤報隨時會再發生。
+不要用 `ls`、`test -e` 或 `os.path.exists`。`verify-paths.py` 讀的就是工作目錄，
+所以**它報的東西一定要先用上面那道指令覆核**。四個 repo 隨時可能有人切到 feature
+branch，那個分支上被刪除的檔案會讓其他 repo 的引用全部誤報。
 
-合併當下，原本的誤報一次全部轉成真失效。處理進度見下方「跨 repo 待辦」。
+#### 第二層（時間）：覆核結果只在當下有效
 
-**還有一個反方向的陷阱**：本 session 在 2026-09-11 驗過同一條路徑兩次，
-前後結果相反——上午 `main` 上還在，下午合併後就沒了。
-**覆核結果只在當下有效。**間隔久了要重驗，不要拿幾小時前的判斷當結論。
+第一層假設 `main` 是穩定的參照點。**它不是。**別的 session 隨時可能合併東西進去。
+
+2026-09-11 的實例：本 session 對同一條路徑跑了兩次同一道指令，答案相反。
+上午 `Pedal-Web-Service/e2e/STAGING-SETUP.md` 還在 `main` 上，判定為誤報、沒改； <!-- path-check:skip 舉例用，該檔已於 396f2c5 刪除，這正是本段要講的事 -->
+下午 PR #49 合併（`396f2c5`）後它就沒了，變成真失效。**兩次判斷在各自的當下都是對的。**
+
+所以：**間隔久了要重驗。最危險的想法是「我上午驗過了」。**
+
+動手改文件之前重跑一次，不要拿幾小時前的結論當依據。
 
 完整說明在 `.githooks/verify-paths.py` 檔頭的「未修的限制」段落。
 
