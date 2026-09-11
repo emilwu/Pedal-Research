@@ -38,6 +38,26 @@ repo 的工作目錄，事後才通知。當時 Pedal-Web-Service 有另一個 s
 
 **症狀是「路徑不存在」但 `main` 上其實有。遇到時先確認對方分支，不要急著改文件。**
 
+```bash
+git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service ls-tree -r main --name-only -- <路徑>
+```
+
+`main` 上有就是誤報。
+
+### 2026-09-11 目前正在誤報的兩處
+
+跑 `--workspace` 會看到這兩筆，**現在都是誤報，不要改**：
+
+```
+Pedal-App/.claude/commands/build.md:90       -> Pedal-Web-Service/src/app/api/mobile/
+Pedal-App/.claude/rules/architecture.md:40   -> Pedal-Web-Service/src/app/api/mobile/
+```
+
+Pedal-Web-Service 停在 `feature/scope-reduction`，該分支刪掉了
+`src/app/api/mobile/auth/login/route.ts`。`main` 上還在，所以 Pedal-App 的引用是對的。
+
+**但合併之後它們會變成真失效。**處理方式已排程，見下方「跨 repo 待辦」。
+
 完整說明在 `.githooks/verify-paths.py` 檔頭的「未修的限制」段落。
 
 ### 4. `analysis/` 裡有些是提案，不是現況
@@ -201,7 +221,21 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 
 ### 跨 repo 待辦
 
-**目前沒有等 Research 動手的跨 repo 待辦。**
+### 有一項排程中，觸發條件是「Web-Service 合併」
+
+`Pedal-Web-Service-Planning/development/web/designs/scope-reduction-manifest.md`
+的**階段 5c**：`feature/scope-reduction` 合併進 `main` 之後，上面第 3 點那兩處
+Pedal-App 引用會從誤報變成真失效，要改。
+
+- **誰改**：Pedal-App session。若當時沒有 App session，由使用者授權其他 session 代改
+  ——**可能會是 Research**，所以記在這裡
+- **驗收**：合併後跑 `.githooks/verify-paths.py --workspace`，要求 exit 0
+- **權威記錄**：manifest 的 5c，不是本節
+
+**合併之前不要動那兩處。**現在改會讓 Pedal-App 的文件提前偏離 `main`，
+變成另一個方向的 BIAS。
+
+除此之外沒有等 Research 動手的跨 repo 待辦。
 
 `Pedal-Web-Service-Planning/planning/07-scope-reduction-2026-09.md` 的決策 17
 （`appendix/source-reference.md` 搬到 Research）已由 Planning 於 2026-09-11
