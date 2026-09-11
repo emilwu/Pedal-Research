@@ -132,10 +132,13 @@ guitars:
     year: null
 
     # 拾音器資訊
-    pickup_neck: "Momose VT-1 single-coil"
-    pickup_bridge: "Momose VT-1 single-coil"
-    pickup_type: "single_coil"
-    pickup_set: "Momose VT-1 pickups"
+    # 2026-09-11 更正：原本四欄記的是「Momose VT-1 single-coil」，
+    # 那是**另一把琴（Momose）的規格**，誤植到這一筆。
+    # 使用者已確認實機為 Seymour Duncan SP90-1 Set，與 Fender 官方規格一致。
+    pickup_neck: "Seymour Duncan SP90-1N Vintage P90"
+    pickup_bridge: "Seymour Duncan SP90-1 Vintage P90"
+    pickup_type: "single_coil"   # P90 本質是單線圈，分類不變
+    pickup_set: "Seymour Duncan SP90-1 Set (SP90-1 + SP90-1N)"
     output_level: "medium"
 
     # 琴身資訊
@@ -161,7 +164,7 @@ guitars:
     # 相關資料檔案
     research_file: "shared/equipment_database/guitars/specs/fender_tokyo_thinline.yaml"
 
-    notes: "經典 Telecaster 音色，Momose VT-1 單線圈拾音器"
+    notes: "經典 Telecaster 音色，Seymour Duncan SP90-1 Set（單線圈尺寸的 P90）"
 
 # 統計資訊
 stats:

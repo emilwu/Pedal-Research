@@ -78,9 +78,13 @@ pickups:
   controls:
     - "Volume (Neck)"
     - "Volume (Bridge)"
-    - "Tone (Neck)"
-    - "Tone (Bridge)"
+    - "Tone (共用)"
     - "3-way pickup selector"
+  # 2026-09-11 更正：原本列 Tone (Neck) 與 Tone (Bridge) 兩顆。
+  # 使用者確認實機面板是三顆旋鈕，Tone 只有一顆（Master Tone）。
+  # 這與 ESP 官方一致：日本站 Original Series 寫
+  # 「Neck Volume, Bridge Volume, Master Tone, Toggle PU Selector」，
+  # 美國站寫「Volume/Volume/Tone/Toggle Switch」。
 
   # 2026-09-11：檔位名稱查不到。這是查證結果，不是還沒查。
   pickup_selector:
@@ -95,15 +99,8 @@ pickups:
     unknown: "檔位順序（toggle 往上或往下是 neck）官方文件與手冊圖示皆未標示"
     do_not_guess: "「雙 humbucker 的 3-way 就是 Neck/Both/Bridge」是常識推論，不是這個型號的資料。不要填進來"
 
-  # 官方規格與本檔 controls 的落差
-  official_spec_conflict:
-    tone_count: |
-      ESP 官方（日本站 Original Series 與美國站）記載的是 **Master Tone 一顆**：
-      CONTROLS 欄為 "Neck Volume, Bridge Volume, Master Tone, Toggle PU Selector"。
-      但本檔 controls 列了 Tone (Neck) 與 Tone (Bridge) 兩顆。
-      **需要看實機才能判定。**本次不改，因為若實機確實是兩顆（客製或改裝），
-      官方頁描述的是標準配置而非這一把。
-    downstream: "shared/equipment_database/PARAMETER_VOCABULARY.md 的吉他表把本琴的 Tone 標為 per-pickup，依據就是本檔。若實機是 Master Tone，那張表也要一起改"
+  # 2026-09-11：Tone 數量爭議已由使用者確認實機結案（Master Tone 一顆），
+  # 上方 controls 已更正。PARAMETER_VOCABULARY.md 的吉他對照表也已同步。
 
 # 硬體規格
 hardware:

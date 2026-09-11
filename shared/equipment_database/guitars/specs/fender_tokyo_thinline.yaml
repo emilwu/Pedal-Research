@@ -77,10 +77,12 @@ pickups:
       - "Vintage P90 output"
 
   pickup_set:
-    name: "Seymour Duncan SP90-1 Set (或 Lollar DC-90 Set)"
+    name: "Seymour Duncan SP90-1 Set (SP90-1 + SP90-1N)"
     description: "P90-style pickups in single-coil size (dogear-style)"
     designed_for: "Blues, Rock, Jazz, versatile tones with P90 character"
-    manufacturer: "Seymour Duncan (或 Lollar Guitars)"
+    manufacturer: "Seymour Duncan"
+    # 2026-09-11 更正：原本寫「或 Lollar DC-90 Set」「Seymour Duncan (或 Lollar Guitars)」。
+    # 那個「或」是本庫自己加的，官方只寫 Seymour Duncan。使用者已確認是 SP90-1 Set。
 
   controls:
     - "Volume (共用)"
@@ -98,20 +100,17 @@ pickups:
     source: "Fender 官方產品頁規格表 Switching 欄"
     unknown: "撥桿的物理方向（推向琴頸端是哪一檔）官方未標示"
 
-  # 官方規格表與本檔既有記載的落差，兩邊都留，不代為取捨
+  # 官方規格表的對應欄位（供交叉比對）
   official_spec_notes:
     controls_per_official: ["Master Volume", "Master Tone"]
     pickups_per_official:
       bridge: "Seymour Duncan SP90-1 Vintage P90"
       neck: "Seymour Duncan SP90-1N Vintage P90"
       configuration: "SS"
-    conflict: |
-      本檔 pickup_set 寫「Seymour Duncan SP90-1 Set (或 Lollar DC-90 Set)」，官方只寫 Seymour Duncan，
-      沒有 Lollar 這個選項。更重要的是：
-      projects/2025-v3-signal-chain/inventory/guitars.yaml:135-138,164 記載的是「Momose VT-1 single-coil」，
-      與官方原廠規格完全不同。
-      這可能表示實機拾音器被更換過（inventory 記現況、本檔記原廠規格，兩者都對），
-      也可能是 inventory 記錯。**需要看實機才能判定，本次不代為修改任何一方。**
+    resolved_2026_09_11: |
+      拾音器爭議已結案。使用者確認實機是 Seymour Duncan SP90-1 Set，與官方一致。
+      projects/2025-v3-signal-chain/inventory/guitars.yaml 原本記的「Momose VT-1」
+      是**另一把琴（Momose）的規格**，誤植到這一筆，已更正。
 
 # 硬體規格
 hardware:

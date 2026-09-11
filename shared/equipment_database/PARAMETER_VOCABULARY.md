@@ -87,8 +87,8 @@
 | 標準名稱 | 台數 | 型態 | 見過的原文寫法 | 說明 |
 |---|---|---|---|---|
 | Volume | 7 個實例／4 台 | **unknown** | `Volume (Neck)` `Volume (Bridge)` `Volume (共用)` | 純名稱字串，**四份檔案都沒寫 controlKind、刻度、taper** |
-| Tone | 6 個實例／4 台 | **unknown** | `Tone (Neck)` `Tone (Bridge)` `Tone (共用)` | 同上 |
-| Pickup Selector Switch | 4 | discrete | `3-way pickup selector` | 2026-09-11 查證：**四把裡只有 `fender_tokyo_thinline` 查到官方檔位名稱**（Position 1 Bridge／2 Bridge+Neck／3 Neck）。其餘三把的官方文件一律不命名檔位，各檔已標註查過哪些來源。`esp_throbber_ctm` 另有更嚴重的問題，見下方 |
+| Tone | 5 個實例／4 台 | **unknown** | `Tone (Neck)` `Tone (Bridge)` `Tone (共用)` | 同上。2026-09-11：`esp_eclipse_ctm` 經使用者確認實機是 Master Tone 一顆，原本記兩顆，已更正（實例數 6 → 5） |
+| Pickup Selector Switch | 4 | discrete | `3-way pickup selector`、`5-Way Lever PU Selector` | **檔數不一致**：三把是 3 檔，`esp_throbber_ctm` 是 **5 檔**（2026-09-11 經使用者確認實機為 ESP 上位機種 THROBBER，原本誤記為 3-way）。檔位名稱只有 `fender_tokyo_thinline` 查到官方寫法（Position 1 Bridge／2 Bridge+Neck／3 Neck），其餘三把的官方文件一律不命名檔位 |
 
 四份檔案都完整讀過，`pickups.controls` 之外沒有其他使用者可調項目（沒有 coil-split、push-pull、主動 EQ）。
 
@@ -96,10 +96,12 @@
 
 | 吉他 | Volume | Tone |
 |---|---|---|
-| `esp_eclipse_ctm` | per-pickup | per-pickup |
-| `esp_throbber_ctm` | per-pickup | per-pickup |
+| `esp_eclipse_ctm` | per-pickup | **共用**（2026-09-11 更正，原記 per-pickup） |
+| `esp_throbber_ctm` | per-pickup | per-pickup（**未經實機確認**，ESP 官方上位機種 THROBBER 是 Master Volume + Master Tone 兩顆） |
 | `fender_tokyo_thinline` | 共用 | 共用 |
 | `greco_te500` | **per-pickup** | **共用** |
+
+四把裡有三種不同的組合。這張表是「不能假設同一把琴內規則一致」的直接證據。
 
 ### 音箱（3 台）
 
@@ -279,33 +281,37 @@
 
 三把查不到的已在各自的 spec YAML 標成 `positions: null`，並列出**查過哪些來源**。那是查證結果，不是還沒查。**不要用「雙 humbucker 的 3-way 就是 Neck/Both/Bridge」這種常識推論填空。**
 
-## 需要看實機才能判定的三處衝突
+## 三處衝突已由使用者確認實機結案（2026-09-11）
 
-查證過程中發現三處官方規格與本庫記載不符。三處都可能是「實機被改裝過」而非「資料寫錯」，所以**本次一律不改，只標註**。
+查證時發現三處官方規格與本庫記載不符。使用者確認實機後，三處全部結案。
 
-### 1. `esp_throbber_ctm` 的 3-way vs 5-way（最嚴重）
+| # | 原本的衝突 | 實機確認結果 | 處置 |
+|---|---|---|---|
+| 1 | `esp_throbber_ctm` 寫 3-way，ESP 官方 Throbber 家族一律 5-Way | **是 ESP 上位機種 THROBBER，5 檔** | 本庫改為 `5-Way Lever PU Selector` |
+| 2 | `esp_eclipse_ctm` 列兩顆 Tone，ESP 官方寫 Master Tone 一顆 | **面板三顆旋鈕，Tone 一顆** | 本庫 controls 改為 `Tone (共用)` |
+| 3 | `fender_tokyo_thinline` 的拾音器三方不一致 | **Seymour Duncan SP90-1 Set (SP90-1 + SP90-1N)** | spec 移除「或 Lollar」的模糊寫法；inventory 的「Momose VT-1」是另一把琴的規格誤植，已更正 |
 
-本庫寫 3-way。但 ESP 品牌 Throbber 家族的官方規格**一律是 5-Way Lever PU Selector**——包含拾音器與本檔完全相符的 THROBBER-STD（Seymour Duncan APH-1n／TB-APH-1b）。
+### 型號識別：Throbber 保留舊名
 
-兩種可能：實機確實是 3 檔（客製或個體差異），或者整筆條目寫錯型號。詳見 `guitars/specs/esp_throbber_ctm.yaml` 的 `pickup_selector.dispute`。
+實機是 ESP Original Series 的**上位機種 THROBBER**，不是型號名稱裡的「Throbber-CTM」。
 
-### 2. `esp_eclipse_ctm` 的 Tone 數量
+本庫**沒有改 id 與型號名稱**。`esp_throbber_ctm` 與「Throbber-CTM」這個字串散在
+Pedal-Research 41 個檔案、Pedal-Web-Service-Planning 7 個檔案，改名的波及範圍遠大於收益。
+實機型號記在 `guitars/specs/esp_throbber_ctm.yaml` 的 `model_identity` 區塊。
 
-本庫 controls 列 `Tone (Neck)` 與 `Tone (Bridge)` 兩顆。ESP 官方（日本站與美國站）寫的是 **Master Tone 一顆**。
+**比對官方規格時請看 ESP Original Series THROBBER（上位機種）**，不是 THROBBER-STD，
+也不是副牌 Edwards 的 E-THROBBER-CTM。
 
-這件事會連帶影響上面吉他表的「作用範圍在同一把琴內不一致」那張對照表——該表把本琴的 Tone 標為 per-pickup，依據就是本庫。
+### Throbber 還有兩項未確認
 
-### 3. `fender_tokyo_thinline` 的拾音器
+使用者確認了檔數與型號，但這兩項尚未確認，本庫維持原記載：
 
-三方不一致：
+1. **旋鈕數量** — 本庫列四顆（Volume 頸/橋、Tone 頸/橋）。官方上位機種 THROBBER 的
+   CONTROL 欄是 Master Volume + Master Tone **兩顆**。
+2. **拾音器** — 本庫記 Seymour Duncan APH-1n / TB-APH-1b。官方上位機種 THROBBER 配的是
+   ESP Custom Lab CL-P-H-2n / CL-P-H-2b。可能是換過拾音器，也可能本庫記錯。
 
-| 來源 | 說法 |
-|---|---|
-| Fender 官方規格表 | Seymour Duncan SP90-1 / SP90-1N Vintage P90 |
-| 本庫 spec YAML | 「Seymour Duncan SP90-1 Set (或 Lollar DC-90 Set)」 |
-| `projects/2025-v3-signal-chain/inventory/guitars.yaml:135-138` | **Momose VT-1 single-coil** |
-
-inventory 記的是現況、spec 記的是原廠規格——若拾音器被換過，兩者可以同時正確。但也可能是 inventory 記錯。
+上面那張 Volume/Tone 對照表的 `esp_throbber_ctm` 那列因此仍標「未經實機確認」。
 
 ## 官方文件自己矛盾、兩面都要記的地方
 
