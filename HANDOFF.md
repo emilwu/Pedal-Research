@@ -44,19 +44,27 @@ git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service ls-tree -r main --name-on
 
 `main` 上有就是誤報。
 
-### 2026-09-11 目前正在誤報的兩處
+### 怎麼分辨誤報與真失效
 
-跑 `--workspace` 會看到這兩筆，**現在都是誤報，不要改**：
+**不要在這裡列清單。**任何「目前正在誤報的是這幾處」的列舉，寫下的當下就開始腐壞——
+2026-09-11 就發生過：清單寫下 7 分鐘後 Web-Service 又刪了 3 個檔案，
+兩處的清單立刻變成七處，而清單看起來像是窮盡的。
 
+改用這個判斷法，它不會過期：
+
+```bash
+# 把 --workspace 報的每一條路徑丟進去
+git -C /Users/emilwu/VSCode/PedalGuy/Pedal-Web-Service ls-tree -r main --name-only -- <路徑>
 ```
-Pedal-App/.claude/commands/build.md:90       -> Pedal-Web-Service/src/app/api/mobile/
-Pedal-App/.claude/rules/architecture.md:40   -> Pedal-Web-Service/src/app/api/mobile/
-```
 
-Pedal-Web-Service 停在 `feature/scope-reduction`，該分支刪掉了
-`src/app/api/mobile/auth/login/route.ts`。`main` 上還在，所以 Pedal-App 的引用是對的。
+- **有輸出** → `main` 上存在，是分支落差造成的誤報。**不要改文件。**
+- **無輸出** → `main` 上真的沒有，是真失效，要改。
 
-**但合併之後它們會變成真失效。**處理方式已排程，見下方「跨 repo 待辦」。
+Scope 縮減執行期間（Web-Service 停在 `feature/scope-reduction`），
+誤報數量會隨它的進度**持續增加**。看到 `--workspace` 報一串失效是常態，
+不代表索引壞了。逐條套上面那個指令判斷。
+
+合併之後誤報會一次全部轉成真失效，處理方式見下方「跨 repo 待辦」。
 
 完整說明在 `.githooks/verify-paths.py` 檔頭的「未修的限制」段落。
 

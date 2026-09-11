@@ -1,7 +1,8 @@
 # Signal Chain: Pure Solid State - JC-22 Stereo Front-End v1.0
 
 **Version:** 1.0 (Pure Solid State)
-**Created:** 2026-01-27
+**Created:** 2026-01-27（手動填寫。實際 commit 進 repo 的日期是 2026-03-09，
+commit `062cf75`。兩者對不上時以 git 為準）
 **Guitar:** ESP Throbber-CTM / Greco TE-500
 **Amp:** Roland JC-22 Jazz Chorus (Front Inputs Used)
 **Music Style:** Neo-Soul / Post-Rock

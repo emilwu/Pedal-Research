@@ -123,7 +123,8 @@
 所有相關檔案已整理至 `projects/2025-v3-signal-chain/` 目錄。
 
 如需繼續此專案或建立基於此配置的新專案，請參考（這幾份後續已搬進 `archived_versions/`）：
-- 訊號鏈最終配置: `archived_versions/signal_chains/signal_chain_v3.0_dual_amp_archived.md`
+- 2025-12-30 歸檔當下的訊號鏈配置: `archived_versions/signal_chains/signal_chain_v3.0_dual_amp_archived.md`
+  （**不是最終版**。歸檔後 `signal_chains/` 仍持續有新設計加入，見下方「專案後續更新」）
 - 完整技術分析: `archived_versions/analysis/comprehensive_analysis_summary_v2.0_dual_amp_archived.md`
 - Swiss Things 配置邏輯: `archived_versions/research/swiss_things_signal_routing_logic_archived.md`
 

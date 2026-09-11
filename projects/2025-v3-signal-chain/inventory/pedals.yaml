@@ -1,5 +1,7 @@
 # 效果器清單 - Pedal Inventory
-# 此檔案記錄當前擁有的所有效果器
+# 此檔案記錄效果器庫存，含「已擁有」與「規劃中」兩種狀態。
+# 要回答「我現在有幾顆」請看檔尾 stats 區塊的 active，不是條目總數——
+# 條目裡混有 status: "planned" 的未購入設備（目前是 Empress Buffer++）。
 # 由 Inventory Manager Skill 管理
 
 version: 2.1
@@ -175,7 +177,7 @@ pedals:
     notes: "可程式化 EQ，為每把吉他建立專用 preset，附 Clean Boost 功能"
 
   # ============================================================
-  # OVERDRIVE / DISTORTION (5)
+  # OVERDRIVE / DISTORTION (6)
   # ============================================================
 
   - id: "sweet_honey"
