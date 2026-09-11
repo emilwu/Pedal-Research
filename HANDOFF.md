@@ -215,7 +215,8 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 Cross-Directory Reference 表指向它。搬到 Research 會讓 Planning 的索引依賴一個
 它不能寫入的唯讀 repo，之後每次更新都要跨 session 協調。
 
-權威記錄在 Planning 的 `07`。若那份文件還寫著「仍未執行」，以本節為準並提醒 Planning 更新。
+權威記錄在 `Pedal-Web-Service-Planning/planning/07-scope-reduction-2026-09.md`
+的「決策 17 標記為不執行（2026-09-11）」一節，決策清單那列也已標註。本節只是摘要。
 
 ---
 
