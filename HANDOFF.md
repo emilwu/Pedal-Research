@@ -275,18 +275,30 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 | JC-22 REVERB 與 Dumblifier Input Boost 沒收進 controls | 已收進 |
 | 「controls 是否含內部微調」的標準 | 已定義，見 `shared/equipment_database/CONTROLS_CONVENTION.md` |
 
-### 三處要看實機才能判定的衝突
+### 三處衝突已結案（2026-09-11）
 
-查證時發現官方規格與本庫記載不符。**三處都可能是實機被改裝過而非資料寫錯，
-所以一律沒改，只標註。**細節在各自的 spec YAML 與 `PARAMETER_VOCABULARY.md`。
+查證時發現官方規格與本庫記載不符三處。使用者確認實機後全部結案，本庫已更正：
 
-1. **`esp_throbber_ctm` 寫 3-way，ESP 官方 Throbber 家族一律是 5-Way Lever**
-   ——包含拾音器與本檔完全相符的 THROBBER-STD。可能是客製，也可能整筆條目寫錯型號。
-2. **`esp_eclipse_ctm` 列兩顆 Tone，ESP 官方寫 Master Tone 一顆。**
-3. **`fender_tokyo_thinline` 的拾音器三方不一致**：官方 SP90-1、本庫 spec 寫
-   「SP90-1 或 Lollar」、inventory 寫 Momose VT-1。
+| 原本的衝突 | 實機是什麼 |
+|---|---|
+| `esp_throbber_ctm` 寫 3-way，ESP 官方 Throbber 家族一律 5-Way | **上位機種 THROBBER，5 檔撥桿** |
+| `esp_eclipse_ctm` 列兩顆 Tone | **三顆旋鈕，Tone 一顆（Master Tone）** |
+| `fender_tokyo_thinline` 拾音器三方不一致 | **Seymour Duncan SP90-1 Set**。inventory 原本記的「Momose VT-1」是另一把琴的規格誤植 |
 
-**這三處是目前 Research 唯一需要使用者親自確認的事。**看一眼實機就能結案。
+**Throbber 的型號名稱沒有改。**實機是上位機種 THROBBER，但 `esp_throbber_ctm` 這個 id
+與「Throbber-CTM」字串散在 Research 41 個檔案、Planning 7 個，改名波及太大。
+實機型號記在 `shared/equipment_database/guitars/specs/esp_throbber_ctm.yaml`
+的 `model_identity` 區塊。**比對官方規格時要看上位機種 THROBBER**，
+不是 THROBBER-STD，也不是副牌 Edwards 的 E-THROBBER-CTM。
+
+### Throbber 剩兩項沒確認（優先順序低）
+
+檔數與型號已確認，這兩項還沒有，本庫維持原記載：
+
+1. **旋鈕數量** — 本庫列四顆，官方上位機種 THROBBER 是 Master Volume + Master Tone 兩顆
+2. **拾音器** — 本庫記 Seymour Duncan APH-1n / TB-APH-1b，官方配的是 ESP Custom Lab CL-P-H-2n / 2b
+
+兩項都是「可能換過零件」而非「一定記錯」。下次碰到那把琴時看一眼就能結案。
 
 ### 跨 repo 待辦
 
