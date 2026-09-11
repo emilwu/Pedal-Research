@@ -17,7 +17,7 @@ accessories:
       currency: "USD"
       tier: "professional_accessory"
 
-    research_file: "shared/equipment_database/accessories/rockboard_mod2_v2.yaml"
+    research_file: "shared/equipment_database/accessories/specs/rockboard_mod2_v2.yaml"
 
     usage:
       purpose: "MIDI 控制 + 訊號線管理"
@@ -45,7 +45,7 @@ accessories:
       currency: "USD"
       tier: "professional_accessory"
 
-    research_file: "shared/equipment_database/accessories/rockboard_mod3_v2.yaml"
+    research_file: "shared/equipment_database/accessories/specs/rockboard_mod3_v2.yaml"
 
     usage:
       purpose: "XLR 輸出 + 訊號線管理"

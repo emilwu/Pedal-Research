@@ -57,7 +57,7 @@ pedals:
       planned_buffer_plus_plus: "n/a (this is the router itself)"
       migration_status: "planned_upgrade"
 
-    research_file: "shared/equipment_database/pedals/empress_buffer_plus_plus.yaml"
+    research_file: "shared/equipment_database/pedals/specs/empress_buffer_plus_plus.yaml"
     notes: "強烈建議升級取代 Swiss Things - 可充分發揮 JC-22 和 Tone King 的 stereo FX loop 能力，2 inputs 快速換吉他，input metering 避免 EMG 削波"
 
     upgrade_plan:
@@ -101,7 +101,7 @@ pedals:
       planned_buffer_plus_plus: "before_router"
       notes: "Always-on compressor before signal router"
 
-    research_file: "shared/equipment_database/pedals/empress_mkii.yaml"
+    research_file: "shared/equipment_database/pedals/specs/empress_mkii.yaml"
     notes: "極度透明的 VCA 壓縮，適合 Jazz 和 Neo Soul"
 
   - id: "cali76_fet"
@@ -135,7 +135,7 @@ pedals:
       planned_buffer_plus_plus: "before_router"
       notes: "Always-on compressor before signal router"
 
-    research_file: "shared/equipment_database/pedals/cali76_fet.yaml"
+    research_file: "shared/equipment_database/pedals/specs/cali76_fet.yaml"
     notes: "溫暖 FET 染色壓縮，增加 sustain 適合 Post Rock"
 
   # ============================================================
@@ -173,7 +173,7 @@ pedals:
       planned_buffer_plus_plus: "before_router"
       notes: "Always-on EQ/boost before signal router"
 
-    research_file: "shared/equipment_database/pedals/pa1qg.yaml"
+    research_file: "shared/equipment_database/pedals/specs/pa1qg.yaml"
     notes: "可程式化 EQ，為每把吉他建立專用 preset，附 Clean Boost 功能"
 
   # ============================================================
@@ -211,7 +211,7 @@ pedals:
       planned_buffer_plus_plus: "loop_1"
       notes: "Gain pedal in switchable loop"
 
-    research_file: "shared/equipment_database/pedals/sweet_honey.yaml"
+    research_file: "shared/equipment_database/pedals/specs/sweet_honey.yaml"
     notes: "訊號鏈1核心溫暖 OD，Neo Soul 甜蜜點"
 
   - id: "prs_horsemeat"
@@ -244,7 +244,7 @@ pedals:
       planned_buffer_plus_plus: "loop_1"
       notes: "Gain pedal in switchable loop"
 
-    research_file: "shared/equipment_database/pedals/prs_horsemeat.yaml"
+    research_file: "shared/equipment_database/pedals/specs/prs_horsemeat.yaml"
     notes: "V3.0 新增，取代 Colosseum Klon Side，訊號鏈1透明 Boost"
 
   - id: "morning_glory"
@@ -277,7 +277,7 @@ pedals:
       planned_buffer_plus_plus: "loop_1"
       notes: "Gain pedal in switchable loop"
 
-    research_file: "shared/equipment_database/pedals/morning_glory.yaml"
+    research_file: "shared/equipment_database/pedals/specs/morning_glory.yaml"
     notes: "V3.0 新增，取代 Colosseum BB Side，經典 BB 音色"
 
   - id: "roshi_blacklon"
@@ -310,7 +310,7 @@ pedals:
       planned_buffer_plus_plus: "loop_1"
       notes: "Gain pedal in switchable loop"
 
-    research_file: "shared/equipment_database/pedals/roshi_blacklon.yaml"
+    research_file: "shared/equipment_database/pedals/specs/roshi_blacklon.yaml"
     notes: "訊號鏈2 Blackface 管機模擬，讓 JC-22 有管機感"
 
   - id: "twa_source_code"
@@ -343,7 +343,7 @@ pedals:
       planned_buffer_plus_plus: "loop_1"
       notes: "Gain pedal in switchable loop"
 
-    research_file: "shared/equipment_database/pedals/twa_source_code.yaml"
+    research_file: "shared/equipment_database/pedals/specs/twa_source_code.yaml"
     notes: "訊號鏈2 TS Evolution，Classic Rock 時需要 TS 中頻開啟"
 
   - id: "odl1cs"
@@ -376,7 +376,7 @@ pedals:
       planned_buffer_plus_plus: "loop_1"
       notes: "Gain pedal in switchable loop"
 
-    research_file: "shared/equipment_database/pedals/odl1cs.yaml"
+    research_file: "shared/equipment_database/pedals/specs/odl1cs.yaml"
     notes: "訊號鏈2 Dumble 高階音色，Fusion 經典"
 
   # ============================================================
@@ -418,7 +418,7 @@ pedals:
       planned_buffer_plus_plus: "loop_2"
       notes: "Time-based effects in stereo-capable loop (Buffer++ Loop 2 is stereo)"
 
-    research_file: "shared/equipment_database/pedals/ff1y.yaml"
+    research_file: "shared/equipment_database/pedals/specs/ff1y.yaml"
     notes: "兩條訊號鏈共用，雙延遲模組提供豐富創意延遲，Random Phase Modulation 世界首創"
 
   # ============================================================
@@ -457,7 +457,7 @@ pedals:
       planned_buffer_plus_plus: "loop_2"
       notes: "Time-based effects in stereo-capable loop (Buffer++ Loop 2 is stereo)"
 
-    research_file: "shared/equipment_database/pedals/nucleo.yaml"
+    research_file: "shared/equipment_database/pedals/specs/nucleo.yaml"
     notes: "兩條訊號鏈共用，Stereo 主 Reverb，核電廠反應爐空間感"
 
   - id: "aasb"
@@ -491,7 +491,7 @@ pedals:
       planned_buffer_plus_plus: "loop_2"
       notes: "Time-based effects in stereo-capable loop (Buffer++ Loop 2 is stereo)"
 
-    research_file: "shared/equipment_database/pedals/aasb.yaml"
+    research_file: "shared/equipment_database/pedals/specs/aasb.yaml"
     notes: "訊號鏈2特殊音景，雙向八度 Shimmer/Drone，天堂與地底碰撞"
 
 # ============================================================

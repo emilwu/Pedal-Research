@@ -53,7 +53,7 @@ amps:
     # 訊號鏈配置
     signal_chain_method: "4cm"  # 4-Cable Method
 
-    research_file: "shared/equipment_database/amps/tone_king_imperial_mkii.yaml"
+    research_file: "shared/equipment_database/amps/specs/tone_king_imperial_mkii.yaml"
     notes: "專業 tube preamp，有 FX loop 適合 4CM 配置，主要用於錄音"
 
   - id: "roland_jc22"
@@ -77,11 +77,12 @@ amps:
       - "Clean headroom"
       - "Classic Jazz Chorus tone"
       - "BRIGHT switch"
-      - "No effects loop"
+      - "Stereo FX loop (mono send, stereo L/R return)"
 
     # Effects Loop
-    has_fx_loop: false
-    fx_loop_type: null
+    # 2026-09-11 修正，依據見本檔末的「JC-22 FX loop 修正記錄」。
+    has_fx_loop: true
+    fx_loop_type: "stereo (mono send, stereo L/MONO + R return)"
 
     # 使用建議
     best_for:
@@ -100,7 +101,7 @@ amps:
       - "Clean styles"
 
     # 訊號鏈配置
-    signal_chain_method: "pre_amp_only"  # 所有效果器放在 amp 之前
+    signal_chain_method: "pre_amp_or_fx_loop"  # 兩種接法都可行，不是只能放前級
 
     # 內建效果
     built_in_effects:
@@ -110,8 +111,8 @@ amps:
           - "SPEED"
           - "DEPTH"
 
-    research_file: "shared/equipment_database/amps/roland_jc22.yaml"
-    notes: "經典 Jazz Chorus 晶體機，無 FX loop，所有效果器需放在前級，內建 stereo chorus"
+    research_file: "shared/equipment_database/amps/specs/roland_jc22.yaml"
+    notes: "經典 Jazz Chorus 晶體機，有 stereo FX loop（mono send / stereo return），前級接法與 FX loop 接法皆可，內建 stereo chorus"
 
 # ============================================================
 # 統計資訊
@@ -125,8 +126,8 @@ stats:
     tube_preamp: 1
     solid_state_combo: 1
 
-  has_fx_loop: 1
-  no_fx_loop: 1
+  has_fx_loop: 2  # 2026-09-11 修正：JC-22 也有（原記為 1/1）
+  no_fx_loop: 0
 
 # ============================================================
 # 使用建議
@@ -135,7 +136,7 @@ stats:
 usage_recommendations:
   signal_chain_1:
     amp: "roland_jc22"
-    reason: "無 FX loop，適合 Jazz/Neo Soul/Funk clean 音色"
+    reason: "clean headroom 大、內建 stereo chorus，適合 Jazz/Neo Soul/Funk clean 音色"
     styles:
       - "Jazz"
       - "Neo Soul"
@@ -150,3 +151,23 @@ usage_recommendations:
       - "Fusion"
       - "Ambient"
       - "Rock"
+
+# ============================================================
+# JC-22 FX loop 修正記錄（2026-09-11）
+# ============================================================
+
+# 本檔原本在六處記載 JC-22「無 FX loop」：features、has_fx_loop、fx_loop_type、
+# signal_chain_method、notes、stats、以及 usage_recommendations 的理由。全部已修正。
+#
+# 依據：shared/equipment_database/amps/specs/roland_jc22.yaml 是 v2.0（last_updated
+# 2026-01-02），檔頭第 6 行的 correction_note 寫「修正版本 - JC-22 確實有 STEREO FX
+# LOOP (Send + Stereo Return)」，:111-127 列出三個接孔，:138-160 的 fx_loop_details
+# 記 has_fx_loop: true、type「Stereo effects loop (mono send, stereo return)」。
+#
+# 分工提醒：本檔（inventory）是「擁有什麼」的權威來源，
+# shared/equipment_database/ 是「技術規格」的權威來源。查規格要看規格庫。
+# 2026-01-02 的修正只套到規格庫，本檔漏掉，導致兩邊衝突了八個月。
+#
+# 下游影響：projects/2025-v3-signal-chain/analysis/jc_22_pure_analysis.md 的
+# Front-End Stereo 論證起點是「amps.yaml 定義 JC-22 為無 FX Loop」。那個前提已不成立。
+# 說明見 projects/2025-v3-signal-chain/signal_chains/README.md。
