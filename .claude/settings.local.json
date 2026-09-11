@@ -25,5 +25,6 @@
       "Bash(git remote add:*)",
       "Bash(git fetch:*)"
     ]
-  }
+  },
+  "outputStyle": "Plain Technical Style"
 }
