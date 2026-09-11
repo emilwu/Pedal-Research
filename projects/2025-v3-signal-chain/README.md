@@ -182,7 +182,9 @@
 - 採 **Front-End Stereo** 接法：效果器分兩段接進 Empress Buffer++（Loop 1 為單聲道 dynamics/drive、Loop 2 為立體聲空間效果），最終直接接進 JC-22 的 stereo L/R front inputs，不經過音箱的 FX Loop
 - 只有**一條**訊號流程，不像 Toneking Only 配置用 Buffer++ Loop 1/2 切換兩種音樂風格的訊號鏈
 
-**目前狀態：** 本專案於 2025-12-30 已宣告「完成並歸檔」，但 `signal_chains/` 目錄在那之後仍持續有新設計加入（2026-01-08 的 Toneking Only、2026-03-09 的 JC-22 Front-End Stereo）。截至本次更新，`signal_chains/` 下同時存在這兩份現行（非歸檔）設計，音箱配置與訊號路由方式互不相同，本文件不代為判斷孰為最終版，請讀者依實際使用需求自行比對兩份文件。
+**目前狀態：** 本專案於 2025-12-30 已宣告「完成並歸檔」，但 `signal_chains/` 目錄在那之後仍持續有新設計加入（2026-01-08 的 Toneking Only、2026-03-09 的 JC-22 Front-End Stereo）。`signal_chains/` 下同時存在這兩份非歸檔設計，音箱配置與訊號路由方式互不相同。
+
+**結論見 `signal_chains/README.md`（2026-09-11 新增）。**摘要：兩份都是提案，都不是現況——兩份的路由架構都建立在尚未購入的 Empress Buffer++ 上，Toneking Only 還額外需要一顆不在庫存的 Boss CE-2W 並要求賣掉仍持有的 JC-22。兩份設計互相排斥，而且都沒有提到對方。判斷方法與逐項依據在該檔。
 
 ---
 

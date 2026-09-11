@@ -86,8 +86,14 @@ Scope 縮減執行期間（Web-Service 停在 `feature/scope-reduction`），
 注意該檔內部的 `Created:` 欄位寫 2026-01-27，與 commit 日期對不上——那是作者手動
 填的建立日期。**以 git 的日期為準。**
 
-`signal_chains/` 目前同時存在兩份非歸檔設計，本 repo 的文件沒有說哪一份是最終版。
-詳見 `projects/2025-v3-signal-chain/README.md`。
+`signal_chains/` 目前同時存在兩份非歸檔設計。**結論在
+`projects/2025-v3-signal-chain/signal_chains/README.md`：兩份都是提案，都不是現況。**
+兩份都需要尚未購入的 Empress Buffer++，而且互相排斥（一份要賣掉 JC-22，另一份以 JC-22
+為唯一音箱）。
+
+有一處會誤導你：`projects/2025-v3-signal-chain/archived_versions/README.md:164-169`
+把其中一份無條件標為「最終配置」。**那段寫於第二份設計出現之前，而且它在
+`archived_versions/` 底下，依規則不改。判斷時要略過它。**
 
 ---
 
@@ -132,10 +138,23 @@ done
 
    相同就表示只改了註解，可以安心覆蓋。不同就要逐行看過再決定。
 
-**2026-09-11 的已知落差**：本檔的 docstring（已知限制、誤判來源那幾段）
-只同步到 Pedal-Research 與 Pedal-App。Pedal-Web-Service-Planning 與
-Pedal-Web-Service 兩份還是舊 docstring，程式邏輯相同、只差註解。
-兩邊各有自己的 session 在顧，等它們同步。
+**落差怎麼判、誰來補**：這裡不列「目前哪幾份落後」的快照。2026-09-11 列過一次，
+當天就過期了——那次寫下 Planning 與 Web-Service 兩份落後，Planning 隨後自己補上，
+清單就錯了一半。改用下面這個流程，它不會過期：
+
+1. 跑上面的 md5 迴圈，找出哪幾份與其他不同。
+2. 對每一份不同的，跑上面的 AST 比對，確認差異是不是只在 docstring。
+3. 依結果決定怎麼處理：
+
+| AST 比對結果 | 處理方式 |
+|---|---|
+| `IDENTICAL` | 只差註解，不急。等該 repo 自己的 session 補。 |
+| `LOGIC DIFFERS` | 逐行看過，先確定哪一份才是新的，再把取檔指令給對方。 |
+
+兩種情況都不要直接寫進別人的工作目錄，理由見上面第 2 點。
+
+例外是 Pedal-App。它是暫停狀態，沒有 session 在顧。它落後時要由使用者授權其他
+session 代補。
 
 ### 安裝
 
@@ -158,14 +177,44 @@ git config core.hooksPath .githooks
 .githooks/verify-paths.py --workspace  # 四個 repo
 ```
 
-commit-time 的 hook 只擋「新增的」失效路徑，擋不住「既有路徑因為別的 repo 改動而失效」。
-後者只有手動全庫重掃抓得到。
+commit-time 的 hook 掃的是**整份 staged 檔案的內容**，不是只掃新增的行。所以你一旦改到
+某個檔案，它裡面既有的失效路徑也會一起擋下來——即使那不是你造成的。
+
+它擋不住的是**你沒動到的檔案**。既有路徑因為別的 repo 改動而失效時，
+只有手動全庫重掃（`--all` 或 `--workspace`）抓得到。
+
+實務後果：改 `HANDOFF.md` 這種本身就引用跨 repo 路徑的檔案時，只要對方在 feature branch 上，
+commit 就會被誤報擋住。先用上面的 `ls-tree` 判斷是不是誤報；確定是誤報就用
+`git commit --no-verify`，**並把判斷依據寫進 commit message**。前例見 Pedal-App 的 `203b0a2`。
 
 ### 已知限制
 
 寫在 `.githooks/verify-paths.py` 的檔頭 docstring 裡，包含三個刻意不做的覆蓋缺口、
 工作目錄 vs 分支的誤報問題、以及改動程式前要知道的三類誤判排除與一個格式陷阱。
 **改動該程式前務必先讀那段。**
+
+### 驗證器看不到的地方：YAML 字串值裡的路徑
+
+驗證器只認反引號包起來的 token 與目錄樹項目（檔頭限制第 1 條）。**寫在 YAML 雙引號
+裡的路徑它一條都看不到**，而那個缺口涵蓋了 `inventory/` 四份 YAML 的 `research_file`
+欄位——本 repo 最權威的那組檔案。
+
+2026-09-11 查到那 21 條全部失效：它們指向 2026-01-13 目錄重構前的舊層級，少一層
+`specs/`。驗證器八個月來報 0，因為它根本看不到。已全部修正。
+
+這個缺口不會自己消失。改動 `shared/equipment_database/` 的目錄結構之後，用這個指令
+手動重掃（驗證器擋不住）：
+
+```bash
+cd /Users/emilwu/VSCode/PedalGuy/Pedal-Research
+grep -rh 'research_file:' projects/*/inventory/*.yaml | while IFS= read -r l; do
+  p=$(echo "$l" | sed 's/.*research_file: *"//; s/".*//')
+  [ -e "$p" ] || echo "MISSING $p"
+done
+```
+
+無輸出就是全部存在。**不要為了讓驗證器抓到而把這些路徑改成反引號**，它們是 YAML
+的值，加反引號會變成值的一部分。
 
 ---
 
@@ -211,21 +260,33 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 
 ## Research 的待辦
 
-### 設備資料缺口（7 項）
+### 設備資料缺口（原 7 項，2026-09-11 已處理）
 
-完整清單在 `shared/equipment_database/PARAMETER_VOCABULARY.md` 的
-「Research 這邊自己該補的資料缺口」章節。摘要：
+完整結果在 `shared/equipment_database/PARAMETER_VOCABULARY.md` 的
+「2026-09-11 的缺口補齊結果」章節。摘要：
 
-1. `empress_buffer_plus_plus` 的控制項數量與功能全是 TBD
-2. `odl1cs` 的 7 個通道控制沒有任何功能說明，`PUSH` 與 `HI CUT` 功能不明
-3. 四把吉他的 pickup selector 都沒寫出三個檔位的實際名稱
-4. `cali76_fet` 的 RATIO 宣告是離散但沒給檔位
-5. `ff1y` 的 EQ (3-band) 未列出個別旋鈕名稱
-6. `roland_jc22` 的 REVERB 旋鈕與 `dsm_dumblifier` 的 Input Boost switch 沒收進各自的 controls 區塊
-7. 「controls 是否包含內部微調項」這條標準沒有在資料庫層級明文定義
+| 缺口 | 結果 |
+|---|---|
+| Buffer++ 的 footswitch／knob／switch 全是 TBD | 補齊（官方手冊 rev04）：1 / 2 / 6 |
+| ODL-1-CS 七個通道控制沒有功能說明 | 補齊（官方 CS 手冊 ver 1.2）。PUSH 是大旋鈕、HI CUT 是 trim，兩者皆連續 |
+| 四把吉他的 selector 檔位名稱 | **只補到一把。**其餘三把確認官方文件不命名檔位 |
+| Cali76 FET 的 RATIO | 補齊，而且原判讀有誤——它是連續旋鈕 4:1~20:1，不是離散 |
+| FF-1Y 的 EQ 名稱與「×2」 | 補齊（官方手冊 Ver 1.3）。EQ 是 TREBLE／MIDDLE／BASS |
+| JC-22 REVERB 與 Dumblifier Input Boost 沒收進 controls | 已收進 |
+| 「controls 是否含內部微調」的標準 | 已定義，見 `shared/equipment_database/CONTROLS_CONVENTION.md` |
 
-**這 7 項的優先順序已降級。** 因為 `settings` 與規格庫解耦，它們不再擋住任何功能，
-只影響 `/gear/[id]` 的規格顯示——而規格缺漏在那裡會誠實顯示為「無資料」，不猜測。
+### 三處要看實機才能判定的衝突
+
+查證時發現官方規格與本庫記載不符。**三處都可能是實機被改裝過而非資料寫錯，
+所以一律沒改，只標註。**細節在各自的 spec YAML 與 `PARAMETER_VOCABULARY.md`。
+
+1. **`esp_throbber_ctm` 寫 3-way，ESP 官方 Throbber 家族一律是 5-Way Lever**
+   ——包含拾音器與本檔完全相符的 THROBBER-STD。可能是客製，也可能整筆條目寫錯型號。
+2. **`esp_eclipse_ctm` 列兩顆 Tone，ESP 官方寫 Master Tone 一顆。**
+3. **`fender_tokyo_thinline` 的拾音器三方不一致**：官方 SP90-1、本庫 spec 寫
+   「SP90-1 或 Lollar」、inventory 寫 Momose VT-1。
+
+**這三處是目前 Research 唯一需要使用者親自確認的事。**看一眼實機就能結案。
 
 ### 跨 repo 待辦
 
