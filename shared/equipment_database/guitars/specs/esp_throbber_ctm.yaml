@@ -32,9 +32,24 @@ price:
 body:
   # 2026-09-12 照官方改。原記 Honduras Mahogany / semi-hollow / set-neck 全部不符。
   wood: "Alder"
-  construction: "Sound Reservoir 空腔設計"
-  type: "chambered"   # 官方寫 Sound Reservoir，不是 semi-hollow
+  construction: "Semi-hollow with Sound Reservoir chamber"
+  type: "semi_hollow"
   thickness: "45mm"
+  # type 的依據是**擁有者確認**，不是 ESP 官方用詞。兩者的關係見下方 esp_own_wording。
+  # 2026-09-12：本庫一度把 type 改成 chambered，理由寫「官方寫 Sound Reservoir，
+  # 不是 semi-hollow」。那是把「有專有名稱」誤當成「屬於另一個分類」，已改回。
+  esp_own_wording:
+    term: "特殊ホロウ形状（名稱為 Sound Reservoir／サウンドリザーバー）"
+    quote: "新たに採用された特殊ホロウ形状の名称はSound Reservoir（サウンドリザーバー）と言います"
+    source: "https://espguitars.co.jp/product/2873/ 的 SPECIAL FEATURES 段落"
+    never_uses: "產品頁逐字掃描：セミホロウ 0 次、semi-hollow 0 次、チェンバー 0 次。ESP 在產品頁上只用「ホロウ」"
+    site_taxonomy: "espguitars.co.jp 自家標籤把 THROBBER-STD 歸在 SemiAcoustic（見 /tag/semiacoustic/）"
+    do_not_cite_one_way: |
+      ESP テクニカルハウス 部落格有一篇開發者訪談，句中出現
+      「チェンバード構造（シンライン等も）では…セミアコ的なサウンドに辿り着けない」。
+      **不要拿這句當「官方排除 chambered」的證據。**它把 Thinline 也歸進 chambered，
+      而 Thinline 正是 semi-hollow 的原型，所以那句對兩種分類同樣不利，不具鑑別力。
+      本庫 2026-09-12 一度想這樣單向引用，被查核擋下。
   shape: "Single cutaway with unique body shape"
   finish: null  # 本庫未記實機顏色。官方現行有 3 Tone Sunburst / Smoky Brown / Dark Metallic Green
   binding: "Ivory Binding"
@@ -44,7 +59,7 @@ body:
     - name: "Sound Reservoir"
       description: "ESP 專利空腔設計"
       effect: "增加 resonance 和 sustain，溫暖音色"
-      note: "這是本區塊唯一原本就對的欄位，兩邊都有"
+      note: "Sound Reservoir 與 semi-hollow 不是互斥分類。本庫一度把它們當成互斥而改錯了 type 欄位"
 
 # 琴頸規格
 neck:
@@ -53,20 +68,23 @@ neck:
   construction: "bolt_on"
   joint: "T-5 Ultimate Access"
   head_type: "CT System Head Type-3"
-  profile: null  # 官方未記載
+  profile: "Slim U"                    # 官方 GRIP SHAPE 欄
   scale_length: "648mm (25.5 inch)"
   frets: "22 frets"
   fret_material: "M-SS"
-  nut_width: null    # 官方未記載
-  nut_material: null # 官方未記載
-  spec_verbatim: "Hard Maple (CT System Head Type-3) / Bolt-on (T-5 Ultimate Access) / 648mm / M-SS, 22frets"
+  nut_width: "42mm"                    # 官方 NUT 欄
+  nut_material: "Unbleached Bone"      # 官方 NUT 欄
+  # 2026-09-12：上面四欄原本標「官方未記載」，那是錯的——2873 頁的
+  # GRIP SHAPE 與 NUT 兩欄都有值。本庫第一次核對時只抄了規格表的一部分。
+  field_split_note: "官方規格表只有單一個 CONSTRUCTION 欄，值是整串「Bolt-on (T-5 Ultimate Access)」。本庫拆成 construction 與 joint 兩欄，是本庫自己的拆解，不是官方欄位"
 
 # 指板規格
 fingerboard:
   # 2026-09-12 照官方改。原記 Ebony，不符。
   wood: "Indian Rosewood"
-  radius: null  # 官方未記載
-  inlays: null  # 官方未記載
+  radius: "Compound (240-305R)"                        # 官方 RADIUS 欄
+  inlays: "(Top)MOP Dot, (Side)Luminlay SGM-23"        # 官方 INLAY 欄
+  # 2026-09-12：兩欄原本標「官方未記載」，那是錯的
 
 # 拾音器配置
 pickups:
@@ -147,17 +165,29 @@ pickups:
       product_urls:
         - "https://espguitars.co.jp/product/2873/"   # 3 Tone Sunburst
         - "https://espguitars.co.jp/product/2874/"   # Smoky Brown
+      # 2026-09-12 第二次核對，補齊全部 18 欄。第一次只抄了 10 欄，
+      # 漏掉 GRIP SHAPE / RADIUS / NUT / INLAY / TUNER / PARTS COLOR / SET STRINGS，
+      # 導致本檔六個欄位被誤標成「官方未記載」。
       spec_verbatim:
-        body: "Alder (Sound Reservoir) w/Ivory Binding (Thickness 45mm)"
-        neck: "Hard Maple (CT System Head Type-3)"
-        fingerboard: "Indian Rosewood"
-        scale: "648mm"
-        fret: "M-SS, 22frets"
-        construction: "Bolt-on (T-5 Ultimate Access)"
-        bridge: "ESP FIXED Bridge"
-        pickups: "(Neck) Seymour Duncan APH-1n, (Bridge) Seymour Duncan TB-APH-1b"
-        controls: "Master Volume, Master Tone, 5-Way Lever PU Selector"
-        price: "616,000 yen (without tax: 560,000 yen)"
+        BODY: "Alder (Sound Reservoir) w/Ivory Binding (Thickness 45mm)"
+        NECK: "Hard Maple (CT System Head Type-3)"
+        GRIP_SHAPE: "Slim U"
+        FINGERBOARD: "Indian Rosewood"
+        RADIUS: "Compound (240-305R)"
+        SCALE: "648mm"
+        NUT: "Unbleached Bone(42mm)"
+        INLAY: "(Top)MOP Dot, (Side)Luminlay SGM-23"
+        FRET: "M-SS, 22frets"
+        CONSTRUCTION: "Bolt-on (T-5 Ultimate Access)"
+        TUNER: "GOTOH SG360-07 MG-T"
+        BRIDGE: "ESP FIXED Bridge"
+        PICKUPS: "(Neck) Seymour Duncan APH-1n, (Bridge) Seymour Duncan TB-APH-1b"
+        PARTS_COLOR: "Chrome"
+        CONTROLS: "Master Volume, Master Tone, 5-Way Lever PU Selector"
+        SET_STRINGS: ".010-.046"
+        PRICE: "616,000 yen (without tax: 560,000 yen)"
+        JAN: "4515303287424"
+      body_structure_note: "規格表沒有獨立的琴身結構欄。CONSTRUCTION 欄講的是琴頸接合方式，琴身空腔資訊只在 BODY 欄的括號裡（Sound Reservoir）"
       matches_actual: "PICKUPS 與 CONTROLS 兩欄與實機完全相符（使用者 2026-09-12 確認）"
       page_does_not_say:
         - "現行產品線沒有出現 THROBBER-CTM 或 CTM 字樣"
@@ -167,6 +197,11 @@ pickups:
     deprecated_source:
       url: "https://espguitars.co.jp/original/throbber/throbber.html"
       what_it_says: "型號 THROBBER，PICKUPS 為 ESP Custom Lab CL-P-H-2n / CL-P-H-2b，PRICE 470,000yen"
+      not_on_discon_page: |
+        ESP JP 的生產終了頁 https://espguitars.co.jp/products/discon-esp-guitar
+        列了 56 筆停產品，**完全沒有任何 THROBBER**（全文 THROB 零命中）。
+        所以這個舊頁的 THROBBER 也不是「已下線並移到停產頁」，它就是一個沒被收進
+        現行導覽與搜尋索引的孤兒頁。
       why_not_usable: |
         這是 2021 年以前舊機種的廢棄頁面，從 ESP 網站首頁沒有任何入口或路徑到得了。
         頁面本身還開得起來，引文也逐字正確——**但它不是現行規格**。
@@ -188,9 +223,11 @@ pickups:
 hardware:
   # 2026-09-12：bridge 照官方補。原本的「Tune-o-matic style 預估」是錯的推測，已移除。
   bridge: "ESP FIXED Bridge"
-  tailpiece: null        # 官方未單列，FIXED Bridge 為一體式
-  tuners: null           # 官方未記載
-  hardware_finish: null  # 官方未記載
+  tailpiece: null                      # 官方確實未單列，FIXED Bridge 為一體式
+  tuners: "GOTOH SG360-07 MG-T"        # 官方 TUNER 欄
+  hardware_finish: "Chrome"            # 官方 PARTS COLOR 欄
+  strings_factory: ".010-.046"         # 官方 SET STRINGS 欄
+  # 2026-09-12：tuners 與 hardware_finish 原本標「官方未記載」，那是錯的
 
 # 電子系統
 electronics:

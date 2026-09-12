@@ -65,7 +65,7 @@ guitars:
     # 2026-09-12 照官方 THROBBER-STD 更正。原記六個欄位全部不符，
     # 逐條對照見 shared/equipment_database/guitars/specs/esp_throbber_ctm.yaml
     body_wood: "Alder"
-    body_type: "chambered"
+    body_type: "semi_hollow"   # 2026-09-12 一度誤改為 chambered，已改回
     neck_wood: "Hard Maple"
     neck_construction: "bolt_on"
     fingerboard_wood: "Indian Rosewood"
@@ -190,5 +190,4 @@ stats:
 
   by_body_type:
     solid: 1
-    semi_hollow: 2      # 2026-09-12 修正：Throbber 原記 semi_hollow，
-    chambered: 1        # 官方是 Sound Reservoir 空腔（chambered），不是半空心
+    semi_hollow: 3

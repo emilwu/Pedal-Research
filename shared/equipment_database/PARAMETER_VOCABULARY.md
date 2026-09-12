@@ -385,6 +385,18 @@ ESP Custom Lab CL-P-H-2n / CL-P-H-2b、PRICE 470,000yen。
 否則下一個人會再撿回去。本庫在 `guitars/specs/esp_throbber_ctm.yaml`
 的 `deprecated_source` 區塊示範了這個寫法。
 
+### 還有第四件事：來源是不是同一間公司
+
+2026-09-12 補上。ESP JP（`espguitars.co.jp`）與 ESP USA（`espguitars.com`）
+是**兩間獨立公司**，產品線不對應。本庫一度拿美國站的規格當日本站型號的佐證。
+
+這類「品牌層級、查證前必須先知道」的事記在 `BRAND_NOTES.md`。
+**查任何品牌的官方規格之前先看那一份。**
+
+它也記了一個 grep 抓不到的坑：整個 repo 沒有任何 `espguitars.com` 的 URL，
+但 ESP USA 的引用確實存在——以中文字串「美國官方站」與零售商商品頁的形式存在。
+單純 grep 網域會回報乾淨。
+
 ## 官方文件自己矛盾、兩面都要記的地方
 
 以下每一組的兩種說法都是官方原文。本庫不代為取捨，兩面都記。

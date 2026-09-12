@@ -280,7 +280,14 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 ### 設備資料缺口（原 7 項，2026-09-11 已處理）
 
 完整結果在 `shared/equipment_database/PARAMETER_VOCABULARY.md` 的
-「2026-09-11 的缺口補齊結果」章節。摘要：
+「2026-09-11 的缺口補齊結果」章節。
+
+**查任何品牌的官方規格之前先讀 `shared/equipment_database/BRAND_NOTES.md`**
+（2026-09-12 新增）。它記的是「哪些看起來像官方其實不是」：ESP JP 與 ESP USA
+是兩間獨立公司、改版後的 URL 形式、停產品移到哪一頁、同名不同品牌怎麼分辨。
+本 session 在這四件事上各踩過一次。
+
+摘要：
 
 | 缺口 | 結果 |
 |---|---|

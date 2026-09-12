@@ -82,9 +82,12 @@ pickups:
     - "3-way pickup selector"
   # 2026-09-11 更正：原本列 Tone (Neck) 與 Tone (Bridge) 兩顆。
   # 使用者確認實機面板是三顆旋鈕，Tone 只有一顆（Master Tone）。
-  # 這與 ESP 官方一致：日本站 Original Series 寫
-  # 「Neck Volume, Bridge Volume, Master Tone, Toggle PU Selector」，
-  # 美國站寫「Volume/Volume/Tone/Toggle Switch」。
+  # 與 ESP **日本站** Original Series 一致：
+  # 「Neck Volume, Bridge Volume, Master Tone, Toggle PU Selector」。
+  #
+  # 2026-09-12：原本這裡還引了 ESP 美國站「Volume/Volume/Tone/Toggle Switch」當佐證。
+  # 那個佐證無效並已移除——ESP JP 與 ESP USA 是兩間獨立公司，產品線不對應。
+  # 見 BRAND_NOTES.md。結論本身由使用者確認實機，不受影響。
 
   # 2026-09-11：檔位名稱查不到。這是查證結果，不是還沒查。
   pickup_selector:
@@ -94,7 +97,9 @@ pickups:
     sources_checked:
       - "ESP 日本站產品頁 espguitars.co.jp/product/5109/ — CONTROLS 欄只寫 Toggle PU Selector，無 3-way 字樣"
       - "ESP 日本站 Original Series EC-CTM 專屬頁 — CONTROL 欄同上"
-      - "ESP 美國官方站 ESP Eclipse Custom — ELECTRONICS 欄寫 Volume/Volume/Tone/Toggle Switch"
+      # 2026-09-12 移除一條：原本列「ESP 美國官方站 ESP Eclipse Custom」。
+      # ESP JP 與 ESP USA 是兩間獨立公司，美國站的規格不能當日本站型號的佐證。
+      # 見 BRAND_NOTES.md。
       - "ESP 官方 OWNER'S MANUAL（20 頁）「各部名称」頁 — 只標「コントロール部（ボリューム、トーン、PU切換えSW）」，全書無檔位名稱"
     unknown: "檔位順序（toggle 往上或往下是 neck）官方文件與手冊圖示皆未標示"
     do_not_guess: "「雙 humbucker 的 3-way 就是 Neck/Both/Bridge」是常識推論，不是這個型號的資料。不要填進來"
