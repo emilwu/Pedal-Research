@@ -304,48 +304,85 @@
 
 ### 型號識別：Throbber 保留舊名
 
-實機是 ESP Original Series 的 **THROBBER**，不是型號名稱裡的「Throbber-CTM」。
+實機是 ESP Original Series 的 Throbber 琴型，不是型號名稱裡的「Throbber-CTM」。
 
-「上位機種」是使用者的說法，**不是 ESP 的用詞**——目錄頁沒有這個標示，該說法是比對
-價格推出來的。該頁也完全沒有出現 `THROBBER-CTM` 或 `CTM` 字樣。
+**現行 THROBBER 產品線只有 THROBBER-STD 與 TB SOLID 系列**，沒有標示為上位機種的款式，
+也沒有任何 `THROBBER-CTM` 或 `CTM` 字樣。
 
 本庫**沒有改 id 與型號名稱**。`esp_throbber_ctm` 與「Throbber-CTM」這個字串散在
 Pedal-Research 41 個檔案、Pedal-Web-Service-Planning 7 個檔案，改名的波及範圍遠大於收益。
 實機型號記在 `guitars/specs/esp_throbber_ctm.yaml` 的 `model_identity` 區塊。
 
-**比對官方規格時請看 ESP Original Series THROBBER** —— `https://espguitars.co.jp/original/throbber/throbber.html`
-（2026-09-12 由本庫親自開啟逐字核對：PICKUPS `(Neck)ESP Custom Lab CL-P-H-2n /
-(Bridge)ESP Custom Lab CL-P-H-2b`、CONTROL `Master Volume / Master Tone /
-5-Way Lever PU Selector`、PRICE `470,000yen (Without TAX)`）。
+**比對官方規格時用現行頁面：**
 
-不是 THROBBER-STD，也不是副牌 Edwards 的 E-THROBBER-CTM。
+- 索引：`https://espguitars.co.jp/products/throbber`
+- 產品頁：`https://espguitars.co.jp/product/2873/`、`https://espguitars.co.jp/product/2874/`
 
-### Throbber 的兩項後續也已結案（2026-09-12）
+2026-09-12 由本庫親自開啟逐字核對的 THROBBER-STD 規格：
 
-2026-09-11 結案時，Throbber 還留了兩項沒確認。使用者已於 09-12 確認：
+```
+BODY          Alder (Sound Reservoir) w/Ivory Binding (Thickness 45mm)
+NECK          Hard Maple (CT System Head Type-3)
+FINGERBOARD   Indian Rosewood
+SCALE         648mm
+FRET          M-SS, 22frets
+CONSTRUCTION  Bolt-on (T-5 Ultimate Access)
+BRIDGE        ESP FIXED Bridge
+PICKUPS       (Neck) Seymour Duncan APH-1n, (Bridge) Seymour Duncan TB-APH-1b
+CONTROLS      Master Volume, Master Tone, 5-Way Lever PU Selector
+PRICE         616,000 yen (without tax: 560,000 yen)
+```
 
-| 項目 | 結果 |
-|---|---|
-| 旋鈕數量 | **兩顆：Master Volume + Master Tone。**本庫原記四顆，已更正 |
-| 拾音器 | **Neck 是 Seymour Duncan APH-1n、Bridge 是 TB-APH-1b**，與本庫記載一致，不需更正 |
+不要用副牌 Edwards 的 E-THROBBER-CTM，那是不同型號。
+**也不要用 `espguitars.co.jp/original/throbber/throbber.html`**——理由見下一節。
 
-拾音器那項有一個落差，**但落差的原因不明，本庫不推論**：
+### Throbber 的兩項後續已結案，且與現行官方規格相符（2026-09-12）
 
-| 來源 | 拾音器 |
-|---|---|
-| 實機（使用者確認） | Seymour Duncan APH-1n / TB-APH-1b |
-| ESP 目錄機種 THROBBER 的頁面 | ESP Custom Lab CL-P-H-2n / CL-P-H-2b |
+| 項目 | 實機 | 現行官方 THROBBER-STD |
+|---|---|---|
+| 旋鈕數量 | 兩顆：Master Volume + Master Tone | 相同 |
+| 檔數 | 5 檔撥桿 | 相同 |
+| 拾音器 | Seymour Duncan APH-1n / TB-APH-1b | 相同 |
 
-至少兩種可能：拾音器被換過，或這把 Custom Shop 訂製品出廠就配不同拾音器
-（該檔 `basic_info.series` 記為 Custom Shop）。**沒有證據能區分。**
+本庫原記四顆旋鈕與 3-way，皆已更正。
 
-**本文件 2026-09-12 一度把它寫成「拾音器被換過」，那是推論不是事實，已更正。**
-不要在任何文件裡寫成「換過」。
+### 這一組衝突查證時犯了三個錯，值得記住
 
-這一整組衝突也正是 2026-09-11「不代為取捨、先問使用者」的理由。
-若當時照目錄規格把拾音器改成 CL-P-H-2，會把一筆正確的資料改錯。
+**第一個**：把反駁 agent 的保留丟掉了。原始研究的反駁 agent 把那條主張從 `high`
+降級為 `medium`，理由是「ESP Throbber 家族一律 5 檔」屬三樣本的全稱化。
+本庫採用了它的值，沒有把它的保留一起帶進來。
 
-四把吉他現在全部經使用者確認實機，本章節無待確認項目。
+**第二個**：把推論寫成結論。當時寫下「所以這把的拾音器是換過的」，
+那需要兩個沒有證據的前提。已更正。
+
+**第三個，也是最隱蔽的**：**引用了一個能開、引文逐字正確、但已經作廢的頁面。**
+
+`https://espguitars.co.jp/original/throbber/throbber.html` 是 2021 年以前舊機種的
+廢棄頁，ESP 網站首頁沒有任何入口或路徑到得了它。它列的 PICKUPS 是
+ESP Custom Lab CL-P-H-2n / CL-P-H-2b、PRICE 470,000yen。
+
+頁面開得起來，引文我親自核對過逐字無誤——**但它不是現行規格**。
+本庫因此推導出一個根本不存在的落差（「實機拾音器與官方不同」），
+再從那個落差推導出「可能被換過」。改用現行頁面後，落差整個消失。
+
+### 查外部規格的第三層：來源時效
+
+`HANDOFF.md` 記了跨 repo 路徑查證的兩層（空間、時間）。查外部設備規格還有第三層：
+
+1. **來源可及性**：URL 打得開、引文逐字對得上
+2. **型號正確性**：那一頁講的確實是這個型號，不是同系列的別款
+3. **來源時效**：**那一頁是不是現行的？**
+
+第三層最容易漏，因為前兩層都會通過。判斷方法：
+
+- 從廠商網站的**產品索引頁**點進去，確認那個 URL 真的在現行導覽裡
+- URL 結構本身是線索。`/original/<系列>/<型號>.html` 這種舊式靜態路徑，
+  與 `/products/<系列>` + `/product/<數字 id>/` 這種現行結構不同
+- 現行索引頁沒有列出的型號，八成是已停產款
+
+**廢棄頁面不要刪掉引用，要標成 deprecated 並寫明為什麼不能用**，
+否則下一個人會再撿回去。本庫在 `guitars/specs/esp_throbber_ctm.yaml`
+的 `deprecated_source` 區塊示範了這個寫法。
 
 ## 官方文件自己矛盾、兩面都要記的地方
 

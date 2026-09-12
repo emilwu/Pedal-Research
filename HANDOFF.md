@@ -302,12 +302,18 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 | `esp_eclipse_ctm` 列兩顆 Tone | **三顆旋鈕，Tone 一顆（Master Tone）** |
 | `fender_tokyo_thinline` 拾音器三方不一致 | **Seymour Duncan SP90-1 Set**。inventory 原本記的「Momose VT-1」是另一把琴的規格誤植 |
 
-**Throbber 的型號名稱沒有改。**實機是 ESP Original Series 的 THROBBER
-（「上位機種」是使用者的說法，不是 ESP 的用詞），但 `esp_throbber_ctm` 這個 id
+**Throbber 的型號名稱沒有改。**實機是 ESP Original Series 的 Throbber 琴型
+（現行產品線只有 THROBBER-STD 與 TB SOLID，沒有 CTM 這個型號），但 `esp_throbber_ctm` 這個 id
 與「Throbber-CTM」字串散在 Research 41 個檔案、Planning 7 個，改名波及太大。
 實機型號記在 `shared/equipment_database/guitars/specs/esp_throbber_ctm.yaml`
-的 `model_identity` 區塊，該處記了目錄頁 URL 與逐字規格。**比對官方規格時要看 THROBBER**，
-不是 THROBBER-STD，也不是副牌 Edwards 的 E-THROBBER-CTM。
+的 `model_identity` 區塊，該處記了現行產品頁 URL、逐字規格，以及一個**不可再使用的
+廢棄頁面**。比對官方規格時看 `https://espguitars.co.jp/products/throbber`，
+不是副牌 Edwards 的 E-THROBBER-CTM。
+
+**另有一塊沒解決**：本庫的 Throbber 琴身／琴頸／指板規格與現行官方 THROBBER-STD
+七個欄位全部不符（木材、接合方式、音階長度、指板）。使用者確認的三項都相符，
+但這一塊要看實機或確認型號才能判定，本庫未代為覆蓋。細節見該檔的
+`unresolved_body_and_neck`。
 
 ### Throbber 的兩項後續也已結案（2026-09-12）
 
@@ -318,16 +324,18 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 | 旋鈕數量 | **兩顆：Master Volume + Master Tone。**本庫原記四顆，已更正 |
 | 拾音器 | **Neck 是 Seymour Duncan APH-1n、Bridge 是 TB-APH-1b**，與本庫記載一致 |
 
-拾音器那項有落差，**但原因不明，不要推論**：ESP 目錄機種 THROBBER 的頁面列的是
-ESP Custom Lab CL-P-H-2n / CL-P-H-2b。可能是換過，也可能這把 Custom Shop 訂製品
-出廠就配不同拾音器。**沒有證據能區分。**
+三項都與 ESP **現行** THROBBER-STD 官方規格相符，沒有任何落差。
 
-**本檔 09-12 一度把它寫成「拾音器被換過」，那是推論不是事實，已更正。**
+這一組查證犯過三個錯，最隱蔽的一個值得記住：**本檔一度引用了一個能開、引文逐字正確、
+但已經作廢的 ESP 頁面**（`original/throbber/throbber.html`，2021 年以前的舊機種，
+網站首頁沒有入口）。它列的拾音器是 CL-P-H-2，於是本檔推導出一個根本不存在的落差，
+再從那個落差推導出「可能被換過」。改用現行頁面後落差整個消失。
 
-這一整組衝突也正是 09-11「不代為取捨、先問使用者」的理由。當時若照目錄規格把
-拾音器改成 CL-P-H-2，會把一筆正確的資料改錯。
+**查外部規格要多一層：那一頁是不是現行的？**判斷法與完整檢討寫在
+`shared/equipment_database/PARAMETER_VOCABULARY.md` 的「查外部規格的第三層：來源時效」。
 
-**四把吉他現在全部經使用者確認實機。Research 沒有等使用者確認的項目了。**
+四把吉他的 controls 與拾音器全部經使用者確認實機。
+**剩一項待確認：Throbber 的琴身／琴頸／指板規格**（見上）。
 
 ### 跨 repo 待辦
 
