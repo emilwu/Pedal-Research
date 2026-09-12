@@ -308,14 +308,23 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 的 `model_identity` 區塊。**比對官方規格時要看上位機種 THROBBER**，
 不是 THROBBER-STD，也不是副牌 Edwards 的 E-THROBBER-CTM。
 
-### Throbber 剩兩項沒確認（優先順序低）
+### Throbber 的兩項後續也已結案（2026-09-12）
 
-檔數與型號已確認，這兩項還沒有，本庫維持原記載：
+09-11 結案時 Throbber 還留了兩項。使用者已確認：
 
-1. **旋鈕數量** — 本庫列四顆，官方上位機種 THROBBER 是 Master Volume + Master Tone 兩顆
-2. **拾音器** — 本庫記 Seymour Duncan APH-1n / TB-APH-1b，官方配的是 ESP Custom Lab CL-P-H-2n / 2b
+| 項目 | 結果 |
+|---|---|
+| 旋鈕數量 | **兩顆：Master Volume + Master Tone。**本庫原記四顆，已更正 |
+| 拾音器 | **Neck 是 Seymour Duncan APH-1n、Bridge 是 TB-APH-1b**，與本庫記載一致 |
 
-兩項都是「可能換過零件」而非「一定記錯」。下次碰到那把琴時看一眼就能結案。
+拾音器那項的結論值得記住：**本庫記對了，但這表示拾音器被換過。**ESP 官方上位機種
+THROBBER 原配是 ESP Custom Lab CL-P-H-2n / CL-P-H-2b。本庫記實機現況、官方記原廠配置，
+**兩者都對，只是描述不同時間點。**
+
+這正是 09-11 判斷那三處衝突時「不代為取捨、先問使用者」的理由。當時若照官方規格把
+拾音器改成 CL-P-H-2，會把一筆正確的資料改錯。
+
+**四把吉他現在全部經使用者確認實機。Research 沒有等使用者確認的項目了。**
 
 ### 跨 repo 待辦
 

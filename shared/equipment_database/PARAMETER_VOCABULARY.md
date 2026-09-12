@@ -86,22 +86,26 @@
 
 | 標準名稱 | 台數 | 型態 | 見過的原文寫法 | 說明 |
 |---|---|---|---|---|
-| Volume | 7 個實例／4 台 | **unknown** | `Volume (Neck)` `Volume (Bridge)` `Volume (共用)` | 純名稱字串，**四份檔案都沒寫 controlKind、刻度、taper** |
-| Tone | 5 個實例／4 台 | **unknown** | `Tone (Neck)` `Tone (Bridge)` `Tone (共用)` | 同上。2026-09-11：`esp_eclipse_ctm` 經使用者確認實機是 Master Tone 一顆，原本記兩顆，已更正（實例數 6 → 5） |
+| Volume | 6 個實例／4 台 | **unknown** | `Volume (Neck)` `Volume (Bridge)` `Volume (共用)` | 純名稱字串，**四份檔案都沒寫 controlKind、刻度、taper**。2026-09-12：`esp_throbber_ctm` 經使用者確認實機是 Master Volume 一顆，原記兩顆（實例數 7 → 6） |
+| Tone | 4 個實例／4 台 | **unknown** | `Tone (共用)` | 同上。兩次更正後**四把琴的 Tone 都是共用一顆**：`esp_eclipse_ctm`（2026-09-11）與 `esp_throbber_ctm`（2026-09-12）原本各記兩顆，經使用者確認實機後更正（實例數 6 → 5 → 4）。`Tone (Neck)` `Tone (Bridge)` 這兩種寫法已不再出現在任何一份檔案裡 |
 | Pickup Selector Switch | 4 | discrete | `3-way pickup selector`、`5-Way Lever PU Selector` | **檔數不一致**：三把是 3 檔，`esp_throbber_ctm` 是 **5 檔**（2026-09-11 經使用者確認實機為 ESP 上位機種 THROBBER，原本誤記為 3-way）。檔位名稱只有 `fender_tokyo_thinline` 查到官方寫法（Position 1 Bridge／2 Bridge+Neck／3 Neck），其餘三把的官方文件一律不命名檔位 |
 
 四份檔案都完整讀過，`pickups.controls` 之外沒有其他使用者可調項目（沒有 coil-split、push-pull、主動 EQ）。
 
 作用範圍在同一把琴內不一致：
 
-| 吉他 | Volume | Tone |
-|---|---|---|
-| `esp_eclipse_ctm` | per-pickup | **共用**（2026-09-11 更正，原記 per-pickup） |
-| `esp_throbber_ctm` | per-pickup | per-pickup（**未經實機確認**，ESP 官方上位機種 THROBBER 是 Master Volume + Master Tone 兩顆） |
-| `fender_tokyo_thinline` | 共用 | 共用 |
-| `greco_te500` | **per-pickup** | **共用** |
+| 吉他 | Volume | Tone | 旋鈕數 |
+|---|---|---|---|
+| `esp_eclipse_ctm` | per-pickup | 共用 | 3 |
+| `esp_throbber_ctm` | 共用 | 共用 | 2 |
+| `fender_tokyo_thinline` | 共用 | 共用 | 2 |
+| `greco_te500` | per-pickup | 共用 | 3 |
 
-四把裡有三種不同的組合。這張表是「不能假設同一把琴內規則一致」的直接證據。
+四把琴全部經使用者確認實機（2026-09-11 與 09-12 兩次）。
+
+**Tone 四把都是共用。Volume 兩把 per-pickup、兩把共用。**所以 `esp_eclipse_ctm` 與
+`greco_te500` 是「同一把琴內兩種規則並存」，另外兩把則是一致的。這張表仍然是
+「不能假設同一把琴內規則一致」的直接證據，只是不一致的是那兩把，不是原本以為的一把。
 
 ### 音箱（3 台）
 
@@ -148,9 +152,16 @@
 
 ### C2 — 吉他的參數名稱把拾音器位置寫進字串裡，且範圍規則在同一把琴內可能不一致
 
-`Volume (Neck)`、`Tone (共用)` 這種寫法把「參數」與「作用位置」黏在同一個字串。而 `greco_te500` 是 Volume per-pickup、Tone 共用（`shared/equipment_database/guitars/specs/greco_te500.yaml:89-91`），與 `esp_eclipse_ctm`（`:79-82`，兩者皆 per-pickup）、`fender_tokyo_thinline`（`:86-87`，兩者皆共用）都不同。
+`Volume (Neck)`、`Tone (共用)` 這種寫法把「參數」與「作用位置」黏在同一個字串。
 
-**忽略的話**：假設「同一把琴內所有旋鈕的範圍規則一致」，`greco_te500` 會被錯誤處理。位置資訊若被吃進參數名字串而未獨立辨識，日後想把它與其他琴的 Volume 放在同一個比較維度時對不齊。
+四把琴分成兩組（行號為 2026-09-12 實際值）：
+
+| 組別 | 吉他 | Volume | Tone |
+|---|---|---|---|
+| 同一把琴內兩種規則並存 | `guitars/specs/esp_eclipse_ctm.yaml:79-81`、`guitars/specs/greco_te500.yaml:89-91` | per-pickup | 共用 |
+| 同一把琴內規則一致 | `guitars/specs/esp_throbber_ctm.yaml:89-90`、`guitars/specs/fender_tokyo_thinline.yaml:88-89` | 共用 | 共用 |
+
+**忽略的話**：假設「同一把琴內所有旋鈕的範圍規則一致」，`esp_eclipse_ctm` 與 `greco_te500` 會被錯誤處理。位置資訊若被吃進參數名字串而未獨立辨識，日後想把它與其他琴的 Volume 放在同一個比較維度時對不齊。
 
 ### C3 — 效果器的控制項混了三種本質不同的操作型態，而且標示方式不統一
 
@@ -302,16 +313,23 @@ Pedal-Research 41 個檔案、Pedal-Web-Service-Planning 7 個檔案，改名的
 **比對官方規格時請看 ESP Original Series THROBBER（上位機種）**，不是 THROBBER-STD，
 也不是副牌 Edwards 的 E-THROBBER-CTM。
 
-### Throbber 還有兩項未確認
+### Throbber 的兩項後續也已結案（2026-09-12）
 
-使用者確認了檔數與型號，但這兩項尚未確認，本庫維持原記載：
+2026-09-11 結案時，Throbber 還留了兩項沒確認。使用者已於 09-12 確認：
 
-1. **旋鈕數量** — 本庫列四顆（Volume 頸/橋、Tone 頸/橋）。官方上位機種 THROBBER 的
-   CONTROL 欄是 Master Volume + Master Tone **兩顆**。
-2. **拾音器** — 本庫記 Seymour Duncan APH-1n / TB-APH-1b。官方上位機種 THROBBER 配的是
-   ESP Custom Lab CL-P-H-2n / CL-P-H-2b。可能是換過拾音器，也可能本庫記錯。
+| 項目 | 結果 |
+|---|---|
+| 旋鈕數量 | **兩顆：Master Volume + Master Tone。**本庫原記四顆，已更正 |
+| 拾音器 | **Neck 是 Seymour Duncan APH-1n、Bridge 是 TB-APH-1b**，與本庫記載一致，不需更正 |
 
-上面那張 Volume/Tone 對照表的 `esp_throbber_ctm` 那列因此仍標「未經實機確認」。
+拾音器那項的結論值得記一筆：**本庫記對了，但這表示拾音器被換過。**
+ESP 官方上位機種 THROBBER 原配的是 ESP Custom Lab CL-P-H-2n / CL-P-H-2b。
+本庫記的是實機現況，官方規格是原廠配置——**兩者都對，只是描述不同時間點。**
+
+這正是 2026-09-11 判斷這三處衝突時「不代為取捨、先問使用者」的理由。
+若當時照官方規格把拾音器改成 CL-P-H-2，反而會把一筆正確的資料改錯。
+
+四把吉他現在全部經使用者確認實機，本章節無待確認項目。
 
 ## 官方文件自己矛盾、兩面都要記的地方
 
