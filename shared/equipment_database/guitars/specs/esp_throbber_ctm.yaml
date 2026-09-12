@@ -80,10 +80,14 @@ pickups:
     description: "Vintage PAF-inspired passive humbuckers"
     designed_for: "Jazz, Blues, Classic Rock, versatile tones"
     era: "Vintage-voiced modern pickups"
-    stock_vs_actual: |
-      2026-09-12 使用者確認：實機就是 APH-1n / TB-APH-1b，本檔記載正確。
-      ESP 官方上位機種 THROBBER 的原廠拾音器是 ESP Custom Lab CL-P-H-2n / CL-P-H-2b，
-      所以這把的拾音器是換過的。本檔記實機現況。
+    confirmed: "2026-09-12 使用者確認實機：Neck 是 Seymour Duncan APH-1n、Bridge 是 TB-APH-1b。本檔記載正確"
+    catalogue_spec_differs: |
+      ESP 目錄機種 THROBBER 的頁面列的拾音器是 ESP Custom Lab CL-P-H-2n / CL-P-H-2b，
+      與實機不同。逐字引文與來源見 model_identity.catalogue_reference。
+
+      **落差的原因不明，本庫不推論。**至少有兩種可能：拾音器被換過，
+      或這把 Custom Shop 訂製品出廠就配不同拾音器（本檔 basic_info.series 記為 Custom Shop）。
+      沒有證據能區分，所以不要在任何文件裡寫成「換過」。
 
   controls:
     - "Volume (共用)"
@@ -108,22 +112,35 @@ pickups:
 
   # 型號識別：本檔的 id 與 model 沿用舊名，實機是上位機種 THROBBER
   model_identity:
-    actual_model: "ESP Original Series THROBBER（上位機種）"
+    actual_model: "ESP Original Series THROBBER（使用者稱「上位機種」；ESP 頁面本身沒有這個標示）"
     recorded_as: "Throbber-CTM"
     why_not_renamed: |
       id esp_throbber_ctm 與「Throbber-CTM」這個名字散在 Pedal-Research 41 個檔案、
       Pedal-Web-Service-Planning 7 個檔案。改名的波及範圍遠大於收益，因此保留原名，
       只在此記錄實機型號，供日後比對官方規格時使用。
-    official_reference: "比對官方規格時請看 ESP Original Series THROBBER（上位機種），不是 THROBBER-STD，也不是副牌 Edwards 的 E-THROBBER-CTM"
+    official_reference: "比對官方規格時請看 ESP Original Series THROBBER（見下方 catalogue_reference 的 URL），不是 THROBBER-STD，也不是副牌 Edwards 的 E-THROBBER-CTM"
     confirmed_2026_09_12:
-      knob_count: "兩顆：Master Volume + Master Tone。與 ESP 官方上位機種 THROBBER 一致。本檔原記四顆，已更正"
-      pickups: |
-        Neck 是 Seymour Duncan APH-1n、Bridge 是 Seymour Duncan TB-APH-1b，
-        與本檔既有記載一致，不需更正。
-        **但這表示拾音器被換過**：ESP 官方上位機種 THROBBER 原配是
-        ESP Custom Lab CL-P-H-2n / CL-P-H-2b。本檔記的是實機現況，官方規格是原廠配置，
-        兩者都對，只是描述不同時間點。查官方規格時要知道這個落差。
-    all_resolved: "型號、檔數、旋鈕數量、拾音器四項皆已由使用者確認實機。本檔無待確認項目"
+      knob_count: "兩顆：Master Volume + Master Tone。本檔原記四顆，已更正"
+      pickups: "Neck 是 Seymour Duncan APH-1n、Bridge 是 TB-APH-1b，與本檔既有記載一致，不需更正"
+
+    # ESP 目錄頁的規格。2026-09-12 由本 session 親自開啟頁面逐字核對。
+    catalogue_reference:
+      url: "https://espguitars.co.jp/original/throbber/throbber.html"
+      model_on_page: "THROBBER"
+      pickups: "(Neck)ESP Custom Lab CL-P-H-2n / (Bridge)ESP Custom Lab CL-P-H-2b"
+      control: "Master Volume / Master Tone / 5-Way Lever PU Selector"
+      price: "470,000yen (Without TAX)"
+      page_does_not_say:
+        - "頁面沒有「上位機種」或最高階機種的標示。那個說法是比對價格推出來的，不是 ESP 的用詞"
+        - "頁面完全沒有出現 THROBBER-CTM 或 CTM 字樣"
+      matches_actual: "CONTROL 欄的兩顆旋鈕與 5-Way 撥桿與實機相符"
+      differs_from_actual: "PICKUPS 欄與實機不符。原因不明，見 pickups.pickup_set.catalogue_spec_differs"
+
+    all_resolved: "旋鈕數量與拾音器兩項已由使用者確認實機。本檔無待確認項目"
+    do_not_infer: |
+      不要從「目錄頁拾音器與實機不同」推論成「拾音器被換過」。
+      那需要兩個沒有證據的前提：這把就是該目錄機種，而且 ESP 從未以其他拾音器出過它。
+      2026-09-12 本庫一度寫成「換過」，已更正。
 
 # 硬體規格
 hardware:

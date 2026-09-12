@@ -298,20 +298,27 @@
 
 | # | 原本的衝突 | 實機確認結果 | 處置 |
 |---|---|---|---|
-| 1 | `esp_throbber_ctm` 寫 3-way，ESP 官方 Throbber 家族一律 5-Way | **是 ESP 上位機種 THROBBER，5 檔** | 本庫改為 `5-Way Lever PU Selector` |
+| 1 | `esp_throbber_ctm` 寫 3-way，ESP 目錄機種 THROBBER 是 5-Way | **是 ESP THROBBER，5 檔** | 本庫改為 `5-Way Lever PU Selector` |
 | 2 | `esp_eclipse_ctm` 列兩顆 Tone，ESP 官方寫 Master Tone 一顆 | **面板三顆旋鈕，Tone 一顆** | 本庫 controls 改為 `Tone (共用)` |
 | 3 | `fender_tokyo_thinline` 的拾音器三方不一致 | **Seymour Duncan SP90-1 Set (SP90-1 + SP90-1N)** | spec 移除「或 Lollar」的模糊寫法；inventory 的「Momose VT-1」是另一把琴的規格誤植，已更正 |
 
 ### 型號識別：Throbber 保留舊名
 
-實機是 ESP Original Series 的**上位機種 THROBBER**，不是型號名稱裡的「Throbber-CTM」。
+實機是 ESP Original Series 的 **THROBBER**，不是型號名稱裡的「Throbber-CTM」。
+
+「上位機種」是使用者的說法，**不是 ESP 的用詞**——目錄頁沒有這個標示，該說法是比對
+價格推出來的。該頁也完全沒有出現 `THROBBER-CTM` 或 `CTM` 字樣。
 
 本庫**沒有改 id 與型號名稱**。`esp_throbber_ctm` 與「Throbber-CTM」這個字串散在
 Pedal-Research 41 個檔案、Pedal-Web-Service-Planning 7 個檔案，改名的波及範圍遠大於收益。
 實機型號記在 `guitars/specs/esp_throbber_ctm.yaml` 的 `model_identity` 區塊。
 
-**比對官方規格時請看 ESP Original Series THROBBER（上位機種）**，不是 THROBBER-STD，
-也不是副牌 Edwards 的 E-THROBBER-CTM。
+**比對官方規格時請看 ESP Original Series THROBBER** —— `https://espguitars.co.jp/original/throbber/throbber.html`
+（2026-09-12 由本庫親自開啟逐字核對：PICKUPS `(Neck)ESP Custom Lab CL-P-H-2n /
+(Bridge)ESP Custom Lab CL-P-H-2b`、CONTROL `Master Volume / Master Tone /
+5-Way Lever PU Selector`、PRICE `470,000yen (Without TAX)`）。
+
+不是 THROBBER-STD，也不是副牌 Edwards 的 E-THROBBER-CTM。
 
 ### Throbber 的兩項後續也已結案（2026-09-12）
 
@@ -322,12 +329,21 @@ Pedal-Research 41 個檔案、Pedal-Web-Service-Planning 7 個檔案，改名的
 | 旋鈕數量 | **兩顆：Master Volume + Master Tone。**本庫原記四顆，已更正 |
 | 拾音器 | **Neck 是 Seymour Duncan APH-1n、Bridge 是 TB-APH-1b**，與本庫記載一致，不需更正 |
 
-拾音器那項的結論值得記一筆：**本庫記對了，但這表示拾音器被換過。**
-ESP 官方上位機種 THROBBER 原配的是 ESP Custom Lab CL-P-H-2n / CL-P-H-2b。
-本庫記的是實機現況，官方規格是原廠配置——**兩者都對，只是描述不同時間點。**
+拾音器那項有一個落差，**但落差的原因不明，本庫不推論**：
 
-這正是 2026-09-11 判斷這三處衝突時「不代為取捨、先問使用者」的理由。
-若當時照官方規格把拾音器改成 CL-P-H-2，反而會把一筆正確的資料改錯。
+| 來源 | 拾音器 |
+|---|---|
+| 實機（使用者確認） | Seymour Duncan APH-1n / TB-APH-1b |
+| ESP 目錄機種 THROBBER 的頁面 | ESP Custom Lab CL-P-H-2n / CL-P-H-2b |
+
+至少兩種可能：拾音器被換過，或這把 Custom Shop 訂製品出廠就配不同拾音器
+（該檔 `basic_info.series` 記為 Custom Shop）。**沒有證據能區分。**
+
+**本文件 2026-09-12 一度把它寫成「拾音器被換過」，那是推論不是事實，已更正。**
+不要在任何文件裡寫成「換過」。
+
+這一整組衝突也正是 2026-09-11「不代為取捨、先問使用者」的理由。
+若當時照目錄規格把拾音器改成 CL-P-H-2，會把一筆正確的資料改錯。
 
 四把吉他現在全部經使用者確認實機，本章節無待確認項目。
 
