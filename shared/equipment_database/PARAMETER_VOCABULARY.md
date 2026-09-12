@@ -304,10 +304,11 @@
 
 ### 型號識別：Throbber 保留舊名
 
-實機是 ESP Original Series 的 Throbber 琴型，不是型號名稱裡的「Throbber-CTM」。
+**實機型號是 ESP Original Series THROBBER-STD**（2026-09-12 使用者確認）。
+ESP 沒有「Throbber-CTM」這個型號——現行產品線只有 THROBBER-STD 與 TB SOLID 系列。
 
-**現行 THROBBER 產品線只有 THROBBER-STD 與 TB SOLID 系列**，沒有標示為上位機種的款式，
-也沒有任何 `THROBBER-CTM` 或 `CTM` 字樣。
+`basic_info.model` 已改為 `THROBBER-STD`，並加 `aliases: ["Throbber-CTM", ...]` 保留舊稱。
+同一筆的琴身／琴頸／指板／硬體原本與官方七個欄位全部不符，也已照官方更正。
 
 本庫**沒有改 id 與型號名稱**。`esp_throbber_ctm` 與「Throbber-CTM」這個字串散在
 Pedal-Research 41 個檔案、Pedal-Web-Service-Planning 7 個檔案，改名的波及範圍遠大於收益。

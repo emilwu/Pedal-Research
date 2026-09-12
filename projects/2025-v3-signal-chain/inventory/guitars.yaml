@@ -45,10 +45,13 @@ guitars:
 
     notes: "高輸出主動式拾音器，適合 Rock 和 Heavy tones"
 
-  - id: "esp_throbber_ctm"
+  - id: "esp_throbber_ctm"   # 保留舊 id，不改。散在 41 個檔案裡
     brand: "ESP"
-    model: "Throbber-CTM"
-    full_name: "ESP Throbber-CTM"
+    # 2026-09-12 更正：使用者確認型號是 THROBBER-STD。ESP 沒有 Throbber-CTM 這個型號。
+    model: "THROBBER-STD"
+    full_name: "ESP THROBBER-STD"
+    aliases: ["Throbber-CTM", "ESP Throbber-CTM"]
+    series: "Original Series"
     year: null
 
     # 拾音器資訊
@@ -59,17 +62,18 @@ guitars:
     output_level: "medium"
 
     # 琴身資訊
-    body_wood: "Honduras Mahogany"
-    body_type: "semi_hollow"
-    neck_wood: "Mahogany"
-    neck_construction: "set_neck"
-    fingerboard_wood: "Ebony"
-    scale_length: "24.75"
+    # 2026-09-12 照官方 THROBBER-STD 更正。原記六個欄位全部不符，
+    # 逐條對照見 shared/equipment_database/guitars/specs/esp_throbber_ctm.yaml
+    body_wood: "Alder"
+    body_type: "chambered"
+    neck_wood: "Hard Maple"
+    neck_construction: "bolt_on"
+    fingerboard_wood: "Indian Rosewood"
+    scale_length: "25.5"
 
     # 特殊設計
     special_features:
       - "Sound Reservoir 空腔設計"
-      - "半空心結構"
 
     # 使用狀態
     status: "active"
@@ -85,7 +89,7 @@ guitars:
     # 相關資料檔案
     research_file: "shared/equipment_database/guitars/specs/esp_throbber_ctm.yaml"
 
-    notes: "半空心設計，溫暖 PAF 風格拾音器，適合 Jazz 和 Blues"
+    notes: "Sound Reservoir 空腔設計，溫暖 PAF 風格拾音器，適合 Jazz 和 Blues"
 
   - id: "greco_te500"
     brand: "Greco"
@@ -186,4 +190,5 @@ stats:
 
   by_body_type:
     solid: 1
-    semi_hollow: 3
+    semi_hollow: 2      # 2026-09-12 修正：Throbber 原記 semi_hollow，
+    chambered: 1        # 官方是 Sound Reservoir 空腔（chambered），不是半空心

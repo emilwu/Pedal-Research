@@ -310,10 +310,14 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 廢棄頁面**。比對官方規格時看 `https://espguitars.co.jp/products/throbber`，
 不是副牌 Edwards 的 E-THROBBER-CTM。
 
-**另有一塊沒解決**：本庫的 Throbber 琴身／琴頸／指板規格與現行官方 THROBBER-STD
-七個欄位全部不符（木材、接合方式、音階長度、指板）。使用者確認的三項都相符，
-但這一塊要看實機或確認型號才能判定，本庫未代為覆蓋。細節見該檔的
-`unresolved_body_and_neck`。
+**琴身規格也已結案（2026-09-12）**：使用者確認型號就是 THROBBER-STD。
+本庫的琴身／琴頸／指板／硬體原本與官方七個欄位全部不符，已照官方更正：
+Alder 琴身、Hard Maple 琴頸、Bolt-on 接合、648mm 音階、Indian Rosewood 指板、
+ESP FIXED Bridge。「Sound Reservoir」是原本唯一對的欄位。
+
+`basic_info.model` 已改為 `THROBBER-STD`，並加 `aliases` 保留舊稱。
+**`id` 沒有改**——`esp_throbber_ctm` 散在 Research 41 個檔案、Planning 7 個。
+其他文件的散文仍寫「Throbber-CTM」，那是 ESP 沒有的型號。要不要全面改名是另一件事。
 
 ### Throbber 的兩項後續也已結案（2026-09-12）
 
@@ -334,8 +338,7 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 **查外部規格要多一層：那一頁是不是現行的？**判斷法與完整檢討寫在
 `shared/equipment_database/PARAMETER_VOCABULARY.md` 的「查外部規格的第三層：來源時效」。
 
-四把吉他的 controls 與拾音器全部經使用者確認實機。
-**剩一項待確認：Throbber 的琴身／琴頸／指板規格**（見上）。
+**四把吉他全部結案。Research 沒有等使用者確認的項目了。**
 
 ### 跨 repo 待辦
 

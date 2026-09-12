@@ -1,55 +1,72 @@
-# ESP Throbber-CTM
+# ESP THROBBER-STD
 # 吉他詳細技術資料
+#
+# 2026-09-12：型號經使用者確認為 ESP Original Series THROBBER-STD。
+# 琴身／琴頸／指板／硬體四個區塊原本與官方規格七個欄位全部不符，已照官方改。
+# 來源：https://espguitars.co.jp/product/2873/（現行產品頁，本庫親自逐字核對）
+#
+# id 仍為 esp_throbber_ctm，沒有改。理由見 pickups.model_identity.why_not_renamed。
 
-version: 1.0
-last_updated: 2026-01-02
+version: 2.0
+last_updated: 2026-09-12
 
 # 基本資訊
 basic_info:
-  id: "esp_throbber_ctm"
+  id: "esp_throbber_ctm"   # 保留舊 id，不改。散在 41 個檔案裡
   brand: "ESP"
-  model: "Throbber-CTM"
-  full_name: "ESP Throbber-CTM"
-  series: "Custom Shop"
+  model: "THROBBER-STD"
+  full_name: "ESP THROBBER-STD"
+  series: "Original Series"
+  aliases: ["Throbber-CTM", "ESP Throbber-CTM"]   # 本庫與其他文件的舊稱，ESP 沒有這個型號
   made_in: "Japan"
   year: null  # 未知年份
 
 # 價格資訊
 price:
-  msrp: null  # 請補充
+  msrp: null       # 本庫未記實際購入價
   currency: "USD"
   tier: "high_end_custom"
+  official_list: "616,000 yen（未稅 560,000 yen）"   # ESP 現行產品頁定價，非購入價
 
 # 琴身規格
 body:
-  wood: "Honduras Mahogany"
-  construction: "Semi-hollow with Sound Reservoir chamber"
-  type: "semi_hollow"
+  # 2026-09-12 照官方改。原記 Honduras Mahogany / semi-hollow / set-neck 全部不符。
+  wood: "Alder"
+  construction: "Sound Reservoir 空腔設計"
+  type: "chambered"   # 官方寫 Sound Reservoir，不是 semi-hollow
+  thickness: "45mm"
   shape: "Single cutaway with unique body shape"
-  finish: null  # 請補充
-  binding: "Multi-ply binding (預估)"
+  finish: null  # 本庫未記實機顏色。官方現行有 3 Tone Sunburst / Smoky Brown / Dark Metallic Green
+  binding: "Ivory Binding"
+  spec_verbatim: "Alder (Sound Reservoir) w/Ivory Binding (Thickness 45mm)"
 
   special_features:
     - name: "Sound Reservoir"
-      description: "ESP 專利空腔設計，提供半空心音色特性"
+      description: "ESP 專利空腔設計"
       effect: "增加 resonance 和 sustain，溫暖音色"
+      note: "這是本區塊唯一原本就對的欄位，兩邊都有"
 
 # 琴頸規格
 neck:
-  wood: "Mahogany"
-  construction: "set_neck"
-  profile: null  # 請補充
-  scale_length: "24.75 inch"
-  frets: "22 frets (預估)"
-  fret_material: null  # 請補充
-  nut_width: null  # 請補充
-  nut_material: null  # 請補充
+  # 2026-09-12 照官方改。原記 Mahogany / set_neck / 24.75 inch 全部不符。
+  wood: "Hard Maple"
+  construction: "bolt_on"
+  joint: "T-5 Ultimate Access"
+  head_type: "CT System Head Type-3"
+  profile: null  # 官方未記載
+  scale_length: "648mm (25.5 inch)"
+  frets: "22 frets"
+  fret_material: "M-SS"
+  nut_width: null    # 官方未記載
+  nut_material: null # 官方未記載
+  spec_verbatim: "Hard Maple (CT System Head Type-3) / Bolt-on (T-5 Ultimate Access) / 648mm / M-SS, 22frets"
 
 # 指板規格
 fingerboard:
-  wood: "Ebony"
-  radius: null  # 請補充
-  inlays: null  # 請補充
+  # 2026-09-12 照官方改。原記 Ebony，不符。
+  wood: "Indian Rosewood"
+  radius: null  # 官方未記載
+  inlays: null  # 官方未記載
 
 # 拾音器配置
 pickups:
@@ -158,32 +175,22 @@ pickups:
 
     all_resolved: "旋鈕數量與拾音器兩項已由使用者確認實機，且與現行官方 THROBBER-STD 相符"
 
-    # 下面這塊與現行官方規格衝突，尚未確認，不要自行覆蓋
-    unresolved_body_and_neck: |
-      本檔的 body / neck / fingerboard 三個區塊與現行官方 THROBBER-STD 規格
-      **七個欄位全部不符**（詳見上方 catalogue_reference.spec_verbatim）：
+    body_and_neck_resolved_2026_09_12: |
+      本檔的 body / neck / fingerboard / hardware 原本與現行官方 THROBBER-STD
+      七個欄位全部不符（Honduras Mahogany vs Alder、set_neck vs Bolt-on、
+      24.75" vs 648mm、Ebony vs Indian Rosewood 等）。
 
-        欄位          本檔                                      官方 THROBBER-STD
-        BODY         Honduras Mahogany                        Alder
-        構造          Semi-hollow with Sound Reservoir chamber  Bolt-on
-        NECK         Mahogany                                 Hard Maple
-        接合          set_neck                                 Bolt-on
-        SCALE        24.75 inch                               648mm (= 25.5 吋)
-        FINGERBOARD  Ebony                                    Indian Rosewood
-        BRIDGE       null                                     ESP FIXED Bridge
-
-      「Sound Reservoir」這個詞兩邊都有，是 Throbber 的真實特徵。其餘欄位看起來像是
-      填了 Gibson 式的預設值（mahogany / set-neck / ebony / 24.75"）。
-
-      **本庫不代為覆蓋。**使用者已確認拾音器、旋鈕數、檔數三項與 THROBBER-STD 相符，
-      但琴身木材、接合方式、音階長度需要看實機或確認型號才能判定。
+      使用者確認型號就是 THROBBER-STD，四個區塊已照官方規格更正。
+      「Sound Reservoir」是本區塊唯一原本就對的欄位——那是 Throbber 的真實特徵。
+      其餘原值看起來像是填了 Gibson 式預設值（mahogany / set-neck / ebony / 24.75"）。
 
 # 硬體規格
 hardware:
-  bridge: null  # 請補充 (Tune-o-matic style 預估)
-  tailpiece: null  # 請補充 (Stop bar 預估)
-  tuners: null  # 請補充
-  hardware_finish: null  # 請補充
+  # 2026-09-12：bridge 照官方補。原本的「Tune-o-matic style 預估」是錯的推測，已移除。
+  bridge: "ESP FIXED Bridge"
+  tailpiece: null        # 官方未單列，FIXED Bridge 為一體式
+  tuners: null           # 官方未記載
+  hardware_finish: null  # 官方未記載
 
 # 電子系統
 electronics:
