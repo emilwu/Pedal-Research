@@ -90,6 +90,8 @@ pickups:
     - "3-way pickup selector"
 
   # 2026-09-11 補齊：四把琴裡只有這一把查到官方檔位名稱。
+  # （2026-09-30：esp_throbber_ctm 也依 ESP 官方檔位圖補齊，見該檔 pickups.pickup_selector。
+  #   注意兩檔的 Position 1 方向相反：這裡是 Bridge，Throbber 那邊是琴頸端。）
   # 來源：Fender 官方產品頁規格表。
   pickup_selector:
     switch_type: "3-Position Blade"   # Tele 式撥桿，不是 Gibson 式 toggle

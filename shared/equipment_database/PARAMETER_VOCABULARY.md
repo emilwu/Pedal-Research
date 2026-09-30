@@ -1,8 +1,10 @@
 # 設備可調參數詞彙
 
 **產生日期**：2026-09-11
-**最後更新**：2026-09-11（補完七項資料缺口後回頭校正，見文末「2026-09-11 的缺口補齊結果」）
+**最後更新**：2026-09-30（`esp_throbber_ctm` 檔位名稱補齊；前次 2026-09-11 補完七項資料缺口，見文末「2026-09-11 的缺口補齊結果」）
 **資料來源**：`shared/equipment_database/` 底下 26 份 spec YAML（效果器 17、吉他 4、音箱 3、配件 2）
+
+> **範圍說明（2026-09-30）**：本文件的抽取與統計仍是 2026-09-11 那 26 份 YAML。當天之後新增的 `guitars/specs/pearson_omega_6.yaml` **不在範圍內**。它有兩個獨立的切單 mini toggle，與下方「吉他」節的結論不同。要納入時需重新抽取，不要只改數字。
 **用途**：供 Pedal-Web-Service-Planning 設計 `UserEquipment.settings` 與 `SignalChainItem.settings` 的 Json 結構時作為依據
 
 ---
@@ -88,9 +90,11 @@
 |---|---|---|---|---|
 | Volume | 6 個實例／4 台 | **unknown** | `Volume (Neck)` `Volume (Bridge)` `Volume (共用)` | 純名稱字串，**四份檔案都沒寫 controlKind、刻度、taper**。2026-09-12：`esp_throbber_ctm` 經使用者確認實機是 Master Volume 一顆，原記兩顆（實例數 7 → 6） |
 | Tone | 4 個實例／4 台 | **unknown** | `Tone (共用)` | 同上。兩次更正後**四把琴的 Tone 都是共用一顆**：`esp_eclipse_ctm`（2026-09-11）與 `esp_throbber_ctm`（2026-09-12）原本各記兩顆，經使用者確認實機後更正（實例數 6 → 5 → 4）。`Tone (Neck)` `Tone (Bridge)` 這兩種寫法已不再出現在任何一份檔案裡 |
-| Pickup Selector Switch | 4 | discrete | `3-way pickup selector`、`5-Way Lever PU Selector` | **檔數不一致**：三把是 3 檔，`esp_throbber_ctm` 是 **5 檔**（2026-09-11 經使用者確認實機為 ESP 上位機種 THROBBER，原本誤記為 3-way）。檔位名稱只有 `fender_tokyo_thinline` 查到官方寫法（Position 1 Bridge／2 Bridge+Neck／3 Neck），其餘三把的官方文件一律不命名檔位 |
+| Pickup Selector Switch | 4 | discrete | `3-way pickup selector`、`5-Way Lever PU Selector` | **檔數不一致**：三把是 3 檔，`esp_throbber_ctm` 是 **5 檔**（2026-09-11 經使用者確認為 5 檔；09-12 確認型號是 ESP THROBBER-STD。原本誤記為 3-way）。檔位名稱有兩把查到官方寫法：`fender_tokyo_thinline`（Position 1 Bridge／2 Bridge+Neck／3 Neck），以及 `esp_throbber_ctm`（2026-09-30 補齊：ESP 現行產品頁有官方檔位圖，5 檔依序為 Neck 串聯／Neck 切單／Neck+Bridge／Neck+Bridge 皆切單／Bridge 串聯）。其餘兩把的官方文件不命名檔位 |
 
 四份檔案都完整讀過，`pickups.controls` 之外沒有其他使用者可調項目（沒有 coil-split、push-pull、主動 EQ）。
+
+> 2026-09-30 補充：上一句的「沒有 coil-split」指的是 2026-09-11 那四把琴**沒有獨立的切單控制項**。`esp_throbber_ctm` 的切單做在 5 檔撥桿裡（Position 2 與 4），出廠就能切單，細節見該檔 `pickups.pickup_selector`。09-30 新增的 `pearson_omega_6` 有獨立切單 mini toggle，不在本表範圍內。
 
 作用範圍在同一把琴內不一致：
 
@@ -275,22 +279,27 @@
 |---|---|---|
 | 1 | `empress_buffer_plus_plus` 的 footswitches／knobs／switches 數量與功能全是 TBD | **已補齊**（官方手冊 rev04） |
 | 2 | `odl1cs` 的 7 個通道控制沒有功能說明，`PUSH` 與 `HI CUT` 功能不明 | **已補齊**（官方 CS 手冊 ver 1.2） |
-| 3 | 四把吉他的 pickup selector 都沒寫出三個檔位的實際名稱 | **一把補齊、三把確認查不到** |
+| 3 | 四把吉他的 pickup selector 都沒寫出三個檔位的實際名稱 | **兩把補齊、兩把確認查不到**（原記「一把補齊、三把查不到」。2026-09-30 補齊 `esp_throbber_ctm`，見下節） |
 | 4 | `cali76_fet` 的 RATIO 宣告是離散但沒給檔位 | **已補齊**，而且原判讀有誤（是連續不是離散） |
 | 5 | `ff1y` 的 EQ (3-band) 未列出個別旋鈕名稱；Delay Time／Feedback 的「×2」意義不明 | **已補齊**（官方手冊 Ver 1.3） |
 | 6 | `roland_jc22` 的 REVERB 與 `dsm_dumblifier` 的 Input Boost 應收進 controls 區塊 | **已收進** |
 | 7 | 「controls 是否包含內部微調項」的標準應在資料庫層級明文定義 | **已定義**，見 `CONTROLS_CONVENTION.md` |
 
-### 缺口 3 為什麼只補了一把
+### 缺口 3 為什麼只補了兩把
 
 四把琴查過官方產品頁、原廠目錄與官方手冊。結果是：
 
 - `fender_tokyo_thinline` — Fender 官方規格表明列三個檔位名稱。**已補進該檔**
 - `esp_eclipse_ctm` — ESP 從產品頁到 20 頁的 OWNER'S MANUAL 都只標開關型態（Toggle PU Selector），全書不命名檔位
-- `esp_throbber_ctm` — 同上，而且這個型號在 ESP 官網搜尋不到
+- `esp_throbber_ctm` — **2026-09-30 補齊。**原本記為「同上，而且這個型號在 ESP 官網搜尋不到」。
+  「同上」是錯的。「搜尋不到」指的是舊稱 Throbber-CTM（ESP 確實沒有這個型號）；實機 THROBBER-STD 在官網找得到（見 `BRAND_NOTES.md`）。
+  現行 THROBBER-STD 產品頁（`espguitars.co.jp/product/2873/`、`/2874/`）在規格表之前的特色說明區塊嵌了官方檔位圖。
+  5 檔依序是 Neck 串聯／Neck 切單／Neck+Bridge／Neck+Bridge 皆切單／Bridge 串聯。已補進該檔 `pickups.pickup_selector`
 - `greco_te500` — 1976 與 1979 兩份原廠目錄都只寫「3回路切替スイッチ」「3段切替スイッチ」
 
-三把查不到的已在各自的 spec YAML 標成 `positions: null`，並列出**查過哪些來源**。那是查證結果，不是還沒查。**不要用「雙 humbucker 的 3-way 就是 Neck/Both/Bridge」這種常識推論填空。**
+兩把查不到的已在各自的 spec YAML 標成 `positions: null`，並列出**查過哪些來源**。那是查證結果，不是還沒查。**不要用「雙 humbucker 的 3-way 就是 Neck/Both/Bridge」這種常識推論填空。**
+
+Throbber 這次的漏看值得記住：09-11 與 09-12 兩次都漏掉。09-12 已讀過同一個 SPECIAL FEATURES 區塊，也逐字掃描整頁，仍然漏掉——因為檔位名稱只畫在圖檔裡，HTML 文字只寫「5種類の音色」。**查控制項要逐張打開頁面上的圖，文字擷取或逐字掃描不夠。**
 
 ## 三處衝突已由使用者確認實機結案（2026-09-11）
 
@@ -417,7 +426,7 @@ ESP Custom Lab CL-P-H-2n / CL-P-H-2b、PRICE 470,000yen。
 - `empress_buffer_plus_plus` — 外接開關要插哪個孔，手冊、產品頁、面板圖三者皆無
 - `cali76_fet` — 官方從未使用 continuous／stepped／detented 任一字眼。「RATIO 無段」是從 min/max 措辭推得的合理推論，不是引文
 - `ff1y` — EQ 頻率點沒標單位（推定 Hz）；MODULATION 的 RATE 沒有 Hz 或 BPM 對照；TONE 的濾波器型態未說明
-- 四把吉他 — 都沒有任何官方文件提到面板上印有檔位字樣
+- 四把吉他 — 都沒有任何官方文件提到面板上印有檔位字樣（`esp_throbber_ctm` 的檔位名稱來自產品頁的示意圖，不是琴身上的印字）
 
 ## 順帶修正的兩處
 

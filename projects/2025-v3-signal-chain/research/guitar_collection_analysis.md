@@ -81,12 +81,17 @@ ESP EC-CTM 搭配 EMG JH HET SET 是現代高增益演奏的終極選擇。日�
 * **阻抗：** 500k (被動拾音器標準)
 
 **可切換設定 (Switching Options):**
-* **3-Way Toggle Switch:**
-  - Position 1: 橋拾音器 (TB-APH-1b) - 明亮、清晰、Classic Rock Lead
-  - Position 2: 橋+頸拾音器 (TB-APH-1b + APH-1n) - 平衡、豐滿、Rhythm/Crunch
-  - Position 3: 頸拾音器 (APH-1n) - 溫暖、滑順、Jazz/Blues Lead
-* **Volume Controls:** 可能為 2 Volume (獨立) 或 Master Volume (視具體配置)
-* **Tone Controls:** 可能為 2 Tone 或 Master Tone
+> ⚠️ 2026-09-30 更正：原本這裡寫「3-Way Toggle」與「可能為 2 Volume／2 Tone」，兩者都錯。
+> 以下依 ESP 官方檔位圖與使用者確認的實機更正。本節其他琴身、琴頸敘述也已過時，規格以
+> `shared/equipment_database/guitars/specs/esp_throbber_ctm.yaml` 為準。
+
+* **5-Way Lever PU Selector**（ESP 官方檔位圖；編號由琴頸端起算，是本庫自編）：
+  - Position 1: Neck humbucker（串聯）
+  - Position 2: Neck 切單
+  - Position 3: Neck + Bridge（兩顆 humbucker）
+  - Position 4: Neck + Bridge，兩顆都切單
+  - Position 5: Bridge humbucker（串聯）
+* **Controls:** Master Volume + Master Tone（使用者確認實機）
 
 **音色描述:**
 

@@ -38,7 +38,7 @@
 - **拾音器:** Seymour Duncan APH-1 SET (被動PAF)
   - TB-APH-1b (Bridge): 8.0k, Alnico II
   - APH-1n (Neck): 7.75k, Alnico II
-- **控制:** 3-Way Toggle, Volume/Tone Controls
+- **控制:** 5-Way Lever PU Selector（含切單檔位 Position 2、4）, Master Volume, Master Tone（2026-09-30 更正，原寫 3-Way Toggle。本節琴身、琴頸敘述也已過時，規格以 `shared/equipment_database/guitars/specs/esp_throbber_ctm.yaml` 為準）
 - **輸出類型:** 中等輸出被動拾音器
 - **核心音色:** 溫暖PAF風格、自然延音、半空心共鳴
 - **最佳風格:** Jazz, Blues, Classic Rock, Vintage Neo Soul

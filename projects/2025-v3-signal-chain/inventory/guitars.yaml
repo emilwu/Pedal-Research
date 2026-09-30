@@ -60,6 +60,7 @@ guitars:
     pickup_type: "passive_humbucker"
     pickup_set: "Seymour Duncan Alnico Pro Humbucker"
     output_level: "medium"
+    coil_split: "via_selector"   # 2026-09-30：5 檔撥桿的 Position 2（neck 切單）與 4（兩顆皆切單），出廠就有；沒有獨立切單開關。見 spec 的 pickups.pickup_selector
 
     # 琴身資訊
     # 2026-09-12 照官方 THROBBER-STD 更正。原記六個欄位全部不符，
@@ -74,6 +75,7 @@ guitars:
     # 特殊設計
     special_features:
       - "Sound Reservoir 空腔設計"
+      - "5 檔撥桿內建切單（Position 2、4）"
 
     # 使用狀態
     status: "active"

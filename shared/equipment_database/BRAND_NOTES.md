@@ -74,6 +74,16 @@ https://espguitars.co.jp/products/discon-esp-guitar
 
 實機經使用者確認是 **ESP THROBBER-STD**。id 保留未改，理由見 `guitars/specs/esp_throbber_ctm.yaml` 的 `model_identity`。
 
+### 規則三：產品頁的資訊可能只畫在圖裡
+
+2026-09-30 發現：THROBBER-STD 產品頁的 SPECIAL FEATURES 區塊有一張 5 檔撥桿的檔位圖
+（`THROBBER_PU-SELECTER.png`）。檔位名稱**只存在於圖檔裡**，該區塊的 HTML 文字只寫「5種類の音色」。
+
+09-11 與 09-12 兩次查證都漏掉它——09-12 甚至讀過同一個區塊、逐字掃描過整頁。
+文字擷取與逐字掃描都看不到圖裡的字。
+
+**查 ESP 的控制項或規格細節時，要逐張打開頁面上的圖片。**
+
 ### 已知污染：`guitars/reports/` 底下兩份報告引用了 ESP USA
 
 `reports/` 是歷史記錄，依 repo 規則不改。但要知道裡面有這個問題：

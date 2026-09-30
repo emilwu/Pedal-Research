@@ -7,8 +7,8 @@
 #
 # id 仍為 esp_throbber_ctm，沒有改。理由見 pickups.model_identity.why_not_renamed。
 
-version: 2.0
-last_updated: 2026-09-12
+version: 2.1
+last_updated: 2026-09-30   # 2026-09-30：pickup_selector 檔位名稱依官方檔位圖補齊
 
 # 基本資訊
 basic_info:
@@ -130,21 +130,65 @@ pickups:
   # 這與 ESP 官方上位機種 THROBBER 的 CONTROL 欄一致。
 
   # 2026-09-11：使用者確認實機規格，爭議已結案。
+  # 2026-09-30：檔位名稱補齊。ESP 現行產品頁有官方檔位圖，本檔原記「官方從不命名」是錯的。
   pickup_selector:
     switch_type: "5-Way Lever PU Selector"
     position_count: 5
-    positions: null
-    position_names_status: "官方文件從不命名檔位。ESP 從產品頁到 20 頁的 OWNER'S MANUAL 都只標開關型態"
+    # 順序由撥桿的「ネックサイド」（琴頸端）往「ブリッジサイド」（琴橋端）排。
+    # 名稱是官方圖示文字的逐字轉寫，括號內是本庫的翻譯。
+    # Position 編號是本庫自編，官方圖沒有編號。1 = 琴頸端。
+    # 注意方向與 fender_tokyo_thinline 相反：Fender 的官方編號 Position 1 = Bridge。
+    numbering: "本庫自編，1 = 撥桿推向琴頸端"
+    positions:
+      - "Position 1. ネック シリーズ（Neck，humbucker 串聯）"
+      - "Position 2. ネック スプリット（Neck，切單）"
+      - "Position 3. ネック&ブリッジ（Neck + Bridge，兩顆都是 humbucker）"
+      - "Position 4. ネック&ブリッジスプリット（Neck + Bridge，兩顆都切單）"
+      - "Position 5. ブリッジ シリーズ（Bridge，humbucker 串聯）"
+    active_coils_per_diagram: |
+      官方圖以亮色／灰色標出每一檔用到的線圈：
+      - Position 2：只用 neck 拾音器靠琴頸側的那顆線圈
+      - Position 4：neck 拾音器靠琴頸側的線圈，加上 bridge 拾音器靠琴頸側（內側）的線圈
+      這是示意圖，沒有文字標示線圈種類。但圖上的磁柱畫法分兩種：黑色線圈（neck 的琴頸側、bridge 的琴橋側）
+      變灰時畫成帶槽的磁柱，米色線圈畫成素圓。照圖讀，Position 2 是 neck 的 screw 線圈，
+      Position 4 是 neck 的 screw 線圈加上 bridge 的 slug 線圈 [inference，未經實機確認]。
+      圖也沒有說明 Position 4 是否抵消 hum。
+    no_bridge_only_split: "五檔裡沒有「只有 bridge 切單」的位置"
+    source:
+      diagram_url: "https://espguitars.co.jp/wp-content/uploads/2018/04/THROBBER_PU-SELECTER.png"
+      embedded_on:
+        - "https://espguitars.co.jp/product/2873/"   # THROBBER-STD 3 Tone Sunburst，現行頁
+        - "https://espguitars.co.jp/product/2874/"   # THROBBER-STD Smoky Brown，現行頁
+      page_text: "5-Way Lever PU Selector 特殊なピックアップセレクターにより、バリエーション豊かな5種類の音色がセレクトできます。"
+      verified: "2026-09-30 本 session 親自開啟兩個產品頁，確認兩頁都嵌入這張圖；圖檔 Last-Modified 為 2019-07-30"
     resolved: |
       原本本檔寫「3-way pickup selector」。2026-09-11 經使用者確認實機為
       **ESP Original Series 的上位機種 THROBBER，5 檔撥桿**，已更正。
       這與 ESP 官方規格一致——Throbber 家族（THROBBER、THROBBER-STD、
       Exhibition Limited Throbber CTM FL）官方一律是 5-Way Lever PU Selector。
-    do_not_guess: "官方不命名檔位，不要用「雙 humbucker 就是 Neck/Both/Bridge」這種推論填 positions。而且這是 5 檔不是 3 檔，那個推論連檔數都不對"
+      2026-09-12 進一步確認型號是 THROBBER-STD，不是上位機種 THROBBER，見 model_identity。
+    correction_2026_09_30: |
+      原記為「官方文件從不命名檔位。ESP 從產品頁到 20 頁的 OWNER'S MANUAL 都只標開關型態」。
+      2026-09-11 與 09-12 兩次查證都漏掉。09-12 已重開 2873 頁，讀過同一個 SPECIAL FEATURES 區塊
+      （見 body.esp_own_wording），也做了逐字掃描，仍然漏掉。
+      原因：檔位名稱只存在於圖檔 THROBBER_PU-SELECTER.png 裡。該區塊的 HTML 文字只寫「5種類の音色」，
+      沒有列出任何檔位。
+      教訓：查控制項要逐張打開頁面上的圖片。文字擷取或逐字掃描看不到圖裡的字。
+    split_already_built_in: |
+      這把琴出廠就能切單（Position 2 與 4），不需要加裝 push-pull 或 mini toggle。
+      所以 PARAMETER_VOCABULARY.md 說的「沒有 coil-split」只對「獨立的切單控制項」成立；
+      切單功能本身是做在撥桿檔位裡的。
 
-  # 型號識別：本檔的 id 與 model 沿用舊名，實機是上位機種 THROBBER
+  # 2026-09-30 新增。與 pearson_omega_6 的 pickups.coil_split 同一種結構，方便比對。
+  # 切單沒有獨立開關，做在上方 pickup_selector 的撥桿檔位裡。
+  coil_split:
+    type: "via_selector（做在 5-Way 撥桿裡，沒有獨立開關）"
+    positions: [2, 4]
+    active_coil_when_split: "見 pickup_selector.active_coils_per_diagram（依官方示意圖推論，未經實機確認）"
+
+  # 型號識別：本檔的 id 沿用舊名。實機是 THROBBER-STD（2026-09-12 確認）
   model_identity:
-    actual_model: "ESP Original Series 的 Throbber 琴型。拾音器、旋鈕數、檔數三項與現行 THROBBER-STD 相符；琴身與琴頸規格未確認（見 unresolved_body_and_neck）"
+    actual_model: "ESP Original Series 的 Throbber 琴型。拾音器、旋鈕數、檔數三項與現行 THROBBER-STD 相符；琴身與琴頸已於 09-12 照官方更正（見 body_and_neck_resolved_2026_09_12）"
     recorded_as: "Throbber-CTM"
     why_not_renamed: |
       id esp_throbber_ctm 與「Throbber-CTM」這個名字散在 Pedal-Research 41 個檔案、
@@ -233,7 +277,7 @@ hardware:
 electronics:
   type: "passive"
   battery: "None (passive pickups)"
-  wiring: "Standard humbucker wiring (預估)"
+  wiring: "5-Way Lever PU Selector，Position 2 與 4 為切單（ESP 官方檔位圖，見 pickups.pickup_selector）。切單線圈的極性與 Position 4 是否抵消 hum，官方未公布"
 
 # 音色特性
 tonal_characteristics:
