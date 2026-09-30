@@ -1,6 +1,6 @@
 # Pedal-Research 交接
 
-**最後更新**：2026-09-11
+**最後更新**：2026-09-30
 
 這份文件記錄「只存在於某次對話、寫不進程式碼」的資訊。從本 repo 開工前先讀這份，
 再讀 `CLAUDE.md`。
@@ -275,6 +275,32 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 
 ---
 
+## 2026-09-30 做了什麼
+
+### 新增第五把吉他：Pearson Omega 6
+
+- `projects/2025-v3-signal-chain/inventory/guitars.yaml` 新增 `pearson_omega_6`。使用者確認：已到手、25.5" 直品、Wasp Yellow、Chrome 五金
+- 規格檔 `shared/equipment_database/guitars/specs/pearson_omega_6.yaml`，每一項都標了證據等級
+- 琴身是鋁板加不鏽鋼的框架，沒有木頭。`body_type` 用了新值 `metal_frame`
+- **待實機確認**：tone 電容是 0.22 還是 0.022µF、切單保留哪一顆線圈、原廠拾音器是否為鍍鉻蓋、背板顏色、bridge 拾音器後方深度
+
+### Lundgren 拾音器選型研究
+
+- 報告：`projects/2025-v3-signal-chain/research/lundgren_pickup_selection_2026-09.md`
+- 結論：原廠 A2 已接近需求，換裝是精修。若要換，推薦 Heaven 57 neck + Heaven 67 bridge，兩顆都買 50mm 版
+- **這是建議，尚未換裝**
+- Pearson 與 Lundgren 的查證陷阱已寫進 `shared/equipment_database/BRAND_NOTES.md`
+
+### Throbber 檔位名稱補齊
+
+ESP 現行 THROBBER-STD 產品頁的 SPECIAL FEATURES 區塊有官方檔位圖。已補進 spec 的
+`pickups.pickup_selector`，並更正 `PARAMETER_VOCABULARY.md`、兩份 research 文件的「3-Way Toggle」寫法。
+
+**教訓：檔位名稱只畫在圖檔裡。**09-12 讀過同一區塊、逐字掃描整頁，仍然漏掉。
+規則已寫進 `BRAND_NOTES.md` 的 ESP 規則三。
+
+---
+
 ## Research 的待辦
 
 ### 設備資料缺口（原 7 項，2026-09-11 已處理）
@@ -293,7 +319,7 @@ Planning 依它拍板：`settings` 與 `Equipment.specs` **完全解耦**，是�
 |---|---|
 | Buffer++ 的 footswitch／knob／switch 全是 TBD | 補齊（官方手冊 rev04）：1 / 2 / 6 |
 | ODL-1-CS 七個通道控制沒有功能說明 | 補齊（官方 CS 手冊 ver 1.2）。PUSH 是大旋鈕、HI CUT 是 trim，兩者皆連續 |
-| 四把吉他的 selector 檔位名稱 | **只補到一把。**其餘三把確認官方文件不命名檔位 |
+| 四把吉他的 selector 檔位名稱 | **補到兩把。**Fender 在 09-11 補齊；Throbber 在 09-30 補齊（ESP 現行產品頁有官方檔位圖；09-11、09-12 兩次都漏看，因為名稱只在圖檔裡）。其餘兩把確認官方文件不命名檔位 |
 | Cali76 FET 的 RATIO | 補齊，而且原判讀有誤——它是連續旋鈕 4:1~20:1，不是離散 |
 | FF-1Y 的 EQ 名稱與「×2」 | 補齊（官方手冊 Ver 1.3）。EQ 是 TREBLE／MIDDLE／BASS |
 | JC-22 REVERB 與 Dumblifier Input Boost 沒收進 controls | 已收進 |
@@ -345,9 +371,23 @@ ESP FIXED Bridge。「Sound Reservoir」是原本唯一對的欄位。
 **查外部規格要多一層：那一頁是不是現行的？**判斷法與完整檢討寫在
 `shared/equipment_database/PARAMETER_VOCABULARY.md` 的「查外部規格的第三層：來源時效」。
 
-**四把吉他全部結案。Research 沒有等使用者確認的項目了。**
+**原本的四把吉他已於 09-12 全部結案。**2026-09-30 新增第五把 `pearson_omega_6`，它還有待實機確認的項目，見下方「2026-09-30 做了什麼」。
 
 ### 跨 repo 待辦
+
+### Omega 6 尚未匯入網站（2026-09-30）
+
+Omega 6 的規格只寫在本 repo。要進網站，由 **Pedal-Web-Service session** 執行 `/migrate-data`。
+**Research 不代寫其他 repo。**執行前那個 session 要知道三件事：
+
+1. **Throbber 的 model 已經改名。**本庫 spec 的 `basic_info.model` 自 09-12 起是 `THROBBER-STD`，
+   但 `Pedal-Web-Service-Planning/scripts/migrations/002_equipment_seed_from_research.sql` 寫的是
+   `Throbber-CTM`。`/migrate-data` 用 `ON CONFLICT (brand, model)`，改名後不會命中舊列，會多插一列。
+   匯入前要先處理舊列的 model 字串
+2. **`metal_frame` 是新的 `body_type` 值。**網站目前的標籤只有 solid／semi_hollow／hollow，需要補對應
+3. **Throbber spec 還有 09-12 更正前留下的舊敘述**（Mahogany、Ebony、set neck、24.75"），
+   散在 `tonal_characteristics`、`notes`、`comparisons` 等區塊。匯入會把它們一起帶進去。
+   這些不屬於本次修正範圍，匯入前要先決定是否清理
 
 ### 階段 5c 的觸發條件已在 2026-09-11 成立
 
