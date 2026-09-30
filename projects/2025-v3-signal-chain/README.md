@@ -186,8 +186,15 @@
 
 **結論見 `signal_chains/README.md`（2026-09-11 新增）。**摘要：兩份都是提案，都不是現況——兩份的路由架構都建立在尚未購入的 Empress Buffer++ 上，Toneking Only 還額外需要一顆不在庫存的 Boss CE-2W 並要求賣掉仍持有的 JC-22。兩份設計互相排斥，而且都沒有提到對方。判斷方法與逐項依據在該檔。
 
+### 🆕 2026-09-30：新增第五把吉他 Pearson Omega 6，與 Lundgren 選型研究
+
+- `inventory/guitars.yaml` 新增 `pearson_omega_6`（已到手）。規格見 `shared/equipment_database/guitars/specs/pearson_omega_6.yaml`
+- `research/lundgren_pickup_selection_2026-09.md`：為 Omega 6 挑選兩顆可切單的 Lundgren humbucker。**這是建議，尚未換裝**
+- `research/` 現在有 6 個文件
+- 本檔第 14 行「4 把吉他」與第 146 行是 2025-12-30 完成時的快照，不改
+
 ---
 
 **專案負責人:** Emil Wu
 **AI 協作:** Claude Code (Sonnet 4.5)
-**最後更新:** 2026-01-11
+**最後更新:** 2026-09-30

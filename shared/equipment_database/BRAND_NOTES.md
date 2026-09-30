@@ -130,6 +130,14 @@ grep -rn 'original/[a-z]*/[a-z0-9_-]*\.html' . --include='*.yaml' --include='*.m
 - **產品頁用 curl 抓不到規格**：規格由前端載入，WooCommerce API 會被 mod_security 擋下，要用會渲染頁面的工具讀取。
 - **保固條款要逐條讀**：「unless we approve them in advance」只適用於「未授權維修」那一條。「change of pickups」和「altered in any way」兩條沒有例外。
 
+### Lundgren（2026-09-30 新增）
+
+- **同一型號有兩個商品頁**：Heaven 57／67／77 與 Smooth Operator 各有「Vintage 49,2mm」與「50mm」兩頁。49.2mm 是兩芯編織線、長腳，**不能切單**；50mm 才是四芯線、短腳。
+- **50mm 頁的下方描述是舊文字**：Heaven 57 與 67 的 50mm 頁，頁首版本說明寫「4 lead cable」，下方描述卻仍寫「braided single conductor」。以頁首版本說明為準，並向 Lundgren 書面確認。
+- **URL slug 會認錯型號**：Modern Vintage 的網址是 `heaven-57®-50mm-spacing-kopia`，看網址會以為是 Heaven 57。
+- **看起來像 humbucker 但不是**：Revolver 是 humbucker 尺寸的 P-90 單線圈，無法切單。
+- 選型研究的完整記錄在 `projects/2025-v3-signal-chain/research/lundgren_pickup_selection_2026-09.md`。
+
 ---
 
 ## 相關文件
