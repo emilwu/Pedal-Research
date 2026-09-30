@@ -1,7 +1,7 @@
 # Pedal Research - 吉他效果器研究與訊號鏈管理系統
 
 **版本:** 2.2
-**最後更新:** 2026-09-10
+**最後更新:** 2026-09-30
 **系統狀態:** ✅ 系統完整運作中
 
 ---
@@ -296,11 +296,12 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 
 ## 當前設備清單（基於 2025-v3-signal-chain 專案）
 
-### 吉他 (4)
+### 吉他 (5)
 1. ESP Eclipse CTM (EMG JH Set, high output)
 2. ESP Throbber-CTM (SD APH-1, medium output, semi-hollow)
 3. Greco TE-500 (Lindy Fralin Wide Range, medium output)
-4. Fender Tokyo Thinline (Momose VT-1 single-coil, medium output)
+4. Fender Tokyo Thinline (Seymour Duncan SP90-1 Set, P90, medium output)
+5. Pearson Omega 6 (Pearson A2 Alnico 2, medium output, headless, aluminium/stainless frame)
 
 ### 效果器 (12)
 **Compressors (2):**
@@ -386,7 +387,7 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 `projects/2025-v3-signal-chain/inventory/`。
 
 - ✅ 17 份效果器規格（目前擁有 12）
-- ✅ 4 份吉他規格（目前擁有 4）
+- ✅ 5 份吉他規格（目前擁有 5）
 - ✅ 3 份音箱規格（目前擁有 2）
 - ✅ 2 份配件規格
 
@@ -450,4 +451,4 @@ User: "我賣掉了 JHS Morning Glory，買了 Walrus Slö"
 
 **系統狀態:** ✅ 系統完整運作中
 
-**最後更新:** 2026-09-10
+**最後更新:** 2026-09-30

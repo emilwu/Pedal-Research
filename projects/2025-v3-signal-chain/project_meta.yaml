@@ -11,7 +11,7 @@ inherited_from:
 
 # Statistics
 statistics:
-  total_guitars: 4
+  total_guitars: 5   # 2026-09-30：新增 Pearson Omega 6。權威來源是 inventory/guitars.yaml，此處為快取
   total_pedals: 13    # 條目總數。已擁有 12 + 規劃中 1（Buffer++）。
                       # 權威拆分在 inventory/pedals.yaml 的 stats 區塊，此處為快取
   total_amps: 2

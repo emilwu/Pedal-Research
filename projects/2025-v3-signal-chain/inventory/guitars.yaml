@@ -3,7 +3,7 @@
 # 由 Inventory Manager Skill 管理
 
 version: 1.0
-last_updated: 2025-12-30
+last_updated: 2026-09-30   # 2026-09-30：新增 Pearson Omega 6
 created: 2025-12-30
 source: "migrated from 2025-v3-signal-chain project"
 
@@ -170,24 +170,79 @@ guitars:
 
     notes: "經典 Telecaster 音色，Seymour Duncan SP90-1 Set（單線圈尺寸的 P90）"
 
+  # 2026-09-30 新增。使用者確認：已到手，25.5" 直品，Wasp Yellow，Chrome 五金。
+  - id: "pearson_omega_6"
+    brand: "Pearson Instruments"
+    model: "Omega 6 Standard"
+    full_name: "Pearson Instruments Omega 6 Standard"   # 顏色與五金記在 finish、hardware_finish
+    year: 2026
+    finish: "Wasp Yellow（粉體塗裝）"
+    hardware_finish: "Chrome"
+    headless: true
+
+    # 拾音器資訊（原廠）
+    # 阻值：Omega 產品頁寫 7.0k/8.1k，2025 年 A2 單賣頁寫 7.2k/8.4k，兩個都是官方數字；Hyper B 實測 7.27k/8.41k
+    pickup_neck: "Pearson A2 Vintage Output Neck (Alnico 2, 7.0–7.2k)"
+    pickup_bridge: "Pearson A2 Vintage Output Bridge (Alnico 2, 8.1–8.4k)"
+    pickup_type: "passive_humbucker"
+    pickup_set: "Pearson A2 Vintage Output"
+    output_level: "medium"   # 官方稱 "lower output classic PAF"；與 Throbber 的 APH-1 同級，歸 medium
+    coil_split: "individual"   # 每顆拾音器各一個 mini toggle，出廠就有
+
+    # 琴身資訊
+    # 琴身沒有木頭，是鋁板加不鏽鋼的開放式框架，所以 body_wood 填 null，材質記在 body_material
+    body_wood: null
+    body_material: "2mm 5052 Aluminum + 2mm 304 Stainless Steel frame"
+    body_type: "metal_frame"   # 新分類。Web-Service 目前 bodyType 只有 solid/semi_hollow/hollow，匯入時需要加對應
+    neck_wood: "Roasted Maple"
+    neck_construction: "bolt_on"
+    fingerboard_wood: "Rosewood"
+    scale_length: "25.5"
+    neck_option: "straight_fret"   # 官方另有 25"–25.5" multiscale 選項，本機不是
+
+    # 特殊設計
+    special_features:
+      - "無頭設計，Gotoh GHL-2 鎖弦"
+      - "每顆拾音器獨立切單（mini toggle）"
+      - "拾音器掛在支柱與壓片上，沒有拾音器槽與 ring"
+
+    # 使用狀態
+    status: "active"
+    acquired_date: null
+
+    # 適用音樂風格（推論，尚無實際彈奏記錄）
+    best_for:
+      - "Jazz"
+      - "Neo Soul"
+      - "Funk"
+      - "Pop Rock"
+      - "Classic Rock"
+
+    # 相關資料檔案
+    research_file: "shared/equipment_database/guitars/specs/pearson_omega_6.yaml"
+
+    pickup_upgrade_status: "尚未換裝。研究建議先用原廠拾音器彈 2–4 週；若要換，推薦 Lundgren Heaven 57 neck + Heaven 67 bridge（皆 50mm 版）"
+    notes: "原廠 A2 是 Alnico 2 vintage 輸出 PAF，四芯線，每顆可獨立切單。Lundgren 換裝研究見 projects/2025-v3-signal-chain/research/lundgren_pickup_selection_2026-09.md"
+
 # 統計資訊
 stats:
-  total_guitars: 4
-  active: 4
+  total_guitars: 5
+  active: 5
   sold: 0
   stored: 0
 
   by_pickup_type:
     active_humbucker: 1
-    passive_humbucker: 1
+    passive_humbucker: 2   # Throbber、Omega 6
     widerange_humbucker: 1
     single_coil: 1
 
   by_output_level:
     high: 1
-    medium: 3
+    medium: 4
     low: 0
 
   by_body_type:
     solid: 1
     semi_hollow: 3
+    metal_frame: 1   # Omega 6。不是木頭實心也不是半空心，單獨分類

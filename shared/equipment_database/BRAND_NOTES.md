@@ -122,6 +122,14 @@ grep -rn 'original/[a-z]*/[a-z0-9_-]*\.html' . --include='*.yaml' --include='*.m
 
 只有單一來源 `www.roland.com/us/`，未發現區域站分歧問題。
 
+### Pearson Instruments（2026-09-30 新增）
+
+- **同名陷阱**：官網是紐西蘭的 `pearsoninstruments.com`。`pearsoninstruments.ca` 是加拿大 Brad Pearson 的維修店，也賣拾音器，但與本庫的 Omega 6 無關。
+- **現行頁與存檔頁規格不同**：2026-03 的存檔頁有「Frame Material: 2mm 5052 Aluminum and 2mm 304 Stainless Steel」與「Coil Split: N/A」。現行頁拿掉了材質那一行，切單改寫為「Individual」。兩個時期都要記，並註明來源日期。
+- **同一顆拾音器有兩組官方數字**：A2 拾音器的阻值，Omega 產品頁寫 7.0k／8.1k，2025 年的 A2 單賣頁寫 7.2k／8.4k。兩個都是官方數字。
+- **產品頁用 curl 抓不到規格**：規格由前端載入，WooCommerce API 會被 mod_security 擋下，要用會渲染頁面的工具讀取。
+- **保固條款要逐條讀**：「unless we approve them in advance」只適用於「未授權維修」那一條。「change of pickups」和「altered in any way」兩條沒有例外。
+
 ---
 
 ## 相關文件

@@ -1,0 +1,266 @@
+# Pearson Omega 6 Standard
+# 吉他詳細技術資料
+#
+# 2026-09-30 建立。使用者確認實機：25.5" 直品（Straight Fret）、Wasp Yellow、Chrome 五金、HH，已到手。
+# 資料來源：Pearson 官方產品頁（2026-09-27 讀取）、創辦人 Dom Pearson 在 Reddit 的回覆、
+# 8 支 YouTube 評測與 Guitar World 訪談。完整研究過程與選型分析見
+# projects/2025-v3-signal-chain/research/lundgren_pickup_selection_2026-09.md
+#
+# 證據等級標記：[official] 官方頁面或創辦人本人；[dealer] 經銷商或代理商；[independent] 評測者或車主；
+# [inference] 本庫推論；[unknown] 查過但沒有資料。
+#
+# ⚠️ 同名陷阱：pearsoninstruments.ca（加拿大 Brad Pearson 的維修店）是另一家公司，與本琴無關。
+# 本琴的廠商是紐西蘭的 Pearson Instruments，官網 pearsoninstruments.com。
+
+version: 1.0
+last_updated: 2026-09-30
+
+# 基本資訊
+basic_info:
+  id: "pearson_omega_6"
+  brand: "Pearson Instruments"
+  model: "Omega 6 Standard"
+  full_name: "Pearson Instruments Omega 6 Standard"   # 型號層級名稱。本機的顏色與五金記在 variant
+  variant:
+    neck_option: "25.5\" Straight Fret"     # 另一個選項是 25"–25.5" Multiscale，本機不是
+    finish: "Wasp Yellow"
+    hardware: "Chrome"
+    pickup_layout: "HH"                      # Omega 目前只有 HH，沒有 HSS 或其他配置 [official]
+  headless: true
+  made_in: "New Zealand（組裝）"
+  origin_detail: |
+    [official] 公司由工業設計師 Dom Pearson 於 2023 年底在紐西蘭 Rotorua 創立。
+    鋁件與壓克力件在紐西蘭加工；琴頸由中國廠商製作，運到紐西蘭再整平、拋光、調整；
+    多數五金來自中國；pot 是韓國 Alpha；最後組裝與調整在紐西蘭完成。
+    [independent] Guitar World（2026-09-09）報導創辦人親自組裝，月產約 80 把。
+  year: 2026   # Omega 於 2026 年 4–5 月上市
+
+# 價格資訊
+price:
+  msrp: 995            # Chrome 五金。Gold／Black 五金為 1,095。琴頸選項不影響價格 [official]
+  currency: "USD"
+  tier: "mid_range"
+  note: "產品頁標 Free Shipping；美國訂單由 Pearson 預付關稅，美國以外的買家自付當地關稅與進口費 [official]。交期 5–8 週 [official]。實際購入價本庫未記"
+
+# 琴身規格
+body:
+  material: "2mm 5052 鋁板 + 2mm 304 不鏽鋼（沒有木頭）"
+  material_source: |
+    [official] 2026 年 3 月的官方頁面寫 "Frame Material: 2mm 5052 Aluminum and 2mm 304 Stainless Steel"。
+    現行頁面改寫為 "aluminum/stainless steel frame"。創辦人稱之為 "marine grade aluminum and stainless steel"。
+  construction: |
+    [official] 開放式骨架，不是空腔。多層折彎鋁板裝在副框架上，中央有不鏽鋼樑，
+    琴橋下方有交錯的墊片把弦的拉力傳到中央框架。
+    [independent] 泰國評測者數出 4 層板，中央鋼芯約 1 吋以上。
+    從板與板的縫隙可以看到內部配線、pot 與 toggle。
+  type: "metal_frame"
+  shape: "Omega（無頭）"
+  finish: "Wasp Yellow，Dulux Duralloy 粉體塗裝"
+  finish_note: |
+    [dealer] 泰國經銷商的 Wasp Yellow 實拍照顯示：只有正面板是黃色，
+    背板與側層是原色拉絲鋁。本機是否相同，本庫未確認。
+    [independent] 原色鋁會留指紋與刮痕（Omega 評測者）；粉體塗裝據一位 Hyper B Gen 6 車主描述不留指紋（不是 Omega）。
+  weight: "2.5 kg [official]；創辦人另說約 2.7 kg"
+
+# 琴頸規格
+neck:
+  wood: "Roasted Maple"
+  construction: "bolt_on"
+  construction_detail: |
+    [official] M5 不鏽鋼螺栓（官方未寫數量）。[independent] 泰國評測者數出 4 顆，背面照片也是 4 顆。
+    [independent] 琴頸跟部直接鎖在平的鋁板上，沒有 neck pocket。
+    [independent] Hyper B（同一接合概念的前一代機種）有車主回報琴頸會移位、螺栓會鬆；
+    Omega 的評測者目前回報音準穩定，但還沒有長期資料。
+  profile: "Modern C"
+  thickness: "21.5mm（1 格）／23mm（12 格）"
+  scale_length: "25.5 inch (647.7mm)，直品"
+  frets: "24 frets，Stainless Steel Medium Jumbo，圓弧品絲端"
+  nut: "Bone，42mm [official, 2026-03 頁面]"
+  string_lock: "Gotoh GHL-2 11/16 Floyd Rose Locking Nut"
+  string_lock_note: "[dealer，泰國代理經評測者轉述] 每塊壓片夾兩條弦，斷一條弦會讓相鄰那條也鬆掉"
+  truss_rod: "Double action，spoke wheel 在琴頸跟部 [official]"
+
+# 指板規格
+fingerboard:
+  wood: "Rosewood"
+  radius: "12 inch（直品）"   # 扇形品格版是 14"，本機不適用
+  inlays: "小型銀色圓點，側面白色標記 [official, 2026-03 頁面]"
+
+# 拾音器配置
+pickups:
+  neck:
+    model: "Pearson A2 Vintage Output (Neck)"
+    type: "passive_humbucker"
+    output: "medium"   # 官方稱 "lower output classic PAF"；與 Throbber 的 APH-1 同級，歸 medium
+    magnets: "Alnico 2 bar"
+    dcr: "7.0k（Omega 產品頁）／7.2k、4.2H（2025 年 A2 單賣頁）[official]；實測 7.27k [independent, Hyper B]"
+    split_dcr_measured: "3.65k [independent, Hyper B]"
+    pole_spacing: "50mm [official, 2025 A2 單賣頁]"
+
+  bridge:
+    model: "Pearson A2 Vintage Output (Bridge)"
+    type: "passive_humbucker"
+    output: "medium"
+    magnets: "Alnico 2 bar"
+    dcr: "8.1k（Omega 產品頁）／8.4k、5.0H（2025 年 A2 單賣頁）[official]；實測 8.41k [independent, Hyper B]"
+    split_dcr_measured: "4.28k [independent, Hyper B]"
+    pole_spacing: "52mm [official, 2025 A2 單賣頁]"
+
+  pickup_set:
+    name: "Pearson A2 Vintage Output"
+    maker: "[official] 中國 OEM 廠製造（原文：Manufactured in China for Pearson by our reputable OEM supplier with over 10 years of pickup manufacturing），10 年指的是該廠的拾音器製造經驗，廠名未公開。[independent, Trogly] 依 Pearson 規格繞製"
+    wiring: "4 conductor（可切單／tap）[official]"
+    color_code: "Black + Bare = Ground，Green = Hot，White + Red = Coil Split [official]"
+    potting: "Fully wax potted [official]"
+    covers: "[inference] Chrome 五金的琴出廠是鍍鉻蓋版；泰國經銷商的 Black 五金琴是開放式黑色。本機是 Chrome，推定為鍍鉻蓋版，未親眼確認"
+    color_code_warning: |
+      ⚠️ Pearson 的熱線是 Green。Lundgren 的熱線是 Black（灰線版是 Blue），Green 是接地。
+      換裝其他品牌時要依功能對接（熱線、接地、切單），不能照顏色對接。
+      混用 Lundgren 與原廠 A2 時，兩者的相位關係未知。裝好後要在中間檔做相位測試：
+      聲音變薄、變空，就對調那一顆的熱線與接地 [inference]。
+
+  mounting:
+    system: "不鏽鋼六角支柱 + 不鏽鋼壓片，每片用一顆短 M3 螺栓固定。沒有拾音器槽，也沒有 ring [official]"
+    pickup_screw_distance: "Import Spec 77mm [official]"
+    pickup_thread: "M3 [official]"
+    imperial_screws: "[official] 官方說其他螺絲規格也相容，框架上有孔可讓長螺絲穿過"
+    depth: "[unknown] 可用深度未公開。[inference，官方背面照片] neck 拾音器背面開放；bridge 拾音器被背板蓋住"
+    orientation: "兩顆都與琴身中線垂直，不斜置 [inference, 官方照片]"
+
+  controls:
+    - "Volume (共用)"
+    - "Tone (共用)"
+    - "3 Way Blade Switch"               # 行為見下方 pickup_selector
+    - "Coil Split Mini Toggle (Neck)"    # 行為見下方 coil_split
+    - "Coil Split Mini Toggle (Bridge)"  # 同上
+  controls_notes: |
+    [official] 產品頁寫 "1 Volume, 1 Tone, 3 Way Blade Switch" 與 "Coil Split: Individual"。
+    切單是兩個 mini toggle，每顆拾音器一個，不是推拉 pot [independent，多位評測者確認；
+    Hyper B 官方頁寫 "2x Mini Toggles (coil split for each pickup)"]。
+    [official] Volume 是 A500K、Tone 是 B500K（Pearson 在 YouTube 留言的回覆），韓國 Alpha 全尺寸公制 pot。
+    產品頁規格表只寫 "Pots: A500K"，沒有分 volume／tone，與 YouTube 回覆不一致。以實機 pot 背面的印字為準。
+    [independent] Volume 有 treble bleed：轉小時高頻保留（intheblues）。
+    [official] 創辦人說 mini toggle 可換成 on/on/on DPDT，做更多自訂配線（'for even more custom wiring'）。
+    [inference] 例如每顆拾音器做串聯／切單／並聯三段。
+    2026 年 5 月的官方規格表曾寫 "Coil Split: N/A"，但所有評測琴都有兩個 toggle；現行頁為 "Individual"。
+
+  # 與 controls 的 "3 Way Blade Switch" 是同一個開關，此處只描述行為
+  pickup_selector:
+    switch_type: "3 Way Blade Switch"
+    position_count: 3
+    positions: null
+    position_names_status: "官方未命名檔位。評測者描述中間檔為兩顆拾音器一起，但撥桿方向與檔位對應沒有官方資料，不填"
+
+  # 與 controls 的 Coil Split Mini Toggle (Neck)／(Bridge) 是同兩個開關，此處只描述行為
+  coil_split:
+    type: "individual（每顆一個 mini toggle）"
+    combinations: "8 種：neck 2 種（humbucker／切單）+ 中間檔 4 種 + bridge 2 種。單顆檔位時，另一顆的 toggle 不起作用 [inference]；泰國評測者也說是 8 種組合 [independent]"
+    active_coil_when_split: "[unknown] 切單時保留哪一顆線圈，官方與評測者都沒有說明"
+
+  modding_specs_official:
+    pot_shaft: "8mm 直徑，Import Spec 6mm 粗齒 spline"
+    output_jack: "1/4 Inch Stereo"   # 用途未說明 [unknown]
+
+# 硬體規格
+hardware:
+  bridge: "Pearson Custom Multi-scale Fixed Headless Bridge"
+  bridge_note: |
+    [official] 直品與扇形品格版共用同一型琴橋（產品頁兩種琴頸都只列這一款）。
+    [inference，官方照片] 每弦獨立 saddle，彈簧式音準螺絲，調音旋鈕在後方。
+    [independent] Guitar World 報導這是修改自 Hipshot 的設計。
+  string_spacing_at_saddle: "10.4mm [official，創辦人 Reddit 回覆：'The string spacing at the bridge is a common 10.4mm.']"
+  string_spread_derived: |
+    [inference] 琴橋處 E 到 E 約 52.0mm（5 × 10.4mm）。
+    弦往琴枕收斂，所以 bridge 拾音器上方約 51mm，neck 拾音器上方約 48–50mm。
+  tuners: "琴橋後方旋鈕式（無頭）"
+  hardware_finish: "Chrome"
+  strings_factory: "[official] 出廠以 10 號弦調整"
+
+# 電子系統
+electronics:
+  type: "passive"
+  battery: "None"
+  grounding: "[independent] 框架有接地線（Trogly 在 Hyper B 上確認）"
+  wiring_access: |
+    [independent] 控制腔在下方背板，拆 4 顆螺栓可打開（Mark Gutierrez）。
+    泰國評測者說可能要拆好幾層板才碰得到配線。配線是焊接的，沒有插拔式接頭 [official]。
+  tone_capacitor: "官方寫 0.22 uF"
+  tone_capacitor_note: "[inference] 一般值是 0.022 uF，官方數字很可能少一個 0，未確認。可直接看電容上的標示"
+
+# 音色特性
+tonal_characteristics:
+  core_tone: "PAF 風格、輸出不高、直接清楚、不像木頭琴那樣有木質感 [independent]"
+  frequency:
+    low: "[independent] 不插電時低頻深而穩。同款 A2 在 Hyper B 上 neck 偏重低音弦，調低後改善"
+    mid: "[independent] 同款 A2 被形容為中頻厚"
+    high: "[independent] neck 高頻稍收（intheblues，Omega）；同款 A2 的 neck 被形容為偏柔、偏暗（Hyper B）"
+  split_tone: "[independent] 切單評價好：'convincing'、'steely'；bridge 切單很 twangy，neck 切單溫暖清楚"
+  listener_impression: |
+    [independent, 弱] YouTube 上沒有這把琴的聽眾常說它亮、steely、偏金屬味；也有人強烈反駁。
+    實際彈過的評測者多半形容原廠拾音器溫暖、sweet、像 Les Paul。
+  dynamics:
+    pick_sensitivity: "[independent] 動態好，音量旋鈕可以把破音收乾淨"
+    volume_sensitivity: "高（有 treble bleed）"
+    compression: "低（輸出不高）"
+  output_level: "Medium（官方稱 lower output，vintage 風格）"
+  noise_level: "[independent] 沒有評測者抱怨 hum。有回報的是機械雜音：鬆掉的螺絲、異音"
+
+# 適用音樂風格
+# [inference] 以下依本庫使用者的風格清單推論，還沒有使用者實際彈奏的記錄
+best_for:
+  good:
+    - "Jazz（neck humbucker 溫暖；注意 neck 可能偏暗）"
+    - "Neo Soul（中間檔與切單）"
+    - "Funk（切單，每顆獨立）"
+    - "Pop Rock"
+    - "Classic Rock（低中增益效果器）"
+  not_ideal:
+    - "Metal（原廠 A2 是 vintage 輸出的 PAF。有評測者用 11–56 降調評為能 chug，本庫推論高增益不是強項）"
+
+# 本庫使用者的拾音器換裝研究（Lundgren 選型）是個人配對資料，不是型號規格，
+# 所以不放在這裡。見 projects/2025-v3-signal-chain/research/lundgren_pickup_selection_2026-09.md
+# 與 inventory/guitars.yaml 的 pearson_omega_6 條目。
+
+# 使用注意事項
+notes:
+  warranty:
+    - "[official] 保固不涵蓋個人需求的調整，包括接線更動、焊接、更換拾音器"
+    - "[official] 任何被客戶或維修師改過的琴也不在保固內，這一條官方沒有寫例外"
+    - "[official] 「事先同意」只出現在「未經授權的維修服務」那一條。官方沒有說事先同意就能保留換拾音器後的保固"
+    - "[official] 售出不退；退貨收 120 美元手續費加運費"
+    - "聯絡：support@pearsoninstruments.com"
+  qc_reports:
+    - "[independent] 自費車主（Silent Rob，直品）：出廠有加工痕、7 根琴格略不平、第 24 格偏高需銼平、一顆鬆螺絲造成喀聲"
+    - "[independent] 另一位扇形品格版車主回報琴頸過厚、品絲處理粗糙、琴枕歪、有異音，最後沒留下"
+    - "[independent] 評測琴（多為 Pearson 提供）則回報出廠調整良好"
+  playability:
+    - "[independent] 琴身在拾音器附近沒有可以靠手指的面，也沒有護板"
+    - "[independent] 拾音器突出，重 pick 偶爾會刮到"
+    - "[independent] 高把位好按"
+  gig_bag: "不附琴袋。官方說一般無頭琴袋（EART、Strandberg）可用 [official]"
+
+# 參考資料來源
+sources:
+  - "https://pearsoninstruments.com/product/pearson-omega-6-standard-wasp-yellow-chrome-hh/"
+  - "https://pearsoninstruments.com/omega-explained/"
+  - "https://pearsoninstruments.com/info/"
+  - "https://pearsoninstruments.com/about/"
+  - "https://web.archive.org/web/20260327184943/https://pearsoninstruments.com/product/pearson-omega-6-standard-raw-aluminum-o6sstr/"
+  - "https://web.archive.org/web/20250828055351/https://pearsoninstruments.com/product/pearson-a2-vintage-output-bridge-only-chrome/"
+  - "https://web.archive.org/web/20250831043054/https://pearsoninstruments.com/product/pearson-a2-vintage-output-neck-only-chrome/"
+  - "https://reddit.com/r/ExtendedRangeGuitars/comments/1tihnfc/"  # 創辦人：10.4mm 弦距、切單 toggle
+  - "https://www.reddit.com/r/metalguitar/comments/1tihx7w/"  # 創辦人：材質、重量、OEM 拾音器
+  - "https://www.guitarworld.com/gear/electric-guitars/pearson-instruments-interview"
+  - "https://www.youtube.com/watch?v=8twS3AynqME"  # intheblues，Omega
+  - "https://www.youtube.com/watch?v=ZBRIJoO7Uq0"  # Silent Rob，自費，直品
+  - "https://www.youtube.com/watch?v=TqkPhYd7-Jc"  # Mark Gutierrez，Omega
+  - "https://www.youtube.com/watch?v=Gfmgzb5Ka0U"  # Kay Hangman，泰文，Wasp Yellow
+  - "https://www.youtube.com/watch?v=ZpCbRsp_tpg"  # Trogly，Hyper B，A2 阻值實測
+  - "https://pearsoninstruments.com/product/pearson-hyper-b-special-gen-6-raw-aluminium-chrome/"  # Hyper B 官方頁：2x Mini Toggles 切單
+  - "https://www.youtube.com/watch?v=oYd29cl2_m4"  # Leon Todd；Pearson 在留言回覆琴袋相容性
+  - "https://reverb.com/item/101941499-pearson-omega-2026-wasp-yellow"  # 泰國經銷商 Wasp Yellow 實拍照
+  - "https://www.youtube.com/watch?v=KPDjibtunr0"  # Astrofreq；留言區有扇形品格版車主的品質抱怨
+  - "https://reddit.com/r/Guitar/comments/1trfidb/"  # Hyper B Gen 6 車主：粉體塗裝不留指紋、切單音量夠
+
+data_collected: 2026-09-27
+data_reliability: "中（官方規格多數齊全；琴身材質有兩個時期的寫法；拾音器線圈、深度、電容值待實機確認）"
