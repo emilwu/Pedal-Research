@@ -375,10 +375,28 @@ ESP FIXED Bridge。「Sound Reservoir」是原本唯一對的欄位。
 
 ### 跨 repo 待辦
 
-### Omega 6 尚未匯入網站（2026-09-30）
+### Omega 6：SQL 已產出，待套用（2026-09-30）
 
-Omega 6 的規格只寫在本 repo。要進網站，由 **Pedal-Web-Service session** 執行 `/migrate-data`。
-**Research 不代寫其他 repo。**執行前那個 session 要知道三件事：
+**狀態：SQL 已產出並在本機驗證，尚未套用到任何環境。不要寫成「已匯入」。**
+
+Pedal-Web-Service session（當時名為 pedal-wesbite）於 09-30 執行 `/migrate-data`，產出兩支檔案。
+兩支都在 Planning repo 的工作目錄裡，**尚未 commit**：
+
+- `Pedal-Web-Service-Planning/scripts/migrations/005_reconcile_model_names.sql`：把 11 筆 brand／model 對齊研究庫，用主鍵 id 配對
+- `Pedal-Web-Service-Planning/scripts/migrations/006_seed_from_research.sql`：25 筆（效果器 17、吉他 5、音箱 3），配件 2 筆因 schema 不收而排除
+
+該 session 回報：已在本機 `pedal_dev` 以 `BEGIN … ROLLBACK` 驗證，資料庫未變動。
+套用到 production 需要資料庫密碼，使用者已決定延後。何時 commit、何時套用，由使用者決定。
+
+Research 在 09-30 讀過 006 並抽查：Omega 6、Fender 拾音器（SP90-1N／SP90-1，無 Lollar）、
+Eclipse 琴橋（不採用 TonePros）、Throbber 更正歷史（已濾掉）的寫入值都正確。
+006 的來源政策是 spec YAML 為唯一權威，`reports/*.md` 只供描述文字，
+污染的兩份 ESP 報告整份排除。這是兩個 session 協調後的結果。
+
+⚠️ 006 會覆蓋 002 寫入的 Eclipse 硬體值（TonePros T3BT、GOTOH 510FA、GOTOH SG301-04、Plek）。
+那些值來自 ESP USA 零售商頁，覆蓋是刻意的，待使用者確認。
+
+以下是匯入前交代給那個 session 的三件事，**都已處理**：
 
 1. **Throbber 的 model 已經改名。**本庫 spec 的 `basic_info.model` 自 09-12 起是 `THROBBER-STD`，
    但 `Pedal-Web-Service-Planning/scripts/migrations/002_equipment_seed_from_research.sql` 寫的是
