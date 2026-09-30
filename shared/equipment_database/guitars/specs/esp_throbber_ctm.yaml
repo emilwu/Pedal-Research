@@ -7,8 +7,8 @@
 #
 # id 仍為 esp_throbber_ctm，沒有改。理由見 pickups.model_identity.why_not_renamed。
 
-version: 2.1
-last_updated: 2026-09-30   # 2026-09-30：pickup_selector 檔位名稱依官方檔位圖補齊
+version: 2.2
+last_updated: 2026-09-30   # 2026-09-30：pickup_selector 檔位名稱依官方檔位圖補齊；清理 09-12 更正前留下的舊敘述
 
 # 基本資訊
 basic_info:
@@ -285,7 +285,7 @@ tonal_characteristics:
 
   frequency:
     low: "Warm, full bass (semi-hollow 特性)"
-    mid: "Rich, woody midrange (Mahogany + semi-hollow)"
+    mid: "Rich, woody midrange (Alder + semi-hollow)"   # 2026-09-30：原寫 Mahogany，照 body.wood 更正
     high: "Smooth, singing highs (Alnico II)"
 
   dynamics:
@@ -364,14 +364,16 @@ notes:
     - "可使用 feedback suppressor 或降低音量"
     - "舞台演出時注意音箱方向"
 
+  # 2026-09-30：maintenance 與 setup 原本照 Mahogany／Ebony／set neck／24.75" 寫成，
+  # 那是 09-12 更正前的錯誤規格。已照 body／neck／fingerboard 的官方欄位改寫。
   maintenance:
-    - "Ebony 指板需要定期保養"
-    - "Mahogany 對濕度敏感"
+    - "Indian Rosewood 指板需要定期保養"
+    - "Alder 琴身與 Hard Maple 琴頸對濕度變化敏感"
     - "Semi-hollow 結構較脆弱，運輸時需小心"
 
   setup:
-    - "Set neck 設計，可能需要專業調整"
-    - "24.75 吋 scale，適合較低弦距設定"
+    - "Bolt-on 琴頸（官方：Bolt-on (T-5 Ultimate Access)）"
+    - "648mm（25.5 吋）scale"
     - "Trembucker spacing (bridge pickup)"
 
 # 與庫存其他吉他比較
@@ -384,15 +386,17 @@ comparisons:
       - "Throbber: Jazz/Blues vs Eclipse: Modern metal"
       - "Throbber: High dynamics vs Eclipse: Compressed"
 
+  # 2026-09-30：原本把琴頸接合與弦長列為差異（Set neck、24.75吋），那是 09-12 更正前的錯誤規格。
+  # 兩把其實都是 bolt-on、25.5 吋，已移到 similarities。
   vs_greco_te500:
     similarities:
       - "Both semi-hollow"
       - "Both medium output"
       - "Both warm tones"
+      - "Both bolt-on"
+      - "Both 25.5 吋 scale"
     differences:
-      - "Throbber: Set neck vs Greco: Bolt-on"
       - "Throbber: PAF humbucker vs Greco: WideRange humbucker"
-      - "Throbber: 24.75吋 vs Greco: 25.5吋"
 
   vs_fender_thinline:
     similarities:

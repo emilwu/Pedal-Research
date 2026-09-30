@@ -385,9 +385,12 @@ Omega 6 的規格只寫在本 repo。要進網站，由 **Pedal-Web-Service sess
    `Throbber-CTM`。`/migrate-data` 用 `ON CONFLICT (brand, model)`，改名後不會命中舊列，會多插一列。
    匯入前要先處理舊列的 model 字串
 2. **`metal_frame` 是新的 `body_type` 值。**網站目前的標籤只有 solid／semi_hollow／hollow，需要補對應
-3. **Throbber spec 還有 09-12 更正前留下的舊敘述**（Mahogany、Ebony、set neck、24.75"），
-   散在 `tonal_characteristics`、`notes`、`comparisons` 等區塊。匯入會把它們一起帶進去。
-   這些不屬於本次修正範圍，匯入前要先決定是否清理
+3. ~~Throbber spec 還有 09-12 更正前留下的舊敘述~~ **已於 2026-09-30 清理。**
+   Throbber spec 的 `tonal_characteristics`、`notes`、`comparisons`，以及 Greco、Fender
+   兩份 spec 裡和 Throbber 比較的段落，原本照 Mahogany／Ebony／set neck／24.75" 寫成，已照官方欄位改正。
+   仍要知道的是：Throbber spec 保留了幾段**更正歷史**（例如 `model_identity`、
+   `body_and_neck_resolved_2026_09_12`），它們是 YAML 字串值，不是註解，匯入時會一起進 `specs`。
+   要不要在匯入時濾掉，由 Web-Service session 決定
 
 ### 階段 5c 的觸發條件已在 2026-09-11 成立
 

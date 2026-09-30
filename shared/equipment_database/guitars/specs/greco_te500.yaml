@@ -237,15 +237,17 @@ comparisons:
       - "Greco: Vintage vs Fender: Modern Japanese"
       - "Greco: 更溫暖 vs Fender: 更 bright"
 
+  # 2026-09-30：Throbber 的琴頸接合、弦長、琴型原本照 09-12 更正前的錯誤規格寫成。
+  # 官方規格是 Bolt-on、648mm（25.5 吋）、ESP 原創單切角琴型，見 esp_throbber_ctm.yaml。
   vs_throbber_ctm:
     similarities:
       - "Both semi-hollow"
       - "Both medium output"
       - "Both warm tones"
+      - "Both bolt-on"
+      - "Both 25.5\" scale"
     differences:
-      - "Greco: Bolt-on vs Throbber: Set neck"
-      - "Greco: Tele shape vs Throbber: LP-style"
-      - "Greco: 25.5\" vs Throbber: 24.75\""
+      - "Greco: Tele shape vs Throbber: ESP 原創單切角琴型"
       - "Greco: WideRange vs Throbber: PAF"
 
 # 推薦訊號鏈

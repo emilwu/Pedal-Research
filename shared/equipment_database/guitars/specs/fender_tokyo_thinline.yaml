@@ -271,15 +271,17 @@ comparisons:
       - "Fender: P90 bite vs Eclipse: Smooth, compressed"
       - "Fender: Semi-hollow airiness vs Eclipse: Solid body sustain"
 
+  # 2026-09-30：原本把「Bolt-on vs Set neck」列為差異，那是 09-12 更正前的 Throbber 錯誤規格。
+  # Throbber 官方是 Bolt-on，已移到 similarities。
   vs_throbber_ctm:
     similarities:
       - "Both warm, thick tone (P90 vs Humbucker)"
       - "Both semi-hollow (Fender Thinline vs Throbber Sound Reservoir)"
       - "Both have strong midrange"
+      - "Both bolt-on"
     differences:
       - "Fender: P90 (single-coil hum) vs Throbber: Humbucker (quiet)"
       - "Fender: More bite vs Throbber: Smoother"
-      - "Fender: Bolt-on vs Throbber: Set neck"
       - "Fender: Telecaster shape vs Throbber: Semi-hollow body"
 
 # 推薦訊號鏈
