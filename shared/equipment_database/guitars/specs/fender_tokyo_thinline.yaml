@@ -1,8 +1,8 @@
 # Fender Made in Japan Flagship Tokyo Editions Telecaster Thinline
 # 吉他詳細技術資料
 
-version: 1.0
-last_updated: 2026-01-02
+version: 1.1
+last_updated: 2026-09-30   # 2026-09-30：移除「或 Lollar DC-90」，neck 改為 SP90-1N
 
 # 基本資訊
 basic_info:
@@ -54,8 +54,11 @@ fingerboard:
 
 # 拾音器配置
 pickups:
+  # 2026-09-30：neck／bridge 的 model 原寫「SP90-1 Vintage P90 (或 Lollar DC-90)」。
+  # 09-11 已更正 pickup_set 並經使用者確認是 SP90-1 Set，但這兩行當時沒跟著改，檔內自相矛盾。
+  # 照 inventory/guitars.yaml 改：neck 是 SP90-1N，bridge 是 SP90-1，沒有 Lollar。
   neck:
-    model: "Seymour Duncan SP90-1 Vintage P90 (或 Lollar DC-90)"
+    model: "Seymour Duncan SP90-1N Vintage P90"
     type: "p90_single_coil_sized"
     output: "medium_high"
     magnets: "Alnico 5"
@@ -66,7 +69,7 @@ pickups:
       - "Vintage P90 voicing"
 
   bridge:
-    model: "Seymour Duncan SP90-1 Vintage P90 (或 Lollar DC-90)"
+    model: "Seymour Duncan SP90-1 Vintage P90"
     type: "p90_single_coil_sized"
     output: "medium_high"
     magnets: "Alnico 5"
@@ -231,7 +234,7 @@ notes:
   mij_quality:
     - "Made in Japan Flagship series 品質極高"
     - "日本製造工藝精良"
-    - "使用 Seymour Duncan SP90-1 或 Lollar DC-90 高品質 P90 拾音器"
+    - "使用 Seymour Duncan SP90-1 Set 高品質 P90 拾音器"
 
   p90_pickups:
     - "P90 拾音器為 single-coil 結構，有 60Hz hum (正常現象)"
@@ -328,8 +331,8 @@ reference_artists:
 
 # P90-Style Pickups 特性
 p90_pickups:
-  description: "P90-style pickups in single-coil size (SP90-1 或 DC-90)"
-  manufacturer: "Seymour Duncan 或 Lollar Guitars"
+  description: "P90-style pickups in single-coil size (neck SP90-1N + bridge SP90-1)"
+  manufacturer: "Seymour Duncan"
 
   characteristics:
     - "P90 warmth and thickness"
@@ -338,7 +341,7 @@ p90_pickups:
     - "Vintage P90 voicing"
     - "Single-coil-sized for Tele routing"
 
-  quality_note: "SP90-1 和 DC-90 都是高品質 P90 風格拾音器，適合 Thinline 的音色特性"
+  quality_note: "SP90-1 是高品質 P90 風格拾音器，適合 Thinline 的音色特性"
 
   note: "⚠️ 原 YAML 記錄為 'Momose VT-1' 有誤，Momose VT-1 是 Momose MT1 系列吉他使用的拾音器，非 Fender 產品"
 
@@ -347,10 +350,9 @@ sources:
   - "Fender 官方網站"
   - "Made in Japan Flagship series 資料"
   - "Seymour Duncan SP90-1 官方規格"
-  - "Lollar DC-90 官方規格"
 
 data_collected: 2026-01-02
-data_updated: 2026-01-13  # 修正拾音器資訊
+data_updated: 2026-09-30  # 移除「或 Lollar DC-90」。前次 2026-01-13 修正拾音器資訊
 data_reliability: "中高 (拾音器資訊已驗證修正，其他規格部分需要補充)"
 
-correction_note: "⚠️ 原 YAML 記錄拾音器為 'Momose VT-1' 有誤，已更正為 'Seymour Duncan SP90-1 或 Lollar DC-90'"
+correction_note: "⚠️ 原 YAML 記錄拾音器為 'Momose VT-1' 有誤，已更正為 Seymour Duncan SP90-1 Set（neck SP90-1N、bridge SP90-1）。2026-01-13 的更正曾寫成「SP90-1 或 Lollar DC-90」，那個「或」是本庫自己加的，使用者 2026-09-11 確認實機後已於 2026-09-30 移除"
