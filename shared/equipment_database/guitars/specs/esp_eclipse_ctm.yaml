@@ -1,8 +1,8 @@
 # ESP Eclipse CTM/E
 # 吉他詳細技術資料
 
-version: 1.0
-last_updated: 2026-01-02
+version: 1.1
+last_updated: 2026-10-01   # 2026-10-01：hardware.bridge／tailpiece 由使用者實機確認補上
 
 # 基本資訊
 basic_info:
@@ -109,8 +109,13 @@ pickups:
 
 # 硬體規格
 hardware:
-  bridge: null  # 請補充 (Tune-o-matic style 預估)
-  tailpiece: null  # 請補充 (Stop bar 預估)
+  # 2026-10-01：bridge 與 tailpiece 由使用者實機確認（經 Pedal-Web-Service session 轉述，
+  # 再由使用者在本 repo 的 session 確認寫入）。production 的 equipment 表已是這兩個值。
+  # ⚠️ 型號是 T3BP，不是 guitars/reports/esp_eclipse_ctm_report.md 寫的 T3BT。
+  #    那份報告的來源是 ESP USA 零售商頁，見 BRAND_NOTES.md「已知污染」。一字之差是不同料號。
+  bridge: "TonePros T3BP Tune-o-matic"
+  tailpiece: "GOTOH 510FA"
+  hardware_source: "使用者實機確認，2026-10-01"
   tuners: null  # 請補充
   hardware_finish: null  # 請補充
 

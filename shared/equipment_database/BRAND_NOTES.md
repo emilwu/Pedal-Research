@@ -90,7 +90,7 @@ https://espguitars.co.jp/products/discon-esp-guitar
 
 | 檔案 | 問題 |
 |---|---|
-| `guitars/reports/esp_eclipse_ctm_report.md` | 「驗證來源」拿零售商 Pit Bull Audio 的 **ESP USA Eclipse** 商品頁，當這把 ESP JP 琴的硬體規格確認 |
+| `guitars/reports/esp_eclipse_ctm_report.md` | 「驗證來源」拿零售商 Pit Bull Audio 的 **ESP USA Eclipse** 商品頁，當這把 ESP JP 琴的硬體規格確認。2026-10-01 使用者實機確認琴橋是 TonePros **T3BP**，報告寫的 **T3BT** 是錯的；不要因為品牌吻合就認為報告可信 |
 | `guitars/reports/esp_throbber_ctm_report.md` | 兩處引用 Pit Bull Audio 的 **ESP USA Eclipse Semi-Hollow**，當 ESP JP Throbber 的設計佐證。**同時踩三個問題**：不同公司、不同型號、零售商頁而非官方頁 |
 
 第二份報告的「驗證的關鍵資訊 ✓」清單有五項與現行 ESP JP 官方規格直接矛盾（琴身、琴頸、指板、音階、接合方式）。**讀那兩份報告的規格結論時要當成未驗證。**權威值在 `guitars/specs/` 的 YAML。
