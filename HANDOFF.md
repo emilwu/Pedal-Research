@@ -375,28 +375,30 @@ ESP FIXED Bridge。「Sound Reservoir」是原本唯一對的欄位。
 
 ### 跨 repo 待辦
 
-### Omega 6：SQL 已產出，待套用（2026-09-30）
+### Omega 6 已匯入網站（2026-10-01）
 
-**狀態：SQL 已產出並在本機驗證，尚未套用到任何環境。不要寫成「已匯入」。**
+**狀態：已套用到 production。**以下由 Pedal-Web-Service session（pedal-wesbite）回報；
+Planning 的兩個 commit 由 Research 親自確認已在 origin/main。
 
-Pedal-Web-Service session（當時名為 pedal-wesbite）於 09-30 執行 `/migrate-data`，產出兩支檔案。
-兩支都在 Planning repo 的工作目錄裡，**尚未 commit**：
+- Planning commit：`a02a658`（新增 005、006）、`76753d1`（005 改用 `(brand, model)` 比對。
+  初版用 seed id 比對，但 production 的 id 是 UUID，初版在 production 會是沉默的 no-op）
+- 005：只有 ESP Throbber-CTM → THROBBER-STD 一筆實際更新，其餘 10 筆在 production 本來就對齊
+- 006：25 筆 upsert，零錯誤。production 由 26 筆變成 27 筆，重複的 `(brand, model)` 為 0
+- 寫入前有 26 列的 CSV 備份（gitignored，在 Web-Service 那邊）
 
-- `Pedal-Web-Service-Planning/scripts/migrations/005_reconcile_model_names.sql`：把 11 筆 brand／model 對齊研究庫，用主鍵 id 配對
-- `Pedal-Web-Service-Planning/scripts/migrations/006_seed_from_research.sql`：25 筆（效果器 17、吉他 5、音箱 3），配件 2 筆因 schema 不收而排除
+匯入後的三個事實，Research 要知道：
 
-該 session 回報：已在本機 `pedal_dev` 以 `BEGIN … ROLLBACK` 驗證，資料庫未變動。
-套用到 production 需要資料庫密碼，使用者已決定延後。何時 commit、何時套用，由使用者決定。
+1. **Eclipse 的硬體值在 production 有、在本庫 spec 沒有。**使用者 2026-10-01 實機確認
+   bridge 是 **TonePros T3BP Tune-o-matic**、tailpiece 是 **GOTOH 510FA**，已寫進 production。
+   本庫 `esp_eclipse_ctm.yaml` 的 `hardware.bridge`／`tailpiece` 原本是 null，
+   **已於 2026-10-01 補上**（使用者在本 repo 的 session 確認）。補上前若再跑 `/migrate-data`，
+   會把 production 的值蓋回「官方未記載」。`tuners` 與 `hardware_finish` 使用者未確認，仍是 null
+2. **報告裡的 T3BT 是錯的。**`esp_eclipse_ctm_report.md` 寫 TonePros T3BT，實機是 T3BP，
+   一字之差、不同料號。不要因為「值看起來吻合」就認為那份報告可信
+3. **production 有 2 筆不在本庫的設備**，是透過網站的 AI 研究功能加入的：
+   Boss DS-1 Distortion、JHS Pedals Fumble。006 沒有動它們。要不要納入本庫是另一件事
 
-Research 在 09-30 讀過 006 並抽查：Omega 6、Fender 拾音器（SP90-1N／SP90-1，無 Lollar）、
-Eclipse 琴橋（不採用 TonePros）、Throbber 更正歷史（已濾掉）的寫入值都正確。
-006 的來源政策是 spec YAML 為唯一權威，`reports/*.md` 只供描述文字，
-污染的兩份 ESP 報告整份排除。這是兩個 session 協調後的結果。
-
-⚠️ 006 會覆蓋 002 寫入的 Eclipse 硬體值（TonePros T3BT、GOTOH 510FA、GOTOH SG301-04、Plek）。
-那些值來自 ESP USA 零售商頁，覆蓋是刻意的，待使用者確認。
-
-以下是匯入前交代給那個 session 的三件事，**都已處理**：
+匯入前交代給那個 session 的三件事，**都已處理**（原文保留供參考）：
 
 1. **Throbber 的 model 已經改名。**本庫 spec 的 `basic_info.model` 自 09-12 起是 `THROBBER-STD`，
    但 `Pedal-Web-Service-Planning/scripts/migrations/002_equipment_seed_from_research.sql` 寫的是
