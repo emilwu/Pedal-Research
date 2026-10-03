@@ -1,0 +1,154 @@
+# JHS Pedals Fumble
+# 效果器詳細技術資料
+#
+# 2026-10-01 建立。這台不在使用者的 inventory 裡，是器材庫（catalog）資料，不是個人器材。
+# 證據等級：[official] JHS 官方頁面；[dealer] 經銷商；[independent] 媒體或買家評論；
+# [inference] 本庫推論；[unknown] 查過但官方沒有公布。
+#
+# ⚠️ brand／model 必須維持 "JHS Pedals"／"Fumble"。這是網站 production 那一列的寫法，
+#    /migrate-data 用 (brand, model) 做 upsert。官方商店標題是全大寫 "FUMBLE"，不要改。
+#
+# ⚠️ 網站上原本的這一列**內容幾乎全是 AI 編造的**，匯入時要整列取代，不要合併。
+#    那一列由網站的 AI 研究功能產生（id cmtwzaigpqx2l5028yppe91j9，
+#    createdAt 2026-09-11T13:14:53，updatedAt 2026-09-11T13:17:42，source ai_research）。
+#    它寫的是「Dallas Rangemaster 風格的鍺電晶體 treble booster，Volume／Gain 兩旋鈕加
+#    Treble／Mid／Bass／Full 四段模式開關，輸入阻抗約 470 kΩ，可能可用 18V，$149」。
+#    實際上 Fumble 是 JFET clean boost，兩顆旋鈕是 OUTPUT／INPUT，沒有模式開關，
+#    官方明寫不可超過 9V，價格 $89。那一列的官方網址 jhspedals.info/fumble 會回 404。
+#    只有「True Bypass」「9V 中心負 約 5 mA」與圖片是對的。
+#    它的 description、suitableStyles、suggestedSettings 也都是編的，匯入時要明確覆寫。
+
+version: 1.0
+last_updated: 2026-10-01
+
+# 基本資訊
+basic_info:
+  id: "jhs_fumble"
+  brand: "JHS Pedals"
+  model: "Fumble"
+  full_name: "JHS Pedals Fumble JFET Clean Boost"
+  type: "boost"                  # [official] 官方商店 product_type "BOOST"
+  subtype: "jfet_clean_boost"    # [official] "True bypass JFET clean boost"
+  not_an_overdrive: "[official] 「This is not an overdrive or a high gain pedal.」"
+  circuit_basis: |
+    [official] Dumble BBC-1 的量產版。JHS 原本為 John Mayer 複製這個電路，
+    又意外把它放進 NOTADÜMBLË V1 的 clean 聲道出貨。
+    JHS 說 BBC-1「lifted almost part for part from a Barcus Berry acoustic preamp made in the 1970s」，
+    Dumble 也在他的音箱裡用同一個 JFET 級（「FET mode」）。這段系譜是 JHS 自己的說法，未經獨立查證。
+    元件值未公布。
+  same_circuit_as: "NOTADÜMBLË V1 的 clean 聲道 [official]。V2 的 clean 聲道改成 Box It Later，是不同電路"
+  release_date: "2026-06-02"     # [official] 官方商店 published_at
+  status: "in_production"        # [official] 2026-10-01 在官方 all-products 導覽裡，不在停產頁
+  made_in: "Assembled in Kansas City, USA"   # [official]
+  sku: "FB"                      # [official]
+  barcode: "810209870058"        # [official]
+
+# 價格資訊
+price:
+  msrp: 89                       # [official]
+  currency: "USD"
+  street_price_uk: "GBP 79"      # [dealer] Thomann，2026-10-01
+  street_price_de: "EUR 93"      # [dealer] Thomann，2026-10-01
+  tier: "budget"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"             # [official]
+    max_voltage: "9V。官方：「DO NOT USE MORE THAN 9VDC CENTER NEGATIVE. DAMAGE MAY OCCUR AND YOUR WARRANTY WILL BE VOIDED.」"
+    polarity: "center negative"  # [official]
+    current_draw: "5 mA"         # [official]
+    battery: null                # [unknown] 官方未提。推測只能用變壓器 [inference]
+
+  controls:
+    - name: "OUTPUT"
+      function: "總音量。左邊那顆旋鈕"   # [official]
+    - name: "INPUT"
+      function: |
+        同時衰減低頻與輸入增益，作用在電路前端。轉到最右是不衰減（等於這顆旋鈕不作用）；
+        往左轉低頻與增益逐漸減少，聲音變薄、變緊。右邊那顆旋鈕。
+        ⚠️ 不是一般的 gain 旋鈕。官方：「It is not a standard gain knob.」
+    - name: "Footswitch"
+      function: "效果開關（true bypass），右側有紅色狀態 LED"   # [official]
+  no_mode_switch: "[official] 沒有任何模式或音色切換開關。規格只寫「Two controls : Input (bass and gain attenuator), Output (master volume)」"
+
+  bypass: "True bypass"          # [official]
+  buffer_note: |
+    [official] JHS 建議可當常開的 buffer 與 clean boost 放在 board 最前面。
+    [inference] 因為是 true bypass，只有效果開啟時才有 buffer 作用；關掉時不 buffer。
+    Thomann 商品名寫「Boost / Buffer」，容易誤會。
+
+  jacks:
+    audio: "兩側各一個 1/4 吋插孔。哪邊是輸入官方頁未寫；依 JHS 慣例推測右進左出 [inference]"
+    dc: "DC 插孔在上緣 [official，官方照片]"
+
+  dimensions: "1.96 x 3.93 x 1.21 吋（約 49.8 x 99.8 x 30.7 mm）"   # [official]
+  weight: "181 g"                # [dealer] Thomann。官方商店的 1.0 lb／454 g 是運送重量，不是本體重量
+
+# 阻抗與電平
+impedance:
+  input: null                    # [unknown] 官方未公布。不要用 AI 那一列寫的約 470 kΩ
+  output: null                   # [unknown] 官方未公布
+  max_boost_db: null             # [unknown] 官方未公布
+
+# 音色特性
+tonal_characteristics:
+  type: "JFET clean boost"
+  official_description:
+    - "主要用來強化 clean 音色：「creates a particularly enhanced clean tone」"   # [official]
+    - "INPUT 轉小：更薄、更緊；轉大：更飽滿、更大聲"                             # [official]
+    - "推已經破音的音箱（Tweed、Plexi）時，聲音「bigger and more articulate」；INPUT 轉小可得到更緊、偏高頻的起音"   # [official]
+  buyer_reviews:                 # [independent] Sweetwater 6 則買家評論（未驗證買家），2026-06 至 07
+    - "像手術刀不像斧頭：收緊低頻、讓高頻更清楚，細微到要關掉才發現它有作用"
+    - "INPUT 可以把低頻調到剛好，高頻好聽、不刺"
+  no_expert_review: "截至 2026-10-01 沒有找到獨立的實測評論。Guitar World 與 MusicRadar 都是新聞稿性質"
+
+  gain:
+    gain_range: "Clean boost（官方說不是 overdrive）"   # [official]
+
+# 使用建議
+usage_recommendations:
+  official_use_cases:            # [official] 官方頁「Use the Fumble four ways」
+    - "放在 board 最前面，當常開的 buffer 與 clean boost"
+    - "推 overdrive 的前端（官方點名 Timmy、King of Tone、Klon、Morning Glory）"
+    - "推已經破音的音箱（Tweed、Plexi）"
+    - "放在訊號鏈最後，當 solo boost"
+  best_for:
+    - "Clean boost"
+    - "Pushing low-to-medium gain overdrives"
+    - "Always-on tone shaping"
+
+# 不要混淆的同名或相關產品
+variants_to_distinguish:
+  - "PedalPCB「Fumble Boost」（PCB708，2025）：第三方 DIY 電路板，旋鈕是 Input／LEVEL，有內部 BIAS 微調。不是 JHS 產品"
+  - "JHS NOTADÜMBLË V1（2025，DIY 套件，已停產）：clean 聲道就是 Fumble 的電路"
+  - "JHS NOTADÜMBLË V2（2026-07）：clean 聲道改成 Box It Later，與 Fumble 不同"
+  - "JHS Box It Later：Dumble「A Box Later」的複製，與 Fumble 不同電路"
+  - "JHS Moonshine 系列：Dumble 風格 overdrive。「Fumble」這個名字 2012 年原本保留給它"
+  - "Red Mod Pedals「Bad Weather」：第三方 BBC-1 複製品，Reverb 商品文案抄 JHS"
+
+# 查證陷阱
+traps:
+  - "官方頁面是 jhspedals.info/products/fumble。jhspedals.info/fumble 會回 404"
+  - "官方頁的 /search 會回 429，改用 /products/fumble.json 讀資料"
+  - "部分經銷商與 AI 把 INPUT 叫做 Gain，錯的"
+  - "部分 Reverb 賣家標成 Overdrive。官方明說不是 overdrive"
+  - "評論裡說「Dumble 音箱般的 tube breakup」的，多半是在講 PedalPCB 的複製品，不是 JHS 這台"
+
+# 參考資料來源
+sources:
+  - "https://jhspedals.info/products/fumble"
+  - "https://jhspedals.info/products/fumble.json"
+  - "https://jhspedals.info/collections/all-products/products.json"   # 現行導覽
+  - "https://jhspedals.info/products/notadumble"
+  - "https://jhspedals.info/products/notadumble-v2"
+  - "https://www.youtube.com/watch?v=r8h8g72ntxM"                     # 官方發表影片，2026-06-02
+  - "https://www.guitarworld.com/gear/guitar-pedals/jhs-pedals-fumble-clean-boost"
+  - "https://www.musicradar.com/guitars/jhs-pedals-fumble-boost-pedal"
+  - "https://www.sweetwater.com/store/detail/TheFumble--jhs-the-fumble-jfet-clean-boost-pedal"
+  - "https://www.thomann.co.uk/jhs_pedals_the_fumble_boost_buffer.htm"
+  - "https://reverb.com/p/jhs-fumble"
+  - "https://www.pedalpcb.com/product/pcb708/"                        # 同名的第三方產品，僅供區分
+
+data_collected: 2026-10-01
+data_reliability: "高（官方頁面與官方 JSON 逐字核對；阻抗、增益量、電池官方未公布，留空）"

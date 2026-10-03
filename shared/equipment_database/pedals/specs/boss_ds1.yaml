@@ -1,0 +1,178 @@
+# BOSS DS-1 Distortion
+# 效果器詳細技術資料
+#
+# 2026-10-01 建立。這台不在使用者的 inventory 裡，是器材庫（catalog）資料，不是個人器材。
+# 證據等級：[official] BOSS／Roland 官方頁面或手冊；[dealer] 經銷商；[independent] 第三方分析；
+# [inference] 本庫推論；[unknown] 查過但官方沒有公布。
+#
+# ⚠️ brand／model 必須維持 "Boss"／"DS-1 Distortion"。這是網站 production 那一列的寫法，
+#    /migrate-data 用 (brand, model) 做 upsert。改成官方商標寫法 "BOSS" 會多插一列。
+#
+# 網站上原本的這一列由網站的 AI 研究功能產生（id cmmtbbeabnxnldlekie8mpw1h，
+# createdAt 2026-03-16T15:02:28，updatedAt 2026-03-16T16:29:00，source ai_research）。
+# 下次 /migrate-data 會用本檔覆寫它，updatedAt 會被改掉，所以原始時間記在這裡。
+# 那一列和官方不符的地方：subtype 寫 "overdrive"（官方是 distortion）、
+# 阻抗寫「Boss 典型值」1 MΩ／10 kΩ（官方輸出是 1 kΩ）、電流寫 ~4 mA（那是 1978 年的舊值，現行是 10 mA）、
+# 價格 $59（現行街價 $69.99）。
+
+version: 1.0
+last_updated: 2026-10-01
+
+# 基本資訊
+basic_info:
+  id: "boss_ds1"
+  brand: "Boss"                  # 官方商標寫 BOSS。這裡刻意沿用 production 的寫法，見檔頭
+  model: "DS-1 Distortion"
+  full_name: "BOSS DS-1 Distortion"
+  type: "distortion"             # [official] "BOSS's first distortion pedal"
+  subtype: "hard_clipping_distortion"
+  subtype_detail: |
+    [official] 單一 hard-clipping 設計，TONE 是 "tilt" 型。BOSS 形容音色在中低頻「slight dip」。
+    [independent, ElectroSmash] 兩顆矽二極體反向並聯接地，TONE 在中間時約 500 Hz 有凹陷。
+    「mid-scooped」是 Sweetwater 與 ElectroSmash 的說法，不是 BOSS 的。
+  circuit_basis: |
+    [official] BOSS 原創設計，不是複製品。兩級電路：先一級電晶體增益，再一級 op-amp 增益。
+    [independent, ElectroSmash] 2SC2240 射極隨耦輸入緩衝 → 共射極電晶體增益（約 35 dB，本身會不對稱軟削波）
+    → 非反相 op-amp 級（0–26.5 dB，由 DIST 控制）→ 二極體接地硬削波 → 被動 LPF／HPF 混合的 tone 網路
+    → 射極隨耦輸出緩衝。
+  design_continuity: |
+    [official] BOSS 說是「original, unchanged design」。
+    [independent, ElectroSmash] 1994 年的零件更換讓整個電路改版（標為 DS1-A），op-amp 也換過幾次
+    （TA7136AP → BA728N → M5223AL → NJM2904L）。兩種說法並存，本庫不判斷。
+  release_year: 1978             # [official]
+  status: "in_production"        # [official] 2026-10-01 美、全球、日本三個官網都在現行導覽裡
+  made_in: null                  # [unknown] BOSS 未公布。早期日本製，之後台灣，現行推測馬來西亞 [inference]
+
+# 價格資訊
+price:
+  msrp: null                     # [unknown] boss.info 三個地區都沒有標價
+  street_price: 69.99            # [dealer] Sweetwater，2026-10-01
+  currency: "USD"
+  street_price_jp: "JPY 11,000（含稅）"   # [dealer] Digimart 多家新品，2026-10-01
+  tier: "budget"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"                         # [official] PSA 系列變壓器或 9V 電池
+    polarity: "center negative"              # [official] 由官方 PSA 變壓器規格推得；DS-1 本身的頁面沒寫
+    current_draw: "10 mA"                    # [official] 現行規格頁與手冊 rev 02
+    connector: "5.5 x 2.1 mm barrel"         # [dealer] Thomann；BOSS 未公布尺寸
+    battery: "9V（6F22 碳鋅或 6LR61 鹼性）。連續使用約 50 小時（碳鋅）／80 小時（鹼性）"   # [official]
+    power_switch_note: "INPUT 插孔兼電源開關，不用時拔掉輸入線可省電池"   # [official]
+    aca_vs_psa: |
+      [official] DS-1 有兩個硬體版本：舊的 ACA 變壓器版與現行的 PSA 版。看 DC IN 旁的標籤分辨。
+      ACA 版 BOSS 建議用電池或從 BOSS 有 DC OUT 的效果器供電，不要直接接 PSA。二手市場可能遇到 ACA 版。
+
+  controls:
+    - name: "DIST"
+      function: "失真量與延音長度。順時針越多。範圍從輕微 boost 到全增益"   # [official]
+    - name: "TONE"
+      function: "Tilt 型音色。順時針減低頻、加高頻；逆時針減高頻、加低頻"   # [official]
+    - name: "LEVEL"
+      function: "效果輸出音量，建議調到與 bypass 時一樣大聲"   # [official]
+    - name: "Pedal Switch"
+      function: "效果開關（電子切換）。開機時的開關狀態不固定"   # [official]
+
+  indicator: "CHECK LED：效果開啟時亮，兼電池檢查（電量低時變暗或不亮）"   # [official]
+
+  bypass: "Buffered bypass（FET 電子切換），不是 true bypass"
+  bypass_evidence: |
+    [official] BOSS 官方文章：「all BOSS pedals include buffer circuits」。1978 年原始手冊寫明「FET ELECTRONIC SWITCH」。
+    現行 DS-1 的規格頁與手冊沒有 Bypass 欄。DS-1W 與 DS-1X 的規格頁有「Buffered bypass」欄，
+    但那是別的型號，不能當 DS-1 的證據。
+
+  jacks:
+    input: "1/4 吋 phone（兼電源開關）"
+    output: "1/4 吋 phone"
+    dc_in: "PSA 系列"
+
+  dimensions: "73 (W) x 129 (D) x 59 (H) mm"   # [official]
+  weight: "360 g（含電池）"                      # [official] 手冊 rev 02。rev 01 寫 400 g
+
+# 阻抗與電平
+impedance:
+  input: "1 MΩ"                  # [official] 現行規格頁與手冊 rev 02
+  input_caveat: |
+    1 MΩ 是現行官方數字，但來源可疑：
+    - 手冊 rev 01（2021 年的 PDF）寫 470 kΩ，1978 年手冊寫 220 kΩ
+    - [independent] ElectroSmash 依電路計算是 470 kΩ
+    - 1 MΩ 最早出現在 2019–2021 年的官網規格頁，那幾頁同時有明顯抄錯的內容
+      （列出不存在的 GAIN 旋鈕、電流寫 20 mA）
+    硬體是否改過、還是只改了文件，未知。
+  output: "1 kΩ"                 # [official]
+  recommended_load: "10 kΩ 以上"  # [official]
+  nominal_input_level: "-20 dBu"  # [official]
+  nominal_output_level: "-20 dBu" # [official]
+
+# 音色特性
+tonal_characteristics:
+  type: "Hard-clipping distortion"
+  official_description:
+    - "起音硬朗，最大失真時仍清楚；增益緊、泛音豐富"                       # [official]
+    - "兩級電路帶來特有的低頻飽滿感"                                       # [official]
+    - "中低頻有輕微凹陷。BOSS 建議搭配中頻突出的音箱（Marshall、Fender tweed）；搭 blackface 音箱時用 Normal 輸入或關掉 bright"   # [official]
+    - "把吉他音量轉小可以收乾淨，不會糊"                                   # [official]
+    - "高失真設定下仍相對安靜"                                             # [official]
+  independent_analysis:
+    - "大部分設定下訊號都被重度削波，波形在約 ±0.7 V 被削平"              # [independent, ElectroSmash]
+    - "TONE 在中間時約 500 Hz 有 -20 dB 凹陷，整體約 -12 dB 損耗"          # [independent, ElectroSmash]
+
+  dynamics:
+    compression: "高（硬削波）"   # [inference]
+
+  gain:
+    gain_range: "Low（輕微 boost）到 High"   # [official] 「from a mild boost ... to full-throttle gain」
+
+# 使用建議
+usage_recommendations:
+  best_for:                       # 依 BOSS 官方文章與產品頁提到的用法
+    - "Rock"
+    - "Punk"
+    - "Grunge"
+    - "Hard Rock"
+    - "Fusion lead"               # [official] BOSS 文章記載 Mike Stern 在自己每張專輯都用 DS-1
+  boost_use: "[official] DIST 調低可當 booster。BOSS 建議 TONE 往減低頻方向轉，保持低頻清楚"
+  stacking: "[official] 可以當推別顆的 boost，也可以被別顆推"
+  notable_users:                  # [official] 由 BOSS 文章轉述
+    - "Mike Stern（每張個人專輯）"
+    - "Mark Speer（Khruangbin，wah 接 DS-1）"
+    - "Kurt Cobain（Bleach，1989；後來改用 DS-2）"
+  not_supported_claims:
+    - "Sweetwater 說「Smells Like Teen Spirit」用 DS-1。BOSS 文章不支持這個說法"
+
+# 版本區分
+variants_to_distinguish:
+  - "DS-1W Waza Craft（2022）：Standard／Custom 模式，日本製，15 mA，430 g，明列 Buffered bypass"
+  - "DS-1X（2014）：MDP 數位電路，LEVEL／LOW／HIGH／DIST，60 mA，440 g"
+  - "限量版：DS-1-4A（2018，40 週年）、DS-1-B50A（2023，50 週年）、DS-1-WH（2024，白色）"
+  - "DS-2 Turbo Distortion（1987）：相關但不同型號"
+  - "改裝版（Keeley、JHS、Analog Man 等）：規格與原廠不同，不能當 DS-1 證據"
+
+# 查證陷阱
+traps:
+  - "手冊有兩個官方版本都還能下載：rev 01 寫 470 kΩ／400 g，rev 02 寫 1 MΩ／360 g。用 rev 02"
+  - "2022 年以前的官網規格頁快照有抄錯（GAIN 旋鈕、20 mA），不要引用"
+  - "1978 年手冊的 4 mA、220 kΩ 是舊機規格。Thomann 至今還寫 4 mA"
+  - "日本官網與手冊寫 PSA-100（日本 100V 版），美國與全球寫 PSA series，數字其他都一樣"
+
+# 參考資料來源
+sources:
+  - "https://www.boss.info/us/products/ds-1/"
+  - "https://www.boss.info/us/products/ds-1/specifications/"
+  - "https://www.boss.info/global/products/ds-1/specifications/"
+  - "https://www.boss.info/jp/products/ds-1/specifications/"
+  - "https://www.boss.info/us/categories/effects_pedals/distortion_overdrive_fuzz/distortion/"   # 現行導覽
+  - "https://static.roland.com/assets/media/pdf/DS-1_M_eng02_W.pdf"   # 現行手冊 rev 02
+  - "https://static.roland.com/assets/media/pdf/DS-1_M_eng01_W.pdf"   # 舊版手冊 rev 01（已被取代）
+  - "https://static.roland.com/assets/media/pdf/DS-1_OM.pdf"          # 1978 年原始手冊
+  - "https://articles.boss.info/all-about-the-ds-1-the-benchmark-boss-distortion/"
+  - "https://articles.boss.info/why-buffers-are-important-for-great-tone/"
+  - "https://support.roland.com/hc/en-us/articles/201928509-DS-1-Recommended-Power-Supply"
+  - "https://support.roland.com/hc/en-us/articles/201953449-BOSS-PSA-S-Adaptor-Specifications"
+  - "https://www.sweetwater.com/store/detail/DS1--boss-ds-1-distortion-pedal"
+  - "https://www.thomannmusic.com/en-tw/boss_ds1_distortion.htm"
+  - "https://web.archive.org/web/20260101121945/https://www.electrosmash.com/boss-ds1-analysis"
+
+data_collected: 2026-10-01
+data_reliability: "高（官方規格頁、現行手冊、官方知識庫交叉比對；電路細節來自第三方分析，已標示）"

@@ -4,7 +4,7 @@
 **最後更新**：2026-09-30（`esp_throbber_ctm` 檔位名稱補齊；前次 2026-09-11 補完七項資料缺口，見文末「2026-09-11 的缺口補齊結果」）
 **資料來源**：`shared/equipment_database/` 底下 26 份 spec YAML（效果器 17、吉他 4、音箱 3、配件 2）
 
-> **範圍說明（2026-09-30）**：本文件的抽取與統計仍是 2026-09-11 那 26 份 YAML。當天之後新增的 `guitars/specs/pearson_omega_6.yaml` **不在範圍內**。它有兩個獨立的切單 mini toggle，與下方「吉他」節的結論不同。要納入時需重新抽取，不要只改數字。
+> **範圍說明（2026-09-30）**：本文件的抽取與統計仍是 2026-09-11 那 26 份 YAML。當天之後新增的 `guitars/specs/pearson_omega_6.yaml`（09-30）、`pedals/specs/boss_ds1.yaml` 與 `pedals/specs/jhs_fumble.yaml`（10-01）**不在範圍內**。Omega 6 有兩個獨立的切單 mini toggle，與下方「吉他」節的結論不同。要納入時需重新抽取，不要只改數字。
 **用途**：供 Pedal-Web-Service-Planning 設計 `UserEquipment.settings` 與 `SignalChainItem.settings` 的 Json 結構時作為依據
 
 ---
