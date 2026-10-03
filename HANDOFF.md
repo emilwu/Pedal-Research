@@ -396,7 +396,26 @@ Planning 的兩個 commit 由 Research 親自確認已在 origin/main。
 2. **報告裡的 T3BT 是錯的。**`esp_eclipse_ctm_report.md` 寫 TonePros T3BT，實機是 T3BP，
    一字之差、不同料號。不要因為「值看起來吻合」就認為那份報告可信
 3. **production 有 2 筆不在本庫的設備**，是透過網站的 AI 研究功能加入的：
-   Boss DS-1 Distortion、JHS Pedals Fumble。006 沒有動它們。要不要納入本庫是另一件事
+   Boss DS-1 Distortion、JHS Pedals Fumble。006 沒有動它們。
+   **2026-10-01 已補進本庫**（`shared/equipment_database/pedals/specs/boss_ds1.yaml`、
+   `shared/equipment_database/pedals/specs/jhs_fumble.yaml`），從官方來源獨立查證，不是照抄 production。
+   兩台都不在 inventory，是器材庫資料，不是個人器材。
+
+### DS-1 與 Fumble 尚未重新匯入網站（2026-10-01）
+
+本庫已有這兩台的 spec，但 production 那兩列仍是 AI 研究的內容。下次 `/migrate-data` 才會覆寫。
+由 Pedal-Web-Service session 執行，Research 不代寫。執行前要知道：
+
+1. **Fumble 那一列幾乎全是 AI 編造的。**它寫成鍺電晶體 Rangemaster 風格、四段模式開關、$149；
+   實際是 JFET clean boost、兩顆旋鈕、沒有模式開關、$89。要整列取代，不要合併。
+   它的 `description`、`suitableStyles`、`suggestedSettings` 也是編的，**匯入時要明確覆寫**，
+   否則 `DO UPDATE` 沒有列到的欄位會留下編造的內容
+2. **DS-1 那一列的錯比較小**：subtype 寫成 overdrive、電流寫 4 mA（舊機值，現行 10 mA）、
+   輸出阻抗寫 10 kΩ（官方 1 kΩ）
+3. **brand／model 照 production 寫**：`Boss`／`DS-1 Distortion`、`JHS Pedals`／`Fumble`。
+   不要改成官方商標寫法 BOSS，否則會多插一列
+4. AI 原始研究的時間（DS-1 2026-03-16、Fumble 2026-09-11）只記在兩份 spec 的檔頭註解裡，
+   匯入後 production 的 `updatedAt` 會被改掉
 
 匯入前交代給那個 session 的三件事，**都已處理**（原文保留供參考）：
 
