@@ -14,12 +14,17 @@
 #    它寫的是「Dallas Rangemaster 風格的鍺電晶體 treble booster，Volume／Gain 兩旋鈕加
 #    Treble／Mid／Bass／Full 四段模式開關，輸入阻抗約 470 kΩ，可能可用 18V，$149」。
 #    實際上 Fumble 是 JFET clean boost，兩顆旋鈕是 OUTPUT／INPUT，沒有模式開關，
-#    官方明寫不可超過 9V，價格 $89。那一列的官方網址 jhspedals.info/fumble 會回 404。
+#    官方明寫不可超過 9V，價格 $89。那一列的官方網址 www.jhspedals.info/fumble
+#    先 301 轉到 jhspedals.info/fumble，再回 404。
 #    只有「True Bypass」「9V 中心負 約 5 mA」與圖片是對的。
 #    它的 description、suitableStyles、suggestedSettings 也都是編的，匯入時要明確覆寫。
+#
+# 2026-10-03 已用本檔重新匯入 production（Planning scripts/migrations/007，commit 3c6117e）。
+# officialUrl 不在 /migrate-data 的 DO UPDATE 清單裡，007 用一道獨立 UPDATE 改成
+# https://jhspedals.info/products/fumble。本檔沒有 official_url 欄位，那個值是人工寫入的。
 
-version: 1.0
-last_updated: 2026-10-01
+version: 1.1
+last_updated: 2026-10-03
 
 # 基本資訊
 basic_info:
@@ -130,6 +135,7 @@ variants_to_distinguish:
 # 查證陷阱
 traps:
   - "官方頁面是 jhspedals.info/products/fumble。jhspedals.info/fumble 會回 404"
+  - "www.jhspedals.info/fumble 第一跳是 301（轉到不帶 www 的網址），第二跳才是 404。不帶 curl -L 只看得到 301，會誤以為網址還有效"
   - "官方頁的 /search 會回 429，改用 /products/fumble.json 讀資料"
   - "部分經銷商與 AI 把 INPUT 叫做 Gain，錯的"
   - "部分 Reverb 賣家標成 Overdrive。官方明說不是 overdrive"

@@ -10,7 +10,8 @@
 #
 # 網站上原本的這一列由網站的 AI 研究功能產生（id cmmtbbeabnxnldlekie8mpw1h，
 # createdAt 2026-03-16T15:02:28，updatedAt 2026-03-16T16:29:00，source ai_research）。
-# 下次 /migrate-data 會用本檔覆寫它，updatedAt 會被改掉，所以原始時間記在這裡。
+# 2026-10-03 已用本檔重新匯入 production（Planning scripts/migrations/007，commit 3c6117e），
+# updatedAt 被改成匯入時間，所以原始時間記在這裡。那一列的 officialUrl 本來就是對的，007 沒有改。
 # 那一列和官方不符的地方：subtype 寫 "overdrive"（官方是 distortion）、
 # 阻抗寫「Boss 典型值」1 MΩ／10 kΩ（官方輸出是 1 kΩ）、電流寫 ~4 mA（那是 1978 年的舊值，現行是 10 mA）、
 # 價格 $59（現行街價 $69.99）。
