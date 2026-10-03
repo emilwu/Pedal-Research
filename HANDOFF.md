@@ -1,6 +1,6 @@
 # Pedal-Research 交接
 
-**最後更新**：2026-09-30
+**最後更新**：2026-10-03
 
 這份文件記錄「只存在於某次對話、寫不進程式碼」的資訊。從本 repo 開工前先讀這份，
 再讀 `CLAUDE.md`。
@@ -399,9 +399,34 @@ Planning 的兩個 commit 由 Research 親自確認已在 origin/main。
    Boss DS-1 Distortion、JHS Pedals Fumble。006 沒有動它們。
    **2026-10-01 已補進本庫**（`shared/equipment_database/pedals/specs/boss_ds1.yaml`、
    `shared/equipment_database/pedals/specs/jhs_fumble.yaml`），從官方來源獨立查證，不是照抄 production。
-   兩台都不在 inventory，是器材庫資料，不是個人器材。
+   兩台都不在 inventory，是器材庫資料，不是個人器材。**2026-10-03 已由 007 重新匯入**，見下一節。
 
-### DS-1 與 Fumble 尚未重新匯入網站（2026-10-01）
+### DS-1 與 Fumble 已重新匯入網站（2026-10-03）
+
+**狀態：已套用到 production。**以下由 Pedal-Web-Service session（pedal-wesbite）回報；
+Planning 的 commit 由 Research 親自確認已在 origin/main。
+
+- Planning commit：`3c6117e`，`scripts/migrations/007_reimport_two_ai_researched_pedals.sql`。
+  欄位值只取自本庫兩份 spec，沒有從 `reports/` 取值
+- production 仍是 27 筆，重複的 `(brand, model)` 為 0。兩列的 `imageUrl`、`createdAt` 保留，
+  `source` 仍是 `ai_research`，`updatedAt` 改成執行時間
+- `suggestedSettings` 兩列都清成空陣列 `[]`（不是 `NULL`）。Fumble 官方的四種用法寫進 `specs.officialUseCases`，
+  沒有換算成旋鈕位置
+- **`officialUrl` 用一道獨立的 `UPDATE` 修正，只改 Fumble。**006 的 `DO UPDATE` 刻意不含 `officialUrl`，
+  直接重跑 006 會留下那個 404 網址。DS-1 的 `officialUrl` 本來就是對的（`https://www.boss.info/us/products/ds-1/`）
+
+匯入後仍要知道的兩件事：
+
+1. **本庫的 spec 沒有官方網址欄位。**19 份效果器 spec 都沒有 `official_url`。官方產品頁只出現在
+   `sources` 清單裡，而 `sources` 混了手冊、經銷商、第三方分析、影片與競品頁，沒有標記哪一筆是官方產品頁。
+   所以 `/migrate-data` 無法自動取得正確網址，007 的網址是人工寫入的常數。
+   要不要加 `official_url` 欄位或給 `sources` 加標記，是本庫的 schema 決定，**尚未決定**
+2. **網站的 AI 研究功能仍會編造規格。**Pedal-Web-Service issue #62（Bugfix 看板，狀態 `Reported`）
+   記錄兩層根因：prompt 要模型產出它無法查證的 `officialUrl` 與電路，寫入前只檢查型別。
+   這次只修正兩筆已寫入的資料，`/research` 的產生路徑沒有改。修法由 Planning／Web-Service 決定。
+   這兩筆的樣本都有事實錯誤，Fumble 那一列還寫了「可能可用 18V」（官方寫明不可超過 9V），在 production 留了三週以上
+
+匯入前交代給那個 session 的內容（原文保留供參考）：
 
 本庫已有這兩台的 spec，但 production 那兩列仍是 AI 研究的內容。下次 `/migrate-data` 才會覆寫。
 由 Pedal-Web-Service session 執行，Research 不代寫。執行前要知道：
