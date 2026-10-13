@@ -1,244 +1,249 @@
-# From Yesterday (Analog Man King of Tone Clone)
+# Device2 From Yesterday
 # 效果器詳細技術資料
-# 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
-# 註: 本效果器使用 Analog Man King of Tone 規格作為參考
+#
+# 2026-10-13 依官方來源整份重寫（v2.0）。v1.0 的內容描述的是 Analog Man King of Tone，
+# 不是這台。差異見下方 correction_2026_10_13。
+# 這台在使用者的 inventory 裡（projects/2025-v3-signal-chain/inventory/pedals.yaml 的
+# device2_from_yesterday，「待新訊號鏈指派」區塊）。使用者持有，但目前不在任何效果器組合中。
+#
+# 證據等級：[official] Device2 官方網站（device2electronic.com，含產品頁的官方照片）；
+# [dealer] 經銷商；[independent] 第三方資料庫或媒體；[inference] 本庫推論；
+# [unknown] 查過但官方沒有公布；[user] 使用者提供。
+#
+# ⚠️ 官方產品頁只有一段中文文案，沒有規格表。電源、bypass、阻抗、尺寸全部沒寫。
+#    電源數字只來自 RockBoard pedalPedia（第三方），標 [independent]。
+#    控制項名稱來自官方產品照片上的面板印字，不是文字規格。
+#
+# ⚠️ 廠商不是日本品牌。官方商店以新台幣標價、網站語系 zh-TW、時區 +08:00、
+#    Artists 頁列的全是台灣樂手。但沒有任何一頁明寫「台灣製」，所以產地標 [inference]。
+#
+# ⚠️ production 已經有一列 brand "From Yesterday"／model "King of Tone Clone"
+#    （production id 是 UUID a1e863d1-…；'seed-pedal-kot' 只是 003／006 SQL 裡的字面值，
+#    2026-10-13 由 Pedal-Web-Service session 更正），由 Pedal-Web-Service-Planning 的
+#    scripts/migrations/006_seed_from_research.sql 匯入。
+#    /migrate-data 用 (brand, model) 做 upsert。本檔改成 "Device2"／"From Yesterday" 之後，
+#    下一次 /migrate-data 會**新增一列重複的資料**，不會更新舊的那一列。
+#    **重新匯入之前，必須先由 Pedal-Web-Service 的 session 把 production 那一列
+#    改名成 brand "Device2"／model "From Yesterday"（與本檔字串完全一致）。**
+#
+# ⚠️ production 那一列的內容全部是 KOT 資料，匯入時要整列取代，不要合併：
+#    - specs：Red/Yellow 雙通道、六顆旋鈕、9V 至 18V、True Bypass、約 1MΩ／10-50kΩ，全部不適用
+#    - suggestedSettings：四組旋鈕位置預設（Yellow/Red VOLUME、DRIVE、TONE 的點鐘位置、18V），
+#      都是為 KOT 編的，這台沒有那些旋鈕。要明確覆寫成空值
+#    - suitableStyles（Blues, Classic Rock, Jazz, Country）與 priceReference（$335 USD）
+#      是 KOT 的值，要明確覆寫
+#    - officialUrl 依 jhs_fumble 的前例不在 /migrate-data 的 DO UPDATE 清單裡，
+#      要另用一道 UPDATE 改成 https://device2electronic.com/products/from-yesterday 。
+#      本檔沒有 official_url 欄位，那個值需人工寫入
 
-version: 1.0
-last_updated: 2026-01-03
+version: 2.0
+last_updated: 2026-10-13
 
 # 基本資訊
 basic_info:
-  id: "from_yesterday_kot"
-  brand: "From Yesterday"
-  model: "King of Tone Clone"
-  full_name: "From Yesterday - Analog Man King of Tone Clone"
-  type: "overdrive"
-  subtype: "dual_transparent"
-  circuit_basis: "Analog Man King of Tone clone"
-  design_approach: "保留吉他與音箱原音,加上溫暖 overdrive"
-  original_designer: "Mike Piera (Analog Man) & Jim Weider"
+  id: "from_yesterday_kot"       # 保留舊 id，多處檔案引用它。id 裡的 "kot" 是歷史遺留，不代表這台是 KOT
+  brand: "Device2"               # [official] About Me 頁「This is Device2 Electronic」；頁尾 ©「DEVICE2」。寫法不一，見 brand_name_variants
+  model: "From Yesterday"        # [official] 官方商店商品標題 "From Yesterday"
+  full_name: "Device2 From Yesterday Dual Channel Overdrive"
+  aliases:
+    - "From Yesterday King of Tone Clone"
+    - "From Yesterday (KOT Clone)"
+    - "Device-2 From Yesterday"
+  official_product_label: "[official] 產品頁文案寫作『From Yesterday』Dual Channel Overdrive"
+  type: "overdrive"              # [official] 「是一款立於 Marshall Bluesbreaker / AnalogMan King of Tone V2 基礎的 Overdrive Pedal」
+  subtype: null                  # [unknown] 官方只寫 Dual Channel Overdrive，內部拓樸未公布，不另立子類
+  circuit_basis: |
+    [official] 「立於 Marshall Bluesbreaker / AnalogMan King of Tone V2 基礎」。
+    這是官方自述的設計出發點，**不是** KOT 的複製品聲明，元件值與電路圖未公布。
+    不要拿 Analog Man KOT 的規格補這台的空白。
+  co_developer: |
+    [official] 「Device-2 Electronic feat. murmur Signal Lab」。PCB 印字「Device-2 Electonics x murmur Signal Lab」。
+    murmur Signal Lab 是誰 [unknown]：2026-10-13 搜尋沒有找到任何相關頁面。
+  pcb_revision: "官方照片的 PCB 印字為「From Yesterday v2.1s」[official，照片]。使用者那台的版本 [unknown]"
+  store_listed_date: "2025-10-12"   # [official] Shopify published_at。這是上架日，不是經查證的發表日
+  status: "listed_sold_out"      # [official] 2026-10-13 仍在官方商店的商品清單中，標示「售罄」。是否停產 [unknown]
+  made_in: null                  # [unknown] 官方未明寫
+  country_of_builder: "Taiwan [inference]：新台幣標價、atom feed xml:lang=\"zh-TW\"、時間戳 +08:00、Artists 頁全為台灣樂手與樂團"
+
+# 品牌名稱的各種寫法（全部觀察自 2026-10-13 抓取的頁面）
+brand_name_variants:
+  - "DEVICE2：網站標題與頁尾「© 2026, DEVICE2」[official]"
+  - "Device2 Electronic：About Me 頁「This is Device2 Electronic」[official]"
+  - "Device-2 Electronic：產品頁文案「Device-2 Electronic feat. murmur Signal Lab」[official]"
+  - "Device-2 Electonics：PCB 絲印，原文如此（少一個 r）[official，照片]"
+  - "Device-2：Instagram 顯示名稱 [official]；RockBoard pedalPedia 也用這個寫法 [independent]"
+  - "Shopify JSON 的 vendor 欄位是預設值「我的商店」，不能當品牌名用"
+  - "本檔選用 Device2，與 inventory 的 brand 一致。改動這個字串會改變 /migrate-data 的 upsert 鍵"
 
 # 價格資訊
 price:
-  msrp: 335
-  currency: "USD"
-  tier: "boutique"
-  note: "2025年因關稅調漲"
-
-# 原版 KOT 參考資訊
-original_kot:
-  wait_time: "數年等待清單"
-  used_price: "800-1000+ USD"
-  alternatives:
-    - "Prince of Tone"
-    - "Duke of Tone"
+  msrp: 12000                    # [official] 官方商店定價
+  currency: "TWD"
+  usd_equivalent: null           # 不換算
+  tier: "boutique"               # [inference] 手工小量生產、價位
+  user_purchase_price: null      # [unknown] inventory 未記
 
 # 核心技術規格
 technical_specs:
   power:
-    voltage: "9V to 18V DC"
-    recommended: "18V (提供更好音色)"
+    voltage: "9V DC"             # [independent] RockBoard pedalPedia。官方頁未寫
+    polarity: "center negative"  # [independent] RockBoard pedalPedia。官方頁未寫
+    current_draw: "6 mA"         # [independent] RockBoard pedalPedia。官方頁未寫
+    max_voltage: null            # [unknown] 是否可用 18V 未公布。不要沿用 KOT 的 9V 至 18V
+    battery: null                # [unknown] 官方未提。內部照片看不到電池扣或電池槽 [inference：可能不支援電池]
+    dc_jack_position: "上緣、兩個音訊插孔之間，偏左（正面俯視），不在正中央 [official，照片]"
 
-  controls:
-    red_channel:
-      - name: "Volume"
-        function: "Red 通道輸出音量"
-      - name: "Drive"
-        function: "Red 通道增益量"
-      - name: "Tone"
-        function: "Red 通道音色控制"
+  controls:                      # 面板印字取自官方產品照片。名稱照面板寫法
+    - name: "GAIN"
+      function: "增益。面板最左 [official，照片]。如何作用於兩個 VOL 對應的狀態 [unknown]"
+    - name: "TONE"
+      function: "音色。左二 [official，照片]。濾波型態 [unknown]"
+    - name: "VOL"
+      position: "左三"
+      function: |
+        [official] 文案：「第二顆腳踏開關不僅切換兩組音量 preset」。面板上有兩顆 VOL，
+        [inference] 對應這兩組音量 preset。哪一顆對應哪個腳踏狀態 [unknown]
+    - name: "VOL"
+      position: "最右"
+      function: "同上，第二組音量 preset [inference]"
+    - name: "The F Knob"
+      panel_label: null          # 面板上沒有印字
+      function: |
+        [official] 文案：「負責自基因層面鋭力改造失真質地 -- 透過對 The F Knob 的仔細調校，
+        更為激烈、前衛的泛音填充、鬆脆溫和的 compression、甚至極端設定下的 dying amp sound」。
+        [inference] 對應面板中央下方那顆沒有印字的小旋鈕（面板上唯一沒標名稱的前面板控制項）。
+        RockBoard 寫「Central F Knob」[independent]。實際電路作用 [unknown]
+    - name: "Footswitch（左）"
+      function: "[inference] 效果開關。官方文案沒有明寫左腳踏的功能"
+    - name: "Footswitch（右，第二顆）"
+      function: |
+        [official] 「切換兩組音量 preset，也可透過內部開關指定 Boost/OD、Boost/Boost、OD/OD 三種切換模式」。
+        官方說「第二顆」，未說是左還是右；標成右邊是 [inference]
+  leds: "三顆：GAIN 與 TONE 兩顆旋鈕之間的下方（斜角照片中亮藍燈）、左 VOL 下方、右 VOL 下方（照片中亮紅燈）[official，照片]。各自代表什麼狀態 [unknown]"
 
-    yellow_channel:
-      - name: "Volume"
-        function: "Yellow 通道輸出音量"
-      - name: "Drive"
-        function: "Yellow 通道增益量"
-      - name: "Tone"
-        function: "Yellow 通道音色控制"
-
-  channels:
-    description: "Dual channel (Red & Yellow)"
-    modes_per_channel: "3 種模式 (OD/Clean/Dist)"
-    total_combinations: "9 種組合 (3×3)"
-
-  internal_controls:
+  internal_controls:             # 依 CONTROLS_CONVENTION：要打開機殼才能調，一律收這裡
     dip_switches:
-      - "Switch 1: Yellow channel mode (OD/CLEAN)"
-      - "Switch 2: Yellow channel DIST mode"
-      - "Switch 3: Red channel mode (OD/CLEAN)"
-      - "Switch 4: Red channel DIST mode"
-    trimpot:
-      - "Treble Trimpot: 內部高頻微調"
-    jumper:
-      - "Channel order jumper: 切換兩通道的串接順序 (預設 Yellow → Red)"
-      # 同一個跳線也記在 channels_usage.stacking.order。
+      hardware: "一組 3 位 DIP 開關（CTS 422 系列），位置印 1、2、3 [official，照片]"
+      functions_stated: |
+        [official] 文案提到兩類內部開關設定：
+        - 第二顆腳踏開關的切換模式：Boost/OD、Boost/Boost、OD/OD（另有預設的兩組音量 preset）
+        - High Gain / Low Gain mode
+      position_mapping: null     # [unknown] 哪一位控制哪一項官方未公布。不要自行對應
+    presence:
+      function: |
+        [official] 「源於 KOT 的經典 Presence 調整，我們特地採用可輕易手轉的元件，毋需額外專用工具」。
+        [inference] 即內部照片中那顆藍色、可用手指轉的 trimpot。
+        「不需工具」指的是轉它不用螺絲起子，仍要打開機殼，所以歸 internal_controls。
+        RockBoard 把它列成一般控制項 [independent]，與分類標準不符
 
-  options:
-    - "Buffer bypass (+$45)"
-    - "External mode toggle (+$50)"
+  bypass: null                   # [unknown] 官方與 RockBoard 都沒寫。不要沿用 v1.0 的 True Bypass
+  bypass_note: "[inference] 內部照片可見兩顆腳踏開關的開關本體，但開關型式不足以證明是 true bypass"
 
-  bypass: "True Bypass"
+  jacks:
+    audio: "上緣左右各一個 1/4 吋插孔 [official，照片]。PCB 絲印有「OUT」「IN」[official，照片]，單聲道進、單聲道出 [inference]。從外面看哪邊是輸入 [unknown]"
+    stereo: false                # [inference] 只有一進一出
+    dc: "上緣、兩個音訊插孔之間，偏左（正面俯視）[official，照片]"
 
-# 三種模式 (每通道獨立設定)
-operating_modes:
-  normal_overdrive:
-    name: "Normal Overdrive Mode"
-    characteristics:
-      - "標準 KOT 音色"
-      - "增益略低於 Tube Screamer"
-      - "可達到 4 倍 TS 音量"
-    best_for: "標準 overdrive 使用"
+  dimensions: null               # [unknown] 官方未寫。RockBoard 有一組低可信度數字，見 dimensions_note，不填入本欄
+  dimensions_note: |
+    官方未寫 [unknown]。RockBoard 頁面伺服器端輸出的表格顯示「000.00 mm」占位值，
+    但同一頁內嵌的資料（__NEXT_DATA__）有 width 121、depth 72、height 58、weight 327。
+    同一筆資料也把 circuit type 標為「digital」，與照片可見的 JRC 4558DD、二極體等類比元件不符，
+    所以這組數字 [independent，可信度低]，尚無官方或實測來源佐證，不填入 dimensions／weight
+  weight: null                   # [unknown] 官方 JSON 的 500 g 是 Shopify 運送重量，不是本體重量。RockBoard 的 327（未標單位）見 dimensions_note
 
-  clean_mode:
-    name: "Clean Mode"
-    characteristics:
-      - "更少失真"
-      - "適合 clean boost"
-      - "Compression 更低"
-      - "可達到 2 倍 OD mode 音量"
-    best_for: "Clean boost, 透明推動"
+  visible_components:            # 只記照片看得到的，不推論電路
+    - "JRC 4558DD 運算放大器一顆 [official，照片]"
+    - "四顆玻璃封裝二極體 [official，照片]。用途 [inference] 可能是削波，未經證實"
+    - "PCB 上有一段德文文字絲印（「Und der Haifisch, der hat Tränen ...」），屬裝飾，與電路無關 [official，照片]"
 
-  distortion_mode:
-    name: "Distortion Mode"
-    characteristics:
-      - "比標準模式更多失真"
-      - "更多 compression"
-      - "保留踏板特性"
-    best_for: "需要更多增益時"
+# 阻抗與電平
+impedance:
+  input: null                    # [unknown] 官方未公布。不要用 v1.0 的約 1MΩ（那是 KOT 的值）
+  output: null                   # [unknown] 官方未公布。不要用 v1.0 的約 10-50kΩ
+  max_output_db: null            # [unknown]
 
 # 音色特性
 tonal_characteristics:
-  type: "Dual Transparent Overdrive"
-  design_goal: "保留吉他與音箱原音"
-
-  frequency:
-    low: "豐富但不過度"
-    mid: "平衡,不突出"
-    high: "開放、清晰"
-
-  dynamics:
-    pick_sensitivity: "極高 (amp-like)"
-    volume_sensitivity: "極高"
-    compression: "極低 (除非選 Dist mode)"
-
+  type: "Overdrive（官方稱 Dual Channel Overdrive）"   # [official]
+  dual_channel_vs_panel: |
+    [official] 文案自稱 Dual Channel Overdrive，但面板只有一顆 GAIN、一顆 TONE、兩顆 VOL。
+    「雙通道」是兩組完整的增益級，還是共用增益級、只切音量與 boost/OD 狀態 [unknown]。
+    不要拿 KOT 的 Red/Yellow 雙通道架構填這個空白
+  official_description:          # [official] 官方文案原意，非實測
+    - "「更為粗獷原始，但不失溫柔的質地」"
+    - "強調演奏動態與「豐富、滿溢的泛音」"
+    - "「黑洞般的死寂」：官方宣稱底噪極低"
+    - "The F Knob 可在激烈的泛音填充、鬆脆溫和的 compression、極端設定下的 dying amp sound 之間改變失真質地"
   gain:
-    breakup_point: "極度透明"
-    gain_range: "Low to Medium-high"
-    harmonics: "豐富、有機,偏偶次諧波"
+    gain_range: null             # [unknown] 有內部 High Gain / Low Gain 兩檔 [official]，實際增益量未公布
+    modes: "內部可設 Boost/OD、Boost/Boost、OD/OD 三種腳踏切換模式 [official]"
+  no_independent_review: "截至 2026-10-13 沒有找到任何獨立評測或買家評論"
 
-  characteristic: "Amp-like 反應,極度觸鍵敏感"
+# 訊號鏈分析用摘要
+signal_chain_facts:
+  category: "overdrive（可內部設為含 boost 段）[official]"
+  power: "9V DC、中心負、6 mA [independent，僅 RockBoard]；可否 18V [unknown]"
+  bypass: null                   # [unknown]
+  input_impedance: null          # [unknown]
+  output_impedance: null         # [unknown]
+  io: "mono in / mono out [inference]"
+  footswitches: 2
+  current_assignment: "使用者持有，目前不在任何效果器組合中。見 inventory 的 device2_from_yesterday [user]"
 
-# 雙通道使用策略
-dual_channel_strategy:
-  typical_setup:
-    yellow: "Clean Mode"
-    red: "OD Mode"
+# 不要混淆的同名或相關產品
+variants_to_distinguish:
+  - "Analog Man King of Tone：官方說 From Yesterday「立於」KOT V2 基礎，但兩者是不同產品。KOT 是雙通道各三顆旋鈕，這台是 GAIN/TONE/VOL/VOL 加 F 旋鈕"
+  - "同一間店的「Dual CH BluesBreaker Pedal Ya All Know」（TWD 14,000）與「GluesFreaker! A BlxesBrexker Clone!」（TWD 6,500）：都是 Device2 店內的 Bluesbreaker 系商品，不是 From Yesterday [official，商品清單]"
 
-  stacking:
-    description: "兩個通道可同時使用"
-    order: "Yellow → Red (可透過內部跳線切換)"  # 跳線已收進 internal_controls.jumper
+# 查證陷阱
+traps:
+  - "v1.0 的品牌「From Yesterday」其實是型號名。廠商是 Device2"
+  - "這不是日本品牌。早先疑為日本製，查證後所有線索都指向台灣 [inference]"
+  - "官方產品頁沒有規格表，規格只能從文案與照片判讀。控制項名稱只存在於照片的面板印字"
+  - "Shopify 的 vendor 欄位是「我的商店」，grams 500 是運送重量，兩者都不是產品資料"
+  - "RockBoard 頁面顯示的尺寸與重量是「000.00 mm」占位值，但內嵌資料有 121/72/58、327 的數字；同一筆資料把 circuit type 標成 digital（照片可見類比元件 [inference]），數字可信度低"
+  - "RockBoard 把 Presence 列成前面板控制項；官方文案說的是內部可手轉的元件"
+  - "官方的「第二顆腳踏開關」沒說是哪一邊"
 
-  flexibility:
-    - "可設定為兩種不同增益"
-    - "可設定為 Clean Boost + OD"
-    - "可設定為兩種不同 OD 色彩"
+# v1.0 更正紀錄
+correction_2026_10_13:
+  date: "2026-10-13"
+  previous_version: "1.0（last_updated 2026-01-03，data_collected 2025-12-13）"
+  what_was_wrong: |
+    v1.0 把品牌寫成 "From Yesterday"、型號寫成 "King of Tone Clone"，檔頭註明
+    「本效果器使用 Analog Man King of Tone 規格作為參考」。整份內容是 Analog Man KOT 的代理資料，
+    沒有描述這台 Device2 From Yesterday。以下 v1.0 的內容在這台上都不成立，不要帶回來：
+    - Red/Yellow 雙通道、每通道 Volume/Drive/Tone 共六顆旋鈕
+    - 每通道 OD/Clean/Dist 三模式、九種組合、四位 DIP 對應表、Treble trimpot、通道順序跳線
+    - 9V 至 18V 供電與 18V 建議
+    - True Bypass
+    - 輸入約 1MΩ、輸出約 10-50kΩ
+    - MSRP 335 USD、Buffer bypass 與 External mode toggle 選配
+    - original_designer Mike Piera 與 Jim Weider、KOT 的評價與比較
+    - v1_usage 與 signal_chain.v1_assignment 的「Yellow Clean Mode」使用紀錄：
+      這台沒有 Yellow 通道，那段紀錄是用 KOT 的詞彙描述的
+  how_found: "2026-10-13 使用者確認持有的是 Device2 From Yesterday；RockBoard pedalPedia 指向官方產品頁，逐項核對官方文案與照片"
+  report_status: "pedals/reports/from_yesterday_kot_report.md 同樣描述 KOT，已在檔頭加上過時警告，內文未改"
 
-# 18V Operation
-voltage_recommendations:
-  9v_mode:
-    description: "標準 9V 供電"
-    characteristics: "標準音色"
-
-  18v_mode:
-    description: "18V 供電 (許多用戶偏好)"
-    advantages:
-      - "更大 headroom"
-      - "更好動態範圍"
-      - "更清晰音色"
-      - "更 amp-like 反應"
-
-# 使用建議
-usage_recommendations:
-  best_for:
-    - "Blues"
-    - "Classic Rock"
-    - "Jazz"
-    - "Country"
-
-  versatility: "幾乎所有音樂風格"
-
-  signal_chain_position: "Signal chain 前段"
-
-  stacking:
-    ability: "內建雙通道疊加,也可與其他 OD 疊加"
-    description: "極佳的疊加能力"
-
-  v1_usage:
-    yellow_channel: "Clean Mode (只使用 1/6 功能)"
-    red_channel: "未使用"
-    utilization: "16% (1/6)"
-    reason_for_removal: "功能被 PA-1QG LEVEL 取代"
-
-  features:
-    - "Dual channel with 3 modes each"
-    - "Amp-like transparency"
-    - "Extreme touch sensitivity"
-    - "18V operation capability"
-
-# 阻抗特性
-impedance:
-  input: "~1MΩ"
-  output: "~10-50kΩ"
-  buffer: "Optional (+$45 extra)"
-
-# 與其他踏板比較
-comparisons:
-  vs_fulltone_ocd:
-    description: "OCD 更多 gain 與 compression"
-    kot_advantage: "更透明,更 amp-like"
-
-  vs_timmy:
-    description: "相似透明度"
-
-  vs_morning_glory:
-    description: "相似設計理念,都是極度透明的 OD"
-
-  transparency_ranking: "市場上最透明的 OD 之一"
-
-# 評價
-review_summary:
-  pros:
-    - "市場上最透明的 overdrive 之一"
-    - "Amp-like 反應 - 踏板適應你的音箱"
-    - "極度觸鍵敏感與動態"
-    - "兩個獨立通道提供極大彈性"
-    - "18V 運作提供更好音色"
-
-  cons:
-    - "原版 KOT 有數年等待清單"
-    - "原版二手價格極高 ($800-1000+)"
-    - "Clone 版本品質參差不齊"
-
-  famous_quote: "The pedal adapts to your amp - Fender sounds like cranked Fender, Marshall sounds like cranked Marshall"
-
-# 訊號鏈配置
-signal_chain:
-  position: "pre_amp_gain"
-  v1_assignment: "Yellow Clean Mode"
-  v2_removal_reason: "只使用 Yellow Clean Mode (1/6 功能),功能被 PA-1QG LEVEL 取代"
-  notes: "V1.0 核心效果器,V2.0 已移除"
-
-# 參考資料來源
+# 參考資料來源（全部於 2026-10-13 抓取並載入成功）
 sources:
-  - "Analog Man 官方網站"
-  - "Premier Guitar"
-  - "Reverb"
-  - "The Gear Page"
+  - "https://device2electronic.com/products/from-yesterday"
+  - "https://device2electronic.com/products/from-yesterday.json"
+  - "https://device2electronic.com/products.json?limit=250"            # 現行商品清單
+  - "https://device2electronic.com/pages/about-me"
+  - "https://device2electronic.com/pages/artists"
+  - "https://device2electronic.com/pages/contact"
+  - "https://device2electronic.com/blogs/%E6%96%B0%E8%81%9E.atom"       # 語系 zh-TW 的依據
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/P5X3A6087_16a4bada-7175-48a3-9aed-f2bd8141b388.jpg"   # 正面面板
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/E.jpg"           # VOL 與 LED 特寫
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/P5X3A6109.jpg"   # 斜角面板
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/5X3A6186.jpg"    # PCB 特寫（版本號）
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/FY3.jpg"         # 內部全景（DIP、trimpot、OUT/IN 絲印）
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/FY2.jpg"         # 內部特寫（4558DD）
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/FY4.jpg"         # 中央小旋鈕特寫
+  - "https://www.instagram.com/device2electronic/"                           # 只用來確認顯示名稱 "Device-2"
+  - "https://www.rockboard.de/en/pedalPedia/Device-2/From-Yesterday/8179445029/"   # [independent] 電源數字的唯一來源；尺寸／重量的低可信度數字也出自此頁
 
-data_collected: 2025-12-13
-data_reliability: "高 (基於原版 KOT 規格)"
-
-# 產地
-origin:
-  original_kot: "USA (Analog Man)"
-  clone_note: "From Yesterday clone 產地未明"
+data_collected: 2026-10-13
+data_reliability: "中（控制項與內部開關功能有官方文案與照片；電源只有第三方來源；bypass、阻抗、尺寸、DIP 對應官方未公布，留空）"

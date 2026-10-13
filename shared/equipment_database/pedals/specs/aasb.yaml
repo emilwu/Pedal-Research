@@ -57,7 +57,7 @@ technical_specs:
       function: "依模式而定: Above/Below Mode=八度音量, Both Mode=高八度音量"
 
   stereo: false
-  note: "Mono輸出 (無Stereo)"
+  note: "Mono輸出 (無Stereo)。2026-10-13 使用者確認是單聲道。tone_king_imperial_mkii.yaml 的接線範例把 AASB 寫成 stereo effect，那是錯的"
 
 # 音色特性
 tonal_characteristics:

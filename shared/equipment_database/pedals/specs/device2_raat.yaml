@@ -1,0 +1,329 @@
+# Device2 RAAT
+# 效果器詳細技術資料
+#
+# 2026-10-13 建立。使用者持有這台，器材現況以
+# projects/2025-v3-signal-chain/inventory/pedals.yaml 為準（本檔建立時 inventory 還沒有這一筆）。
+#
+# 證據等級：[official] Device2 官方商店（device2electronic.com，含產品頁的官方照片）；
+# [dealer] 經銷商；[independent] 第三方資料（PCB 設計商文件、媒體、論壇、資料庫）；
+# [inference] 本庫推論；[unknown] 查過但沒有公布；[user] 使用者提供。
+#
+# ⚠️ 任務前提「沒有公開產品頁」是錯的。2026-10-13 查到 Device2 官方商店有一個現行商品頁：
+#    https://device2electronic.com/products/raat-ultra-spec-with-upc156a
+#    標題「"RAAT" Ultra Spec With uPC156A」，2026-01-24 上架，在官方 products.json 的現行清單裡。
+#    頁面只有一段中文文案與三張照片，沒有規格表。電源、耗流、bypass、阻抗、尺寸全部沒寫。
+#
+# ⚠️ 官方頁描述的是「某一批次」，不一定是使用者手上這顆。
+#    文案寫「最受歡迎的 clone 品項之一 - 勞贖！再次到貨！」，並說這批是在「以往的三段 clipping 切換」
+#    之外再加新選項。所以 RAAT 不只做過一批。使用者說「只做 3 顆」[user]。
+#    兩個說法可能都對（指的是不同批次），也可能使用者的是更早的批次。
+#    本檔把官方頁的內容一律標成「[official，2026-01 批次頁]」，**不當成使用者這顆的事實**。
+#    uPC156A、綠色 LED、內部 DIP 開關這三項，在確認批次之前都不能套到使用者的實機上。
+#
+# ⚠️ 電路平台是 Aion FX 的 Helios（RAT 復刻 PCB）。官方內部照片的 PCB 絲印有「aion」與「HELIOS v1.1」。
+#    Aion 的 Helios 建構文件因此是電路拓樸的合法第三方來源，標 [independent]。
+#    但 Device2 改過 Mode 開關的二極體配置，也說 Ruetz 鈕「刻意延展了控制區間」，
+#    所以 Aion 的元件值只代表平台，不代表 RAAT。
+#
+# ⚠️ ProCo 官方資料：procosound.com 現在 301 轉到 actentertainment.com（ACT Entertainment 經營 RAT 品牌）。
+#    RAT 2 與 Turbo RAT 的現行官方頁只有一句文案、SKU、UPC，Specifications 區塊是空的。
+#    所以 RAT 的基準數字只能用經銷商頁（[dealer]）與第三方分析（[independent]）。
+#    ElectroSmash 的 RAT 分析頁（electrosmash.com）本次 DNS 查無此網域，web.archive.org 回 503，**本檔沒有引用它**。
+#    使用者研究文件 docs/RAAT-Research.md 裡引用的 ElectroSmash 與 zzounds PDF 也都沒能讀到。
+#
+# ⚠️ model 字串：依任務指示寫 "RAAT"，不寫官方完整標題。理由：
+#    (1) 「Ultra Spec With uPC156A」是批次描述，使用者這顆不一定是這批；
+#    (2) 引號裡的 RAAT 才是型號本體。官方完整標題收在 official_name_string 與 aliases。
+#    production 目前沒有這一列。/migrate-data 用 (brand, model) 做 upsert，第一次匯入會新增一列 "Device2"／"RAAT"。
+#    品牌字串沿用 from_yesterday_kot.yaml 的 "Device2"（官方 vendor 欄位是全大寫 "DEVICE2"）。
+
+version: 1.0
+last_updated: 2026-10-13
+
+# 基本資訊
+basic_info:
+  id: "device2_raat"
+  brand: "Device2"               # [official] Shopify vendor「DEVICE2」。大小寫沿用 from_yesterday_kot.yaml 與 inventory
+  model: "RAAT"                  # [official] 商品標題引號內的型號。見檔頭的 model 字串說明
+  official_name_string: '"RAAT" Ultra Spec With uPC156A'   # [official，2026-01 批次頁] 商品標題原文（含引號）
+  full_name: "Device2 RAAT"
+  aliases:
+    - "Device2 RAAT"             # [user]
+    - '"RAAT" Ultra Spec With uPC156A'   # [official，2026-01 批次頁]
+    - "勞贖"                     # [official] 官方文案對 RAT 系列的暱稱
+    - "賀歲鼠贖"                 # [official，2026-01 批次頁] 文案對這一批的暱稱
+  type: "distortion"             # [official] 商品 tag「Distortion」
+  subtype: "rat_style_hard_clipping_distortion"   # [inference] RAT 架構：op-amp 增益級後接二極體對地削波
+  circuit_basis: |
+    [user] ProCo RAT 的復刻／改裝版。
+    [official，2026-01 批次頁] 官方稱它為 clone 品項，核心是「LM308」類的 IC。
+    [official，照片] PCB 是 Aion FX「HELIOS v1.1」，主板與 bypass 板分開。
+    [independent，Aion FX] Helios 是 Pro Co RAT 的復刻，RAT2 與 Turbo RAT 的核心電路「essentially the same」。
+  build_type: |
+    [user] 手工訂製，只做 3 顆。
+    [official，2026-01 批次頁] 文案寫「數量有限」，沒寫數量；又寫「再次到貨」，表示 RAAT 不只做過一批。
+    「3 顆」指的是哪一批，未確認。
+  release_date_of_listed_batch: "2026-01-24"   # [official] Shopify published_at。這是商品頁上架日，不是使用者這顆的製造日
+  status: "listed"               # [official] 2026-10-13 在 device2electronic.com/products.json 的現行清單裡
+  made_in: null                  # [unknown] 官方沒寫。依 from_yesterday_kot.yaml 的查證，Device2 推測是台灣廠商 [inference]
+
+# 價格資訊
+price:
+  listed_price: 7800             # [official，2026-01 批次頁] Shopify variant price
+  currency: "TWD"
+  user_purchase_price: null      # [unknown] 使用者沒提供
+  tier: null                     # [unknown]
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: null                # [unknown] Device2 沒寫。[independent] Aion Helios 平台設計是 +9V
+    polarity: null               # [unknown] Device2 沒寫。[inference] Aion 平台用 2.1mm DC 插座並串一顆 1N5817 防反接二極體，推測是 pedal 常見的中心負，未經證實
+    current_draw: null           # [unknown] Device2 與 Aion 都沒有公布耗流。不要套用 Turbo RAT 經銷商頁的 7.8 mA
+    max_voltage: null            # [unknown] 可不可以吃 18V 沒有任何資料
+    battery: null                # [unknown] Aion 平台可選配電池扣。[inference] 官方內部照片看不到電池扣
+    reverse_polarity_protection: "[independent，Aion BOM] 平台在電源串一顆 1N5817 Schottky。[official，照片] 小板上可見一顆黑色二極體，是否就是它 [inference]"
+
+  controls:
+    # 面板上的旋鈕名稱：官方照片的機殼正面**沒有任何印字**。
+    # 下面的名稱來自三個地方，各自標明：使用者的說法、PCB 絲印、Aion 文件。
+    # 旋鈕在面板上的位置對應是 [inference]，見每一項的 position。
+    - name: "Distortion"
+      pcb_label: "DISTORTION"    # [official，照片] PCB 絲印
+      function: "失真量。控制 op-amp 增益級的增益 [independent，Aion 文件]"
+      position: "右上 [inference]：依 Aion 鑽孔模板，並與照片中 PCB（從背面看左右相反）一致"
+    - name: "Volume"
+      pcb_label: "VOLUME"        # [official，照片]
+      function: "總輸出音量 [independent，Aion 文件]"
+      position: "左上 [inference]，依據同上"
+    - name: "Filter"
+      pcb_label: "FILTER"        # [official，照片]
+      function: |
+        [user] 「和 Turbo RAT 一樣的 Filter 旋鈕」。
+        [independent，Aion 文件] 反向的音色控制，順時針切掉高頻。
+        [independent，Aion FX] RAT2 與 Turbo RAT 核心電路相同；Aion 平台的 Filter 網路是 1k5 + 3n3 + 100kA 電位器。
+        使用者說的「和 Turbo RAT 一樣」是指什麼（旋轉方向、範圍、或只是指它有 Filter）[unknown]，見 questions_for_user。
+        RAAT 實機的 Filter 元件值 [unknown]。
+      position: "左下 [inference]，依據同上"
+    - name: "Ruetz"
+      pcb_label: "SWEEP"         # [official，照片] PCB 絲印是 SWEEP，不是 Ruetz
+      function: |
+        [user] 內建 Ruetz Mod，做成旋鈕：轉到 0 是 stock RAT，順時針轉到底是完整的 Ruetz Mod。
+        [official，2026-01 批次頁] 文案稱「Ruetz Mod 鈕」，並說這批「刻意延展了控制區間」。
+        [independent，Aion 文件] Aion 把這顆叫 Sweep，也說它就是「Ruetz mod」：在增益級的一條低頻濾波支路上
+        串入電阻，改變 EQ 與手感，同時降低一些增益。逆時針到底時這顆完全不在電路裡（= stock）。
+        Aion 平台用 1kB 電位器，串在 47R 後面（47R + 2.2uF 那一支）。
+        RAAT 的電位器值 [unknown]：官方說區間被延展過，不要套用 Aion 的 1kB。
+      position: "右下 [inference]，依據同上"
+    - name: "Clipping 切換開關"
+      pcb_label: "MODE"          # [official，照片] PCB 絲印。Aion 文件 v1.1.0 把原本的「Clip」改名「Mode」
+      type: "三段撥桿"            # [official，文案＋照片] 文案說三種外部切換；照片看得到面板中央一顆小撥桿
+      positions:
+        - "Ge：鍺二極體 [user]。[official，2026-01 批次頁] 對應 You Dirty RAT，但官方特別說沒有照原廠用 Schottky，而是用真的鍺二極體"
+        - "LED [user]。[official，2026-01 批次頁] 對應 Turbo RAT"
+        - "Si：矽二極體 [user]。[official，2026-01 批次頁] 對應 RAT／RAT2"
+      user_literal_note: "[user] 使用者原文寫「Ge／LEC／Si」。「LEC」依 docs/RAAT-Research.md 與官方文案解讀為 LED"
+      physical_order: null       # [unknown] 左、中、右各是哪一種，官方沒寫。不要套 Aion 原廠的順序，Device2 改過二極體配置
+      cross_reference: "Si 檔還有三種內部子模式，收在 internal_controls.si_clipping_dip，見該處"
+    - name: "Footswitch"
+      function: "效果開關。左下有狀態 LED [official，照片]"
+  knob_count: "4 [official，照片，2026-01 批次]。使用者這顆是否同樣 4 顆 [unknown]"
+  panel_labels: "[official，照片] 2026-01 批次的機殼正面沒有印字。使用者這顆有沒有印字 [unknown]"
+
+  internal_controls:
+    # 依 CONTROLS_CONVENTION.md：要打開機殼才能調的，收在這裡。
+    si_clipping_dip:
+      applies_to: "[official，2026-01 批次頁] 只在切換開關撥到 Si 時作用"
+      access: "[official，2026-01 批次頁]「可以打開背蓋，透過 DIP 小開關設定」"
+      hardware: "[official，照片] PCB 上一顆兩位 DIP 開關"
+      modes:                     # [official，2026-01 批次頁] 文案原意
+        - "對稱、低 headroom：經典的純正 RAT 味"
+        - "不對稱（asymmetrical clipping）"
+        - "對稱、高 headroom：可做出「風味特異的 Turbo Rat」"
+      dip_to_mode_mapping: null  # [unknown] 兩個 DIP 位置怎麼對應三種模式，官方沒寫
+      total_modes: "[official，2026-01 批次頁] 外部三段 × Si 檔三種子模式，官方說「其實擁有五種模式」"
+      present_on_user_unit: null # [unknown] 官方說 DIP 是這批新加的。使用者這顆若是更早批次，可能沒有。見 questions_for_user
+
+  bypass: null                   # [unknown] Device2 沒寫
+  bypass_note: |
+    [inference] Aion Helios 平台用 3PDT 踏板開關加獨立的 bypass 小板，
+    官方內部照片也看得到那塊小板（絲印 1A／2A／3A、J.IN／J.OUT、LED）。
+    3PDT 平台通常是 true bypass，但 Device2 沒有明寫，不能當成事實。
+
+  jacks:
+    audio: "上緣兩個 1/4 吋插孔 [official，照片]。依 Aion 鑽孔模板，從正面看左邊 OUT、右邊 IN [independent]，RAAT 是否照做 [inference]"
+    stereo: false                # [inference] 只有一進一出，Aion 平台是單聲道電路
+    dc: "上緣中央 [official，照片]。Aion 平台是 2.1mm DC 插座 [independent]"
+    io: "mono in / mono out [inference]"
+
+  enclosure: "[official，照片] 藍色錘紋烤漆，頂部出線。文案稱「深海錘紋藍」。Aion 平台用 125B 機殼 [independent]，RAAT 機殼型號 [unknown]"
+  dimensions: null               # [unknown] 官方沒寫
+  weight: null                   # [unknown] 官方 JSON 的 295 g 是 Shopify 的商品重量欄位，可能是運送重量，不能當本體重量（同 from_yesterday_kot.yaml 的陷阱）
+
+  components_listed_batch:       # 只記官方文案與照片看得到的，屬 2026-01 批次，不一定適用使用者這顆
+    op_amp: "[official，2026-01 批次頁] NEC uPC156A 金屬罐封裝（照片印字「NEC C156A」），官方說是精密工業用的高規格 308。使用者這顆用哪一顆 IC [unknown]"
+    clipping_leds: "[official，照片] D8／D9 位置是兩顆綠色 LED。Aion 的 BOM 指定紅色 3mm LED，所以 Device2 換過顏色。使用者這顆的 LED 顏色 [unknown]"
+    other_diodes: "[official，照片] D2／D3 位置是兩顆透明玻璃、紅色色帶的二極體；DIP 開關上下另各有一顆紅色玻璃封裝、黑色色帶的小型二極體（共兩顆，內部全景照可見）。哪顆是 Ge、哪顆是 Si [unknown]"
+    parts_grade: "[official，2026-01 批次頁]「一貫的高品質 NOS 元件」"
+
+# 阻抗與電平
+impedance:
+  input: null                    # [unknown] Device2 沒公布。Aion 平台輸入端有 R1 1M 與 2M2 下拉電阻 [independent，Aion BOM]，但這是元件值，不是量測到的輸入阻抗
+  output: null                   # [unknown] Device2 沒公布
+  max_output: null               # [unknown]
+  note: "RAT 系的 1 MΩ／1 kΩ 是 Turbo RAT 經銷商頁的數字，收在 inherited_rat_baseline，不是 RAAT 的值"
+
+# 從 RAT 基準繼承的資料
+inherited_rat_baseline:
+  warning: "以下全部是 ProCo RAT 系列或 Aion 平台的資料，從 RAT 基準繼承，沒有在 RAAT 上量測過。不要當成 RAAT 的規格"
+  official_status: |
+    [official] ACT Entertainment 的 RAT 2（SKU RAT2，UPC 765811580546）與 Turbo RAT（SKU TRAT）產品頁都在現行導覽裡，
+    但 Specifications 區塊是空的，只有文案。Turbo RAT 文案只有一句「TurboRat is the most intense of the RATs.」
+  turbo_rat_dealer_specs:        # [dealer] musicstreet.co.uk 的 Turbo RAT 頁，2026-10-13。看起來是轉貼原廠規格，但原廠頁本身沒有
+    input_impedance: "1 Megohm"
+    output_impedance: "1 Kilohm"
+    maximum_gain: "60 dB"
+    equivalent_input_noise: "-110 dB"
+    filter: "6 dB/octave low-pass"
+    power: "9V battery or external DC power supply"
+    battery_consumption: "7.8 mA/100 hours"
+    max_output: "2.8 V (P-P)，文案說是前代的兩倍以上"
+  bypass_dealer_conflict: |
+    [dealer] Turbo RAT 的 bypass：musicstreet.co.uk 與 turramusic.com.au 的文案都寫 true bypass，
+    但 turramusic.com.au 同一頁的規格表寫「True Bypass: No」。經銷商自相矛盾，與 RAAT 無關，只是提醒不要拿來佐證。
+  rat2_specs: "RAT 2 的阻抗與耗流數字本次沒有讀到任何載入成功的頁面（zzounds、Adorama、cedist 都回 403），不記"
+  circuit:
+    op_amp: "[independent] 原版 LM308，1990 年代中期改用 OP07（Wikipedia、Aion 文件、JHS）。JHS 與 Aion 認為兩者在同電路中聲音相同"
+    clipping_stock: "[independent] 一對矽二極體對地硬削波。Wikipedia 寫 1N4148，Coda Effects 寫 1N914"
+    turbo_rat_clipping: "[independent] 把矽二極體換成兩顆紅色 5mm LED（Wikipedia、JHS）"
+    you_dirty_rat_clipping: "[independent，JHS] 換成 1N34A 鍺二極體；現行版因鍺管稀缺改用 BAT-41 Schottky"
+    gain_stage_networks: "[independent，Aion BOM] 增益級兩條對地支路：47R + 2.2uF，與 560R + 4.7uF。與 docs/RAAT-Research.md 寫的值一致"
+    ruetz_branch: "[independent，madbean 論壇] Ruetz mod 改的是 47R 那一支，47R + 2.2uF 的轉折頻率約 1500 Hz"
+    filter_network: "[independent，Aion BOM] 1k5 + 3n3 + 100kA 電位器，接在削波之後。Wikipedia 描述為截止頻率約 500 Hz 附近的低通濾波"
+    filter_direction: "[independent，JHS] 最早的 V1 是順時針加高頻，後來反過來，順時針切高頻。RAAT 的方向 [unknown]"
+    output_buffer: "[independent，Aion 文件] JFET 輸出緩衝。原版 2N5458，Aion 用 2N5485 代替"
+
+# 音色特性
+tonal_characteristics:
+  type: "RAT 系 hard-clipping distortion，三種削波材質可切，加連續可調的 Ruetz Mod"
+  official_description:          # [official，2026-01 批次頁] 文案原意，非實測
+    - "uPC156A 讓「熟悉的古典勞贖風味中被加上了更明確的動態回饋」"
+    - "鍺二極體「在勞贖的 low gain 區間表現極度出色」"
+    - "搭上延展過區間的 Ruetz 鈕，「守備範圍過度寬廣」"
+  no_independent_review: "截至 2026-10-13 沒有找到任何獨立評測或買家評論"
+
+  ruetz_knob_behavior:
+    user: "[user] 0 = stock RAT；順時針到底 = 完整 Ruetz Mod"
+    independent:
+      - "[independent，Aion 文件] 改變 EQ 與手感，同時降低一些增益；Usage 段說它讓更多低頻通過、讓聲音變厚"
+      - "[independent，madbean 論壇] 主要是減少 RAT 的 fizz，也會降低一些增益。論壇成員強調「The Rat is not a bass booster」"
+      - "[independent，beavisaudio] 把回授迴路裡一顆固定電阻換成電位器，可以從輕微髒的 boost、mild overdrive 一路調到全開"
+    source_conflict: |
+      docs/RAAT-Research.md 寫 Ruetz「低頻較完整、厚實」，Aion 也說「thickening the tone」；
+      madbean 論壇則說 RAT 不會因此變成低頻增強器，主要作用是減 fizz。
+      兩邊不一定矛盾（相對減少中高頻增益，聽起來就比較厚），但「增加低頻」這個說法要保留疑問。
+
+  clipping_materials:            # [independent] puget.audio 的順向電壓，是通則，不是 RAAT 實測
+    ge: "約 0.25–0.35 V 開始導通，最早削波、壓縮最多"
+    si: "約 0.6–0.7 V，削波較銳利、奇次諧波較強，約 1.4 Vpp 的乾淨 headroom"
+    led: "約 1.7–2.0 V，headroom 明顯更大"
+    led_color_note: "[inference，信心低] 2026-01 批次用綠色 LED，Turbo RAT 是紅色。不同顏色 LED 的順向電壓可能不同，LED 檔的 headroom 可能與 Turbo RAT 有差。沒有實測，不給數字"
+    platform_led_note: "[independent，Aion 文件] Aion 平台的兩顆 LED 永遠接在電路上；切到門檻較低的二極體時，訊號已先被削掉，LED 不起作用。RAAT 的接法是否相同 [unknown]"
+
+  ruetz_x_clipping_matrix:
+    # 全部是 [inference]：由 docs/RAAT-Research.md、上面的 [independent] 來源與 [official] 文案推得，沒有實測。
+    # 只描述兩個端點（stock 與完整 Ruetz）的傾向，不是設定建議。
+    si_stock: "[inference] 經典 RAT：緊、兇、顆粒明確的中高頻咬勁，增益範圍從 overdrive 到接近 fuzz"
+    si_full_ruetz: "[inference] 增益下降、fizz 減少、聽感較開放，偏向中增益 drive。docs/RAAT-Research.md 稱這是最通用的組合"
+    led_stock: "[inference] Turbo RAT 方向：輸出最大、壓縮較少、動態較開放；增益開高時可能變粗、變硬"
+    led_full_ruetz: "[inference] 增益級增益已降低，再配高門檻的 LED，可能變成削波很少、輸出很大的 boost／edge-of-breakup 音色"
+    ge_stock: "[inference] 最早削波：最飽和、最壓縮、偏 fuzz，輸出最小。JHS 形容 You Dirty RAT 的鍺模式「much more saturated and compressed」"
+    ge_full_ruetz: "[inference] 增益降低後仍因鍺管早削波而厚、軟、壓縮。官方說鍺管在 low gain 區間表現特別好，與這個傾向一致"
+    si_sub_modes: "[inference] Si 檔的三種 DIP 子模式（若使用者這顆有）：對稱低 headroom = stock RAT；不對稱 = 增加偶次諧波；對稱高 headroom = 接近 LED 檔的開放感。DIP 對應方式 [unknown]"
+
+  gain:
+    gain_range: "RAT 系：從 dirty boost 到接近 fuzz [dealer，Sweetwater 對 RAT 2 的描述]。RAAT 實際增益量 [unknown]"
+    level_shift_between_modes: "[inference] 三種材質的削波門檻差很多，切換時輸出音量會明顯跳動（Ge 最小、LED 最大）。實際差多少 dB [unknown]"
+
+# 訊號鏈分析用摘要
+signal_chain_facts:
+  category: "distortion（RAT 系，可降到 boost／overdrive）[official tag + inference]"
+  power: "電壓、極性、耗流全部 [unknown]。Aion 平台是 9V [independent]，極性推測中心負 [inference]"
+  bypass: null                   # [unknown]；3PDT 平台推測 true bypass [inference]
+  input_impedance: null          # [unknown]
+  output_impedance: null         # [unknown]
+  io: "mono in / mono out [inference]"
+  footswitches: 1                # [official，照片，2026-01 批次]
+  output_level_note: "[inference] 換削波材質會改變輸出音量，接在後面的效果器與 Imperial MKII 前級看到的電平會跟著變。換檔後可能要重調 Volume"
+  current_assignment: |
+    [user，轉述自 projects/2025-v3-signal-chain/WORKLOG_2026-10_imperial_chain.md]
+    2026-10 Imperial MKII 耳機訊號鏈的第 6 位（Virtues Arca 之後、AASB 之前）。
+    與第 5 位 Virtues Arca 不會同時開。
+
+# 不要混淆的同名或相關產品
+variants_to_distinguish:
+  - "ProCo RAT 2（SKU RAT2）：矽二極體，沒有 Ruetz 鈕，沒有削波切換 [official／independent]"
+  - "ProCo Turbo RAT（SKU TRAT）：紅色 LED 削波，沒有 Ruetz 鈕 [official／independent]"
+  - "ProCo You Dirty RAT：鍺二極體 1N34A，現行版改用 BAT-41 Schottky [independent，JHS]。RAAT 的 Ge 檔官方說用的是真鍺管，不是 Schottky"
+  - "Aion FX Helios：RAAT 使用的 PCB 平台本身。原廠 Mode 是 Si 一對／Si 兩對串聯／只剩 LED，與 RAAT 的 Ge／LED／Si 不同 [independent]"
+  - "Aion FX Heliosphere（站內網址 heliosphere-dual-distortion，Aion 標示基於 Stamps Drive-O-Matic）：名字相近，不是 RAAT 的平台 [independent]"
+  - "Device2 其他商品（From Yesterday 等）：見 from_yesterday_kot.yaml"
+
+# 查證陷阱
+traps:
+  - "官方商品網址是 /products/raat-ultra-spec-with-upc156a。/products/raat 會回 404"
+  - "官方頁沒有規格表。控制項名稱不在面板上，只在 PCB 絲印上；PCB 寫 SWEEP，不寫 Ruetz"
+  - "官方頁是某一批的介紹（uPC156A、綠色 LED、內部 DIP），不要直接套到使用者那顆"
+  - "Shopify 的 grams（295 g）不能當本體重量"
+  - "procosound.com 會 301 轉到 actentertainment.com。RAT 2／Turbo RAT 官方頁的 Specifications 區塊是空的，規格只能從經銷商頁取得"
+  - "ElectroSmash（electrosmash.com）2026-10-13 DNS 查無此網域，web.archive.org 回 503。docs/RAAT-Research.md 引用的 ElectroSmash 數字本次無法核對"
+  - "使用者原文的「LEC」是 LED"
+  - "Aion 的 Sweep 是 1kB，但 Device2 說這批的 Ruetz 區間「刻意延展」，RAAT 的電位器值 [unknown]，不要套 1kB"
+  - "turramusic.com.au 的 Turbo RAT 頁，文案說 true bypass，規格表寫 True Bypass: No，經銷商頁自相矛盾"
+
+# 需要問使用者的事
+questions_for_user:
+  - "你這顆是不是官方頁上那批「\"RAAT\" Ultra Spec With uPC156A」（2026-01 上架）？如果不是，大概哪一年買的？"
+  - "「只做 3 顆」是指你那一批只做 3 顆，還是 RAAT 總共只做 3 顆？官方頁說是「再次到貨」"
+  - "背蓋裡面有沒有一顆兩位的 DIP 小開關？（有的話 Si 檔還有三種子模式）"
+  - "IC 是圓形金屬罐（NEC C156A）還是一般 8 腳黑色晶片？上面印什麼？"
+  - "削波 LED 是什麼顏色？"
+  - "三段撥桿左、中、右各是 Ge、LED、Si 的哪一個？"
+  - "面板上有沒有印旋鈕名稱？四顆旋鈕各在什麼位置？"
+  - "「和 Turbo RAT 一樣的 Filter」指的是什麼？（RAT 2 本身也有 Filter）"
+  - "你用什麼電源供電？電壓多少？用過電池嗎？"
+
+# 參考資料來源（全部於 2026-10-13 本次實際讀取成功）
+sources:
+  - "https://device2electronic.com/products/raat-ultra-spec-with-upc156a"        # 官方商品頁
+  - "https://device2electronic.com/products/raat-ultra-spec-with-upc156a.json"   # 官方商品 JSON（文案、價格、上架日、圖片）
+  - "https://device2electronic.com/products.json?limit=250"                      # 現行商品清單
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/5X3A6414.jpg?v=1769260667"        # 官方照片：正面
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/5X3A6428.jpg?v=1769260667"        # 官方照片：內部全景
+  - "https://cdn.shopify.com/s/files/1/0718/1084/2796/files/5X3A6462_45c68bb1-19bf-4a2b-9c1b-dd58f4cee011.jpg?v=1769260667"   # 官方照片：PCB 特寫
+  - "https://aionfx.com/project/helios-vintage-distortion/"                       # PCB 平台說明
+  - "https://aionfx.com/app/files/docs/helios_documentation.pdf"                  # PCB 平台建構文件 v1.1.0（2024-09-25）
+  - "https://actentertainment.com/rat-distortion-detail/"                         # RAT 品牌頁（procosound.com 的轉址目的地）
+  - "https://actentertainment.com/products/effects-pedals/"                       # 現行效果器導覽
+  - "https://actentertainment.com/rat-2-distortion-pedal/"
+  - "https://actentertainment.com/turbo-rat/"
+  - "https://www.musicstreet.co.uk/products/proco-turbo-rat-distortion-pedal"     # Turbo RAT 規格（經銷商）
+  - "https://www.turramusic.com.au/products/proco-turbo-rat"                      # Turbo RAT（經銷商，bypass 自相矛盾）
+  - "https://www.sweetwater.com/store/detail/Rat2--pro-co-rat-2-distortion-fuzz-overdrive-pedal"   # RAT 2 文案（經銷商）
+  - "https://en.wikipedia.org/wiki/Pro_Co_RAT"
+  - "https://coda-effects.com/2016/01/proco-rat-white-face-1985.html"
+  - "https://jhspedals.info/blogs/news/proco-rat-pedal-myths-history-and-timeline"
+  - "https://www.madbeanpedals.com/forum/index.php?topic=28475.0"                 # Ruetz mod 討論
+  - "https://beavisaudio.com/projects/fkr/"                                       # Ruetz mod 簡述
+  - "https://puget.audio/blog/germanium-vs-silicon-diodes/"                       # 削波二極體順向電壓
+  - "docs/RAAT-Research.md"                                                       # 使用者自己的研究文件（本庫內）
+
+unreachable_sources:             # 本次嘗試但讀不到，不當依據
+  - "electrosmash.com／www.electrosmash.com：DNS 查無此網域"
+  - "web.archive.org：回 503／500"
+  - "zzounds.com 的 RAT2 說明書 PDF 與商品頁：403"
+  - "adorama.com、cedist.com、amplifiedparts.com：403"
+  - "forum.pedalpcb.com 的 Ruetz 討論串：403"
+
+data_collected: 2026-10-13
+data_reliability: "低到中。官方頁只有文案與照片，而且描述的批次不一定是使用者這顆；電源、bypass、阻抗全部未公布。電路拓樸靠 Aion 平台文件，RAT 基準靠經銷商頁"

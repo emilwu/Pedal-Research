@@ -1,3 +1,7 @@
+> ⚠️ **過時警告（2026-10-13）**：本報告描述的是 Analog Man King of Tone，不是使用者持有的 Device2 From Yesterday。
+> 報告中的雙通道 Red/Yellow、六顆旋鈕、9V 至 18V、True Bypass、阻抗與價格等內容都不適用於這台。
+> 依官方來源重寫的規格見 `shared/equipment_database/pedals/specs/from_yesterday_kot.yaml`（v2.0）。本報告內文保留原樣作為歷史記錄。
+
 # From Yesterday King of Tone Clone - 器材詳細報告
 
 **版本:** 1.0

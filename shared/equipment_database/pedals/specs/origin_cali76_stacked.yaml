@@ -1,0 +1,276 @@
+# Origin Effects Cali76 Stacked Compressor
+# 效果器詳細技術資料
+#
+# 2026-10-13 建立。使用者在 2026-10 Imperial MKII 耳機訊號鏈中列出這台
+# （使用者寫法「Cali76 Staked Compressor」；worklog 記為「Cali76 Stacked Compressor，與現有 Cali76 FET 不同型號」）。
+# 證據等級：[official] Origin Effects 官方產品頁、官方手冊、官方 Getting Started Guide；
+# [dealer] 經銷商；[independent] 媒體報導；[inference] 本庫推論；[unknown] 查過但官方沒有公布；
+# [user] 使用者口述。
+#
+# ⚠️ 官方網域是 origineffects.com。任務指示寫的 originfx.com 在 2026-10-13 查證時
+#    HTTPS 憑證不符（SSL 錯誤），HTTP 回 403，不是官方站。不要拿它當來源。
+#
+# ⚠️ 型號身分：本檔記的是 2025 年推出的現行款「Cali76 Stacked Compressor」，
+#    不是 2022 年以前的「Cali76 Stacked Edition」（已停產）。兩者電源、電流、旋鈕行為都不同。
+#    判斷理由與實機辨識方法見 model_identity 區塊。使用者尚未實機確認。
+#
+# ⚠️ 官方手冊的下載連結是 ?tekguild_pdf_download=<id>&nonce=<值> 形式，nonce 會變。
+#    穩定入口是 https://origineffects.com/manuals/ 。sources 裡的 nonce 網址是 2026-10-13 抓到的版本。
+
+version: 1.0
+last_updated: 2026-10-13
+
+# 基本資訊
+basic_info:
+  id: "origin_cali76_stacked"
+  brand: "Origin Effects"
+  model: "Cali76 Stacked Compressor"     # [official] 產品頁標題、手冊封面、schema.org name
+  aliases:
+    - "Cali76 Staked Compressor"         # [user] 使用者原文寫法（拼字少一個 c）
+    - "Cali76 Stacked"                   # [user] worklog 的簡稱
+  full_name: "Origin Effects Cali76 Stacked Compressor"
+  type: "compressor"
+  subtype: "dual_stage_fet"              # [official] 「two FET compression stages」「two compressors cascaded in series」
+  circuit_basis: |
+    [official] 兩級壓縮串聯（cascaded in series）。官方說法：「Incorporating all the latest improvements to our
+    world-renowned Cali76 circuit」，「Evoking the character of the iconic Urei® 1176®」。
+    [official] 手冊 Key Features：「All-analogue signal path」。
+    [inference] 每一級是否與 Cali76 FET Compressor 的壓縮電路完全相同，官方沒有明說，本庫不做此判斷。
+  release_date: "2025-02"                # [official] 官方產品頁 WordPress 發佈日 2025-02-14；[independent] Sound On Sound 2025-02-25、GuitarPedalX 2025-02-26 報導發表
+  replaces: "Cali76 Stacked Edition"     # [independent] Sound On Sound：「will replace the existing Cali76 Stacked Edition」。[official] 舊網址 /product/cali76-stacked-edition/ 301 轉到本產品頁；官方手冊頁把 Stacked Edition 列在「Discontinued Products」
+  status: "in_production"                # [official] 2026-10-13 產品頁 schema.org availability = InStock，手冊頁列在現行產品區
+  made_in: "Designed and built in England"   # [official]
+  sku:                                   # [official] 產品頁 WooCommerce variation 資料
+    brushed_aluminium: "OEX-0051-00"
+    black: "OEX-0072-00"
+  finishes: "Brushed Aluminium／Black 兩色"   # [official] 產品頁顏色選項
+  enclosure_note: "[official] 產品頁內文寫「brushed stainless enclosure」，顏色選項卻寫「Brushed Aluminium」。官方頁面自己不一致，本庫不取捨，兩者都記"
+
+# 型號身分（為什麼本檔是 Stacked Compressor 而不是 Stacked Edition）
+model_identity:
+  decision: "本檔記載現行款 Cali76 Stacked Compressor（2025）"
+  reasons:
+    - "[user] 使用者寫的是「...Compressor」，worklog 也記為「Cali76 Stacked Compressor」，與現行款官方名稱一致"
+    - "[official] Stacked Edition 已在官方手冊頁的停產區，舊產品網址 301 轉到現行款"
+  user_confirmed: "[user] 2026-10-13 使用者確認手上那台是 2025 年現行款。本檔的電源、電流、旋鈕方向等欄位適用"
+  how_to_tell_apart_on_the_unit:
+    - "DC 插孔標示：現行款手冊寫「9VDC」；Stacked Edition 手冊寫「9-18VDC」[official，兩份手冊]"
+    - "指示燈：現行款是兩顆小 LED 分別顯示兩級壓縮量 [official]；Stacked Edition 是中央一顆 jewel 燈（效果開關狀態）加左右兩組 LED VU meter [official，舊手冊]"
+    - "LED 左右對應：現行款第一級在右、第二級在左；Stacked Edition 舊手冊也是第一級在右、第二級在左。這一點無法用來分辨 [official]"
+
+# 價格資訊
+price:
+  msrp_gbp_ex_vat: 290.83                # [official] 官方商店 2026-10-13，未稅（ex VAT）
+  msrp_usd: 419                          # [independent] Sound On Sound、GuitarPedalX 引述發表新聞稿（2025-02）。官方美國售價本次未直接取得
+  msrp_gbp_inc_vat: 349                  # [independent] 同上
+  msrp_eur: 355                          # [independent] 同上（GuitarPedalX 註明 ex. Tax）
+  currency_note: "官方頁依訪客地區顯示幣別；本次抓到的是 GBP 未稅價"
+  tier: "high_end_boutique"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"                     # [official] 產品頁、手冊 Appendix B
+    max_voltage: "[official] 手冊只寫「designed to be powered from a 9VDC, >200mA power supply」，並警告用錯規格的供應器可能損壞踏板與供應器。沒有寫可接受 18V。⚠️ 舊款 Stacked Edition 可吃 9-18V，現行款不行，不要沿用舊款習慣"
+    polarity: "center negative，2.1mm"   # [official]
+    current_draw: "200 mA"               # [official] 產品頁、手冊 Appendix B；手冊安全須知寫供應器需 >200mA
+    internal_voltage: "內部升壓到 24V"    # [official] 「Voltage increased internally to 24V for high headroom」
+    battery: false                       # [official] 「powered by a mains adaptor only」，不支援電池
+    psu_advice: "[official] 建議使用專為效果器設計的穩壓供應器，濾波不足的供應器可能帶來雜訊"
+
+  compression:
+    stages: 2                            # [official] dual-stage，兩級串聯
+    type: "FET"                          # [official] 「two FET compression stages」
+    threshold: "固定（fixed threshold）。IN 推更多訊號超過門檻 → 更多壓縮"   # [official] 手冊 IN 段
+    ratio: "每一級固定 4:1"              # [official] 手冊：「NOTE: Each compression stage has a fixed ratio of 4:1」
+    combined_ratio: null                 # [unknown] 兩級串聯後的整體比例官方未公布，本庫不自行計算
+    attack_time_range: null              # [unknown] 官方未公布毫秒數。⚠️ 不要沿用 Cali76 FET 的 0.2–4.8 ms
+    release_time_range: null             # [unknown] 官方未公布毫秒數。⚠️ 不要沿用 Cali76 FET 的 69.5–398 ms
+
+  # 面板六旋鈕 + 一個腳踏開關。官方文件未提任何切換開關或內部微調。
+  controls:
+    - name: "IN"
+      function: "第一級壓縮的輸入電平。轉大 → 更多訊號超過固定門檻 → 第一級壓縮更多，同時音量變大，需要用 THRU 與 OUT 平衡"   # [official]
+      control_kind: "continuous"         # [inference] 官方未使用 continuous／stepped 字眼，與 cali76_fet 相同處理
+    - name: "OUT"
+      function: "壓縮訊號在輸出端的電平。調整 IN、THRU 時可能需要跟著調。官方建議與 bypass 音量對齊"   # [official]
+      control_kind: "continuous"         # [inference]
+    - name: "DRY"
+      function: "混入未壓縮的乾訊號（平行壓縮）。與 OUT 是兩個獨立的電平控制，DRY 加大時要把 OUT 降低以維持總音量"   # [official]
+      control_kind: "continuous"         # [inference]
+      unity_position: "約 2 點鐘"         # [official]
+      max_boost: "全順時針 +9 dB"         # [official]
+    - name: "ATT/REL 1"
+      function: "第一級的 attack 與 release，一顆旋鈕同時控制兩者（反向連動）"   # [official]
+      control_kind: "continuous"         # [inference]
+      direction: "全逆時針 = 快 attack、慢 release（平滑、增加延音）；全順時針 = 慢 attack、快 release（凸顯撥弦起音、較有彈性）"   # [official]
+      range: null                        # [unknown] 官方未公布時間值
+    - name: "THRU"
+      function: "第一級輸出送進第二級的電平，決定第二級壓縮量。順時針 = 第二級壓縮更多；全逆時針 = 接近單級壓縮"   # [official]
+      control_kind: "continuous"         # [inference]
+      appearance: "金色旋鈕"             # [independent] GuitarPedalX：「Gold accent 'Thru' knob」。現行款官方文字未提顏色
+    - name: "ATT/REL 2"
+      function: "第二級的 attack 與 release，行為與 ATT/REL 1 相同"   # [official]
+      control_kind: "continuous"         # [inference]
+      direction: "全逆時針 = 快 attack、慢 release；全順時針 = 慢 attack、快 release"   # [official]
+      range: null                        # [unknown]
+    - name: "Bypass Switch"
+      function: "效果開關。buffered bypass + 電子切換。通電時預設為開啟（ON）"   # [official]
+  no_mode_switch: "[official 未提] 官方產品頁與手冊都沒有提到任何切換開關、內部 trimpot 或 DIP。依 CONTROLS_CONVENTION 限制 C9，不在清單裡不等於一定沒有"
+
+  visual_feedback:
+    type: "兩顆壓縮量指示 LED，各對應一級，壓縮越多越亮"   # [official] Getting Started Guide「3. METERING」
+    layout: "右邊 LED = 第一級；左邊 LED = 第二級"          # [official]
+    not_a_bar_graph: "[official] 不是 Cali76 FET 那種 10-LED dB 刻度條狀表"
+    bypass_indicator: null               # [unknown] Getting Started Guide 寫「The two smaller LEDs」，暗示另有一顆較大的 LED（推測是效果開關狀態燈 [inference]），官方文字未說明
+
+  bypass: "Buffered bypass，電子切換"     # [official]
+  power_on_state: "通電預設為開啟（ON）。官方說明是為了配合切換系統與 rack 系統"   # [official]
+  buffer_note: |
+    [official]「High-quality buffered bypass」。
+    [inference] 因為是 buffered bypass，關掉效果時訊號仍經過 buffer；放在它後面的效果器看到的是低輸出阻抗訊號。
+
+  jacks:
+    audio: "INSTR（輸入）、AMP（輸出），1/4 吋 TS（Tip = Signal，Sleeve = Ground）"   # [official] 手冊 Appendix C
+    io_config: "Mono in／Mono out"       # [official] 只有 INSTR 與 AMP 兩個 TS 插孔
+    dc: "9VDC，2.1mm 中心負"              # [official]
+    jack_sides: null                     # [unknown] 本次讀到的手冊文字未寫插孔在哪一側（接線圖是圖片，文字擷取讀不到）
+
+  dimensions: "124 (L) x 64 (W) x 58 (H) mm，含旋鈕與開關"   # [official] 產品頁、手冊 Appendix A
+  dimensions_note: "[official] 產品頁 WooCommerce 資料另有 142 x 66 x 59 mm，那是商店物流欄位，不是規格表數值。以規格表與手冊為準"
+  weight: "553 g"                        # [official] 未裝盒
+  boxed: "135 x 90 x 85 mm／661 g"       # [official] 手冊 Appendix A，裝盒數值，勿與本體混用
+
+# 阻抗與電平
+impedance:
+  input: "1 MΩ"                          # [official] 產品頁、手冊 Appendix B；產品頁 feature 寫「Ultra-high input impedance」
+  output: "1 kΩ"                         # [official]
+  line_level: "[official] 可處理 line level 訊號（鍵盤、鼓機、混音台 insert、re-amp）。可能需要降低 IN 以免過度壓縮"
+  max_output_boost_db: null              # [unknown] 只有 DRY 全開 +9 dB 有公布，OUT 旋鈕最大增益未公布
+
+# 訊號鏈分析用
+signal_chain_facts:
+  official_placement: |
+    [official] 手冊：「we recommend using it at the start of your signal chain. Only pedals that don't work after buffers
+    should go before it, such as vintage fuzz or wah.」
+  noise: |
+    [official] 壓縮器會放大前級的背景噪音。手冊說即使低增益 overdrive 放在它前面也可能顯得吵；
+    若前面接 vintage fuzz，建議開 fuzz 時把壓縮關掉。
+    [official] 單線圈拾音器的交流聲也會被放大，用較輕的壓縮設定可減輕。
+  unity_gain_advice: "[official] Getting Started Guide 建議保持 unity gain，開關比對壓縮與 bypass 的音量，以免意外增益與噪音"
+  power_on_default: "[official] 通電即為開啟狀態，與切換系統搭配時要注意"
+  power_budget: "[official] 200 mA @ 9V，供應器該路要能給 >200 mA"
+  stereo: false                          # [official] Mono in／out
+
+# 音色特性
+tonal_characteristics:
+  type: "雙級串聯 FET 壓縮"
+  official_description:
+    - "「super-squashed cleans, singing slide tones, and endlessly sustaining leads」"   # [official] 產品頁、手冊
+    - "從輕度「always on」動態修飾，到誇張的 funk squish，到極長延音的 lead 與 slide"   # [official]
+    - "兩級可各自設定不同風格：例如第一級慢 attack 快 release 凸顯起音，第二級快 attack 讓整體更肥"   # [official]
+    - "「without having to reach for an overdrive pedal」：用壓縮取得 overdrive 般的手感與延音，但不失真"   # [official] 手冊；sample setting「CLEAN OVERDRIVE」
+    - "官方定位：鼓勵把壓縮當創意效果，不只是工具"   # [official]
+  independent_description:
+    - "Sound On Sound（摘要，非逐字）：設計目標是極端壓縮效果，不是細微修飾"   # [independent]
+  gain:
+    gain_range: "Clean（壓縮器，非破音器）。DRY 全開 +9 dB；OUT 最大值未公布"   # [official] / [unknown]
+    clipping: "[official 未提] 現行款手冊沒有提到前級會削波。⚠️ 舊款 Stacked Edition 手冊寫 IN 過大時前級會 clip，那是舊款的描述，不要套用"
+  no_expert_review: "截至 2026-10-13 沒有讀到獨立的實測評論。Sound On Sound 與 GuitarPedalX 都是新聞稿性質；MusicRadar 頁面本次抓取只拿到導覽列，未採用"
+
+# 使用建議
+usage_recommendations:
+  official_use_cases:                    # [official] 手冊「Sample Settings」三組的名稱與用途（不抄旋鈕位置）
+    - "STACKED COMPRESSORS：兩級各司其職，第一級做 snappy、funky 的起音，第二級讓整體更肥、在混音中更突出"
+    - "CLEAN OVERDRIVE：不失真但有 overdrive 般的手感與無限延音，適合 clean lead 與 slide"
+    - "PARALLEL COMPRESSION：用 DRY 混回乾訊號，兼顧重壓縮與自然動態"
+  best_for:
+    - "極端 clean sustain（slide、clean lead）"
+    - "Funk 的 squish 與起音塑形"
+    - "平行壓縮"
+
+# 與使用者另一台 Cali76 FET Compressor 的差異
+# 兩邊都以官方頁面與手冊為準：Stacked 手冊 V2.0、FET 手冊 V2.2，2026-10-13 抓取。
+comparisons:
+  vs_cali76_fet:
+    spec_file: "pedals/specs/cali76_fet.yaml"
+    differences:
+      - item: "壓縮級數"
+        stacked: "兩級串聯 [official]"
+        fet: "單級 [official]"
+      - item: "壓縮比"
+        stacked: "每一級固定 4:1，沒有 RATIO 旋鈕 [official]"
+        fet: "RATIO 旋鈕 4:1 ~ 20:1 [official]"
+      - item: "Attack／Release 控制"
+        stacked: "每級一顆 ATT/REL 旋鈕，attack 與 release 反向連動；未公布時間值 [official]／[unknown]"
+        fet: "ATTACK 與 RELEASE 各自一顆；attack 0.2–4.8 ms、release 69.5–398 ms [official]"
+      - item: "旋鈕方向（容易搞混）"
+        stacked: "ATT/REL 全逆時針 = 最快 attack [official]"
+        fet: "ATTACK 全順時針 = 最快 attack；RELEASE 全順時針 = 最快 release [official]"
+        note: "兩台的「快 attack」方向相反。同時擁有兩台時要特別注意"
+      - item: "第二級送入量"
+        stacked: "THRU 旋鈕（Stacked 獨有）[official]"
+        fet: "無 [official]"
+      - item: "壓縮量顯示"
+        stacked: "兩顆 LED，各對應一級，亮度表示壓縮量 [official]"
+        fet: "10-LED 條狀表，以 dB gain reduction 刻度標示 [official]"
+      - item: "官方建議擺位措辭"
+        stacked: "放在訊號鏈最前面，只有 vintage fuzz、wah 這類不能接在 buffer 後的放它前面 [official]"
+        fet: "手冊說多數玩家把壓縮放在鏈的前段、drive 放在它後面，以免放大 drive 的底噪；產品頁說 24V headroom 讓它在鏈中任何位置都保持清晰 [official]"
+        note: "Stacked 產品頁同樣寫「stays crystal-clear anywhere in your signal chain」[official]，但手冊明確建議放最前面"
+      - item: "價格"
+        stacked: "GBP 290.83 未稅 [official]；USD 419 [independent]"
+        fet: "GBP 265.83 未稅 [official] FET 官方產品頁 2026-10-13（與 Stacked 的 290.83 同為未稅，可直接比）；GBP 319 [independent] GuitarPedalX 2025-02（未註明含稅與否，不要拿來跟未稅價比）；cali76_fet.yaml 記 USD 369（該檔未標證據等級）"
+    identical:                           # [official] 兩台的官方產品頁規格表與手冊數值相同
+      - "電源：9V DC，2.1mm 中心負，200 mA，內部升壓 24V，不支援電池"
+      - "阻抗：輸入 1 MΩ、輸出 1 kΩ"
+      - "尺寸與重量：124 x 64 x 58 mm、553 g；盒裝 135 x 90 x 85 mm、661 g"
+      - "Bypass：buffered bypass + 電子切換，通電預設開啟"
+      - "DRY：unity 約 2 點鐘，全開 +9 dB；DRY 與 OUT 是獨立電平控制"
+      - "IN：固定門檻，IN 推越多壓越多"
+      - "I/O：INSTR／AMP 單聲道"
+      - "可處理 line level 訊號"
+    not_claimed: "[inference] 兩台每一級的壓縮電路是否相同、音色染色是否相同，官方沒有說。本庫不推論"
+
+# 不要混淆的同名或相關產品
+variants_to_distinguish:
+  - name: "Cali76 Stacked Edition（已停產）"
+    facts:
+      - "[official] 舊手冊（© 2022）：電源 9-18V DC，2.1mm 中心負；「PSU Spec. 82mA @ 9V / 108mA @ 18V」；官方建議用 18V 以增加 headroom"
+      - "[official] 「100% Class-A discrete signal path」、內建 discrete 前級（IN 過大會 clip）、「signal-conditioning」buffered bypass"
+      - "[official] 有中央 jewel 指示燈加左右兩組 LED VU meter"
+      - "[official] 與 SlideRIG 相同訊號路徑，但可調整兩級的輸入與 attack/release"
+    why_it_matters: "電源與電流規格完全不同。拿舊款資料配電會錯：舊款 82 mA、可 18V；現行款 200 mA、只能 9V"
+  - name: "Cali76 FET Compressor"
+    facts:
+      - "單級 FET 壓縮，見 comparisons 區塊與 cali76_fet.yaml"
+  - name: "SlideRIG（已停產）"
+    facts:
+      - "[official] Stacked Edition 舊手冊：SlideRIG 是兩顆 Cali76 背對背串聯，許多參數固定"
+      - "[independent] GuitarPedalX：現行款「shares a lot of DNA with the now discontinued SlideRIG pedals」"
+
+# 查證陷阱
+traps:
+  - "originfx.com 不是官方站（2026-10-13：HTTPS 憑證不符、HTTP 403）。官方是 origineffects.com"
+  - "許多經銷商（如 coastsonic、gearhero、guitarfactory、dijkmans）仍把現行款或舊款標為「Stacked Edition」，搜尋結果混在一起。看電源規格分辨：9-18V 是舊款，9V→24V 是現行款"
+  - "/product/cali76-stacked-edition/ 會 301 轉到 /product/cali76-stacked-compressor/，看起來像同一產品，其實是新款取代舊款"
+  - "官方手冊下載網址的 nonce 參數會變，引用時以 /manuals/ 為穩定入口"
+  - "產品頁 WooCommerce 的 142 x 66 x 59 mm 是物流欄位，不是規格"
+  - "不要把 Cali76 FET 的 attack/release 毫秒數或 RATIO 範圍套到這台"
+  - "WebSearch 摘要曾出現「取代 SlideRIG Compact Deluxe MK2」的說法，本次抓到的頁面都沒有這句，未採用"
+
+# 參考資料來源（全部於 2026-10-13 實際抓取）
+sources:
+  - "https://origineffects.com/product/cali76-stacked-compressor/"                   # 官方產品頁
+  - "https://origineffects.com/wp-json/wp/v2/product?slug=cali76-stacked-compressor"  # 官方頁發佈日 2025-02-14
+  - "https://origineffects.com/manuals/"                                            # 手冊索引，穩定入口；Stacked Edition 在 Discontinued Products 區
+  - "https://origineffects.com/?tekguild_pdf_download=14503&nonce=6539064108"       # Origin-Effects-Stacked-Compressor-Manual-V2.pdf（Owner's Manual Version 2.0，© 2025）
+  - "https://origineffects.com/?tekguild_pdf_download=13639&nonce=326357f27b"       # Origin-Effects-Cali76-Stacked-Compressor-Getting-Started-Guide-EN-DE-FR-ES.pdf
+  - "https://origineffects.com/?tekguild_pdf_download=9637&nonce=9ad6a51d07"        # Origin-Effects-Cali76-Stacked-Edition-manual.pdf（舊款，僅供區分）
+  - "https://origineffects.com/product/cali76-fet-compressor/"                       # 比較用：FET 官方產品頁
+  - "https://origineffects.com/wp-content/uploads/2024/11/Origin-Effects-Cali76-FET-Compressor-Owners-Manual-V2-2.pdf"   # 比較用：FET 手冊 V2.2
+  - "https://www.soundonsound.com/news/cali76-stacked-compressor-origin-effects"     # 2025-02-25 新聞
+  - "https://www.guitarpedalx.com/news/news/origin-effects-shrinks-down-its-cali76-stacked-compressor-to-the-same-compact-size-as-its-recent-cali76-jfet-compressor"   # 2025-02-26 新聞
+
+data_collected: 2026-10-13
+data_reliability: "高（現行款規格與控制項逐字取自官方產品頁與手冊 V2.0）。attack/release 時間、整體壓縮比、OUT 最大增益官方未公布，留空。使用者手上是現行款或舊款尚未實機確認"

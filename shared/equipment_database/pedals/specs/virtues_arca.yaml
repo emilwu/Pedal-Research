@@ -1,184 +1,298 @@
-# Virtues Arca
+# Virtues arca
 # 效果器詳細技術資料
-# 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
+#
+# 2026-10-13 依官方頁面重寫。舊版（version 1.0，2026-01-03）沒有任何官方來源，
+# 所有改動逐項列在下方 correction_2026_10_13 區塊。
+# 使用者持有這台，但目前不在現行效果器組合中。器材現況以
+# projects/2025-v3-signal-chain/inventory/pedals.yaml 為準，本檔不記持有狀態。
+#
+# 證據等級：[official] Virtues 官方網站（virtueseffect.wixsite.com）與官方 YouTube 頻道；
+# [dealer] 經銷商（CULT、島村楽器）；[independent] 第三方資料庫或評論；
+# [inference] 本庫推論；[unknown] 查過但官方沒有公布；[user] 使用者提供。
+#
+# 官方來源：Virtues 的官方網站是 Wix 建的站 https://virtueseffect.wixsite.com/mysite ，
+# 沒有獨立網域。arca 在站內 Items 導覽裡（2026-10-13 確認）。查不到官方 PDF 手冊。
+#
+# ⚠️ brand／model 必須維持 "Virtues"／"Arca"。這是網站 production 那一列的寫法，
+#    /migrate-data 用 (brand, model) 做 upsert。官方一律寫小寫 "arca"，
+#    不要因此把 model 改成小寫，否則會在 production 多出一列重複的資料。官方寫法收在 aliases。
+#
+# ⚠️ production 已經有這一列，而且內容是舊的未查證版本，匯入時要整列覆寫，不要合併。
+#    那一列的 production id 是 UUID 012e2675-…（seed-pedal-arca 只是 003／006 SQL 裡的字面值，
+#    2026-10-13 由 Pedal-Web-Service session 更正）。它先由 Planning scripts/migrations/003_seed_missing.sql 建立，
+#    再由 006_seed_from_research.sql 用舊版本檔覆寫。006 的 description 寫的是
+#    「Virtues 以 Bluesbreaker 架構為基礎改良的半透明 Overdrive」，還有一句來源不明的
+#    「日文評測形容它…」、與 Morning Glory／Colosseum 的比較、以及帶旋鈕位置的 suggestedSettings。
+#    下一次 /migrate-data 必須明確覆寫 description、specs、suitableStyles 與 suggestedSettings。
+#    Bluesbreaker 架構這個說法沒有任何來源，而且與經銷商的電路描述矛盾（見 correction_2026_10_13）。
 
-version: 1.0
-last_updated: 2026-01-03
+version: 2.0
+last_updated: 2026-10-13
 
 # 基本資訊
 basic_info:
   id: "virtues_arca"
   brand: "Virtues"
   model: "Arca"
-  full_name: "Virtues Arca Semi-Transparent Overdrive"
-  type: "overdrive"
-  subtype: "bluesbreaker_enhanced"
-  circuit_basis: "Bluesbreaker 架構但有改良"
-  design_approach: "類似 BB 但增加顆粒度與中頻厚實度"
+  official_name_string: "arca"   # [official] 官方頁標題「arca | Virtues」，面板印字也是小寫 arca
+  aliases:
+    - "Virtues Arca"             # [user] 使用者與本庫原本的寫法
+    - "arca"                     # [official]
+    - "アルカ"                   # [dealer] 島村楽器文章「arca（アルカ）」
+    - "Virtues arca オーバードライブ ヴァーチャス"   # [dealer] 島村楽器線上商店的商品名
+  full_name: "Virtues arca Translucent Overdrive"   # [inference] 本庫組合的全名。官方頁只寫「OverDrive」與日文「トランスルーセント(半透明)」，沒有這個英文全名
+  type: "overdrive"              # [official] 官方頁標示「OverDrive」
+  subtype: "translucent_overdrive"   # [official] 官方「トランスルーセント(半透明)なサウンドを持つオーバードライブ」
+  official_concept: |
+    [official] 「arcaはガラスを思わせるトランスペアレント(透明)ではなく、
+    トランスルーセント(半透明)なサウンドを持つオーバードライブです。」
+    Virtues 把它定義為「トランスルーセント（半透明）」，刻意與 transparent overdrive 區分。
+  circuit_basis: |
+    [unknown] Virtues 官方頁沒有描述電路。
+    [dealer] 經銷商 CULT 的 arca CULT Limited 商品頁說：典型的 transparent 系電路是
+    「非常にシンプルな増幅回路」加上「大きく歪まないクリッパー」；arca 的基本電路接近這種結構，
+    但 clipper 改成主要用於 distortion 的「ハード・クリップ」。CULT 原文的重點是
+    「トランスペアレント系 + ハード・クリップ」。文中以 Paul Cochrane Timmy 作為 transparent 系的代表。
+    [dealer] 同一頁說 builder 小林氏特別講究一顆「オーディオ用オペアンプ」，
+    「中域にキャラクターがあり、このオペアンプありきで設計がなされています」；
+    另外用了巻線抵抗與 PPS（ポリフェニレンサルファイド）電容。
+    這段描述寫在 CULT Limited 版的頁面上。CULT 點名的 Limited 與通常版差異是 Gain 最大值與外殼，
+    但沒有明說其餘電路完全相同。
+    元件編號與元件值都沒有公布。
+  not_bluesbreaker: |
+    舊版寫的「Bluesbreaker 架構」沒有任何來源。CULT 把 arca 放在 transparent（Timmy）系譜，
+    clipper 是 hard clip；這與 Bluesbreaker 的描述不符。不要再用 BB 來描述這台。
+  hybrid_label: |
+    [independent] RockBoard pedalPedia 資料庫的 electronicType 欄位是「HYBRID」。
+    那是資料庫的分類欄位，沒有說明定義，Virtues 官方頁從未說過 hybrid。不要寫成「hybrid 電路」。
+  release_date: "2025-09"        # [official] 官方 YouTube 示範影片說明「通常版2025年9月末発売予定」（影片 2025-08-31 發佈）
+  status: "in_production"        # [official] 2026-10-13 仍列在官方站 Items 導覽裡
+  predecessor_note: "[dealer] CULT：前作 Stella 之後約兩年的新作"
+  brand_origin: |
+    [official] 「2019年、東京にてペダルブランド「Virtues」を立ち上げました」。
+    營運公司為 有限会社湘南トレイド，本社在神奈川縣橫濱市。官方站標題寫「Virtues-Handmade Effect Pedal」。
+    [dealer] 島村楽器稱它是「国産ハンドメイドエフェクターブランド」。
+  made_in: "日本"                # [dealer] 島村楽器「国産ハンドメイド」。官方頁沒有逐台寫產地
 
 # 價格資訊
 price:
-  msrp: 270
-  currency: "USD"
-  price_range: "250-280 USD"
+  msrp: 30000                    # [official] 官方頁「￥30,000+tax」
+  currency: "JPY"
+  tax_note: "官方價格不含稅"
+  msrp_tax_included: 33000       # [dealer] 島村楽器「メーカー希望価格：￥33,000 税込」，與官方未稅價加 10% 一致
+  street_price_jp: "JPY 33,000 含稅"   # [dealer] 島村楽器線上商店與兩家門市文章，2025-11 至 2026-04
+  availability_note: "[dealer] 島村楽器：品薄状態が続いており、抽選販売になることも多い"
   tier: "mid_high_end"
 
 # 核心技術規格
 technical_specs:
-  controls:
-    - name: "Treble"
-      function: "高頻控制"
-    - name: "Bass"
-      function: "低頻控制"
+  power:
+    voltage: "9V DC"             # [official] 「電源:DC9 センターマイナス(2.1mm)に対応」
+    polarity: "center negative"  # [official]
+    connector: "2.1 mm"          # [official]
+    current_draw: null           # [unknown] 官方頁寫「消費電流:確認中」（2026-10-13）
+    max_voltage: null            # [unknown] 官方未提可否用 18V。不要推測
+    battery: |
+      [official] 「LEDインジケータは、電池残量によって色が変化する様に設計されており、
+      歪み系ペダルを電池で使いたいユーザーにも使いやすい設計。」
+      [inference] 依這段文字，可以用 9V 電池。電池型號與續航官方未寫。
+      RockBoard 資料庫寫 battery: false，與官方文字矛盾，以官方為準。
+
+  controls:                      # [official] 「Control:Volume/Gain/Treble/Bass」
     - name: "Volume"
-      function: "輸出音量"
+      position: "左上"           # [dealer] CULT
+      function: "輸出音量 [inference，依名稱]。官方未說明作用範圍"
     - name: "Gain"
-      function: "增益量控制"
+      position: "右上"           # [dealer] CULT
+      function: |
+        增益量。[official] 增益範圍「クリーン～クラシカルディストーション」。
+        [dealer] CULT：Limited 版的 Gain 最大值比通常版高很多，最小值與通常版相同。
+    - name: "Treble"
+      position: "左下"           # [dealer] CULT
+      function: "高頻控制 [inference，依名稱]。是 cut、boost 或兩者皆可，官方未公布"
+    - name: "Bass"
+      position: "右下"           # [dealer] CULT
+      function: "低頻控制 [inference，依名稱]。是 cut、boost 或兩者皆可，官方未公布"
+    - name: "Footswitch"
+      function: "效果開關（true bypass），上緣中央有一顆 LED"   # [official] 規格文字與官方照片
+  knob_count: 4                  # [official]
+  knob_labels_note: |
+    [official，官方照片] 面板上四顆旋鈕沒有印任何字，只印了「arca」字樣。
+    旋鈕名稱只出現在文字規格，四顆的位置只有 CULT 寫出來。
+  controls_dealer_note: "[dealer] CULT：「各コントロールはトランスペアレント系と同様でありながら、サウンドコンセプトに合わせてその効果が調整されています。」"
+  no_mode_switch: "[official，官方照片] 面板上沒有任何撥桿或模式切換開關"
 
-  knob_count: 4
-  design_note: "4 旋鈕設計提供充分音色塑造能力"
+  internal_controls:
+    - name: null
+      kind: "trimpot"
+      function: null             # [unknown] 用途未公布
+      note: |
+        [official，官方頁的「基板」照片] 電路板上有一顆藍色 trimpot。
+        官方從未提到它，不知道是出廠校正用還是給使用者調。不要當成可調參數使用。
 
-  bypass: "True Bypass (推測)"
+  bypass: "True bypass"          # [official] 「トゥルーバイパス」
+  buffer_note: "[inference] True bypass，關閉時不提供 buffer"
+
+  jacks:
+    audio: "INPUT、OUTPUT 各一個 1/4 吋單聲道插孔 [official]。位於機身左右兩側中段 [official，官方照片]。哪邊是輸入官方未寫"
+    dc: "DC Jack 2.1 mm／9VDC [official]。官方特寫照片顯示 DC 插孔在側面，與其中一個 1/4 吋插孔同一面；是哪一側照片看不出來"
+    stereo: "否。只有單一 INPUT 與 OUTPUT [official]"
+
+  pcb_photo_observations: |
+    [official，官方頁的「基板」照片] 可見一顆 8-pin DIP IC、一顆黃色 1.0 µF 薄膜電容、
+    數顆電解電容與數顆小型二極體。IC 型號照片看不清，本庫不推測。
+    [inference] 8-pin IC 與 CULT 說的「オーディオ用オペアンプ」吻合，但未經確認。
+
+  dimensions:
+    official: "61 × 112 × 51 mm"   # [official]
+    dealer_shimamura: "61 × 112 × 46 mm"   # [dealer] 島村楽器商品頁「外寸：61×112×46 (mm)」
+    independent_rockboard: "64 × 112 × 80 mm"   # [independent] RockBoard JSON。高度 80 mm 與官方照片不符，不可靠
+    note: "高度官方 51 mm 與島村 46 mm 不同，原因未知。官方頁註明「外見や仕様、使用している部品等は、予告なく変更することがございます」"
+  weight: null                   # [unknown] 官方未公布。RockBoard JSON 寫 240 g [independent]，未經其他來源確認
+  enclosure: "[dealer] CULT：通常版為陽極處理（アルマイト）鋁殼"
+  included: "取扱説明書、保証書 [official]"
+
+# 阻抗與電平
+impedance:
+  input: null                    # [unknown] 官方未公布。舊版的「~1MΩ」是推測，已刪除
+  output: null                   # [unknown] 官方未公布。舊版的「~10-50kΩ」是推測，已刪除
+
+# 訊號鏈分析用摘要
+signal_chain_facts:
+  power: "9V DC、center negative、2.1 mm [official]；耗流未公布（官方「確認中」）[unknown]；可用電池 [inference，依官方 LED 說明]"
+  bypass: "True bypass [official]"
+  io: "Mono in／mono out [official]"
+  impedance: "輸入、輸出阻抗皆未公布 [unknown]"
+  gain_range: "Clean 到 classical distortion [official]"
+  clipping: "Hard clip [dealer，CULT]"
+  eq: "Treble、Bass 兩段 [official]；cut 或 boost 未公布 [unknown]"
 
 # 音色特性
 tonal_characteristics:
-  type: "Semi-Transparent Overdrive (BB-like with enhancement)"
-  design_goal: "保持 Bluesbreaker 基礎,增加現代個性"
-
-  frequency:
-    low: "可調 (Bass 控制)"
-    mid: "比標準 BB 更厚實、更突出"
-    high: "可調 (Treble 控制)"
-
-  dynamics:
-    pick_sensitivity: "高"
-    volume_sensitivity: "高"
-    compression: "適中,比 BB 略多"
-
+  type: "Translucent overdrive"  # [official] 官方自訂的分類詞
+  official_description:          # [official] 官方頁原文
+    - "「元の音像の特徴点は損なわずに、より魅力的といえるミドルレンジ、実音と高度に両立した倍音感を付与」"
+    - "「決して硬質でなく、柔らかさと透明さを両立した音像を、クリーン～クラシカルディストーションのゲインレンジで実現します。」"
+    - "「解像度、透明感、聴感的な自然さを維持しながら、魅力的なベロシティ、明瞭な分離感と究めて質の高い豊富なミドルレンジを両立します。」"
+    - "「視覚的に言えばレンズ越しに見る風景を感じさせるもの」"
+  dealer_description:            # [dealer]
+    - "CULT：與 transparent 系同樣有自然的厚度與 glassy 的高頻，但更強地保留吉他本身中頻的存在感"
+    - "CULT：破音比 transparent 系「良い意味で加工感が強く、芯から歪む」"
+    - "島村楽器（レイクタウン店）：「ガラスのような冷たさではなく、柔らかく有機的な歪み」，ピッキングへの追従性も抜群"
+  independent_review:            # [independent]
+    - "かずき／ギターのある暮らし（YouTube，2025-09-30）：影片說明寫它適合當樂團的主要破音；章節標題含「音がデカくて好き」「つまみの効き方がアート」。本庫只讀了說明與章節標題，沒有逐字聽寫影片內容"
   gain:
-    breakup_point: "可調"
-    gain_range: "Low to Medium"
-    harmonics: "比 BB 更多顆粒感"
-
-  tone_character:
-    - "聲音較 Q"
-    - "有彈性"
-    - "更多顆粒度 (grit)"
-    - "中頻更厚實"
-
-# 與 Bluesbreaker 比較
-bluesbreaker_comparison:
-  similarities:
-    - "基本音色走向相似"
-    - "開放、清晰的特性"
-    - "動態響應"
-
-  differences:
-    midrange:
-      arca: "更厚實、更突出"
-      bb: "較平衡"
-    grit:
-      arca: "增加顆粒度"
-      bb: "較平滑"
-    character:
-      arca: "更 Q、更有彈性"
-      bb: "較傳統、較溫和"
-    versatility:
-      arca: "更現代、更有個性"
-      bb: "更經典、更中性"
-
-  enhancement: "保留 BB 核心,加入現代改良"
-
-# EQ 控制
-eq_controls:
-  treble:
-    function: "高頻 cut/boost"
-    purpose: "針對吉他或音箱特性調整高頻"
-
-  bass:
-    function: "低頻 cut/boost"
-    purpose: "調整低頻厚度與溫暖度"
-
-  benefit: "4 旋鈕設計提供比標準 BB (3 旋鈕) 更多音色塑造能力"
+    gain_range: "Clean 到 classical distortion"   # [official]
+    clipping: "Hard clip"        # [dealer] CULT
+    harmonics: "[official] 「実音と高度に両立した倍音感」"
+  midrange: "[official] 豊富なミドルレンジ；[dealer] CULT 說中頻特色來自那顆音訊用 op-amp"
 
 # 使用建議
 usage_recommendations:
-  best_for:
-    - "Blues"
-    - "Rock"
-    - "Fusion"
+  official_use_cases: null       # [unknown] 官方頁沒有列使用情境
+  dealer_notes:
+    - "[dealer] CULT：Gain 最小值可做 clean boost 與 low gain overdrive（這句寫在 Limited 版頁面，CULT 說最小值與通常版相同）"
+    - "[dealer] CULT：保留中頻存在感，所以泛用性比 transparent 系高"
+  current_chain_status: "使用者持有，目前不在現行效果器組合中 [user]。指派狀態以 inventory/pedals.yaml 為準"
 
-  good_for:
-    - "Neo Soul"
-    - "Jazz"
+# 不要混淆的同名或相關產品
+variants_to_distinguish:
+  - "arca CULT Limited：經銷商 CULT 的限定版。2025-08-31 至 09-30 限定接單 [official，官方 YouTube 影片說明]；CULT 標價 ¥35,200，頁面未註明含稅與否 [dealer]。Gain 最大值比通常版高很多、最小值相同；外殼改為鍍鋅鋼板加透明漆，表面花紋每台不同 [dealer]。不是通常版"
+  - "Virtues monica、Lander、Stella（官方 Items 導覽列出的其他型號 [official]）；Carla、Signe 只出現在 CULT 商店 [dealer]。皆為不同電路"
+  - "Arca 這個字在搜尋結果會撞到委內瑞拉音樂人 Arca 與遊戲角色，搜尋時要加 Virtues"
 
-  versatility: "BB 音色但更現代、更有個性"
+# 查證陷阱
+traps:
+  - "Virtues 官方站是 virtueseffect.wixsite.com/mysite，沒有獨立網域。不要找 virtues.jp 之類的網址"
+  - "用 WebFetch 讀島村楽器商品頁，摘要模型捏造了「Gain、Tone、Level」三顆旋鈕。原始 HTML 沒有列任何控制項。查控制項要讀原始頁面"
+  - "「hybrid 電路」只來自 RockBoard pedalPedia 的 electronicType 欄位，搜尋引擎摘要再轉述成「ハイブリッド回路」。官方從未這樣說"
+  - "RockBoard JSON 的 current: 0 是未填，不是 0 mA；battery: false 與官方 LED 說明矛盾；頁面顯示的尺寸是 000.00 mm 佔位字"
+  - "官方 YouTube 影片標題拼成「Vritues」，影片說明把 Limited 版拼成「acra」。頻道作者名是 Virtues"
+  - "舊版引用的 YouTube wo7BpL1sNP8 是第三方評論（かずき／ギターのある暮らし），不是官方影片"
+  - "CULT 商品頁是 Limited 版的頁面。電路與控制項段落以「arca」泛稱書寫，CULT 只點名 Gain 上限與外殼兩處與通常版不同，並沒有明說其餘部分共通"
+  - "島村楽器對品牌的片假名寫法是「ヴァーチャス」。「ヴァーチューズ」這個寫法本次沒有在任何來源看到"
 
-  signal_chain_position: "Signal chain 前段或中段"
+# 2026-10-13 修正紀錄
+correction_2026_10_13:
+  reason: "舊版的 sources 只有一支第三方 YouTube 影片與「用戶評價」，沒有官方來源。本次找到官方頁、官方影片與兩家經銷商後逐欄核對"
+  changed:
+    - field: "basic_info.subtype"
+      old: "bluesbreaker_enhanced"
+      new: "translucent_overdrive"
+      why: "Bluesbreaker 沒有任何來源。官方自稱 translucent；CULT 描述為 transparent 系電路加 hard clip"
+    - field: "basic_info.circuit_basis／design_approach"
+      old: "Bluesbreaker 架構但有改良；類似 BB 但增加顆粒度與中頻厚實度"
+      new: "官方未描述電路；經銷商 CULT 的描述（transparent 系 + hard clip + 音訊用 op-amp）"
+      why: "舊說法無來源，且與 CULT 的描述矛盾"
+    - field: "basic_info.full_name"
+      old: "Virtues Arca Semi-Transparent Overdrive"
+      new: "Virtues arca Translucent Overdrive"
+      why: "官方用詞是 トランスルーセント（translucent），不是 semi-transparent"
+    - field: "price"
+      old: "msrp 270 USD，price_range 250-280 USD"
+      new: "msrp 30,000 JPY 未稅（含稅 33,000 JPY）"
+      why: "270 USD 沒有來源。官方頁公布的是日圓未稅價"
+    - field: "technical_specs.controls"
+      old: "Treble／Bass／Volume／Gain（無來源）"
+      new: "Volume／Gain／Treble／Bass，加上 CULT 提供的面板位置"
+      why: "名稱與數量經官方確認是對的，但舊版從未引用來源。舊版寫的 Treble／Bass「cut/boost」沒有來源，改為未公布"
+    - field: "technical_specs.bypass"
+      old: "True Bypass (推測)"
+      new: "True bypass [official]"
+      why: "官方頁明寫トゥルーバイパス"
+    - field: "technical_specs.power（新增）"
+      old: "沒有這個欄位"
+      new: "9V DC、center negative、2.1 mm；耗流 null；可用電池"
+      why: "官方頁有公布"
+    - field: "technical_specs.internal_controls、dimensions、jacks（新增）"
+      old: "沒有這些欄位"
+      new: "見上方"
+      why: "官方照片與規格"
+    - field: "impedance.input／output"
+      old: "~1MΩ (推測)／~10-50kΩ (推測)"
+      new: "null [unknown]"
+      why: "不寫推測數值"
+    - field: "origin.country"
+      old: "未知"
+      new: "日本（basic_info.brand_origin、made_in）"
+      why: "官方 About us：2019 年於東京成立，公司在橫濱"
+    - field: "tonal_characteristics"
+      old: "聲音較 Q、有彈性、更多顆粒度、中頻更厚實、壓縮比 BB 略多等"
+      new: "官方與經銷商原文"
+      why: "舊描述以 BB 為比較基準且無來源"
+  removed:
+    - block: "bluesbreaker_comparison"
+      why: "建立在 Bluesbreaker 前提上，前提無來源"
+    - block: "eq_controls"
+      why: "Treble／Bass 的 cut/boost 說法無來源；控制項已收在 technical_specs.controls"
+    - block: "comparisons（vs_standard_bb、vs_jhs_morning_glory、vs_cornerstone_colosseum_bb）"
+      why: "「與 Colosseum BB 側 80% 重疊」等比較建立在 BB 前提上，無來源"
+    - block: "review_summary"
+      why: "優缺點沒有來源；「價格較高 ($270)」的價格本身無來源"
+    - block: "usage_recommendations.best_for／good_for"
+      why: "Blues、Rock、Fusion、Neo Soul、Jazz 沒有來源"
+    - block: "signal_chain（V1.0 評估後移除）"
+      why: "移除理由是與 Colosseum 的 BB 重疊，前提不成立；持有與指派狀態改以 inventory/pedals.yaml 為準"
+  confirmed_unchanged:
+    - "brand Virtues、model Arca（production 寫法，見檔頭）"
+    - "type overdrive"
+    - "四顆旋鈕的名稱與數量"
 
-  tone_shaping:
-    description: "4 旋鈕設計提供充分音色塑造能力"
-    benefit: "可針對不同吉他/音箱進行精細調整"
-
-  features:
-    - "Bluesbreaker-based"
-    - "Enhanced midrange thickness"
-    - "Added grit and articulation"
-    - "4-knob control (Treble/Bass/Volume/Gain)"
-
-# 阻抗特性
-impedance:
-  input: "~1MΩ (推測,標準)"
-  output: "~10-50kΩ (推測)"
-  buffer: "None (True Bypass 推測)"
-
-# 與其他 BB 踏板比較
-comparisons:
-  vs_standard_bb:
-    improvement: "更多中頻厚實度與顆粒感"
-    eq_control: "獨立 Treble/Bass 控制"
-
-  vs_jhs_morning_glory:
-    midrange: "Arca 更突出,Morning Glory 更中性"
-    transparency: "Morning Glory 更透明,Arca 更有個性"
-
-  vs_cornerstone_colosseum_bb:
-    approach: "Arca 增加顆粒度,Colosseum 改良透明度"
-    overlap: "80% 功能重疊,都是 BB-style"
-
-# 評價
-review_summary:
-  pros:
-    - "保留 Bluesbreaker 核心音色"
-    - "增加中頻厚實度"
-    - "更多顆粒度與個性"
-    - "4 旋鈕提供充分音色塑造"
-    - "聲音 Q 彈、有活力"
-
-  cons:
-    - "與其他 BB 踏板功能重疊 (Morning Glory, Colosseum)"
-    - "價格較高 ($270)"
-    - "資訊較少,品牌知名度較低"
-
-  use_case: "適合喜歡 BB 音色,但希望有更多中頻厚實度與顆粒感的玩家"
-
-# V1.0 配置使用
-signal_chain:
-  position: "pre_amp_gain"
-  v1_status: "評估後移除"
-  removal_reason: "與 Colosseum BB Side 功能重疊 (80%)"
-  notes: "V1.0 評估後即移除,選擇 Colosseum 作為 BB 代表"
-
-# 參考資料來源
+# 參考資料來源（全部在 2026-10-13 讀取）
 sources:
-  - "YouTube Demo: https://www.youtube.com/watch?v=wo7BpL1sNP8"
-  - "用戶評價"
+  - "https://virtueseffect.wixsite.com/mysite/arca"            # 官方產品頁
+  - "https://virtueseffect.wixsite.com/mysite"                 # 官方首頁
+  - "https://virtueseffect.wixsite.com/mysite/items"           # 官方產品索引（現行導覽）
+  - "https://virtueseffect.wixsite.com/mysite/about-us"        # 品牌與公司資訊
+  - "https://virtueseffect.wixsite.com/mysite/dealer"
+  - "https://www.youtube.com/watch?v=0QFqEPoD1ns"              # 官方示範影片（田渕ひさ子），2025-08-31
+  - "https://www.cult-pedals.com/products/arca-cult-limited.json"   # 經銷商 CULT，Limited 版
+  - "https://www.cult-pedals.com/products.json"
+  - "https://store.shimamura.co.jp/ec/pro/disp/1/tp173-0753320"     # 島村楽器線上商店
+  - "https://www.shimamura.co.jp/shop/laketown/article/product/20260402/13853"
+  - "https://www.shimamura.co.jp/update/shops/hakata/amp-effector/36705/"
+  - "https://www.rockboard.de/en/pedalPedia/Virtues/Arca/8201644540/"   # 第三方資料庫，只當 [independent]
+  - "https://www.youtube.com/watch?v=wo7BpL1sNP8"              # 第三方評論（かずき／ギターのある暮らし），2025-09-30
 
-data_collected: 2025-12-13
-data_reliability: "中 (資訊較少)"
-
-# 產地
-origin:
-  manufacturer: "Virtues"
-  country: "未知"
-  note: "較小眾品牌,資訊有限"
+data_collected: 2026-10-13
+data_reliability: "中高（控制項、bypass、電源、價格、尺寸有官方原文；電路描述只來自經銷商；耗流、阻抗、重量未公布）"

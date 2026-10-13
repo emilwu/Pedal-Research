@@ -1,3 +1,7 @@
+> ⚠️ **過時警告（2026-10-13）**：本報告的電路說法（「Bluesbreaker 架構」）沒有任何來源，且與經銷商 CULT 的描述（transparent 系電路加 hard clip）矛盾；與 BB、Morning Glory、Colosseum 的比較都建立在這個前提上。
+> 控制項名稱（Volume／Gain／Treble／Bass）後來經官方確認是對的，但本報告寫的時候並未引用來源；bypass、價格（270 USD）同樣未經查證，官方價格是 ¥30,000 未稅。
+> 已查證的規格以 `shared/equipment_database/pedals/specs/virtues_arca.yaml`（version 2.0）為準，修正逐項列在該檔的 `correction_2026_10_13` 區塊。
+
 # Virtues Arca Semi-Transparent Overdrive - 器材詳細報告
 
 **版本:** 1.0

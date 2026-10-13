@@ -1,0 +1,420 @@
+# Hologram Electronics Chroma Console
+# 效果器詳細技術資料
+#
+# 2026-10-13 建立。這台不在使用者的 inventory 裡（尚未決定採用），是器材庫（catalog）資料。
+# 證據等級：[official] Hologram 官方頁面或官方手冊；[dealer] 經銷商；[independent] 媒體或買家評論；
+# [inference] 本庫推論；[unknown] 查過但官方沒有公布；[user] 使用者提供。
+#
+# 下游裝置是「單聲道輸入」的前級（Tone King Imperial MKII）。本檔的 mono_out_behavior 區塊
+# 精確記錄單聲道輸出時的行為，以及官方手冊沒寫清楚的地方。
+#
+# 主要來源（本次執行全部實際抓取過）：
+#   - 官方使用手冊 CC_manual_WEB.pdf，封面標示「FIRMWARE V1.04」（官方 /pages/support 頁的連結）
+#   - 官方快速上手 CC_quick_start_WEB.pdf
+#   - 官方產品頁 /products/chroma-console（商店頁，含 .json）
+#   - 官方行銷頁 /pages/chroma-console
+#   - 官方韌體頁 /pages/chroma-console-firmware
+#
+# 來源時效檢查：
+#   - 手冊對應韌體 v1.04；官方韌體頁 2026-10-13 仍寫「最新韌體是 v1.04，2025-05-05 發布」，兩者一致 [official]
+#   - 官方商店頁（products/chroma-console）列的規格是行銷摘要，沒有阻抗、電流、極性；那些只在手冊 p.44
+#   - 手冊的 PDF 網址帶 ?v= 版本參數，之後官方更新檔案時網址會變，引用時以 support 頁為入口
+#
+# 品牌陷阱：
+#   - hologramelectronics.com 是官方。這間公司的產品（Microcosm、Infinite Jets、Dream Sequence）
+#     手冊並列在同一個 support 頁，不要拿 Microcosm 或 Dream Sequence 的手冊規格套用在 Chroma Console
+#   - 官方 collection 還有四款「Special Edition Monochrome」（藍／綠／紅／黃）的商品頁，
+#     slug 為 chroma-console-special-edition-monochrome-*。本檔只依據標準款頁面，
+#     特別版與標準款的規格差異未查（[unknown]），但官方手冊與官方頁面把它們當同一款 Chroma Console 處理 [inference]
+#
+# 可購買狀態（2026-10-13 驗證時更正；available 代表可下單，不等於確認有現貨庫存）：官方商店 /products/chroma-console.js 四個電源變體
+#    （US/EU/UK/AU）皆為 "available": true，商品頁 Add to cart 按鈕未停用，價格區塊沒有 price--sold-out class [official]。
+#    商品頁 HTML 裡的「Sold out」「Variant sold out or unavailable」是 Shopify 佈景主題預先放好的隱藏標籤，
+#    不是實際庫存狀態，不要用純文字擷取判斷缺貨。
+
+version: 1.0
+last_updated: 2026-10-13
+
+# 基本資訊
+basic_info:
+  id: "hologram_chroma_console"
+  brand: "Hologram Electronics"
+  model: "CHROMA CONSOLE"        # [official] 商店標題全大寫；手冊與行銷頁寫 "Chroma Console"
+  aliases:
+    - "Chroma Console"
+    - "Hologram Chroma Console"
+    - "CC"                       # [official] 手冊檔名與 SKU 前綴 CC-106
+  full_name: "Hologram Electronics Chroma Console multi-effect pedal"
+  type: "multi_effect"           # [official] 官方稱 "flexible multi-effect pedal"
+  subtype: "four_module_stereo_multi_fx"   # [inference] 本庫分類：4 個可重排模組、每模組 5 種效果
+  circuit_basis: |
+    [official] 數位處理：AD/DA 24-bit 48 kHz（手冊 p.44）。
+    官方明說不是對任何特定器材的模擬或致敬：
+    「It's not a studious emulation or tribute to any specific piece of gear」。
+    內部 DSP 架構未公布 [unknown]。
+  release_date: null             # [unknown] 官方頁面未寫發售日。商店 JSON 的 published_at 是 2025-09-09 [official]，但那是商店上架日不是發售日：官方韌體頁 v1.04（2025-05-05）已是給出貨中機器的更新，產品早於此日存在
+  first_announced: null          # [unknown] 本次未找到官方發表日。matrixsynth 2024-03 的文章提到手冊還在寫，屬於轉述，不採用
+  status: "in_production"        # [official] 2026-10-13 官方商店 .js 四個變體 available: true、可加入購物車；官方網站頁尾導覽仍列 Chroma Console
+  made_in: null                  # [unknown] 本次抓到的頁面沒寫
+  sku: "CC-106-US / CC-106-EU / CC-106-UK / CC-106-AU"   # [official] 四個變體只差電源插頭
+  warranty: "2 年（自原始零售購買日起，瑕疵與工藝）"       # [official] 手冊 p.50
+
+# 價格資訊
+price:
+  msrp: 399                      # [official] 商店頁 US/EU/UK/AU 變體皆 399.00，幣別顯示 USD
+  currency: "USD"
+  tier: "premium"                # [inference]
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"             # [official] 手冊 p.44
+    polarity: "center negative，標準 2.1 mm 插頭"   # [official] 手冊 p.44
+    current_draw: null           # [unknown] 官方沒有公布「實際耗電」
+    minimum_supply_current: "至少 500 mA 連續電流"  # [official] 手冊 p.44，這是對電源供應器的最低要求，不是耗電量
+    supply_warning: "[official] 手冊：使用不符規格的電源「could result in damage to Chroma Console or the power supply」"
+    included_supply: "隨附 9V DC 變壓器（依銷售地區附不同插頭）"   # [official] 商店頁 Includes
+    battery: null                # [unknown] 官方未提；官方只列 9VDC 插孔 [inference：無電池座]
+    daisy_chain_note: "[inference] 500 mA 是一般 9V 效果器菊鍊輸出（通常 100 mA 一孔）的好幾倍，要接獨立且足量的隔離輸出孔。本庫不替官方推測實際耗電"
+
+  # 控制項分類依 CONTROLS_CONVENTION.md：手動伸手可調的都進 controls（含需按鈕組合進入的次要功能）。
+  # 沒有需拆機殼的項目（internal_controls 不建立）。韌體更新走 USB-C MIDI，不是參數設定，
+  # 沒有只能靠電腦調的參數（software_controls 不建立）。
+  controls:
+    knobs_note: |
+      [official] 每顆旋鈕有兩個功能：PRIMARY（旋鈕下方粗體字）與 SECONDARY（灰字）。
+      同時按下 A、B 兩個按鈕進入次要控制選單，再按一次 A+B 或踩一下 BYPASS 離開。
+      共 8 顆旋鈕：TILT、RATE、TIME、MIX，以及 4 顆模組 AMOUNT。
+    primary:
+      - name: "TILT"
+        module: "Character"
+        function: "控制 Character 效果的音色。中央為中性 EQ；往右變亮、往左變暗，同時影響飽和類效果的參數"   # [official]
+      - name: "AMOUNT (Character)"
+        function: "各效果的強度。DRIVE／FUZZ／HOWL 為強度，SWEETEN 為壓縮與飽和量，SWELL 為 attack 與 decay 時間"   # [official]
+      - name: "RATE"
+        module: "Movement"
+        function: "調變頻率；DOUBLER 為加倍時間範圍；PITCH 為音高（中央不變、最左 -1 octave、最右 +1 octave）"   # [official]
+      - name: "AMOUNT (Movement)"
+        function: "調變深度或混合量；DOUBLER 為加倍量；PHASER 同時增加相位級數（2 級至 12 級）；PITCH 為 wet 量，全開 100% wet"   # [official]
+      - name: "TIME"
+        module: "Diffusion"
+        function: "延遲時間、殘響大小或播放速度／音高，依效果而定。使用 tap tempo 時 CASCADE 的延遲時間會量化為所踩速度的細分"   # [official]
+      - name: "AMOUNT (Diffusion)"
+        function: "CASCADE／REELS／COLLAGE 為 repeats 與 feedback（最大時自振盪）；SPACE 與 REVERSE 為 wet/dry 混合，全開 100% wet"   # [official]
+      - name: "AMOUNT (Texture)"
+        function: "Texture 效果的強度或截止頻率（FILTER 時為截止頻率）"   # [official]
+      - name: "MIX"
+        function: "整台效果與輸入訊號的混合。官方建議建立新音色時從 100% 效果音開始，這是最簡單的訊號路徑，再視需要混入乾訊號"   # [official]
+    secondary:
+      - name: "SENSITIVITY"
+        function: "微調 Calibration 設定的 headroom，決定 Character 驅動類效果的失真起點；SWELL 時為觸發門檻。中性時指示燈亮綠"   # [official]
+        knob: "TILT"             # [inference] 手冊在 Character 頁說明 SENSITIVITY 在 TILT 旁，沒有逐字寫出旋鈕對應
+      - name: "DRIFT (Movement)"
+        function: "為調變效果加入隨機、不穩定（見 modules.movement 各效果的 DRIFT 行為）"   # [official]
+        knob: "RATE"             # [inference] 對應旋鈕手冊未逐字寫出；MIDI 表列為獨立 CC
+      - name: "DRIFT (Diffusion)"
+        function: "為時間類效果加入音高調變與訊號劣化"   # [official]
+        knob: "TIME"             # [inference] 同上
+      - name: "OUTPUT LEVEL"
+        function: "衰減或提升整台 FX 輸出音量。中性時指示燈亮綠"   # [official]
+        knob: "MIX"              # [inference] 手冊未逐字寫出旋鈕對應
+      - name: "EFFECT VOL (每個模組各一個)"
+        function: "調整各模組輸出音量，用來平衡模組鏈內部。Diffusion 的 EFFECT VOL 只調 wet 效果音"   # [official]
+        knob: "各模組的 AMOUNT"  # [inference]
+    buttons:
+      - "A、B、C、D：四個模組按鈕（Character、Movement、Diffusion、Texture）。單按往下切換該模組的效果；長按該按鈕是 bypass 該效果 [official]"
+    footswitches:
+      - name: "TAP"
+        function: |
+          單踩：tap tempo（作用於 Vibrato、Phaser、Tremolo、Cascade、Reels、Collage、Reverse）。
+          長按：CAPTURE 錄音。左右踩踏板在預設瀏覽器內移動游標。   # [official]
+      - name: "BYPASS"
+        function: |
+          單踩：整台或指定模組的 bypass／啟用。長按：進入 PRESET BROWSER。
+          在 DUAL BYPASS 啟用時，雙擊是 bypass 整台。   # [official]
+    expression_input:
+      jack: "EXP，TRS"           # [official]
+      recommended_pot: "> 10k Ohm"   # [official]
+      assignable_to: "任一個單一的主要控制（TILT、RATE、TIME、MIX、或任一個 AMOUNT）"   # [official]
+      note: "[official] 一個表情踏板只能對應一個主要控制；對應存在 FX SETUP，隨 preset 儲存"
+
+  bypass:
+    modes:                       # [official] 手冊 p.41，GLOBAL SETTINGS 的 BYPASS MODE（Diffusion AMOUNT 旋鈕）
+      buffered_bypass: "輸入維持 buffer，關掉時乾音一致，且單聲道輸入時維持立體聲像。效果立即停止（無 trails）"
+      buffered_bypass_with_trails: "Diffusion 效果在 bypass 時自然淡出，但不處理新進來的訊號，直到重新啟用"
+      true_bypass: "兩顆繼電器做立體 true bypass，bypass 時輸出直通對應輸入，與輸入輸出電氣隔離。此時自動單轉立體、立體轉單的路由不適用"
+    default_mode: null           # [unknown] 手冊列出三種模式但沒寫出廠預設是哪一種。需實機確認
+    marketing_summary: "True Bypass Switching／Buffered Bypass with trails"   # [official] 官方行銷頁
+    dual_bypass: "[official] BYPASS 踏板可設定為只 bypass 指定模組；可隨 preset 儲存，可與 trails 組合。預設（空白 preset）是同時 bypass 全部模組"
+    module_bypass_gesture: "[official] 在 live 模式長按某模組按鈕即 bypass 該效果"
+    buffer_note: |
+      [inference] Buffered Bypass 模式下，關掉時仍有 AD/DA 與 buffer 在訊號路徑上；
+      True Bypass 模式下，關掉時只剩繼電器直通，但效果開啟時一定經過 24-bit 48 kHz AD/DA。
+
+  io:
+    topology: "stereo in／stereo out；可單聲道使用"   # [official]
+    jacks:
+      - "INPUT L、INPUT R：左右 1/4 吋音訊輸入"      # [official]
+      - "OUTPUT L、OUTPUT R：左右 1/4 吋音訊輸出"    # [official]
+      - "EXP：表情踏板輸入（TRS）"                   # [official]
+      - "MIDI IN、MIDI OUT：5-pin DIN"               # [official]
+      - "USB：USB-C，MIDI"                           # [official]
+      - "9VDC：電源輸入"                             # [official]
+    midi_thru: "[official] 行銷頁與商店頁寫 MIDI In/Out/Thru；實體只有 MIDI IN 與 MIDI OUT 兩個 DIN 孔，Thru 是用 Global Settings 的 MIDI ROUTING 讓 OUT 孔轉送 IN 的訊息（Thru mode）"
+    input_levels: "[official] 設計給 instrument 與 line level 兩種輸入；用 Calibration 選四種 headroom"
+    audio_specs:                 # [official] 手冊 p.44
+      max_input_level: "+8 dBu"
+      converters: "24-bit 48 kHz AD/DA"
+      input_impedance: "1 MΩ"
+      output_impedance: "< 1 kΩ"
+      jack_wiring: null          # [unknown] 音訊孔是 TS 還是 TRS、平衡與否官方未寫。不要假設可用 TRS 平衡接法
+
+  dimensions: "6.0 x 5.0 x 3.0 吋（約 152 x 127 x 76 mm）"   # [official] 商店頁；公釐是本庫換算
+  weight: null                   # [unknown] 官方未公布，經銷商未查
+
+# 單聲道輸出行為（下游是單聲道輸入的 Tone King Imperial MKII，這一節是這份檔案的重點）
+mono_out_behavior:
+  auto_detect: |
+    [official] 手冊 p.44：「Chroma Console detects which inputs are connected and routes
+    the signal automatically」。靠有沒有插線自動判斷，沒有 mono/stereo 切換開關。
+  documented_routings:
+    mono_to_stereo: "Connect either input and both outputs.（接任一輸入、兩個輸出）[official]"
+    stereo_to_mono: "Connect both inputs and either output.（接兩個輸入、任一個輸出）[official]"
+  not_documented:
+    - "單輸入加單輸出（一進一出，例如 Imperial MKII 的單聲道鏈）：手冊兩種已記載的路由都不是這個接法，沒有逐字描述 [unknown]"
+    - "立體轉單聲道時是怎麼混（直接相加、衰減幾 dB、是否相位處理）：官方未寫 [unknown]"
+    - "只接一個輸出時，另一個輸出的訊號是否被丟掉，或兩聲道會合併後從單一輸出送出：手冊的 stereo-to-mono 寫「either output」，語意是兩個輸入混合後從任一輸出出，但混合方式未寫 [inference]"
+    - "單輸入加單輸出時，立體效果（Doubler、Vibrato 的 DRIFT 立體寬度、Space 殘響、Cascade 等）在單一輸出上是左聲道、右聲道、或兩者混合：官方未寫 [unknown]"
+  stereo_effects_in_mono_out: |
+    [official] 官方行銷頁：「All of Chroma Console's effects can process stereo signals or create a lively
+    stereo image from a mono signal when used in mono-to-stereo configuration.」
+    [official] DOUBLER 是「Stereo double tracking effect」；VIBRATO 的 DRIFT「increases the stereo width」。
+    [inference] 這些效果的立體寬度在單聲道輸出時會被折疊。折疊方式（直接相加）若是相加，
+    類似 chorus 或 doubler 的左右時間差會產生梳狀濾波（comb filtering），聽感可能變薄或音色改變。
+    這是一般立體轉單聲道的物理現象，不是官方說的，且本庫沒有實測。
+  buffered_bypass_and_mono: |
+    [official] BUFFERED BYPASS 的說明：「maintaining the stereo image when a mono input source is used」，
+    即單聲道輸入在關閉狀態下仍然會從兩個輸出出來。
+    [official] TRUE BYPASS 時「automatic mono-to-stereo and stereo-to-mono routings do not apply」，
+    關掉時輸出只是繼電器直通對應輸入。
+    [inference] 因此只用單輸入單輸出的鏈，True Bypass 時要接「同一邊」的輸入與輸出（例如 INPUT L 接 OUTPUT L），
+    否則直通路徑會沒有訊號。這點官方沒有明說，只是從「輸出直通對應輸入」推出。
+  chain_recommendation_status: |
+    [unknown] 官方沒有針對單聲道前級的建議接法。實機接進 Imperial MKII 前，
+    需要實測確認：(a) 單進單出時哪一邊輸出有訊號、(b) 效果開啟與關閉兩種狀態音量是否一致、
+    (c) 立體寬度類效果折疊後的音色變化。
+
+# 效果模組（手冊 p.7、p.12-19；官方行銷頁的名稱與手冊一致）
+modules:
+  structure: |
+    [official] 4 個模組：Character、Movement、Diffusion、Texture，每個模組 5 種效果，共 20 種。
+    每個模組還可選「OFF」（MIDI 表 CC 16-19 的 110-127 範圍）。
+    預設順序：Character → Movement → Diffusion → Texture（手冊 p.27 的圖，官方）。
+    順序可重排，並隨 preset 儲存。一個模組一次只能選一種效果。
+  signal_notes: |
+    [official] 可以用一個模組去推另一個模組過載；訊號接近 headroom 上限時整條鏈會被推到柔和的 soft clipping。
+  character:
+    knobs: "TILT、AMOUNT（紅色）"
+    effects:
+      - name: "DRIVE"
+        description: "[official] Tube-like drive，從暖前級到完整 overdrive。AMOUNT 調過載強度"
+      - name: "SWEETEN"
+        description: "[official] 前級型，加 EQ、壓縮、輕微飽和。可用來輕推後面的效果。AMOUNT 調壓縮與飽和"
+      - name: "FUZZ"
+        description: "[official] 動態、復古音色的 fuzz，從圓滑到破喇叭。TILT 同時改變 transient 與 bias 特性"
+      - name: "HOWL"
+        description: "[official] 共振濾波 fuzz；依 TILT 位置可得持續音或合成器般的短促音"
+      - name: "SWELL"
+        description: "[official] 依包絡觸發的音量漸強。SENSITIVITY 調觸發門檻；AMOUNT 調 attack 與 decay 時間"
+  movement:
+    knobs: "RATE、AMOUNT（黃色）；次要控制 DRIFT"
+    effects:
+      - name: "DOUBLER"
+        description: "[official] 立體 double tracking，從緊密加倍到短 slapback。DRIFT 加入隨機瞬間音高偏移。不在手冊的 tap tempo／MIDI clock 同步清單內 [official]"
+      - name: "VIBRATO"
+        description: "[official] 音高調變，從正弦波到類磁帶抖動。DRIFT 增加立體寬度並引入隨機調變波形。可同步 tap tempo"
+      - name: "PHASER"
+        description: "[official] 復古 phaser。AMOUNT 同時增加相位級數，2 級到 12 級。可同步 tap tempo"
+      - name: "TREMOLO"
+        description: "[official] 振幅調變，從 amp 式閃爍到方波切斷。可同步 tap tempo"
+      - name: "PITCH"
+        description: "[official] 變調 -1 octave 到 +1 octave，RATE 中央不變調。DRIFT 降低變調器解析度（lo-fi）。不在 tap tempo 同步清單"
+  diffusion:
+    knobs: "TIME、AMOUNT（綠色）；次要控制 DRIFT"
+    effects:
+      - name: "CASCADE"
+        description: "[official] 類 bucket-brigade 類比 delay，音色偏暗。TIME 從短 slapback 到四分音符；AMOUNT 最大時自振盪、失真。可同步 tap tempo，延遲時間量化為細分"
+      - name: "REELS"
+        description: "[official] 帶式回音，明亮、有顆粒、微不穩。TIME 從短 slapback 到四分音符。可同步 tap tempo"
+      - name: "SPACE"
+        description: "[official] 殘響，在 5 種殘響聲音之間連續過渡，從緊的錄音室回音室到大片持續雲狀殘響。TIME 調大小與音色。不在 tap tempo 同步清單"
+      - name: "COLLAGE"
+        description: "[official] 隨機、自發的 looping delay。移動 TIME 會破壞性編輯 delay line，產生音高彎曲、雙倍與半速 loop。可同步 tap tempo"
+      - name: "REVERSE"
+        description: "[official] 反向 delay，播放速度與音高可變（-1 到 +1 octave），TIME 中央為正常速度。可同步 tap tempo"
+    note: "[official] Diffusion 是 wet 效果；EFFECT VOL 只調 wet 輸出音量"
+  texture:
+    knobs: "AMOUNT（藍色，單一旋鈕）"
+    effects:
+      - name: "FILTER"
+        description: "[official] 多模式濾波，預設 TILT，可設為 LPF 或 HPF（FX SETUP，每個 preset 各自設定）。AMOUNT 調截止頻率"
+      - name: "SQUASH"
+        description: "[official] 重手壓縮器兼過載。AMOUNT 增加壓縮，接近 100% 時開始過載"
+      - name: "CASSETTE"
+        description: "[official] 卡帶機的 wow、flutter、抖動、磁帶劣化與音高瑕疵；AMOUNT 增加磁帶飽和、壓縮、濾波與雜訊"
+      - name: "BROKEN"
+        description: "[official] 週期性音高下墜加上振幅與頻率調變，模擬故障的馬達式音響設備"
+      - name: "INTERFERENCE"
+        description: "[official] 在訊號上加入溶解般的干擾層，靈感來自電信網路故障與無線電雜訊"
+  filter_styles:                 # [official] 手冊 p.30
+    TILT: "往左切高頻、往右切低頻（預設）"
+    LPF: "往左切高頻"
+    HPF: "往右切低頻"
+  tap_tempo_synced_effects: "Vibrato、Phaser、Tremolo、Cascade、Reels、Collage、Reverse"   # [official] 手冊 p.11 與 p.39
+
+# 校準
+calibration:
+  purpose: "[official] 依樂器輸出電平設定壓縮與飽和門檻與許多效果參數，使效果落在甜蜜點"
+  levels: "Low、Medium、High、Very High（四種 headroom）"   # [official]
+  methods: "自動（彈奏開放和弦幾次）或手動（點四個按鈕之一）"   # [official]
+  enter: "同時長按兩個踏板，指示燈出現紫色動畫"           # [official]
+  scope: "[official] 校準結果記住（含斷電），套用到所有 preset"
+  guide: "[official] Low：多數低輸出吉他與貝斯、低輸出合成器；Medium：多數吉他與貝斯（humbucker、stacked）、電鋼琴；High：高輸出（overwound、active）吉他、多數 line level；Very High：高輸出 line level、modular"
+
+# Presets
+presets:
+  user_presets: 80               # [official] 4 bank（A-D）x 20
+  factory_presets: null          # [unknown] 手冊只提 user presets，沒有寫出廠是否附 preset
+  saved_in_preset:               # [official] 手冊 p.31
+    - "效果與模組順序"
+    - "所有主要控制設定"
+    - "所有次要控制設定"
+    - "所有 Gesture 錄製"
+    - "Filter Style"
+    - "Dual Bypass 設定"
+    - "Capture Routing"
+    - "表情踏板對應"
+    - "tap tempo 速度"
+  not_saved_in_preset: "CAPTURE 錄製的音訊不隨 preset 儲存 [official]；校準設定不隨 preset，是全域 [official]；bypass mode 為全域設定 [official]"
+  recall: "長按 BYPASS 進入 PRESET BROWSER，用 AMOUNT 旋鈕或踏板移動，長按 BYPASS 或 TAP 載入。預設會邊瀏覽邊試聽，可在全域設定關閉試聽（適合現場）[official]"
+  midi_recall: "Program Change PC# 0-79 對應 bank A 1 到 bank D 20 [official]"
+
+# GESTURE 與 CAPTURE
+gesture:
+  function: "錄製並循環播放主要控制旋鈕的動作，可同時錄多顆旋鈕"   # [official]
+  enter: "同時按 C 與 D"                                         # [official]
+  details:
+    - "[official] 錄製中該欄按鈕 LED 由白轉紅；回放時模組 LED 在效果色與白色之間閃動"
+    - "[official] 可用 tap tempo 或外部 MIDI clock 相對於錄製時的速度加快或減慢回放"
+    - "[official] 在 live 模式移動已錄製的旋鈕會覆寫該旋鈕的錄製；長按 C+D 刪除所有錄製"
+    - "[official] 只作用於主要控制（Primary Controls）"
+  stored_with_preset: true       # [official]
+capture:
+  function: "短暫的 sustainer 兼 looper，最長 30 秒錄音"   # [official]
+  operation: "按住 TAP 踏板錄音，放開即進入播放；再按住可同時清除舊 loop 並錄新的；單踩 TAP 停止／清除"   # [official]
+  behavior: "極短 loop 會有柔和淡入淡出邊緣，形成連續環境墊底（指示燈藍）；較長素材當一般 looper 用（指示燈綠）"   # [official]
+  routing: "POST-FX（預設）或 PRE-FX，在 FX SETUP 用 MIX 旋鈕選擇，隨 preset 儲存"   # [official]
+  recordings_saved: false        # [official]
+
+# MIDI
+midi:
+  connectors: "5-pin DIN MIDI IN／MIDI OUT；USB-C（MIDI）"   # [official]
+  channel: "1-16，預設 1"                                    # [official]
+  routing_modes: "Interface mode（預設）、Interface without internal clock、Thru mode、Thru without internal clock"   # [official]
+  clock_source: "Auto（預設，USB 優先）、USB MIDI、DIN MIDI、Internal only"   # [official]
+  clock_synced: "Vibrato、Phaser、Tremolo、Cascade、Reels、Collage、Reverse"   # [official]
+  cc_map:                        # [official] 手冊 p.46-49，韌體 v1.04
+    primary:
+      TILT: 64
+      AMOUNT_Character: 65
+      RATE: 66
+      AMOUNT_Movement: 67
+      TIME: 68
+      AMOUNT_Diffusion: 69
+      MIX: 70
+      AMOUNT_Texture: 71
+    secondary:
+      SENSITIVITY: 72
+      EFFECT_VOL_Character: 73
+      DRIFT_Movement: 74
+      EFFECT_VOL_Movement: 75
+      DRIFT_Diffusion: 76
+      EFFECT_VOL_Diffusion: 77
+      OUTPUT_LEVEL: 78
+      EFFECT_VOL_Texture: 79
+    module_effect_select: "CC16 Character、CC17 Movement、CC18 Diffusion、CC19 Texture；0-127 平分為 5 效果 + OFF（每 22 一格，110-127 為 OFF）"
+    bypass:
+      standard_bypass: "CC91（0-63 bypass、64-127 engage）"
+      dual_bypass: "CC92（0-31 total bypass、32-63 dual bypass、64-127 total engage）"
+      module_bypass: "CC103 Character、CC104 Movement、CC105 Diffusion、CC106 Texture（0-63 bypass、64-127 engage）。韌體 v1.04 新增 [official 韌體頁]"
+    other:
+      gesture_play_rec: "CC80"
+      gesture_stop_erase: "CC81"
+      capture: "CC82（0-43 stop/clear、44-87 play、88-127 record）"
+      capture_routing: "CC83（0-63 post-FX、64-127 pre-FX）"
+      filter_mode: "CC84（0-43 LPF、44-87 TILT、88-127 HPF）"
+      tap_tempo: "CC93"
+      calibration_level: "CC94（0-31 Low、32-63 Medium、64-95 High、96-127 Very High）"
+      calibration_enter: "CC95（0-63 exit、64-127 enter）"
+  program_change: "PC# 0-79 對應 80 個 user presets"   # [official]
+  firmware_update: "經由 MIDI（隨附電源與 USB-C 線），最新 v1.04，2025-05-05"   # [official] 韌體頁
+
+# 訊號鏈分析用摘要
+signal_chain_summary:
+  position_hint: "[inference] 因為是立體多重效果且 Character 模組有 drive／fuzz，可放在前級或音箱 FX loop 前；本庫不替官方決定。官方只說依樂器電平校準"
+  gain_character: |
+    [official] Character 模組有 DRIVE、SWEETEN、FUZZ、HOWL 四種失真／前級類，加 SWELL 漸強；
+    Texture 的 SQUASH 與 CASSETTE 也有壓縮與飽和。增益量與失真類型都沒有公布數值 [unknown]。
+  tonal_character: |
+    [official] 官方定位是仿古錄音器材的偏差、顆粒與不穩定感（DRIFT 是核心），非乾淨的 hi-fi 多重效果。
+    [inference] 因為有 AD/DA 與 DSP，乾訊號在效果開啟時一定數位化；Mix 設在 100% 是官方建議的最單純路徑。
+  latency: null                  # [unknown] 官方未公布
+  buffer_summary: "Buffered Bypass（有 buffer）、Buffered Bypass with trails、True Bypass 三選一，全域設定；預設 [unknown]"
+  impedance_summary: "輸入 1 MΩ、輸出 < 1 kΩ [official]"
+  power_summary: "9V DC、center negative、2.1 mm，電源供應器至少 500 mA；實際耗電 [unknown]"
+  stereo_summary: "立體進出；單輸入雙輸出（mono-to-stereo）與雙輸入單輸出（stereo-to-mono）有官方描述；單進單出未逐字描述 [unknown]"
+
+# 使用建議（官方原文所述，沒有任何建議旋鈕位置）
+usage_recommendations:
+  official_use_cases:            # [official] 手冊 p.6、行銷頁
+    - "重排模組做不同訊號鏈：殘響過 fuzz、reverse delay 進變調器、卡帶機聲音進立體 doubler"
+    - "用 GESTURE 錄旋鈕動作做出演變中的質地"
+    - "用 CAPTURE 做環境墊底或疊 loop"
+    - "適合 instrument 與 line level（合成器、modular）"
+  best_for:
+    - "實驗性、氛圍類、帶有老式錄音設備偏差感的音色"   # [inference] 依官方定位歸納
+    - "J-Rock／J-Pop 的氛圍層、器樂搖滾的質地與環境層"   # [user] 使用者想增加的風格；效果名稱是否適合由使用者實機判斷，本庫不判斷
+
+# 不要混淆的同名或相關產品
+variants_to_distinguish:
+  - "Chroma Console Special Edition Monochrome（藍／綠／紅／黃）：官方 collection 有獨立商品頁，是外觀特別版，規格差異未查 [unknown]"
+  - "Hologram Microcosm：同廠另一款，granular／loop 取向的立體效果器。手冊也列在 support 頁，規格不可混用"
+  - "Hologram Dream Sequence、Infinite Jets：同廠其他產品，規格不可混用"
+  - "Rhodes Chroma（1980s 合成器）：搜尋引擎會把 Rhodes Chroma 的手冊排在前面，與本品無關"
+
+# 查證陷阱
+traps:
+  - "商店頁與行銷頁寫「Stereo Input/Output」，手冊 p.6 寫「Stereo or Mono Input/Output」。手冊更完整，單聲道使用是官方支援的"
+  - "「MIDI In/Out/Thru」是功能描述，實體只有 IN 與 OUT 兩個 DIN 孔"
+  - "500 mA 是電源供應器最低要求，不是耗電量。不要把它寫成 current_draw"
+  - "官方行銷頁一句話「True Bypass Switching/Buffered Bypassed with trails」容易讀成「預設是 true bypass」，手冊沒有寫預設"
+  - "商品頁 HTML 內含「Sold out」「Variant sold out or unavailable」字樣，是 Shopify 佈景主題的隱藏標籤，不代表缺貨。庫存要看 /products/<handle>.js 的 available 欄位（2026-10-13 四個變體皆 true）"
+  - "商店 JSON 的 published_at（2025-09-09）是商店上架日，不是發售日；韌體 v1.04 在 2025-05-05 已發布"
+  - "手冊 PDF 網址帶 ?v= 版本號，會隨官方更新而變，入口用 /pages/support"
+  - "手冊對應韌體 v1.04（封面），模組 bypass 的 MIDI CC 103-106 是 v1.04 才有；舊韌體沒有"
+  - "手冊 p.27 的預設模組順序與 FX SETUP 步驟的細節有圖，文字擷取看不到；本檔的預設順序是看圖得到"
+
+# 參考資料來源（本次執行全部實際抓取、頁面載入且內容相關）
+sources:
+  - "https://cdn.shopify.com/s/files/1/0920/2928/8752/files/CC_manual_WEB.pdf?v=1758823440"   # 官方使用手冊，firmware V1.04
+  - "https://cdn.shopify.com/s/files/1/0920/2928/8752/files/CC_quick_start_WEB.pdf?v=1758909316"   # 官方快速上手
+  - "https://www.hologramelectronics.com/products/chroma-console"        # 官方商店頁
+  - "https://www.hologramelectronics.com/products/chroma-console.json"   # 官方商店 JSON（價格、SKU、上架日）
+  - "https://www.hologramelectronics.com/products/chroma-console.js"     # 官方商店 JS（各變體 available 庫存狀態；驗證時抓取）
+  - "https://www.hologramelectronics.com/pages/chroma-console"           # 官方行銷頁
+  - "https://www.hologramelectronics.com/pages/chroma-console-firmware"  # 官方韌體頁
+  - "https://www.hologramelectronics.com/pages/support"                  # 官方 support 頁（手冊連結來源）
+  - "https://www.hologramelectronics.com/collections/all"                # 官方 collection（特別版商品頁來源）
+
+data_collected: 2026-10-13
+data_reliability: "高（官方手冊 v1.04 與官方頁面逐項核對）。實際耗電、重量、產地、預設 bypass 模式、單進單出路由與立體折疊方式官方未公布，留空"

@@ -295,6 +295,7 @@ inputs_outputs:
 fx_loop_details:
   has_fx_loop: true
   type: "Stereo effects loop (mono send, stereo return)"
+  user_statement_2026_10_13: "使用者說 Imperial MKII 的輸入是單聲道，Send／Return 與輸出是立體聲，走四線法沒問題。本檔寫 send 是 mono，與使用者說法不一致，尚未用官方手冊核對。本檔沒有證據等級，數值多為預估"
   bypassable: true
 
   operation:

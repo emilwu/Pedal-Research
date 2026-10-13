@@ -1,0 +1,289 @@
+# JHS Pedals NOTADÜMBLË V2
+# 效果器詳細技術資料
+#
+# 2026-10-13 建立。使用者寫的是「JHS - NotADumble V2」。
+# 證據等級：[official] JHS 官方頁面；[dealer] 經銷商；[independent] 媒體或買家評論；
+# [inference] 本庫推論；[unknown] 查過但官方沒有公布；[user] 使用者自述。
+#
+# 官方來源：本次(2026-10-13)實際抓取 https://jhspedals.info/products/notadumble-v2 與其 .json，
+# 兩者都載入成功，內容相符。.json 的 updated_at 為 2026-10-12，是現行頁。
+# 官方頁的文字(body_html)是本檔幾乎所有 [official] 值的來源。官方頁沒有規格表，
+# 沒有寫 bypass 類型、尺寸、阻抗、立體聲/單聲道，這些一律是 [unknown]。
+#
+# ⚠️ 網域是 jhspedals.info（不是 jhspedals.com）。URL 形式見 jhs_fumble.yaml 檔頭：
+#    官方頁是 jhspedals.info/products/<handle>，不帶 www。www.jhspedals.info 會先 301 再轉，
+#    這次沒有使用 www 形式。
+# ⚠️ 品名字串有 diaeresis："NOTADÜMBLË V2"（官方商店標題）。brand／model 的寫法比照
+#    jhs_fumble.yaml 與 morning_glory.yaml：brand "JHS Pedals"。
+# ⚠️ 這台是 DIY 套件(kit)，不是出廠組裝好的成品。官方 product_type 為 "DIY KIT"。
+#    使用者實際持有的是組好的成品或自己組的，本檔不知道 [unknown]。
+# ⚠️ 這台不在 inventory 裡，除非使用者另行加入。器材現況以 projects/2025-v3-signal-chain/inventory/ 為準。
+
+version: 1.0
+last_updated: 2026-10-13
+
+# 基本資訊
+basic_info:
+  id: "jhs_notadumble_v2"
+  brand: "JHS Pedals"
+  model: "NOTADÜMBLË V2"          # [official] 官方商店標題
+  aliases:                        # 使用者與經銷商常見寫法，不是官方字串
+    - "JHS - NotADumble V2"       # [user]
+    - "NotADumble V2"
+    - "Notadumble V2"
+    - "NOTADUMBLE V2"
+  full_name: "JHS Pedals NOTADÜMBLË V2 two-channel Dumble-style DIY kit pedal"
+  type: "overdrive"               # [inference] 含 overdrive 與 clean boost 兩個聲道
+  subtype: "dual_channel_dumble_style_overdrive_and_clean_boost"   # [inference]
+  product_type_official: "DIY KIT"   # [official] 商店 product_type
+  description_official: "「the two-channel DIY Dumble kit pedal」"   # [official]
+  release_date: "2026-07-16"      # [official] 商店 published_at 2026-07-16T09:59:01-05:00
+  status: "in_production"         # [official] 2026-10-13 出現在官方 all-products 集合 products.json，variant available=true
+  sku: "NDV2"                     # [official]
+  barcode: "810209870096"         # [official]
+  made_in: null                   # [unknown] 官方頁本文未寫產地
+  kit_assembly: null              # [unknown] V1 頁寫 "no soldering required"，V2 頁沒有這句，不要套用
+  warranty_note: "[official] 「limited liability warranty」；全部銷售不退貨（ALL SALES FINAL）"
+  trademark_disclaimer: "[official] 與 Howard Dumble／Dumble Amplifiers 無關聯、未經背書；官方稱是向其作品致敬的複製品"
+
+# 價格資訊
+price:
+  msrp: 119                       # [official]
+  currency: "USD"
+  tier: "budget"                  # [inference]
+  discount_note: "[official] 排除 WELCOME15 與 SMS 折扣"
+
+# 核心技術規格
+technical_specs:
+  power:
+    voltage: "9V DC"              # [official]
+    max_voltage: "9V。官方：「Do not use more than 9V DC. If you do, you will void your warranty.」"   # [official]
+    polarity: "center negative"   # [official]
+    current_draw: "25 mA"         # [official]
+    battery: null                 # [unknown] 官方未提
+
+  # 兩個聲道各有獨立的腳踏開關，以下依官方頁 CONTROLS 區塊整理。
+  channels:
+    overdrive:
+      footswitch: "左側腳踏開關 [official]"
+      circuit_lineage: |
+        [official] 官方形容是「a stripped-down, heavily modified Tube Screamer with unusual clipping
+        and a different gain feel」這條系譜的精品 overdrive。這是 JHS 自己的行銷描述，未經獨立查證，元件值未公布。
+      official_voicing_hint: "[official] 官方頁寫「Neck pickup. Medium-high drive. EQ rolled back.」是他們說的 violin tone。這是官方的描述，不是本庫建議設定"
+      controls:
+        - name: "Volume"
+          function: "overdrive 聲道的總音量。左小右大"            # [official]
+        - name: "Drive"
+          function: "overdrive 量。左少右多"                       # [official]
+        - name: "EQ"
+          function: "可調的 low-pass filter。往左切掉更多高頻，往右切得更少"   # [official]
+        - name: "Presence"
+          function: "控制增益級裡的中高頻與高頻。左少右多"           # [official]
+          note: "V2 搬到面板上。V1 是內部 trimpot"                  # [official]
+    clean:
+      footswitch: "右側腳踏開關 [official]"
+      circuit: |
+        [official] Box It Later，即 Dumble「A Box Later」的複製。官方描述原機是
+        「a buffer preamp boost with a built-in effects loop」，Howard Dumble 1980 年代製作。
+        元件值未公布。
+      controls:
+        - name: "Output"
+          function: "clean 聲道的輸出音量(官方在 CONTROLS 寫「for the effects loop send」，在別處稱 master volume)"   # [official]
+        - name: "Input"
+          function: |
+            [official] 不是增益旋鈕。官方：「It changes the impedance the signal sees as it enters the circuit」，
+            影響亮暗、緊鬆。0 較薄較精準，10 較飽滿較圓。效果依吉他與前級踏板而定，有些裝置差異很小。
+            ⚠️ 官方頁對它有兩種寫法：CONTROLS 區塊寫它「controls the volume of the incoming signal on the effects loop return」，
+            其他段落寫它是 impedance／brightness shaper。兩面都記，本庫不取捨。
+  additional_controls:
+    - name: "Order switch"
+      location: "前面板滑動開關"        # [official]
+      function: |
+        兩個聲道同時開啟時，決定哪一個先接在串聯前面 [official]。官方說明：
+        「Drive → Clean is a lead lift. Clean → Drive turns the boost into a distortion driver.」
+        開關上兩個位置哪一端對應哪個順序，官方頁文字沒寫 [unknown]。
+    - name: "Footswitch (Overdrive)"
+      function: "overdrive 聲道開關"      # [official]
+    - name: "Footswitch (Clean)"
+      function: "clean 聲道開關，同時啟用 effects loop 裡的整條鏈"   # [official]
+  internal_controls: null                 # [unknown] 官方頁沒有列出任何需要拆機殼調整的項目
+
+  effects_loop:
+    jack: "1/4 吋 TRS [official]"
+    wiring: "[official] 用 TRS-to-TS/TS Y-cable。Tip 是 send，Ring 是 return"
+    position: "只在 clean 聲道內 [official]"
+    auto_bypass: "[official] 沒插線時 loop 自動略過"
+    note: "[official] 官方稱原版 A Box Later 也有這個 loop"
+    send_return_level: null               # [unknown] 官方未公布位準(instrument 或 line)
+
+  bypass: null                            # [unknown] 官方頁沒有寫 true bypass 或 buffered。V1 頁寫 true bypass，但 V2 電路已改，不可直接套用
+  bypass_note: |
+    [inference] 官方稱 A Box Later 原機是 "buffer preamp boost"，V2 clean 聲道複製它，
+    開啟時推測有 buffer 作用；關閉時是否仍 buffer、兩個聲道都關時是 true bypass 與否，官方沒寫 [unknown]。
+    排訊號鏈時不要假設 true bypass。
+
+  jacks:
+    audio_input: "1/4 吋，在踏板右側 [official]"
+    audio_output: "1/4 吋，在踏板左側 [official]"
+    effects_loop: "1/4 吋 TRS [official]"
+    dc: null                              # [unknown] DC 插孔位置官方頁未寫
+    mono_stereo: "單聲道。官方只列一進一出與一個 TRS loop，沒有立體聲聲稱 [inference]"
+
+  dimensions: null                        # [unknown] V2 頁未列。V1 頁寫 3.7 x 4.7 x 1.66 吋，不可直接當 V2 的值
+  weight: "運送重量 680 g（1.5 lb）。是 shipping weight，不是本體重量 [official]"
+
+# 阻抗與電平
+impedance:
+  input: null                             # [unknown] 官方未公布
+  output: null                            # [unknown] 官方未公布
+  max_boost_db: null                      # [unknown] 官方未公布
+  note: "官方只說 clean 聲道的 Input 旋鈕會改變訊號進電路時看到的阻抗，沒有給數值"
+
+# 音色特性
+tonal_characteristics:
+  overdrive_channel:
+    character: "[official] Dumble 式的 sustaining violin 音色；官方點名 Larry Carlton、Eric Johnson、Carlos Santana、Robben Ford、Robert Randolph 與 Joe Bonamassa 獨奏"
+    gain_range: null                      # [unknown] 官方沒有給增益量；官方只說 Drive 越高 overdrive 越多
+    lineage_note: "[official] Tube Screamer 系譜，EQ 為 low-pass"
+  clean_channel:
+    character: "[official] 乾淨的 buffer preamp boost，可串 loop。Input 旋鈕調整亮暗與緊鬆"
+    gain_range: "Clean boost [inference]。官方沒有說明最大推多少 dB [unknown]"
+  stacked:
+    - "Drive → Clean：lead lift [official]"
+    - "Clean → Drive：boost 變成推 distortion 的 driver [official]"
+  no_independent_review: "本次沒有查獨立媒體評論或實測，這些欄位留空 [unknown]"
+
+# 使用建議(只列官方說的用途，不寫建議設定)
+usage_recommendations:
+  official_use_cases:                     # [official] 官方頁「Three real-world uses」
+    - "One-stomp lead preset：把 delay、chorus、distortion 放進 loop，一個腳踏開關切換整條鏈"
+    - "給任何沒有音量旋鈕的踏板加音量與阻抗控制：把它放進 loop，用 Output 與 Input 控制"
+    - "調變或延遲放在 drive 之前還是之後：翻轉 Order switch"
+
+# 訊號鏈分析要點
+signal_chain_notes:
+  power: "9V DC center negative，25 mA。不可超過 9V [official]；25 mA 的負載大小是否適合共用某個電源口，本庫未評估"
+  mono_stereo: "單進單出，單聲道 [inference]"
+  bypass: "未知。排鏈時要實測或問 JHS [unknown]"
+  loop_cabling: |
+    [official] loop 用 TRS-to-TS/TS Y-cable。若使用者有 Swiss Things 或 Empress Buffer++ 等
+    router，要另外確認這條 TRS Y-cable 與那些 loop 的接法不衝突；這點官方未討論 [inference]。
+  gain_staging: |
+    [inference] 兩個聲道各自有 Volume／Output。Order switch 在 Clean → Drive 時，
+    Clean 的 Output 會直接推 Drive 的輸入，這是官方也講的 distortion driver 用法。
+
+# V1 → V2 差異(只依官方頁，兩個版本都在本次抓取)
+v1_to_v2_changes:
+  source_note: |
+    V2 頁的「WHAT'S NEW」與 V1 頁(https://jhspedals.info/products/notadumble，現列 DISCONTINUED & RARE)
+    逐項核對。V1 頁在本次載入成功。
+  changes:
+    - item: "clean 聲道電路"
+      v1: "Dumble BBC-1 [official]"
+      v2: "Box It Later (A Box Later 複製) [official]"
+      why: "[official] JHS 自承 V1 用錯電路：本來要用 Box It Later，但拉錯了 schematic。V1 的 clean 電路後來獨立出貨成 Fumble"
+    - item: "聲道切換"
+      v1: "單一 slider 二選一(Drive 在上、Clean 在下) [official]"
+      v2: "兩個獨立腳踏開關，可同時開 [official]"
+    - item: "Effects loop"
+      v1: "沒有 [official] V2 頁 WHAT'S NEW：「We added ... an effects loop」；V1 頁也沒列"
+      v2: "Clean 聲道有 1/4 吋 TRS loop [official]"
+    - item: "串聯順序"
+      v1: "沒有 [official] V2 頁 WHAT'S NEW：「We added ... an order toggle」"
+      v2: "前面板 Order slide switch [official]"
+    - item: "Presence"
+      v1: "內部 trimpot [official]"
+      v2: "面板旋鈕 [official]"
+    - item: "電流"
+      v1: "10 mA [official]"
+      v2: "25 mA [official]"
+    - item: "電壓與極性"
+      v1: "9V DC center negative [official]"
+      v2: "9V DC center negative，不變 [official]"
+    - item: "價格"
+      v1: "USD 119 [official]"
+      v2: "USD 119，不變 [official]"
+    - item: "Bypass"
+      v1: "True bypass(單一腳踏開關) [official]"
+      v2: "未公布 [unknown]"
+    - item: "尺寸"
+      v1: "3.7 x 4.7 x 1.66 吋 [official]"
+      v2: "未公布 [unknown]"
+    - item: "狀態"
+      v1: "DISCONTINUED & RARE。V2 頁稱 15,000 片批次賣完後停產 [official]"
+      v2: "現行 [official]"
+
+# 與 Free the Tone ODL-1-CS 的簡短事實比較(使用者兩台都有)
+# ODL-1-CS 的數值取自本庫 odl1cs.yaml(該檔引用官方 CS 手冊 ver 1.2)，本次沒有重新抓取手冊，
+# 所以下面 ODL-1-CS 欄位的證據等級以 odl1cs.yaml 為準，不是本次驗證。
+comparison_with_odl1cs:
+  summary: |
+    兩台都是 Dumble 風格、雙聲道，但設計取向不同。ODL-1-CS 是單一 Normal 通道加前置 Drive 模組，
+    內部可升壓，並有 HTS buffered bypass，耗電大；NOTADÜMBLË V2 是 Tube Screamer 系譜 overdrive 加
+    Box It Later clean boost，兩聲道各自獨立，並有 effects loop。
+  table:
+    - item: "價格"
+      jhs_notadumble_v2: "USD 119 [official]"
+      odl1cs: "USD 425 [odl1cs.yaml]"
+    - item: "形式"
+      jhs_notadumble_v2: "DIY 套件 [official]"
+      odl1cs: "成品，日本製 [odl1cs.yaml]"
+    - item: "聲道架構"
+      jhs_notadumble_v2: "Overdrive 與 Clean 兩個獨立腳踏開關，可串聯、可調順序 [official]"
+      odl1cs: "Normal 與 Drive 兩個聲道，兩個腳踏開關；Drive 電路在 Normal 通道之前 [odl1cs.yaml]"
+    - item: "供電"
+      jhs_notadumble_v2: "9V DC center negative，25 mA，不可超過 9V [official]"
+      odl1cs: "外部 DC9V；耗流 95 mA，需 200 mA 以上供電能力；CS 版內部升壓 10-19V 可調 [odl1cs.yaml]"
+    - item: "電池"
+      jhs_notadumble_v2: "未提 [unknown]"
+      odl1cs: "9V 鹼性電池可用，約 3 小時 [odl1cs.yaml]"
+    - item: "Bypass"
+      jhs_notadumble_v2: "未公布 [unknown]"
+      odl1cs: "Buffered bypass(HTS circuit，常開) [odl1cs.yaml]"
+    - item: "輸入／輸出阻抗"
+      jhs_notadumble_v2: "未公布 [unknown]"
+      odl1cs: "輸入 500 kΩ 以上、輸出 10 kΩ 以上 [odl1cs.yaml]"
+    - item: "Effects loop"
+      jhs_notadumble_v2: "有，clean 聲道 TRS [official]"
+      odl1cs: "標準 CS 版沒有；ODL-1A-CS 有 channel control terminal(外部切換)，是不同概念 [odl1cs.yaml]"
+    - item: "Tone 控制"
+      jhs_notadumble_v2: "Overdrive：EQ(low-pass)與 Presence；Clean：Output 與 Input [official]"
+      odl1cs: "TONE、GAIN、NOR LEVEL、DRIVE、PUSH、DRV LEVEL、HI CUT 與兩個撥桿(EQ ON/GLASS、ROCK/JAZZ)[odl1cs.yaml]"
+    - item: "電路取向"
+      jhs_notadumble_v2: "Overdrive 為 Tube Screamer 系譜；Clean 為 A Box Later 複製 [official，JHS 自述]"
+      odl1cs: "捕捉 Dumble Overdrive Special 質感，設計者 Yuki Hayashi [odl1cs.yaml]"
+  not_a_replacement: |
+    使用者 2026-10-13 的原話：「都留著，只是不在這個效果器組合中」[user]。原問題的上下文本檔沒有，不再轉述。
+    本檔只列事實，不做取捨建議。
+
+# 不要混淆的同名或相關產品
+variants_to_distinguish:
+  - "JHS NOTADÜMBLË(V1，2025-05，DIY 套件，已停產)：clean 聲道是 BBC-1，單一 slider 切換，Presence 在內部"
+  - "JHS Fumble：就是 V1 clean 聲道用的 BBC-1，單獨出貨的 JFET clean boost；與 V2 clean 聲道(Box It Later)不同電路"
+  - "JHS Box It Later：Dumble「A Box Later」的複製，是 V2 clean 聲道的電路來源。官方頁只說 2019 年為 John Mayer 複製、自 2021 年在 Mayer 的 pedalboard 上 [official]；是否公開販售，官方頁沒寫，且 2026-10-13 不在 all-products 集合中 [unknown]"
+  - "JHS Basic Boost：JHS 為 John Mayer 私下做的 BBC-1 複製(官方頁提及)，非量產品"
+  - "Free the Tone ODL-1-CS：不同廠牌，使用者另一台 Dumble 風格 overdrive，見 odl1cs.yaml"
+
+# 查證陷阱
+traps:
+  - "官方頁是 jhspedals.info/products/notadumble-v2。V1 的 handle 是 notadumble(沒有 -v2)，頁面仍在，標為 DISCONTINUED & RARE"
+  - "V1 頁的規格(10 mA、true bypass、尺寸 3.7 x 4.7 x 1.66 吋、Presence 在內部)不是 V2 的規格；V2 頁沒有 bypass 與尺寸"
+  - "V2 的 clean 聲道不是 Fumble 的電路。Fumble 是 BBC-1；V2 是 Box It Later"
+  - "Input 旋鈕不是 gain 旋鈕，官方明寫 [official]"
+  - "V2 頁的 weight 680 g 是運送重量，不是本體重量"
+  - "V2 頁的 Input 旋鈕有兩種說法(見上方 clean 聲道 Input)"
+
+# 參考資料來源(都是 2026-10-13 本次實際抓取且載入成功)
+sources:
+  - "https://jhspedals.info/products/notadumble-v2"
+  - "https://jhspedals.info/products/notadumble-v2.json"
+  - "https://jhspedals.info/products/notadumble"
+  - "https://jhspedals.info/products/notadumble.json"
+  - "https://jhspedals.info/collections/all-products/products.json?limit=250"   # 現行導覽，V2 在內；V1 不在
+
+# 本次嘗試但失敗、不列為來源
+failed_attempts:
+  - "https://www.freethetone.com/en/product/effects/overdrive/odl-1-cs/ 回 404，ODL-1-CS 比較改引本庫 odl1cs.yaml，未重新驗證"
+
+data_collected: 2026-10-13
+data_reliability: "中高(JHS 官方頁與官方 JSON 核對；bypass、尺寸、阻抗、產地、DC 插孔位置官方未公布，留空；沒有查獨立評論)"
