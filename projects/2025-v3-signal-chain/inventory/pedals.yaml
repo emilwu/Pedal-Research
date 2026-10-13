@@ -3,12 +3,18 @@
 # 要回答「我現在有幾顆」請看檔尾 stats 區塊的 active，不是條目總數——
 # 條目裡混有 status: "planned" 的未購入設備（目前是 Empress Buffer++）。
 # 由 Inventory Manager Skill 管理
+#
+# ⚠️ 2026-10-13 起，目前實際接起來的訊號鏈記在檔尾 active_signal_chain。
+#    各條目的 signal_routing 是 V3 Swiss Things 設計的歷史，不是現況。
 
 version: 2.1
-last_updated: 2026-01-11
+last_updated: 2026-10-13
 created: 2025-12-30
 source: "migrated from 2025-v3-signal-chain project"
 changelog:
+  - date: 2026-10-13
+    change: "加回 Virtues Arca 與 Device2 From Yesterday（使用者確認仍持有）。新增 Cali76 Stacked、NOTADÜMBLË V2、Device2 RAAT、Chroma Console。新增檔尾 active_signal_chain 區塊，記錄使用者 2026-10 實際接起來的訊號鏈"
+    routing_decision: "各條目的 signal_routing 欄位描述的是 V3 Swiss Things／Buffer++ 設計，保留作為歷史，不再代表現況。現況一律看 active_signal_chain。新條目的 signal_routing 全部為 null"
   - date: 2026-01-11
     change: "Added dual routing fields (legacy Swiss Things + planned Buffer++) for migration readiness"
   - date: 2026-01-02
@@ -67,7 +73,7 @@ pedals:
       priority: "high"
 
   # ============================================================
-  # COMPRESSORS (2)
+  # COMPRESSORS (3)
   # ============================================================
 
   - id: "empress_mkii"
@@ -138,6 +144,39 @@ pedals:
     research_file: "shared/equipment_database/pedals/specs/cali76_fet.yaml"
     notes: "溫暖 FET 染色壓縮，增加 sustain 適合 Post Rock"
 
+  - id: "origin_cali76_stacked"
+    brand: "Origin Effects"
+    model: "Cali76 Stacked Compressor"
+    type: "compressor"
+    subtype: "dual_stage_fet"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 419  # 第三方來源（SOS／GuitarPedalX），非實際購入價
+      currency: "USD"
+
+    features:
+      - "兩級串聯 FET 壓縮，每級固定 4:1"
+      - "THRU 控制送進第二級的量"
+      - "DRY 平行壓縮"
+      - "Buffered bypass，9V 200 mA"
+
+    best_for:
+      - "Post Rock"
+      - "Neo Soul"
+      - "Sustaining leads"
+
+    signal_chain_position: "always_on_pre_amp"
+
+    signal_routing:
+      current_router: null
+      legacy_swiss_things: null
+      planned_buffer_plus_plus: null
+      notes: "2026-10 新增，不在 V3 Swiss Things 設計中。目前位置見檔尾 active_signal_chain"
+
+    research_file: "shared/equipment_database/pedals/specs/origin_cali76_stacked.yaml"
+    notes: "2026-10-13 加入。2025 現行款 Stacked Compressor，不是停產的 Stacked Edition（2026-10-13 使用者確認）。價格 419 是第三方來源的美元售價"
+
   # ============================================================
   # EQ (1)
   # ============================================================
@@ -177,7 +216,7 @@ pedals:
     notes: "可程式化 EQ，為每把吉他建立專用 preset，附 Clean Boost 功能"
 
   # ============================================================
-  # OVERDRIVE / DISTORTION (6)
+  # OVERDRIVE / DISTORTION (10)
   # ============================================================
 
   - id: "sweet_honey"
@@ -379,6 +418,138 @@ pedals:
     research_file: "shared/equipment_database/pedals/specs/odl1cs.yaml"
     notes: "訊號鏈2 Dumble 高階音色，Fusion 經典"
 
+  - id: "device2_from_yesterday"
+    brand: "Device2"
+    model: "From Yesterday"
+    type: "overdrive"
+    subtype: null
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 12000  # 官方標價，非實際購入價
+      currency: "TWD"
+
+    features:
+      - "以 Bluesbreaker 與 KOT V2 為基礎的雙聲道 overdrive"
+      - "F 旋鈕改變失真性格"
+      - "第二個腳踏開關切換兩組音量 preset"
+      - "內部 DIP：Boost/OD、Boost/Boost、OD/OD 與 High/Low Gain"
+
+    best_for:
+      - "Blues"
+      - "Neo Soul"
+      - "J-Rock／J-Pop"
+
+    signal_chain_position: "pre_amp_gain"
+
+    signal_routing:
+      current_router: null
+      legacy_swiss_things: null
+      planned_buffer_plus_plus: null
+      notes: "2026-10 新增，不在 V3 Swiss Things 設計中。目前位置見檔尾 active_signal_chain"
+
+    research_file: "shared/equipment_database/pedals/specs/from_yesterday_kot.yaml"
+    notes: "2026-10-13 加回（使用者確認仍持有）。spec 檔名與 id 仍是 from_yesterday_kot（散在多個檔案，不改名），內容已於同日依 Device2 官方頁重寫"
+
+  - id: "jhs_notadumble_v2"
+    brand: "JHS Pedals"
+    model: "NOTADÜMBLË V2"
+    type: "overdrive"
+    subtype: "dual_channel_dumble_style_overdrive_and_clean_boost"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 119
+      currency: "USD"
+
+    features:
+      - "Dumble 風格 overdrive + Box It Later clean boost 雙聲道"
+      - "兩個獨立腳踏開關、Order 撥桿"
+      - "clean 聲道 TRS effects loop"
+      - "9V 25 mA，不可超過 9V"
+
+    best_for:
+      - "Neo Soul"
+      - "Blues"
+      - "J-Rock／J-Pop lead"
+
+    signal_chain_position: "pre_amp_gain"
+
+    signal_routing:
+      current_router: null
+      legacy_swiss_things: null
+      planned_buffer_plus_plus: null
+      notes: "2026-10 新增，不在 V3 Swiss Things 設計中。目前位置見檔尾 active_signal_chain"
+
+    research_file: "shared/equipment_database/pedals/specs/jhs_notadumble_v2.yaml"
+    notes: "2026-10-13 加入。DIY 套件。bypass 類型官方未公布"
+
+  - id: "virtues_arca"
+    brand: "Virtues"
+    model: "Arca"
+    type: "overdrive"
+    subtype: "translucent_overdrive"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 30000  # 官方未稅價（含稅 33000），非實際購入價
+      currency: "JPY"
+
+    features:
+      - "Translucent（半透明）overdrive"
+      - "Volume／Gain／Treble／Bass"
+      - "True bypass（官方）"
+      - "9V DC 中心負"
+
+    best_for:
+      - "Neo Soul"
+      - "Blues"
+      - "J-Pop"
+
+    signal_chain_position: "pre_amp_gain"
+
+    signal_routing:
+      current_router: null
+      legacy_swiss_things: null
+      planned_buffer_plus_plus: null
+      notes: "2026-10 新增，不在 V3 Swiss Things 設計中。目前位置見檔尾 active_signal_chain"
+
+    research_file: "shared/equipment_database/pedals/specs/virtues_arca.yaml"
+    notes: "2026-10-13 加回（使用者確認仍持有）。V2.0 時從 V3 訊號鏈移除，但沒有賣掉。spec 已於同日依官方來源重寫：不是 Bluesbreaker 架構"
+
+  - id: "device2_raat"
+    brand: "Device2"
+    model: "RAAT"
+    type: "distortion"
+    subtype: "rat_style_hard_clipping_distortion"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 7800  # 官方頁 2026-01 批次標價，非實際購入價
+      currency: "TWD"
+
+    features:
+      - "ProCo RAT 復刻"
+      - "Ruetz 旋鈕：0 = stock，全開 = Ruetz"
+      - "Turbo RAT 式 Filter"
+      - "Ge／LED／Si 削波切換"
+
+    best_for:
+      - "J-Rock"
+      - "器樂搖滾"
+      - "Post Rock"
+
+    signal_chain_position: "pre_amp_gain"
+
+    signal_routing:
+      current_router: null
+      legacy_swiss_things: null
+      planned_buffer_plus_plus: null
+      notes: "2026-10 新增，不在 V3 Swiss Things 設計中。目前位置見檔尾 active_signal_chain"
+
+    research_file: "shared/equipment_database/pedals/specs/device2_raat.yaml"
+    notes: "2026-10-13 加入。手工訂製，使用者說只做 3 顆。價格是官方頁 2026-01 批次的標價，不確定使用者這顆屬於哪一批。使用者寫的 LEC 視為 LED"
+
   # ============================================================
   # DELAY (1)
   # ============================================================
@@ -494,34 +665,70 @@ pedals:
     research_file: "shared/equipment_database/pedals/specs/aasb.yaml"
     notes: "訊號鏈2特殊音景，雙向八度 Shimmer/Drone，天堂與地底碰撞"
 
+  # ============================================================
+  # MULTI-FX / MODULATION (1)
+  # ============================================================
+
+  - id: "hologram_chroma_console"
+    brand: "Hologram Electronics"
+    model: "CHROMA CONSOLE"
+    type: "multi_effect"
+    subtype: "four_module_stereo_multi_fx"
+    status: "active"
+    acquired_date: null
+    price:
+      amount: 399
+      currency: "USD"
+
+    features:
+      - "4 個可重排模組：Character／Movement／Diffusion／Texture"
+      - "每模組 5 種效果，共 20 種"
+      - "GESTURE、CAPTURE、80 組 preset"
+      - "立體聲 I/O，9V 至少 500 mA"
+
+    best_for:
+      - "Post Rock"
+      - "Ambient"
+      - "器樂搖滾"
+
+    signal_chain_position: "post_gain_modulation"
+
+    signal_routing:
+      current_router: null
+      legacy_swiss_things: null
+      planned_buffer_plus_plus: null
+      notes: "2026-10 新增，不在 V3 Swiss Things 設計中。目前位置見檔尾 active_signal_chain"
+
+    research_file: "shared/equipment_database/pedals/specs/hologram_chroma_console.yaml"
+    notes: "2026-10-13 加入。單進單出的行為手冊沒有逐字描述，接 Imperial MKII（單聲道輸入）前要實測。使用者基本不用 Character 模組，破音交給 Arca、RAAT、NOTADÜMBLË；AASB 開著時只用 Texture（2026-10-13）"
+
 # ============================================================
 # 統計資訊
 # ============================================================
 
 stats:
-  total_pedals: 13
-  active: 12
+  total_pedals: 19
+  active: 18
   planned: 1  # Buffer++ (replacing Swiss Things)
   sold: 0
+  in_active_signal_chain: 9  # 見 active_signal_chain。其餘 9 台持有但不在這條鏈裡
 
   by_type:
-    utility: 1       # Buffer++
-    compressor: 2
+    utility: 1        # Buffer++
+    compressor: 3     # Empress MKII, Cali76 FET, Cali76 Stacked
     eq: 1
-    overdrive: 6     # Sweet Honey, Horsemeat, Morning Glory, Blacklon, Source Code, ODL-1-CS
+    overdrive: 9      # Sweet Honey, Horsemeat, Morning Glory, Blacklon, Source Code, ODL-1-CS, From Yesterday, NOTADÜMBLË V2, Arca
+    distortion: 1     # RAAT
     delay: 1
     reverb: 2
+    multi_effect: 1   # Chroma Console
 
   by_signal_router:
-    current_status: "swiss_things"  # Until Buffer++ is purchased
-
-    routing_summary:
-      before_router: 3   # Compressors (2) + EQ (1)
-      loop_1: 6          # All overdrive/gain pedals
-      loop_2: 3          # Time-based effects (delay + reverbs)
+    current_status: "none"  # 2026-10-13：新訊號鏈不用 Swiss Things／Buffer++，全部串接進 Imperial MKII 前級
+    note: "以下 legacy／planned 區塊是 V3 設計的歷史統計，只涵蓋 2026-10 以前的 12 台"
 
     legacy_swiss_things:
-      status: "active"
+      status: "superseded_2026_10"
       limitations: "Loop 2 is mono - cannot utilize JC-22/Tone King stereo FX loops"
       before_input: 3    # Empress MKII, Cali76, PA-1QG
       loop_1: 6          # All gain pedals
@@ -535,11 +742,33 @@ stats:
       loop_2: 3          # FF-1Y, Nucleo, AASB (stereo mode enabled!)
 
   total_cost:
-    current_pedals: 3344  # 不含 PRS Horsemeat 價格
+    current_pedals_usd: 3848  # 2026-10-13 依條目重新加總，只算幣別為 USD 且有金額的 active 條目
     planned_buffer_plus_plus: 299
-    total_with_planned: 3643
-    currency: "USD"
+    total_with_planned_usd: 4147
+    not_included:
+      - "PRS Horsemeat、FF-1Y：價格待補"
+      - "From Yesterday TWD 12000、RAAT TWD 7800、Arca JPY 30000（未稅）：非美元，未換算"
     notes:
-      - "PRS Horsemeat 價格待補充"
+      - "2026-10-13 以前的 current_pedals 寫 3344，與當時條目加總 2911 對不上，原因未查；本次改為依條目重新加總"
+      - "多數價格是官方或第三方定價，不是實際購入價"
       - "Buffer++ 為計劃購買 (取代 Swiss Things)"
-      - "實際升級成本: $50-100 (賣掉 Swiss Things 後)"
+
+# ============================================================
+# 目前實際接起來的訊號鏈（2026-10-13，使用者提供）
+# ============================================================
+
+active_signal_chain:
+  id: "2026-10-imperial-headphone"
+  detail_file: "projects/2025-v3-signal-chain/signal_chains/signal_chain_2026-10_imperial_headphone.yaml"
+  output: "tone_king_imperial_mkii"  # 當 pedal platform，耳機 + 內建 cab sim
+  router: null
+  order:
+    - {position: 1, pedal_id: "pa1qg"}
+    - {position: 2, pedal_id: "origin_cali76_stacked"}
+    - {position: 3, pedal_id: "device2_from_yesterday"}
+    - {position: 4, pedal_id: "jhs_notadumble_v2"}
+    - {position: 5, pedal_id: "virtues_arca", exclusive_with: "device2_raat"}
+    - {position: 6, pedal_id: "device2_raat", exclusive_with: "virtues_arca"}
+    - {position: 7, pedal_id: "aasb"}
+    - {position: 8, pedal_id: "hologram_chroma_console"}
+    - {position: 9, pedal_id: "ff1y"}

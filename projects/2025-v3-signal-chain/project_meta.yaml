@@ -1,6 +1,6 @@
 version: 1.0
 created: 2025-12-30
-last_accessed: 2026-01-13
+last_accessed: 2026-10-13
 name: "2025-v3-signal-chain"
 description: "Main signal chain configuration project for 2025 V3 setup"
 
@@ -12,12 +12,12 @@ inherited_from:
 # Statistics
 statistics:
   total_guitars: 5   # 2026-09-30：新增 Pearson Omega 6。權威來源是 inventory/guitars.yaml，此處為快取
-  total_pedals: 13    # 條目總數。已擁有 12 + 規劃中 1（Buffer++）。
+  total_pedals: 19    # 條目總數。已擁有 18 + 規劃中 1（Buffer++）。2026-10-13 更新
                       # 權威拆分在 inventory/pedals.yaml 的 stats 區塊，此處為快取
   total_amps: 2
   total_accessories: 2  # RockBoard MOD 2 V2, MOD 3 V2
   total_styles: 7
-  total_signal_chains: 0  # Will be updated as signal chains are created
+  total_signal_chains: 3  # 2026-10-13：signal_chains/ 下兩份提案 + 一份實際使用中（2026-10 Imperial 耳機鏈）
 
 # History
 history:

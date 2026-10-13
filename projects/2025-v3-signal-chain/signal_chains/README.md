@@ -1,8 +1,18 @@
 # signal_chains/ 目錄說明
 
-**最後更新**：2026-09-11
+**最後更新**：2026-10-13
 
-這個目錄底下有兩份非歸檔的訊號鏈設計。它們互相矛盾，而且都沒有標示自己是不是現行版本。這份文件說明怎麼看待它們。
+## 2026-10-13 起的現況
+
+**目前實際接起來的訊號鏈是 `signal_chain_2026-10_imperial_headphone.md`（與同名 `.yaml`）。**
+它由使用者在 2026-10-13 提供：Tone King Imperial MKII 當 pedal platform，耳機 + 內建 cab sim，沒有 router。
+inventory 的對應記錄在 `projects/2025-v3-signal-chain/inventory/pedals.yaml` 檔尾的 `active_signal_chain` 區塊。
+
+下面原本的說明仍然成立：另外兩份是提案，不是現況。它們都需要尚未購入的 Empress Buffer++。
+
+---
+
+這個目錄底下有兩份非歸檔的訊號鏈提案。它們互相矛盾，而且都沒有標示自己是不是現行版本。以下說明怎麼看待它們。
 
 ---
 

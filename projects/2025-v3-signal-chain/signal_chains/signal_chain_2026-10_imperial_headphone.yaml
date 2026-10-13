@@ -1,0 +1,205 @@
+# 訊號鏈定義：Imperial MKII 耳機鏈（2026-10）
+# 對應報告：signal_chain_2026-10_imperial_headphone.md（同目錄）
+# inventory 對應：projects/2025-v3-signal-chain/inventory/pedals.yaml 的 active_signal_chain
+#
+# 本檔只記錄「接法與性質」，不記錄旋鈕設定。
+# 證據標籤沿用各 spec：[official] [dealer] [independent] [inference] [unknown] [user]。
+# PA-1QG、AASB、FF-1Y、Imperial MKII 的 spec 是舊格式，沒有標證據等級，引用時寫「spec 未標證據等級」。
+
+version: "1.0"
+created: 2026-10-13
+status: "active — 使用者實際接起來的訊號鏈（第一版）"
+source: "[user] 使用者 2026-10-13 提供的實際接法與順序"
+
+output:
+  id: "tone_king_imperial_mkii"
+  model: "Tone King Imperial MKII"
+  spec_file: "shared/equipment_database/amps/specs/tone_king_imperial_mkii.yaml"
+  role: "pedal platform（管前級 + Zero Watt power amp + IR cab sim）"
+  input_used: "前面 INPUT，1/4 吋，單聲道，1 MΩ"
+  fx_loop_used: false
+  monitoring: "耳機輸出（立體聲），使用內建 IR cab sim"
+  channel_policy: "踏板 drive 開著時以 Rhythm 聲道為平台（建議，見報告 B-1）"
+  built_in_effects: "stereo convolution spring reverb、stereo tremolo；在電路中的位置 spec 沒寫，推測在前級之後 [inference]"
+  evidence_note: "spec 未標證據等級；耗電 300 mA、Lead 聲道 British-voiced、FX loop 的 buffered 與 line level 都標「預估」"
+
+router: null
+fx_loop: null
+topology: "全部串聯進 Imperial 前面輸入。無 router、無 FX loop"
+
+guitars:
+  inventory_file: "projects/2025-v3-signal-chain/inventory/guitars.yaml"
+  ids:
+    - "esp_eclipse_ctm"
+    - "esp_throbber_ctm"
+    - "greco_te500"
+    - "fender_tokyo_thinline"
+    - "pearson_omega_6"
+  note: "鏈前兩台都是 buffered，換琴主要改變輸入電平，不改變阻抗互動 [inference]。PA-1QG 每把琴一個 preset 當電平對齊器"
+
+scenarios:
+  arca:
+    name: "情境 Arca"
+    on_capable_positions: [1, 2, 3, 4, 5, 7, 8, 9]
+    character: "translucent OD，clean 到 classical distortion，保留中頻 [official／dealer]"
+    leaning_styles: ["Jazz", "Neo Soul", "Blues", "J-Pop"]
+  raat:
+    name: "情境 RAAT"
+    on_capable_positions: [1, 2, 3, 4, 6, 7, 8, 9]
+    character: "RAT 系 hard clip distortion，Ge／LED／Si 三種削波 [user／official 2026-01 批次頁]"
+    leaning_styles: ["J-Rock", "器樂搖滾重段落", "Post Rock 音牆", "Rock"]
+  rule: "[user] 第 5 位（Arca）與第 6 位（RAAT）永不同時開啟。其餘單元兩個情境都可疊加使用"
+
+signal_chain:
+  - position: 1
+    pedal_id: "pa1qg"
+    pedal_name: "Free the Tone PA-1QG"
+    spec_file: "shared/equipment_database/pedals/specs/pa1qg.yaml"
+    role: "每把吉他一個 preset：EQ 與電平對齊"
+    bypass_type: "Buffered bypass（HTS）— spec 未標證據等級"
+    impedance: "輸入 INST 1 MΩ／LINE 300 kΩ；最大輸入 INST +4 dBu／LINE +14 dBu — spec 未標證據等級"
+    mono_stereo: "mono in／mono out"
+    notes:
+      - "在 Cali76 前面。Cali76 是固定門檻，PA-1QG 的 preset 音量會直接改變壓縮量 [inference]"
+      - "ESP Eclipse（EMG 主動式）是否超過 INST 輸入上限待實測；LINE 輸入是退路"
+
+  - position: 2
+    pedal_id: "origin_cali76_stacked"
+    pedal_name: "Origin Effects Cali76 Stacked Compressor"
+    spec_file: "shared/equipment_database/pedals/specs/origin_cali76_stacked.yaml"
+    role: "主壓縮器（兩級串聯，固定門檻）"
+    bypass_type: "Buffered bypass，電子切換 [official]"
+    power_on_state: "通電預設為開啟（ON）[official]"
+    impedance: "輸入 1 MΩ、輸出 1 kΩ [official]"
+    mono_stereo: "mono in／mono out [official]"
+    notes:
+      - "2025 現行款 Stacked Compressor，不是停產的 Stacked Edition（2026-10-13 使用者確認 [user]）"
+      - "壓縮器會放大前級底噪與單線圈交流聲 [official]"
+
+  - position: 3
+    pedal_id: "device2_from_yesterday"
+    pedal_name: "Device2 From Yesterday"
+    spec_file: "shared/equipment_database/pedals/specs/from_yesterday_kot.yaml"
+    role: "BB／KOT V2 基礎的 overdrive，兩組音量 preset；內部可設 Boost／OD 模式"
+    bypass_type: "unknown"
+    impedance: "unknown"
+    mono_stereo: "mono in／mono out [inference]"
+    notes:
+      - "spec 檔名保留 from_yesterday_kot 是歷史原因，內容描述的是 Device2 From Yesterday"
+      - "「雙通道」是兩組增益級還是共用增益級只切音量 [unknown]"
+
+  - position: 4
+    pedal_id: "jhs_notadumble_v2"
+    pedal_name: "JHS NOTADÜMBLË V2"
+    spec_file: "shared/equipment_database/pedals/specs/jhs_notadumble_v2.yaml"
+    role: "OD 聲道（TS 系譜 Dumble 風）＋ Clean 聲道（buffer preamp boost）；前面板 Order 開關切換兩聲道先後"
+    bypass_type: "unknown（官方 V2 頁未寫；不可沿用 V1 的 true bypass）"
+    impedance: "unknown"
+    mono_stereo: "mono in／mono out [inference]"
+    notes:
+      - "Clean 聲道內的 effects loop 未使用；不插線時自動略過 [official]"
+      - "建議當主 clean boost（有獨立腳踏、可用 Order 開關推 OD）[inference]"
+
+  - position: 5
+    pedal_id: "virtues_arca"
+    pedal_name: "Virtues Arca"
+    spec_file: "shared/equipment_database/pedals/specs/virtues_arca.yaml"
+    role: "情境 Arca 的最後一級 drive：translucent OD，hard clip，保留中頻"
+    bypass_type: "True bypass [official]"
+    impedance: "unknown"
+    mono_stereo: "mono in／mono out [official]"
+    exclusive_with: "device2_raat"
+    scenario: "arca"
+    notes:
+      - "drive 區最後一級，決定情境 Arca 的削波質地 [inference]"
+
+  - position: 6
+    pedal_id: "device2_raat"
+    pedal_name: "Device2 RAAT"
+    spec_file: "shared/equipment_database/pedals/specs/device2_raat.yaml"
+    user_research: "docs/RAAT-Research.md"
+    role: "情境 RAAT 的最後一級 drive：RAT 系 distortion，Ruetz 旋鈕、Turbo 式 Filter、Ge／LED／Si 削波開關"
+    bypass_type: "unknown（3PDT 平台推測 true bypass [inference]）"
+    impedance: "unknown"
+    mono_stereo: "mono in／mono out [inference]"
+    exclusive_with: "virtues_arca"
+    scenario: "raat"
+    notes:
+      - "電源電壓、極性、耗流全部 [unknown]。接電前要先確認"
+      - "Ge 是削波二極體，不是輸入級電晶體；前面有 buffer 不會變調 [inference]"
+      - "切換削波材質時輸出音量會跳動（Ge 最小、LED 最大）[inference]，影響下游 7–9 與 Imperial 的輸入電平"
+      - "使用者原文「LEC」解讀為 LED；官方頁描述 2026-01 批次，不一定是使用者這顆"
+
+  - position: 7
+    pedal_id: "aasb"
+    pedal_name: "Lichtlaerm Audio As Above So Below"
+    spec_file: "shared/equipment_database/pedals/specs/aasb.yaml"
+    role: "shimmer／octave reverb、Freeze（特殊用途殘響）"
+    bypass_type: "Relay bypass，buffered，spillover 可切 — spec 未標證據等級"
+    impedance: "unknown"
+    mono_stereo: "mono in／mono out — spec 未標證據等級（stereo: false）"
+    notes:
+      - "mono in／mono out（2026-10-13 使用者確認 [user]）。Imperial spec 接線範例寫成 stereo effect 是錯的"
+      - "在 Chroma 與 FF-1Y 之前：FF-1Y 會重複殘響 [inference]。Chroma 的 Character 模組不使用 [user]，AASB 開著時 Chroma 只用 Texture [user]，SQUASH／CASSETTE 會刻意壓縮、飽和殘響"
+
+  - position: 8
+    pedal_id: "hologram_chroma_console"
+    pedal_name: "Hologram Chroma Console"
+    spec_file: "shared/equipment_database/pedals/specs/hologram_chroma_console.yaml"
+    role: "多效果：調變、特殊 delay／reverb、PITCH、CAPTURE、質地"
+    bypass_type: "三選一全域設定：Buffered／Buffered with trails／True bypass [official]；出廠預設 [unknown]"
+    impedance: "輸入 1 MΩ、輸出 <1 kΩ [official]"
+    mono_stereo: "立體聲 I/O，本鏈單聲道使用：INPUT L → OUTPUT L。單進單出官方沒有記載；效果開啟時單一輸出拿到左、右或混合 [unknown]"
+    notes:
+      - "Calibration 是全域設定、不隨 preset [official]；看到的是 3–6 處理後的電平，不是吉他原始輸出"
+      - "DOUBLER、VIBRATO DRIFT 等立體寬度在單聲道下消失 [official 效果說明 + inference]"
+      - "電源供應器至少 500 mA 連續 [official]；實際耗電 [unknown]"
+
+  - position: 9
+    pedal_id: "ff1y"
+    pedal_name: "Free the Tone FF-1Y"
+    spec_file: "shared/equipment_database/pedals/specs/ff1y.yaml"
+    role: "主 delay（雙延遲單元，tap tempo、preset）"
+    bypass_type: "unknown（spec 未寫 bypass 型式；乾音全類比、HTS 混音 — spec 未標證據等級）"
+    impedance: "輸入 ≥500 kΩ、輸出 ≥10 kΩ 負載 — spec 未標證據等級"
+    mono_stereo: "立體聲 I/O，本鏈單聲道使用：A IN → A OUT。STEREO 模式下只接 A 時是否聽得到 B [unknown]；SERIES 模式兩單元串在同一路徑 [spec 拓樸描述]"
+    notes:
+      - "PAN 與 RFPM（官方說 Stereo 模式效果最好）在單聲道下變弱或消失 [inference]"
+      - "spec 沒有 HOLD 功能；無限延續改由 AASB Freeze 或 Chroma CAPTURE 負責"
+
+power_summary:
+  supply: "inventory 未記錄電源供應器，供電方案未定"
+  total_current: "未知值不加總。待 RAAT、Arca、Chroma 實際耗電確認後再算"
+  units:
+    - {position: 1, pedal_id: "pa1qg", voltage: "9V DC", current: "200 mA", evidence: "spec 未標證據等級", note: "spec 寫不建議 daisy chain"}
+    - {position: 2, pedal_id: "origin_cali76_stacked", voltage: "只能 9V DC（內部升壓 24V）", current: "200 mA，供應器需 >200 mA", evidence: "[official]", note: "使用者確認是 2025 現行款 [user]"}
+    - {position: 3, pedal_id: "device2_from_yesterday", voltage: "9V DC，中心負", current: "6 mA", evidence: "[independent，僅 RockBoard]", note: "可否 18V [unknown]"}
+    - {position: 4, pedal_id: "jhs_notadumble_v2", voltage: "9V 上限，中心負", current: "25 mA", evidence: "[official]", note: "超過 9V 保固失效"}
+    - {position: 5, pedal_id: "virtues_arca", voltage: "9V DC，中心負，2.1 mm", current: "unknown（官方「確認中」）", evidence: "[official]／[unknown]", note: "可否 18V [unknown]"}
+    - {position: 6, pedal_id: "device2_raat", voltage: "unknown（Aion 平台為 9V [independent]）", current: "unknown", evidence: "[unknown]", note: "極性推測中心負 [inference]；接電前先確認"}
+    - {position: 7, pedal_id: "aasb", voltage: "只能 9V DC", current: "150 mA", evidence: "spec 未標證據等級", note: ""}
+    - {position: 8, pedal_id: "hologram_chroma_console", voltage: "9V DC，中心負", current: "unknown（供應器下限 500 mA 連續）", evidence: "[official]", note: "500 mA 是供應器要求，不是耗電量"}
+    - {position: 9, pedal_id: "ff1y", voltage: "9V DC，中心負", current: "350 mA", evidence: "spec 未標證據等級", note: ""}
+    - {position: "output", pedal_id: "tone_king_imperial_mkii", voltage: "9–18V DC，中心負", current: "300 mA（預估）", evidence: "spec 未標證據等級", note: "spec 要求避免與數位設備共用電源，另給一路"}
+  architecture_notes:
+    - "至少五台需要獨立、隔離、大電流的輸出孔：PA-1QG、Cali76 Stacked、AASB、Chroma Console、FF-1Y。一般 100 mA 的孔不夠 [inference]"
+    - "NOTADÜMBLË V2、Cali76 Stacked（現行款）、AASB 不可接 18V"
+    - "Imperial MKII 另給一路，避開數位設備"
+
+known_conflicts:
+  - "立體聲折疊：Chroma Console 與 FF-1Y 的立體聲在進 Imperial 單聲道輸入前就消失；耳機裡的立體感只剩 Imperial 內建 reverb／tremolo"
+  - "時間系順序 AASB → Chroma → FF-1Y：FF-1Y 會重複殘響。Post Rock 可用，清楚 delay 的風格容易糊 [inference]。Chroma Character 模組不使用 [user]"
+  - "重複增益級：多級踏板 drive 加 Imperial Lead 聲道 [inference]"
+  - "無 noise gate：耳機 + 錄音為主，Cali76 與高增益會放大底噪與單線圈交流聲"
+
+related_files:
+  report: "projects/2025-v3-signal-chain/signal_chains/signal_chain_2026-10_imperial_headphone.md"
+  inventory: "projects/2025-v3-signal-chain/inventory/pedals.yaml"
+  music_styles: "projects/2025-v3-signal-chain/music_styles.yaml"
+
+user_confirmations_2026_10_13:
+  - "Cali76 Stacked 是 2025 現行款"
+  - "AASB 是單聲道"
+  - "Imperial MKII 輸入單聲道；Send／Return 與輸出是立體聲；走四線法（7–9 移到 FX loop）沒問題。基準接法仍是全部進前面輸入，FX loop 是已確認可行的替代接法"
+  - "Chroma Console 的 Character 模組基本不用；破音交給 Arca、RAAT、NOTADÜMBLË"
+  - "AASB 疊 Chroma 時，Chroma 只用 Texture；單用 Chroma（不開 AASB）時才可能用 Movement、Diffusion、Texture；Character 一律不用"
