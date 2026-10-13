@@ -25,6 +25,8 @@
 #    下一次 /migrate-data 會**新增一列重複的資料**，不會更新舊的那一列。
 #    **重新匯入之前，必須先由 Pedal-Web-Service 的 session 把 production 那一列
 #    改名成 brand "Device2"／model "From Yesterday"（與本檔字串完全一致）。**
+#    ✅ 2026-10-13 已處理：Planning 008 已改名並整列取代；新的資料檔把舊鍵收進 previousKeys，
+#    重跑 006 不會再插回舊列。以上警告保留作為歷史。
 #
 # ⚠️ production 那一列的內容全部是 KOT 資料，匯入時要整列取代，不要合併：
 #    - specs：Red/Yellow 雙通道、六顆旋鈕、9V 至 18V、True Bypass、約 1MΩ／10-50kΩ，全部不適用

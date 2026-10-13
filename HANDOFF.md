@@ -9,7 +9,7 @@
 
 ---
 
-## ⚠️ 最容易誤判的五件事
+## ⚠️ 最容易誤判的六件事
 
 ### 1. 這個 repo 不做規劃
 
@@ -106,6 +106,18 @@ branch，那個分支上被刪除的檔案會讓其他 repo 的引用全部誤�
 有一處會誤導你：`projects/2025-v3-signal-chain/archived_versions/README.md:164-169`
 把其中一份無條件標為「最終配置」。**那段寫於第二份設計出現之前，而且它在
 `archived_versions/` 底下，依規則不改。判斷時要略過它。**
+
+### 6. 改 spec 的 brand 或 model 時，交接要寫出舊值（2026-10-13 起）
+
+網站的設備資料改成「資料檔 + 純 upsert 程式」：
+`Pedal-Web-Service-Planning/scripts/migrations/equipment-data/equipment.json` 是設備資料的真相來源，
+006 只負責守門檢查、依 `previousKeys` 改名、upsert。每一筆用 `researchSpec` 指向本庫的 spec。
+
+**本庫改了任何 spec 的 `basic_info.brand` 或 `basic_info.model`，就要在交接裡寫出舊的 brand／model。**
+網站要把舊值加進該筆的 `previousKeys`，否則重跑 006 會多插一列。`id` 與檔名照舊不改。
+
+本檔下面幾段提到「`/migrate-data` 用 `(brand, model)` 比對、要先改 production 那一列」，
+是這個機制建立之前的寫法。現在 `/migrate-data` 只改資料檔，不再產生新的 SQL。
 
 ---
 
@@ -369,6 +381,17 @@ Research 沒有代寫任何其他 repo 的檔案。
 - 新增的 4 台另寫 009 匯入：同意並授權
 - 要不要重寫 006：**使用者選 B，重寫 006 的本體**，讓它對齊目前的 spec，重跑也安全。已轉達 `pedal-website`，排在 009 之後處理。使用者追加：**006 要把規則（設備資料）與程式（upsert 邏輯）拆開**，以後 spec 更正只改資料檔、不必再重寫 006；規劃由 Website 自己決定
 - 修 `sync-equipment.sh`（沒有終端機輸入時直接結束、不印任何訊息）：同意，已轉達 `pedal-website`
+
+**Website 的完成回報（2026-10-13 上午）：**
+
+- **006 已改寫並套用到 production。**資料與程式拆開（Planning `81c7f92`），套用紀錄在 `7017f47`。
+  使用者 10:08 先做了備份。這次只有 RAAT 一列被更新（電壓 9V），其餘 30 列沒變。五段驗證全部通過：總數 31、重複鍵 0
+- 007、008、009 的檔頭已註明「內容已收進資料檔，不要再執行」
+- 新 006 重跑時會更新 `officialUrl`。網站管理介面直接改 production 的欄位，下次重跑 006 會被資料檔蓋回去
+- 資料檔收 31 筆，本庫有 33 份 spec。沒收的是 `rockboard_mod2_v2`、`rockboard_mod3_v2` 兩件配件：
+  配件要不要成為第四種 equipmentType，Planning 還沒決定
+- `sync-equipment.sh` 的修正在 Web-Service PR #63，等使用者 merge
+- 待使用者決定：其餘 23 列要不要逐欄對照 spec；NOTADÜMBLË V2、CHROMA CONSOLE、RAAT 的 subtype 要不要也改用官方說法
 
 ---
 
