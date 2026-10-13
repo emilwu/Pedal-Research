@@ -152,3 +152,16 @@ Herdr 裡的 `pedal-website`（pane `w1:p2`）會隨重啟消失。它的工作�
 7. 報告「待實測確認」清單（Cali76 與 RAAT 電源已確認，其餘待實際彈奏）
 
 規則提醒：改 spec 的 brand／model 時，交接要寫出舊值（`HANDOFF.md` 陷阱 6）。
+
+## Herdr 恢復後（2026-10-13）：使用者對 7 項待決事項的裁定
+
+| # | 事項 | 裁定 | 狀態 |
+|---|---|---|---|
+| 1 | 3 台 subtype 改官方說法 | 改 | 已完成（Research `7b0c79e`）。網站資料檔由 `/migrate-data` 同步 |
+| 2 | 其餘 23 筆逐欄對照 | 對照 | 已交給 `pedal-website` 跑 `/migrate-data`（對照全部 31 筆），等它回報 |
+| 3 | PR #63 | merge | 已 squash merge（`911c6d2`） |
+| 4 | 配件成為第四種 equipmentType | 暫時不要 | — |
+| 5 | `CLAUDE.md` 的 `/migrate-data` 描述 | 更新 | 已完成（`7b0c79e`） |
+| 6 | push Research | push | 已 push 到 `7b0c79e` |
+| 7 | 待實測確認清單 | 放著 | 使用者之後通知再更新 |
+
