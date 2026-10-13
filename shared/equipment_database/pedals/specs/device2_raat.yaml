@@ -77,7 +77,7 @@ price:
 # 核心技術規格
 technical_specs:
   power:
-    voltage: null                # [unknown] Device2 沒寫。[independent] Aion Helios 平台設計是 +9V
+    voltage: "9V DC"             # [user] 2026-10-13 使用者確認。[independent] Aion Helios 平台設計也是 +9V
     polarity: "center negative"  # [user] 2026-10-13 使用者確認「內負外正」。原本的 [inference]（Aion 平台推測中心負）與此一致
     current_draw: null           # [unknown] Device2 與 Aion 都沒有公布耗流。不要套用 Turbo RAT 經銷商頁的 7.8 mA
     max_voltage: null            # [unknown] 可不可以吃 18V 沒有任何資料
@@ -248,7 +248,7 @@ tonal_characteristics:
 # 訊號鏈分析用摘要
 signal_chain_facts:
   category: "distortion（RAT 系，可降到 boost／overdrive）[official tag + inference]"
-  power: "極性中心負 [user，2026-10-13]。電壓與耗流 [unknown]，Aion 平台是 9V [independent]"
+  power: "9V DC、中心負 [user，2026-10-13]。耗流 [unknown]；可否 18V [unknown]"
   bypass: null                   # [unknown]；3PDT 平台推測 true bypass [inference]
   input_impedance: null          # [unknown]
   output_impedance: null         # [unknown]
