@@ -46,7 +46,8 @@ basic_info:
     - "CC"                       # [official] 手冊檔名與 SKU 前綴 CC-106
   full_name: "Hologram Electronics Chroma Console multi-effect pedal"
   type: "multi_effect"           # [official] 官方稱 "flexible multi-effect pedal"
-  subtype: "four_module_stereo_multi_fx"   # [inference] 本庫分類：4 個可重排模組、每模組 5 種效果
+  subtype: "Flexible Multi-Effect Pedal（官方說法）"   # [official] 官方稱 "flexible multi-effect pedal"。2026-10-13 使用者裁定用官方說法
+  subtype_previous_inference: "four_module_stereo_multi_fx"   # 舊的本庫分類值：4 個可重排模組、每模組 5 種效果
   circuit_basis: |
     [official] 數位處理：AD/DA 24-bit 48 kHz（手冊 p.44）。
     官方明說不是對任何特定器材的模擬或致敬：

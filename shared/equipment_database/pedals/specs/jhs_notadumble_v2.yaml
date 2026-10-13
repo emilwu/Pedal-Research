@@ -34,7 +34,8 @@ basic_info:
     - "NOTADUMBLE V2"
   full_name: "JHS Pedals NOTADÜMBLË V2 two-channel Dumble-style DIY kit pedal"
   type: "overdrive"               # [inference] 含 overdrive 與 clean boost 兩個聲道
-  subtype: "dual_channel_dumble_style_overdrive_and_clean_boost"   # [inference]
+  subtype: "Two-Channel DIY Dumble Kit Pedal（官方說法）"   # [official] 取自 description_official。2026-10-13 使用者裁定用官方說法
+  subtype_previous_inference: "dual_channel_dumble_style_overdrive_and_clean_boost"   # 舊的本庫分類值，保留作為歷史
   product_type_official: "DIY KIT"   # [official] 商店 product_type
   description_official: "「the two-channel DIY Dumble kit pedal」"   # [official]
   release_date: "2026-07-16"      # [official] 商店 published_at 2026-07-16T09:59:01-05:00

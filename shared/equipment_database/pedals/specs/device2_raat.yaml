@@ -53,7 +53,8 @@ basic_info:
     - "勞贖"                     # [official] 官方文案對 RAT 系列的暱稱
     - "賀歲鼠贖"                 # [official，2026-01 批次頁] 文案對這一批的暱稱
   type: "distortion"             # [official] 商品 tag「Distortion」
-  subtype: "rat_style_hard_clipping_distortion"   # [inference] RAT 架構：op-amp 增益級後接二極體對地削波
+  subtype: "Distortion（官方標籤；官方文案稱 RAT clone）"   # [official] 商品 tag 與 2026-01 批次頁文案。2026-10-13 使用者裁定用官方說法
+  subtype_previous_inference: "rat_style_hard_clipping_distortion"   # 舊的本庫分類值：op-amp 增益級後接二極體對地削波
   circuit_basis: |
     [user] ProCo RAT 的復刻／改裝版。
     [official，2026-01 批次頁] 官方稱它為 clone 品項，核心是「LM308」類的 IC。

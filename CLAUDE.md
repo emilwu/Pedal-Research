@@ -55,7 +55,7 @@
 | 跑某個模組的 GO/NO-GO 驗證報告 | Pedal-Web-Service-Planning | 在 Pedal-Web-Service 執行 /validate [module]，validator agent 寫入 Planning/development/web/reports/ |
 | 討論或更新產品 scope、要不要做某個功能 | Pedal-Web-Service-Planning | 更新 planning/ 下的規格文件（Source of Truth），比照 07-scope-reduction-2026-09.md 的模式留下變更紀錄 |
 | 建立 AWS infra 資源或寫 IAM policy | Pedal-Web-Service-Planning | 寫入 scripts/aws/ 的部署 shell script 或 IAM policy JSON |
-| 產生設備遷移 SQL 把新資料匯入資料庫 | Pedal-Web-Service-Planning | 在 Pedal-Web-Service 執行 /migrate-data，data-migrator agent 讀取 Pedal-Research 的設備 YAML/MD 產生 idempotent SQL，成品寫入並保管在 Planning/scripts/migrations/ |
+| 把新的或更正過的設備資料匯入資料庫 | Pedal-Web-Service-Planning | 在 Pedal-Web-Service 執行 /migrate-data，data-migrator agent 拿 Pedal-Research 的設備 spec 對照資料檔 Planning/scripts/migrations/equipment-data/equipment.json 並更新它（不再產生新的 SQL）；寫入 production 由 006 的 upsert 負責。改 spec 的 brand／model 時要在交接寫出舊值（見 HANDOFF.md 陷阱 6） |
 | 改網站前端頁面/元件樣式（例如登入頁） | Pedal-Web-Service | 用 /build frontend [module]，改 src/app、src/components 對應頁面/元件 |
 | 加一個網站 API 端點 | Pedal-Web-Service | 用 /build backend [module]，在 src/app/api 新增 route 並更新 Prisma schema/migrations |
 | 同步 production 和 staging 的設備資料 | Pedal-Web-Service | 用 repo 內 scripts/ 下依賴 Prisma client 的 prod↔staging 資料同步腳本 |
@@ -109,7 +109,7 @@
 **本目錄是唯讀的。** Web-Service 的 Agent（architect、frontend-builder、backend-builder、ai-integrator、validator、data-migrator）與 App 的 Agent（architect、app-builder、api-builder、validator）不得寫入本目錄。
 
 本目錄的資料被以下方式引用：
-- `data-migrator` agent 讀取 `shared/equipment_database/` 產生遷移腳本
+- `data-migrator` agent 讀取 `shared/equipment_database/`，更新 Planning 的設備資料檔 `equipment.json`
 - `ai-integrator` agent 讀取 `.claude/knowledge/` 產生 prompt 模板
 - `spec-reader` skill 讀取設備規格作為驗證依據
 

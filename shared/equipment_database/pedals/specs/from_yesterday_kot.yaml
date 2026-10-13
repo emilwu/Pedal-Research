@@ -53,7 +53,7 @@ basic_info:
     - "Device-2 From Yesterday"
   official_product_label: "[official] 產品頁文案寫作『From Yesterday』Dual Channel Overdrive"
   type: "overdrive"              # [official] 「是一款立於 Marshall Bluesbreaker / AnalogMan King of Tone V2 基礎的 Overdrive Pedal」
-  subtype: null                  # [unknown] 官方只寫 Dual Channel Overdrive，內部拓樸未公布，不另立子類
+  subtype: "Dual Channel Overdrive（官方說法，內部拓樸未公布）"   # [official] 2026-10-13 使用者裁定用官方說法；與網站資料檔 equipment.json 一致
   circuit_basis: |
     [official] 「立於 Marshall Bluesbreaker / AnalogMan King of Tone V2 基礎」。
     這是官方自述的設計出發點，**不是** KOT 的複製品聲明，元件值與電路圖未公布。
