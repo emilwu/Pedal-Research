@@ -1,6 +1,6 @@
 # Pedal-Research 交接
 
-**最後更新**：2026-10-03
+**最後更新**：2026-10-13
 
 這份文件記錄「只存在於某次對話、寫不進程式碼」的資訊。從本 repo 開工前先讀這份，
 再讀 `CLAUDE.md`。
@@ -298,6 +298,66 @@ ESP 現行 THROBBER-STD 產品頁的 SPECIAL FEATURES 區塊有官方檔位圖�
 
 **教訓：檔位名稱只畫在圖檔裡。**09-12 讀過同一區塊、逐字掃描整頁，仍然漏掉。
 規則已寫進 `BRAND_NOTES.md` 的 ESP 規則三。
+
+---
+
+## 2026-10-13 做了什麼
+
+### 使用者接了一條新的訊號鏈
+
+使用者提供了實際接起來的訊號鏈：PA-1QG → Cali76 Stacked → From Yesterday → NOTADÜMBLË V2 →
+Arca／RAAT（兩者不會同時開）→ AASB → Chroma Console → FF-1Y → Tone King Imperial MKII（耳機 + 內建 cab sim）。
+沒有 Swiss Things／Buffer++，沒有 FX loop。
+
+- `projects/2025-v3-signal-chain/inventory/pedals.yaml` 新增檔尾 `active_signal_chain` 區塊。**這是現況。**
+  各條目的 `signal_routing` 是 V3 Swiss Things 設計的歷史，不再代表現況
+- 新增 4 台：`origin_cali76_stacked`、`jhs_notadumble_v2`、`device2_raat`、`hologram_chroma_console`
+- 加回 2 台（使用者確認仍持有，V2.0 時只是從設計中移除）：`virtues_arca`、`device2_from_yesterday`
+- 不在新鏈裡的效果器都還持有，`status` 仍是 `active`
+- 訊號鏈文件與分析：`projects/2025-v3-signal-chain/signal_chains/signal_chain_2026-10_imperial_headphone.md` 與同名 `.yaml`
+- 工作紀錄：`projects/2025-v3-signal-chain/WORKLOG_2026-10_imperial_chain.md`
+
+### 兩份舊 spec 描述的是錯的東西，已重寫
+
+| spec | 原本寫的 | 實際 |
+|---|---|---|
+| `shared/equipment_database/pedals/specs/from_yesterday_kot.yaml` | brand `From Yesterday`、model `King of Tone Clone`，內容是 Analog Man KOT 的代理資料 | **Device2 的 From Yesterday**，以 Bluesbreaker 與 KOT V2 為基礎的雙聲道 OD |
+| `shared/equipment_database/pedals/specs/virtues_arca.yaml` | Bluesbreaker 架構、bypass 推測，沒有任何官方來源 | Virtues（日本手工品牌；「橫濱」只見於其 YouTube 頻道自述）自稱 translucent overdrive，官方沒有說是 BB 架構 |
+
+**id 與檔名都沒有改**（沿用 Throbber 的做法）。兩份對應的 report 加了過期橫幅，其餘內容沒有動。
+
+仍有檔案用 KOT 時代的寫法描述 From Yesterday（Red／Yellow 通道等），本次沒有改：
+`shared/equipment_database/PARAMETER_VOCABULARY.md`（引用的 `red_channel` 行號範圍已不存在）、
+三個 skill 檔、`shared/tone_theory/` 兩份、`projects/2025-v3-signal-chain/research/` 與 `analysis/`。
+
+### 跨 repo 待辦：production 的兩列錯誤資料
+
+由 Pedal-Web-Service session 處理，Research 不代寫。
+
+1. **From Yesterday（production id 是 UUID `a1e863d1-…`；`seed-pedal-kot` 只是 SQL 字面值）**：brand／model 是 `From Yesterday`／`King of Tone Clone`。
+   本庫 spec 已改成 `Device2`／`From Yesterday`。**`/migrate-data` 用 `(brand, model)` 比對，
+   不先改 production 那一列就重跑，會多插一列。**`suggestedSettings`（四組編造的 KOT 設定）、
+   `suitableStyles`、價格 $335、`officialUrl` 都要明確覆寫
+2. **Arca（production id 是 UUID `012e2675-…`；`seed-pedal-arca` 只是 SQL 字面值）**：brand／model 不變，但 `description` 寫 Bluesbreaker 架構，
+   `suggestedSettings` 是編造的。重新匯入時要整列覆寫，不要合併
+3. 新增的 4 台還不在 production。要不要匯入由 Planning／Web-Service 決定
+
+**2026-10-13 凌晨：使用者授權 Research 通知網站更正。**Research 用 Herdr 在同一個 tab 開了
+Pedal-Web-Service 的 Claude session（agent 名稱 `pedal-website`，pane `w1:p2`），並傳送更正需求。
+傳送內容要求它：production 寫入前先等使用者早上確認。處理結果以該 session 的回報與 Planning 的 commit 為準，
+Research 沒有代寫任何其他 repo 的檔案。
+
+**`pedal-website` 的回報（2026-10-13 03:43）：已準備好，尚未套用到 production。**
+
+- Planning commit `365868e`、`56522f1`：`scripts/migrations/008_correct_from_yesterday_and_arca.sql`。
+  先把 From Yesterday 改名，再整列取代兩列。本機用 10-03 的 production 備份驗證過，可以重跑
+- 006 檔頭加了警告，SQL 沒改：**套用 008 之後不可再整檔重跑 006**。改名後 KOT 那列會被插回去，
+  Arca 會被覆寫回 Bluesbreaker 的舊內容
+- 套用需要使用者本人執行備份（`scripts/sync-equipment.sh --backup prod` 會互動式問 RDS 密碼），
+  再跑 008。步驟寫在該 session 的回報裡
+- 等使用者決定的三件事：From Yesterday 的 `specs.subtype` 要寫官方說法還是自訂分類值；
+  新增的 4 台要不要另寫 009 匯入；要不要重寫 006 的本體
+- 兩張 production 圖片都正確，不需要重新產生
 
 ---
 
