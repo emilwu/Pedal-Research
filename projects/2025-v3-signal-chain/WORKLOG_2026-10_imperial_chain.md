@@ -128,3 +128,27 @@ RAAT 與 ProCo RAT 的差異（使用者口述）：
 
 報告文末新增「2026-10-13 使用者確認」一節。
 
+
+## 收尾狀態（2026-10-13 上午，Herdr 重啟前）
+
+**全部完成，沒有進行中的工作。**三個 repo 的工作目錄都乾淨。
+
+| Repo | 狀態 |
+|---|---|
+| Pedal-Research | 9 個 commit 在本機 main，**沒有 push**（使用者沒有要求 push） |
+| Pedal-Web-Service-Planning | 008、009、改寫後的 006 都已套用到 production 並 push（最新 `7017f47`）。production 共 31 筆 |
+| Pedal-Web-Service | 已 push（最新 `c1fc08f`）。`sync-equipment.sh` 修正在 PR #63，等使用者 merge |
+
+Herdr 裡的 `pedal-website`（pane `w1:p2`）會隨重啟消失。它的工作都已 commit，不需要恢復。
+
+**等使用者決定（Resume 後從這裡接）：**
+
+1. NOTADÜMBLË V2、CHROMA CONSOLE、RAAT 的 subtype 要不要改用官方說法（From Yesterday 已改）。改的話：Research 改 spec，網站改資料檔 `equipment.json` 再重跑 006
+2. 資料檔裡其餘 23 筆要不要逐欄對照 spec
+3. merge Web-Service PR #63
+4. 兩件 RockBoard 配件是否成為第四種 equipmentType（Planning 決定）
+5. `CLAUDE.md` 重導表仍寫「`/migrate-data` 產生遷移 SQL」，現在它只改資料檔。是否更新由使用者決定
+6. 是否 push Pedal-Research 的 9 個 commit
+7. 報告「待實測確認」清單（Cali76 與 RAAT 電源已確認，其餘待實際彈奏）
+
+規則提醒：改 spec 的 brand／model 時，交接要寫出舊值（`HANDOFF.md` 陷阱 6）。
