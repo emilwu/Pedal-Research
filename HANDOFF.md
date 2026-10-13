@@ -340,6 +340,7 @@ Website 套用後（Planning `9dd010d`、`9711d7d`）回報 6 件請 Research �
 其中 4 份 spec 依官方來源改正：Imperial MKII 電源（**9–12V、≥ 9W、附不接地的 12V 變壓器**，原本寫 9–18V）、
 Colosseum（200mA、10kΩ）、Sweet Honey（6 mA、390kΩ／25kΩ）、Source Code（mechanical true bypass）。
 Imperial 的改正已同步到訊號鏈報告的電源表與「待實測確認」第 16 條。
+這 6 件已同步進網站資料檔並套用到 production（Planning `71dbd23`、`40e490d`，6 筆 16 項）。**逐欄對照報告的全部事項已結案。**
 
 ### 兩份舊 spec 描述的是錯的東西，已重寫
 

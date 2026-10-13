@@ -176,3 +176,4 @@ Herdr 裡的 `pedal-website`（pane `w1:p2`）會隨重啟消失。它的工作�
 - 第四節（使用者個人資訊 24 項）不在這次範圍
 - Website 已套用（Planning `9dd010d`、`9711d7d`）：24 筆 63 項修改，31 筆的 suggestedSettings／suitableStyles 全部清成 []
 - Website 回報 6 件請 Research 確認：1 JC-22 pedalPairingNotes 的 Sag → 刪；2 Thinline cons → 依 spec 分開寫「Ash 琴身對濕度敏感」「Semi-hollow 結構較脆弱」；3–6（Imperial 電源、Colosseum 電流／阻抗、Sweet Honey 手冊、Source Code bypass）→ workflow `wf_49e5fe73-30d` 查官方來源修 spec
+- Research `adcf4ab` 的 6 件結論已套用到 production（Planning `71dbd23`、`40e490d`）。逐欄對照報告全部結案
