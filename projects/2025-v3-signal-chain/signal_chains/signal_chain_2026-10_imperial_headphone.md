@@ -2,7 +2,7 @@
 
 **日期**：2026-10-13
 **狀態**：active — 使用者實際接起來的訊號鏈（第一版）
-**更新**：2026-10-13 凌晨，依使用者回覆更新五點（見文末「2026-10-13 使用者確認」）
+**更新**：2026-10-13 凌晨，依使用者回覆更新六點（見文末「2026-10-13 使用者確認」）
 **鏈定義**：`signal_chain_2026-10_imperial_headphone.yaml`（同目錄）
 
 ## 結論摘要
@@ -13,7 +13,7 @@
 
 **最重要的三個行動**
 
-1. 接電前先確認 RAAT 的電壓與極性，再決定電源供應器。Cali76 已確認是現行款（只能 9V、200 mA）[user]。
+1. 接電前先確認 RAAT 的電壓（極性已確認是中心負 [user]），再決定電源供應器。Cali76 已確認是現行款（只能 9V、200 mA）[user]。
 2. PA-1QG 每把琴存一個 preset，把電平拉近，讓 Cali76 的設定能跨琴共用。踏板 drive 開著時，Imperial 用 Rhythm 聲道當平台。
 3. 分配殘響角色：日常殘響交給 Imperial 內建 reverb，AASB 留給 shimmer。要保留 Chroma 與 FF-1Y 的立體聲，可把 7–9 移到 Imperial 的 FX loop（使用者確認 Send／Return 與輸出都是立體聲、走四線法沒問題 [user]，見「可選的調整」第 4 項）。
 
@@ -234,7 +234,7 @@ inventory 沒有記錄電源供應器，供電方案未定。
 | 3 | From Yesterday | 9V，中心負 | 6 mA | [independent，僅 RockBoard]；可否 18V [unknown] |
 | 4 | NOTADÜMBLË V2 | **9V 上限**，中心負 | 25 mA | [official]；超過 9V 保固失效 |
 | 5 | Arca | 9V，中心負 | [unknown]（官方「確認中」） | [official] |
-| 6 | RAAT | [unknown] | [unknown] | Aion 平台為 9V [independent]；極性推測中心負 [inference] |
+| 6 | RAAT | 電壓 [unknown]；中心負 [user] | [unknown] | Aion 平台為 9V [independent]；極性 2026-10-13 使用者確認 |
 | 7 | AASB | **只能 9V** | 150 mA | |
 | 8 | Chroma Console | 9V，中心負 | [unknown] | 供應器至少 500 mA 連續 [official]；這是供應器下限，不是耗電量 |
 | 9 | FF-1Y | 9V，中心負 | 350 mA | |
@@ -315,7 +315,7 @@ inventory 沒有記錄電源供應器，供電方案未定。
 依影響程度排序。
 
 1. ~~Cali76 實機 DC 孔標示~~ **已確認**：2025 現行款 [user]。
-2. **RAAT 的電源電壓與極性**。接電前必須確認。
+2. **RAAT 的電源電壓**。極性已確認是中心負（內負外正）[user]。電壓接電前必須確認。
 3. **Cali76 最輕的用法對 Jazz 是否夠細緻**，還是要換 Empress MKII。
 4. **Chroma INPUT L → OUTPUT L**：效果開啟時輸出是左、右或混合；開關前後音量是否一致；出廠 bypass 模式。
 5. **FF-1Y 只接 A IN／A OUT**：STEREO 模式聽不聽得到 B；SERIES 模式從哪個輸出出來。
@@ -389,7 +389,7 @@ inventory 沒有記錄電源供應器，供電方案未定。
 
 ## 2026-10-13 使用者確認
 
-使用者在 2026-10-13 凌晨回覆，以下五點已寫進本報告與相關 spec：
+使用者在 2026-10-13 凌晨回覆，以下六點已寫進本報告與相關 spec：
 
 | # | 使用者回覆 | 影響 |
 |---|---|---|
@@ -398,4 +398,5 @@ inventory 沒有記錄電源供應器，供電方案未定。
 | 3 | Imperial MKII 輸入單聲道，Send／Return 與輸出是立體聲，走四線法沒問題 | 「可選的調整」第 4 項（7–9 移到 FX loop）可行。spec 寫 send 是 mono，與此不一致，以使用者為準並在 spec 註記 |
 | 4 | Chroma Console 的 Character 模組基本不用；破音交給 Arca、RAAT、NOTADÜMBLË | B-4「Chroma drive 類模組破音殘響」與 B-6 的 overdrive／fuzz 重疊不再成立 |
 | 5 | AASB 疊 Chroma 時，Chroma 只用 Texture。單用 Chroma（不開 AASB）時才可能用 Movement、Diffusion、Texture 三個模組；Character 一律不用 | B-4「SPACE 疊 AASB」不再成立；B-6 reverb 重疊降為輕度。B-4 剩下的實質問題只有 FF-1Y 重複殘響 |
+| 6 | RAAT 電源極性是內負外正（中心負） | B-7 電源表與「待實測確認」第 2 條已更新；電壓仍未確認 |
 

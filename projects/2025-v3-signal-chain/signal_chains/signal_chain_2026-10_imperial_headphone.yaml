@@ -176,7 +176,7 @@ power_summary:
     - {position: 3, pedal_id: "device2_from_yesterday", voltage: "9V DC，中心負", current: "6 mA", evidence: "[independent，僅 RockBoard]", note: "可否 18V [unknown]"}
     - {position: 4, pedal_id: "jhs_notadumble_v2", voltage: "9V 上限，中心負", current: "25 mA", evidence: "[official]", note: "超過 9V 保固失效"}
     - {position: 5, pedal_id: "virtues_arca", voltage: "9V DC，中心負，2.1 mm", current: "unknown（官方「確認中」）", evidence: "[official]／[unknown]", note: "可否 18V [unknown]"}
-    - {position: 6, pedal_id: "device2_raat", voltage: "unknown（Aion 平台為 9V [independent]）", current: "unknown", evidence: "[unknown]", note: "極性推測中心負 [inference]；接電前先確認"}
+    - {position: 6, pedal_id: "device2_raat", voltage: "unknown（Aion 平台為 9V [independent]）", current: "unknown", evidence: "[unknown]／[user]", note: "極性中心負（內負外正）[user，2026-10-13]；電壓接電前先確認"}
     - {position: 7, pedal_id: "aasb", voltage: "只能 9V DC", current: "150 mA", evidence: "spec 未標證據等級", note: ""}
     - {position: 8, pedal_id: "hologram_chroma_console", voltage: "9V DC，中心負", current: "unknown（供應器下限 500 mA 連續）", evidence: "[official]", note: "500 mA 是供應器要求，不是耗電量"}
     - {position: 9, pedal_id: "ff1y", voltage: "9V DC，中心負", current: "350 mA", evidence: "spec 未標證據等級", note: ""}
@@ -203,3 +203,4 @@ user_confirmations_2026_10_13:
   - "Imperial MKII 輸入單聲道；Send／Return 與輸出是立體聲；走四線法（7–9 移到 FX loop）沒問題。基準接法仍是全部進前面輸入，FX loop 是已確認可行的替代接法"
   - "Chroma Console 的 Character 模組基本不用；破音交給 Arca、RAAT、NOTADÜMBLË"
   - "AASB 疊 Chroma 時，Chroma 只用 Texture；單用 Chroma（不開 AASB）時才可能用 Movement、Diffusion、Texture；Character 一律不用"
+  - "RAAT 電源極性是內負外正（中心負）"
