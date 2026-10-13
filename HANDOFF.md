@@ -329,6 +329,15 @@ Arca／RAAT（兩者不會同時開）→ AASB → Chroma Console → FF-1Y → 
 - 訊號鏈文件與分析：`projects/2025-v3-signal-chain/signal_chains/signal_chain_2026-10_imperial_headphone.md` 與同名 `.yaml`
 - 工作紀錄：`projects/2025-v3-signal-chain/WORKLOG_2026-10_imperial_chain.md`
 
+### 回應網站的逐欄對照報告（2026-10-13）
+
+網站把資料檔 `equipment.json` 的 31 筆逐欄對照本庫 spec，列出 214 項「資料檔有、spec 沒有」的值。
+本庫的回應在 `shared/equipment_database/AUDIT_RESPONSE_2026-10-13.md`：刪除 170、保留 20、補進 spec 23、修正 spec 1。
+**資料檔的值一律不算證據**，補進 spec 的 23 項都有本次抓到的官方來源或使用者確認。
+`suggestedSettings` 與 `suitableStyles` 依使用者裁定一律刪除。Colosseum 的 Clip Blender 方向已依官方手冊寫清楚。
+
+待查：Imperial MKII 官方手冊寫附 Universal 12V 電源，`tone_king_imperial_mkii.yaml` 寫 9–18V DC（預估），尚未核對。
+
 ### 兩份舊 spec 描述的是錯的東西，已重寫
 
 | spec | 原本寫的 | 實際 |

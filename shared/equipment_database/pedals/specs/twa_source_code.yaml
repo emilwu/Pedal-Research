@@ -3,7 +3,7 @@
 # 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
 
 version: 1.0
-last_updated: 2025-12-30
+last_updated: 2026-10-13
 
 # 基本資訊
 basic_info:
@@ -17,6 +17,7 @@ basic_info:
   design_approach: "TS808 的終極進化版本"
   country: "USA"
   manufacturing: "Handmade in USA"
+  official_url: "https://totallywyckedaudio.com/products/sc-01-source-code-overdrive"   # [official] 2026-10-13 抓取，HTTP 200，商品標題 "Source Code overdrive designed by Susumu Tamura"，標價 USD 299.00
 
 # 價格資訊
 price:
@@ -147,7 +148,7 @@ signal_chain:
 
 # 參考資料來源
 sources:
-  - "TWA (Totally Wycked Audio) 官方網站"
+  - "TWA (Totally Wycked Audio) 官方網站：https://totallywyckedaudio.com/products/sc-01-source-code-overdrive（2026-10-13 抓取）"
   - "Susumu Tamura 設計資料"
   - "Premier Guitar"
   - "Reverb"

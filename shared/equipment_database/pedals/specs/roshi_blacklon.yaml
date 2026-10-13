@@ -1,9 +1,15 @@
 # Roshi Pedals Blacklon Amp-in-a-Box
 # 效果器詳細技術資料
 # 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
+#
+# 2026-10-13 依 Planning AUDIT-2026-10-13.md 第三節（#28）補官方證據。
+# 證據等級：[official] RoShi 官方產品頁（見 sources）；其餘未標註的舊內容維持原狀。
+# 本次只補了 bypass、AMP 系列第二款、JC 用途的官方原文與官方網址。
+# 網站資料檔裡的 Deluxe Reverb／Princeton Reverb 等機型清單、「無法修復」、
+# 「不適合現場快速切換」、review cons 都查無依據，已請網站刪除，不要補回來。
 
-version: 1.0
-last_updated: 2025-12-30
+version: 1.1
+last_updated: 2026-10-13
 
 # 基本資訊
 basic_info:
@@ -15,6 +21,7 @@ basic_info:
   subtype: "amp_simulator"
   amp_simulation: "Fender Blackface AB763"
   design_philosophy: "如同腳下有台音箱"
+  series_position: "[official] AMP 系列第二款，前一款是 Plexition（「Plexitionに続くAMPシリーズの第2弾。」）"
   country: "Japan"
 
 # 價格資訊
@@ -30,6 +37,8 @@ technical_specs:
     voltage: "DC9V"
     max_voltage: "10V"
     warning: "不可超過 10V - 會損壞"
+
+  bypass: "True Bypass"  # [official] 「スイッチング方式：トゥルーバイパス」
 
   controls:
     - name: "Volume"
@@ -118,6 +127,7 @@ usage_recommendations:
 
   special_use:
     jc_amp: "JC 等電晶體音箱也能獲得真空管感"
+    jc_amp_official: "[official] 「JCなどのトランジスタアンプでも真空管アンプのようなコンプレッション感や歪みの質感を得ることができる」"
 
   signal_chain_position: "Signal chain 前段"
 
@@ -167,6 +177,7 @@ signal_chain:
 # 參考資料來源
 sources:
   - "RoShi Pedals 官方網站"
+  - "https://roshipedals.com/en/collections/products/products/blacklon （官方產品頁，2026-10-13 取得）"
   - "日本效果器評測"
 
 data_collected: 2025-12-13

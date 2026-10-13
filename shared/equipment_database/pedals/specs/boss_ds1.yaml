@@ -42,6 +42,11 @@ basic_info:
     （TA7136AP → BA728N → M5223AL → NJM2904L）。兩種說法並存，本庫不判斷。
   release_year: 1978             # [official]
   status: "in_production"        # [official] 2026-10-01 美、全球、日本三個官網都在現行導覽裡
+  production_note: |
+    [official] BOSS 文章：1978 年推出後「has remained in the lineup ever since」。
+    "benchmark" 只出現在文章標題「All About the DS-1: The Benchmark BOSS Distortion」，內文沒有再說。
+    [inference] 標題指的是 BOSS 自家產品線的基準失真，不是整個 hard-clipping 類別的基準。2026-10-13 查證。
+    BOSS 沒有談零件或維修資源。
   made_in: null                  # [unknown] BOSS 未公布。早期日本製，之後台灣，現行推測馬來西亞 [inference]
 
 # 價格資訊

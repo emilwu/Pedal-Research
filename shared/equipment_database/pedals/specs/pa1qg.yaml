@@ -16,6 +16,7 @@ basic_info:
   country: "Japan"
   release_year: 2018
   development_time: "10+年研發"
+  debut: "[official] NAMM Show 2018 發表（Free The Tone 官方 News：「We introduced a new product, the Programmable Analog 10 band EQ PA-1QG/B」）"
 
 # 價格資訊
 price:
@@ -199,6 +200,7 @@ sources:
   - "Premier Guitar"
   - "MusicRadar"
   - "Perfect Circuit"
+  - "https://freethetone.com/en/article/news_copy.html（Free The Tone 官方 News，NAMM 2018 發表；2026-10-13 查證）"
 
 data_collected: 2025-12-13
 data_reliability: "高 (多方驗證)"

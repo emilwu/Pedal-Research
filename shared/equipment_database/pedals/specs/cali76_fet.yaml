@@ -40,6 +40,8 @@ technical_specs:
   compression:
     type: "FET (1176風格)"
     characteristic: "全類比 FET 壓縮"
+    inspired_by: "Urei 1176 錄音室壓縮器 [official]"
+    # 2026-10-13 補：官方產品頁與手冊 V2.2 p.6 原文「inspired by the world-famous Urei® 1176® studio compressor」。
     threshold: "固定閾值設計"
     attack: "0.2ms ~ 4.8ms，全順時針為最快（反向旋鈕）"
     release: "69.5ms ~ 398ms，全順時針為最快"

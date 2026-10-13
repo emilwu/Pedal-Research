@@ -43,6 +43,7 @@ technical_specs:
     weight: "26.46 lbs (12 kg)"
 
   power_consumption: "43W"
+  power_supply: "AC 電源（機身 AC IN jack）"  # [official] Roland JC-22 規格頁 Connectors 欄列 AC IN jack、Accessories 列 Power cord；Power Consumption 43 W（2026-10-13 查證 https://www.roland.com/us/products/jc-22/specs/）
 
 # 控制面板
 controls:
@@ -315,7 +316,7 @@ blacklon_pairing:
 # 適合搭配的吉他
 guitar_pairing:
   excellent:
-    - "Throbber-CTM (jazz/neo soul 完美配對)"
+    - "THROBBER-STD (jazz/neo soul 完美配對)"  # [user] 實機型號為 ESP THROBBER-STD（2026-09-12 使用者確認；舊稱 Throbber-CTM，id esp_throbber_ctm 未改）
     - "Greco TE-500 (warm Tele + clean amp)"
     - "Fender Thinline (classic Tele + JC chorus)"
   good:
@@ -519,6 +520,7 @@ buffer_plus_plus_pairing:
 # 參考資料來源
 sources:
   - "Roland 官方網站 (https://www.roland.com/us/products/jc-22/)"
+  - "Roland 官方規格頁 (https://www.roland.com/us/products/jc-22/specs/)"
   - "JC-22 產品手冊 (https://static.roland.com/assets/media/pdf/JC-22_eng02_W.pdf)"
   - "Sweetwater JC-22 規格頁面 (https://www.sweetwater.com/store/detail/JC-22--roland-jc-22-jazz-chorus-30-watt-2x6.5-inch-stereo-combo-amp)"
   - "Jazz Chorus series 歷史資料"

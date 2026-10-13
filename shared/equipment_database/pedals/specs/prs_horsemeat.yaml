@@ -3,7 +3,7 @@
 # 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
 
 version: 1.0
-last_updated: 2025-12-30
+last_updated: 2026-10-13
 
 # 基本資訊
 basic_info:
@@ -17,6 +17,7 @@ basic_info:
   design_approach: "從零設計 (非 clone), Klon-inspired but original"
   country: "USA"
   manufacturing: "Designed and Made in Maryland, USA"
+  official_url: "https://prsguitars.com/pedals/model/horsemeat"  # [official] 2026-10-13 確認：PRS 官方產品頁（直連回 403 Cloudflare 擋爬蟲，內容以 Wayback 2026-07-09 快照核對，頁名 "Horsemeat / Transparent Overdrive"）
 
 # 價格資訊
 price:
@@ -161,6 +162,7 @@ signal_chain:
 # 參考資料來源
 sources:
   - "PRS 官方網站"
+  - "https://prsguitars.com/pedals/model/horsemeat (2026-10-13 經 Wayback 快照 20260709021136 核對)"
   - "Premier Guitar"
   - "Reverb"
   - "Equipboard"

@@ -1,9 +1,16 @@
 # Cornerstone Colosseum
 # 效果器詳細技術資料
 # 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
+#
+# 2026-10-13 依網站 AUDIT-2026-10-13 第二、三節處理。證據等級沿用 jhs_fumble.yaml：
+# [official] Cornerstone 官方產品頁或官方使用手冊；[dealer] 經銷商；[independent] 媒體或買家；
+# [inference] 本庫推論；[unknown] 查過但官方沒有公布。
+# 官方產品頁：https://www.cornerstonemusicgear.com/colosseum
+# 官方手冊 PDF：https://www.cornerstonemusicgear.com/wp-content/uploads/2026/02/cs_colosseum-manuali.pdf
+# 未加標籤的舊欄位是 2025-12 建檔時寫的，這次沒有逐欄重驗。
 
-version: 1.0
-last_updated: 2026-01-03
+version: 1.1
+last_updated: 2026-10-13
 
 # 基本資訊
 basic_info:
@@ -15,6 +22,10 @@ basic_info:
   subtype: "dual_channel"
   circuit_basis: "Bluesbreaker + Klon combination"
   design_approach: "Community-driven design combining BB and Klon"
+  community_design:
+    - "[official] 官方產品頁標題：「The First Community overdrive pedal」"
+    - "[official] 「Designed with direct input from the Cornerstone community」（產品頁）；手冊：「designed with input from the Cornerstone Community」"
+    - "[unknown] 官方產品頁與手冊都沒有寫「投票（poll／vote）」。「polls taken among Cornerstone followers」只見於經銷商文案，本次未在官方來源查到"
 
 # 價格資訊
 price:
@@ -25,6 +36,8 @@ price:
 
 # 核心技術規格
 technical_specs:
+  # ⚠️ 2026-10-13 待決：官方手冊寫 Current Consumption 200mA、Output Impedance 10k，
+  #    與下方 current 150mA、impedance.output 50kΩ 不同。這兩項不在 AUDIT 第三節範圍，本次只標註、未改值。
   power:
     voltage: "9V DC"
     current: "150mA"
@@ -53,14 +66,14 @@ technical_specs:
       - name: "Tone"
         function: "Klon 通道音色控制"
       - name: "Clip Blender"
-        function: "混合 Germanium 與 Silicon clipping"
+        function: "混合 Germanium 與 Silicon clipping；逆時針到底＝純 Germanium，順時針到底＝純 Silicon [official]"
 
     switches:
       - name: "Order Toggle"
         function: "切換兩通道順序 (BB→Klon 或 Klon→BB)"
 
   special_features:
-    - "4 Rear Jacks (可獨立接入 looper 或其他效果器)"
+    - "4 Rear Jacks：每一側（BB／Klon）可各自接入 looper，或在兩側之間插入其他效果器 [official]"
     - "Order Toggle (切換通道順序)"
     - "Clean Control (BB side)"
     - "Clip Blender (Klon side)"
@@ -117,6 +130,7 @@ tonal_characteristics:
       germanium: "Hand-selected 1N34A (原版 Klon)"
       silicon: "新增 Silicon diodes"
       effect: "提供從 Germanium 到 Silicon 的連續變化"
+      knob_direction: "逆時針轉到底（面板左側 Ge 標示）＝純 Germanium（原版 Klon 1N34A）；順時針轉到底（面板右側 Si 標示）＝純 Silicon；中間連續混合 [official]（官方手冊 PDF 第 1 頁面板圖與實機照片）"
 
 # Clean Control (BB Side)
 clean_control:
@@ -129,16 +143,22 @@ clean_control:
 clip_blender:
   name: "CLIP BLENDER"
   description: "混合兩種 clipping 特性"
+  # 2026-10-13：舊版寫 germanium_mode「順時針最小」、silicon_mode「順時針最大」（兩種讀法都通，已改寫）。
+  knob_direction: "逆時針轉到底（面板左側 Ge 標示）＝純 Germanium（原版 Klon 1N34A）；順時針轉到底（面板右側 Si 標示）＝純 Silicon；中間連續混合 [official]"
+  knob_direction_source: "[official] 官方手冊 PDF 第 1 頁：Builder's Settings 面板圖與實機照片，CLIP 旋鈕左側印 Ge、右側印 Si。手冊第 2 頁的電路示意圖把 SILICON 畫在左、GERMANIUM 畫在右，那是訊號流向圖，不代表旋鈕方向；方向以面板絲印為準。產品頁沒有寫方向"
+  official_instruction: "[official] 手冊：「Start with clipping all the way over to the Germanium side. Sweep towards silicon while playing to find your sweet spot.」"
   germanium_mode:
-    setting: "順時針最小"
+    setting: "逆時針轉到底（面板左側 Ge）[official]"
     effect: "Pure Germanium clipping (原版 Klon)"
     tone: "溫暖、有機"
   silicon_mode:
-    setting: "順時針最大"
+    setting: "順時針轉到底（面板右側 Si）[official]"
     effect: "Pure Silicon clipping"
     tone: "更清晰、更多 headroom"
+    official_note: "[official] 手冊：「A pair of silicon diodes have been selected to offer a harder clipping texture but still retains the core Klon sound.」"
   blend:
     description: "可連續調整兩種 clipping 比例"
+    official_wording: "[official] 產品頁：「blend between the classic Klon sound and a fresh new flavor」；手冊：「going from full Germanium to full Silicon, an entirely new flavor of Klon ... while still being able to harness the sound of the original」"
 
 # Order Toggle
 order_toggle:
@@ -151,6 +171,7 @@ order_toggle:
     setting: "Klon → BB"
     character: "Klon 基礎音色 + BB 開放感"
   note: "兩種順序音色差異明顯"
+  official_wording: "[official] 產品頁：「A toggle switch easily changes the order of the two channels, unlocking even more sonic possibilities.」官方沒有描述兩種順序各自的音色（例如偏 Lead 或偏 Rhythm）"
 
 # 使用建議
 usage_recommendations:
@@ -169,7 +190,8 @@ usage_recommendations:
     description: "可透過 Order Toggle 切換疊加順序"
 
   integration:
-    four_jacks: "4 Rear Jacks 可獨立接入 looper 或插入其他效果器"
+    four_jacks: "4 Rear Jacks 讓每一側（BB／Klon）各自接入 looper，或在兩側之間插入其他效果器 [official]"
+    four_jacks_official: "[official] 產品頁：「Four rear jacks allow you to integrate each side independently with your favorite looper or insert other pedals in between.」手冊：「4 jacks to connect each side of the pedal with your favorite looper. You can use the sides independently or put any other pedal in between.」"
 
   features:
     - "Community-driven design"
@@ -228,6 +250,8 @@ signal_chain:
 # 參考資料來源
 sources:
   - "Cornerstone 官方網站"
+  - "[official] https://www.cornerstonemusicgear.com/colosseum （2026-10-13 讀取）"
+  - "[official] https://www.cornerstonemusicgear.com/wp-content/uploads/2026/02/cs_colosseum-manuali.pdf （2026-10-13 讀取；Clip Blender 方向依第 1 頁面板圖與實機照片的 Ge／Si 絲印）"
   - "Community feedback"
   - "Premier Guitar"
   - "Reverb"

@@ -3,13 +3,14 @@
 # 資料來源: projects/2025-v3-signal-chain/research/overdrive_pedals_technical_data.md
 
 version: 1.0
-last_updated: 2025-12-30
+last_updated: 2026-10-13
 
 # 基本資訊
 basic_info:
   id: "morning_glory"
   brand: "JHS Pedals"
   model: "Morning Glory V3"
+  brand_origin: "美國 Kansas City"   # [official] 2026-10-13 官方網站頁尾「Guitar Pedals made in Kansas City, USA」
   full_name: "JHS Pedals Morning Glory V3"
   type: "overdrive"
   subtype: "bluesbreaker"
@@ -164,6 +165,7 @@ signal_chain:
 # 參考資料來源
 sources:
   - "JHS Pedals 官方網站"
+  - "https://jhspedals.info/products/morning-glory（2026-10-13 讀取；頁面現為 V4，頁尾載明 made in Kansas City, USA）"
   - "Premier Guitar"
   - "Reverb"
   - "Josh Scott (JHS Pedals)"

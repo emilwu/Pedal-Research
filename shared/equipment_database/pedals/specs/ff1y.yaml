@@ -63,6 +63,15 @@ innovative_features:
       - "透過隨機相位變化創造調變效果"
       - "獨特的調變音色特性"
       - "創造豐富的空間感"
+    # 2026-10-13 補：網站稽核（AUDIT-2026-10-13 #16）比對時，由官方產品頁重新抓取確認。
+    vs_lfo: >-
+      [official] 一般調變電路的 LFO 相位以預設週期規律變化；FF-1Y 則是訊號跨過某個衰減位準時相位隨機變化。
+      官方原文："In general, the phase of a low frequency oscillator (LFO) used in these modulation
+      circuits changes regularly at a preset cycle. However in our 'FUTURE FACTORY,' we succeeded in
+      creating a new modulation sound with a unique method in which signal's phase changes at random
+      when the signal crosses a certain attenuation level."
+      官方沒有說「聽起來自然而不機械」這類主觀聽感。
+      來源：https://www.freethetone.com/en/products/detail43/
 
   dual_delay_architecture:
     description: "雙延遲模組設計"
@@ -429,11 +438,11 @@ comparison_with_ft1y:
 sources:
   - "官方 Owner's Manual Ver 1.3 (EN)（第一順位）- https://www.freethetone.com/upload/en/file/manual/effects/ff1y/FF-1Y_Manual_en.pdf"
   - "官方 Owner's Manual Ver 1.3 (JP) - 交叉比對用"
-  - "Free the Tone 官方網站: https://www.freethetone.com/en/products/detail43/"
+  - "Free the Tone 官方網站: https://www.freethetone.com/en/products/detail43/（2026-10-13 重新抓取，確認 RFPM 與 LFO 的對比原文）"
   - "產品規格頁面"
 
 data_collected: 2026-01-10
-data_updated: 2026-09-11
+data_updated: 2026-10-13
 data_reliability: "高 (官方手冊 Ver 1.3)"
 data_note: |
   2026-09-11 依官方手冊補齊 controls 區塊。原本的「待手冊確認」已解除。

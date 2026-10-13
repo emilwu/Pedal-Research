@@ -14,6 +14,8 @@ basic_info:
   type: "overdrive"
   subtype: "transparent_warm"
   circuit_basis: "Honey Bee circuit evolution"
+  # 2026-10-13 補（網站稽核 AUDIT-2026-10-13 #24）：官方手冊末頁署名 "Mad Professor Amplification Ltd / Finland"
+  country: "Finland"  # [official] 官方 SHOD DLX Owner's Manual
 
 # 價格資訊
 price:
@@ -37,8 +39,13 @@ technical_specs:
       function: "調整動態響應與整體 EQ"
     - name: "Treble"
       function: "後級高頻控制 (post-gain)"
+      # 2026-10-13 補（網站稽核 #24）：官方手冊原文
+      official_text: "[official] TREBLE, post distortion, it cuts and/or boosts the treble."
     - name: "Bass"
       function: "前級低頻控制 (pre-gain)"
+      # 2026-10-13 補（網站稽核 #24）：官方手冊原文，Bass 在失真之前，決定低頻與低中頻如何被失真
+      official_text: "[official] BASS, pre distortion, it sets how the bass and low mids are distorted."
+      effect_on_distortion: "[official] 會改變低頻與低中頻的失真方式"
 
   bypass: "True Bypass"
 
@@ -50,6 +57,7 @@ tonal_characteristics:
 
   frequency:
     low: "可調整 (Bass 控制在 pre-gain)"
+    low_note: "[official] Bass 在失真之前，決定低頻與低中頻如何被失真（見 controls.Bass.official_text）"
     mid: "溫暖、飽滿"
     high: "可調整 (Treble 控制在 post-gain)"
 
@@ -154,9 +162,17 @@ signal_chain:
 # 參考資料來源
 sources:
   - "Mad Professor 官方網站"
+  - "官方 SHOD DLX Owner's Manual（2026-10-13 抓取，確認 Bass／Treble 位置與國別）: https://mpamp.com/files/manuals/Sweet%20Honey%20Overdrive%20Deluxe%20manual.pdf"
   - "產品手冊"
   - "Premier Guitar"
   - "Reverb"
 
 data_collected: 2025-12-13
+data_updated: 2026-10-13
+# ⚠️ 2026-10-13 讀官方手冊時發現下列欄位與本檔不一致，本次稽核範圍外，尚未修改，待另行處理：
+#   - 耗流：官方 "Current consumption at 9VDC: 6 mA"；本檔 technical_specs.power.current 寫 5mA
+#   - 電壓：官方 "Supply voltage range: 7.5 to 18VDC"；本檔只寫 9V
+#   - 阻抗：官方 "Input impedance: 390K Ohms"、"Output impedance: 25K Ohms"；本檔寫 ~1MΩ／~10-50kΩ (預估)
+#   - Focus 起點：官方 "A good starting point is 11 o'clock"；本檔 recommended_settings.general.focus 寫 1-2 點鐘
+#   - 手冊未提 Björn Juhl、Bias 類比、任何藝人名稱
 data_reliability: "高 (多方驗證)"

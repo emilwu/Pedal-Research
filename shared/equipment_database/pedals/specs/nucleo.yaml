@@ -1,9 +1,12 @@
 # Cornerstone Nucleo Stereo Reverb
 # 效果器詳細技術資料
 # 資料來源: projects/2025-v3-signal-chain/research/compressor_eq_spatial_effects_technical_data.md
+#
+# 2026-10-13：依網站 AUDIT-2026-10-13（#10 Nucleo）補兩項官方說明書內容（bypass、TONE 方向）。
+# 證據等級：[official] Cornerstone 官方說明書 NUCLEO-MANUAL-V4.pdf；未標記的舊內容維持原狀。
 
 version: 1.0
-last_updated: 2025-12-30
+last_updated: 2026-10-13
 
 # 基本資訊
 basic_info:
@@ -56,6 +59,15 @@ technical_specs:
     midi: 128
 
   decay_time: "最長90秒 (epic decay)"
+
+  # [official] 說明書 p.25-26「BYPASS MODES」，於 Configuration Mode 設定
+  bypass:
+    modes:
+      - name: "True Bypass"
+        description: "[official] 關閉時完全斷開效果電路，殘響尾音不保留；只能在 Mono In / Mono Out 路由下使用"
+      - name: "Buffered Bypass"
+        description: "[official] 關閉後殘響尾音自然衰減（trails）；經 buffer 輸出，可推長線材"
+    dry_signal: "[official] bypass 時的乾訊號可為 analog 或 digital，取決於所選 Dry Mode"
 
   size:
     dimensions: "94x119x42mm"
@@ -116,6 +128,7 @@ controls:
     function: "殘響長度/Pre-Delay"
   - name: "TONE/DIFF"
     function: "音色/Diffusion"
+    note: "[official] TONE 控制殘響的頻率內容：逆時針較暗、順時針較亮（說明書 p.15）"
   - name: "FREEZE-PITCH/FREEZE-VOLUME"
     function: "凍結音高/音量"
 
@@ -219,6 +232,7 @@ sources:
   - "Paul Davids 官網與視頻"
   - "Premier Guitar"
   - "Perfect Circuit"
+  - "Cornerstone 官方說明書 NUCLEO-MANUAL-V4.pdf：https://www.cornerstonemusicgear.com/wp-content/uploads/2026/02/NUCLEO-MANUAL-V4.pdf（2026-10-13 讀取）"
 
 data_collected: 2025-12-13
 data_reliability: "高 (多方驗證)"

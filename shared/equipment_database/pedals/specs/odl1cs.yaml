@@ -14,6 +14,11 @@ basic_info:
   type: "overdrive"
   subtype: "dumble_style"
   designer: "Yuki Hayashi (20+ years Dumble 維修經驗)"
+  # 2026-10-13 補充（網站審核 #17）：官方 ODL-1A-CS 產品頁原文
+  # "amassed over 20 years of experience in maintaining and repairing DUMBLE amplifiers
+  #  and was a proud owner of multiple DUMBLE amps himself."
+  # 頁面另列 Overdrive Special 50W Combo（1992 購入）與 Overdrive Reverb（1995 購入）兩台。
+  designer_background: "[official] 二十年以上 Dumble 音箱的維護與維修經驗，本人擁有多台 Dumble 音箱（官方列出 Overdrive Special 50W Combo 與 Overdrive Reverb）"
   design_approach: "捕捉 Dumble Overdrive Special 的質感"
   country: "Japan"
 
@@ -208,6 +213,8 @@ related_models:
   odl_1a_cs:
     description: "加入 channel control terminal (外部切換)"
     battery: "不支援電池 (高電流消耗)"
+    current: "[official] DC9V 120mA；開機瞬間電流大，需 200mA 以上供電能力"
+    # 2026-10-13 依官方產品頁確認：https://www.freethetone.com/en/products/detail77/
 
 # 評價
 review_summary:
@@ -240,6 +247,7 @@ sources:
   - "Premier Guitar"
   - "官方 CS 手冊 ver 1.2 (EN): https://www.freethetone.com/upload/file/manual/customshop/odl1cs/Manual_ODL_1_CS_ver_1_2_ENG.pdf"
   - "官方標準版 ODL-1 手冊 ver 1.1 (EN): https://www.freethetone.com/upload/file/en/manual/effects/ODL_1/Manual_ODL_1_ver_1_1_ENG.pdf"
+  - "官方 ODL-1A-CS 產品頁（設計者背景、ODL-1A-CS 耗流與電池）: https://www.freethetone.com/en/products/detail77/"
 
 data_collected: 2025-12-13
 data_reliability: "高 (多方驗證)"

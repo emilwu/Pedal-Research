@@ -165,3 +165,12 @@ Herdr 裡的 `pedal-website`（pane `w1:p2`）會隨重啟消失。它的工作�
 | 6 | push Research | push | 已 push 到 `7b0c79e` |
 | 7 | 待實測確認清單 | 放著 | 使用者之後通知再更新 |
 
+
+## 回應網站的逐欄對照報告（2026-10-13）
+
+- 來源：Planning `scripts/migrations/equipment-data/AUDIT-2026-10-13.md`（`e10a752`），第二節 Colosseum Clip Blender、第三節 214 項
+- 使用者裁定：suggestedSettings（65）與 suitableStyles（9）一律刪除，Research 不收
+- 其餘 140 項 + Clip Blender：workflow runId `wf_15c22218-9b6`（task `we3xkl89l`），每台 1 agent + 1 驗證（一輪）+ Colosseum 1 agent
+- 規則：資料檔的值不算證據。處置只有 keep／add_to_spec（本次抓到官方來源或 HANDOFF 的使用者確認）／spec_fixed／delete
+- 產出：`shared/equipment_database/AUDIT_RESPONSE_2026-10-13.md`（刪除 170、保留 20、補進 spec 23、修正 spec 1；45 agent 0 失敗）。15 份 spec 有修改，brand／model／id 都沒動
+- 第四節（使用者個人資訊 24 項）不在這次範圍

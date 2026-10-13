@@ -29,6 +29,9 @@ price:
 technical_specs:
   type: "All-analog buffer, router, interface, boost"
   signal_path: "All-analog, pristine transparent buffering"
+  # 2026-10-13 補：官方手冊 rev04 p.42 規格表與官方產品頁規格欄皆列此值。
+  frequency_response: "[official] 20Hz – 20kHz"
+  frequency_response_note: "[official] 手冊 p.5：in 1 loading 順時針到底（1MΩ）時「allowing your guitar's full frequency range to pass untouched」；逆時針降阻抗只柔化高頻（softening the top end）。官方未公布輸出阻抗數值 [unknown]"
 
   inputs:
     count: 2

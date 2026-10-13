@@ -15,6 +15,7 @@ basic_info:
   subtype: "shimmer_octave"
   country: "Germany"
   city: "Berlin"
+  manufacturing: "手工製造 (Handmade in Berlin) [official] 官網頁首全站標語原文「Somic Doom Devices | handmade in Berlin」（官網拼字如此）；頁尾只寫 Lichtlaerm Audio • Berlin-Lichtenberg。2026-10-13 抓取官網確認"
   release_year: 2024
   prototype_year: 2018
   design: "雙向八度 (高八度+低八度)"
@@ -201,6 +202,7 @@ sources:
   - "Premier Guitar"
   - "Perfect Circuit"
   - "Delicious Audio"
+  - "https://www.lichtlaermaudio.com/shop/as-above-so-below-cinematic-octave-divider-reverb (官方產品頁，2026-10-13 抓取)"
 
 data_collected: 2025-12-13
 data_reliability: "高 (多方驗證)"
