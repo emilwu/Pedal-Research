@@ -12,7 +12,7 @@
 #
 # ⚠️ 型號身分：本檔記的是 2025 年推出的現行款「Cali76 Stacked Compressor」，
 #    不是 2022 年以前的「Cali76 Stacked Edition」（已停產）。兩者電源、電流、旋鈕行為都不同。
-#    判斷理由與實機辨識方法見 model_identity 區塊。使用者尚未實機確認。
+#    判斷理由與實機辨識方法見 model_identity 區塊。2026-10-13 使用者確認是現行款。
 #
 # ⚠️ 官方手冊的下載連結是 ?tekguild_pdf_download=<id>&nonce=<值> 形式，nonce 會變。
 #    穩定入口是 https://origineffects.com/manuals/ 。sources 裡的 nonce 網址是 2026-10-13 抓到的版本。
@@ -273,4 +273,4 @@ sources:
   - "https://www.guitarpedalx.com/news/news/origin-effects-shrinks-down-its-cali76-stacked-compressor-to-the-same-compact-size-as-its-recent-cali76-jfet-compressor"   # 2025-02-26 新聞
 
 data_collected: 2026-10-13
-data_reliability: "高（現行款規格與控制項逐字取自官方產品頁與手冊 V2.0）。attack/release 時間、整體壓縮比、OUT 最大增益官方未公布，留空。使用者手上是現行款或舊款尚未實機確認"
+data_reliability: "高（現行款規格與控制項逐字取自官方產品頁與手冊 V2.0）。attack/release 時間、整體壓縮比、OUT 最大增益官方未公布，留空。使用者手上是現行款（2026-10-13 使用者確認）"

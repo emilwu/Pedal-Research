@@ -340,7 +340,8 @@ Arca／RAAT（兩者不會同時開）→ AASB → Chroma Console → FF-1Y → 
    `suitableStyles`、價格 $335、`officialUrl` 都要明確覆寫
 2. **Arca（production id 是 UUID `012e2675-…`；`seed-pedal-arca` 只是 SQL 字面值）**：brand／model 不變，但 `description` 寫 Bluesbreaker 架構，
    `suggestedSettings` 是編造的。重新匯入時要整列覆寫，不要合併
-3. 新增的 4 台還不在 production。要不要匯入由 Planning／Web-Service 決定
+3. 新增的 4 台：使用者同意匯入。**009 已套用到 production，總數 27 → 31**（Planning `5d42a85`、`97f7e20`）。
+   同一支 009 也把 From Yesterday 的 subtype 改成官方說法
 
 **2026-10-13 凌晨：使用者授權 Research 通知網站更正。**Research 用 Herdr 在同一個 tab 開了
 Pedal-Web-Service 的 Claude session（agent 名稱 `pedal-website`，pane `w1:p2`），並傳送更正需求。
