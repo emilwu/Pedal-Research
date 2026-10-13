@@ -36,11 +36,11 @@ price:
 
 # 核心技術規格
 technical_specs:
-  # ⚠️ 2026-10-13 待決：官方手冊寫 Current Consumption 200mA、Output Impedance 10k，
-  #    與下方 current 150mA、impedance.output 50kΩ 不同。這兩項不在 AUDIT 第三節範圍，本次只標註、未改值。
+  # 2026-10-13：current 150mA -> 200mA，依官方手冊 PDF 規格欄「Current Consumption: 200mA」
+  #   （cs_colosseum-manuali.pdf，2026-10-13 讀取；官方產品頁未列電流）。
   power:
     voltage: "9V DC"
-    current: "150mA"
+    current: "200mA"  # [official] 手冊 Current Consumption
 
   dimensions:
     depth: "119mm"
@@ -201,9 +201,10 @@ usage_recommendations:
     - "4 Rear Jacks 整合性"
 
 # 阻抗特性
+# 2026-10-13：output 50kΩ -> 10kΩ，依官方手冊 PDF 規格欄「Output Impedance: 10k」（手冊未寫單位符號）。
 impedance:
-  input: "1MΩ"
-  output: "50kΩ"
+  input: "1MΩ"  # 手冊規格欄寫「Input Impedance: 1M」，與舊值一致
+  output: "10kΩ"  # [official] 手冊 Output Impedance
 
 # 與其他踏板比較
 comparisons:
@@ -230,7 +231,7 @@ review_summary:
 
   cons:
     - "尺寸較大 (119mm × 94mm)"
-    - "電流消耗較高 (150mA)"
+    - "電流消耗較高 (200mA，官方手冊) [official]"  # 2026-10-13：150mA -> 200mA
 
   use_case: "適合需要 BB 與 Klon 兩種音色,但想節省 pedalboard 空間的玩家"
 

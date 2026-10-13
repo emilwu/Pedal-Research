@@ -180,10 +180,10 @@ power_summary:
     - {position: 7, pedal_id: "aasb", voltage: "只能 9V DC", current: "150 mA", evidence: "spec 未標證據等級", note: ""}
     - {position: 8, pedal_id: "hologram_chroma_console", voltage: "9V DC，中心負", current: "unknown（供應器下限 500 mA 連續）", evidence: "[official]", note: "500 mA 是供應器要求，不是耗電量"}
     - {position: 9, pedal_id: "ff1y", voltage: "9V DC，中心負", current: "350 mA", evidence: "spec 未標證據等級", note: ""}
-    - {position: "output", pedal_id: "tone_king_imperial_mkii", voltage: "9–18V DC，中心負", current: "300 mA（預估）", evidence: "spec 未標證據等級", note: "spec 要求避免與數位設備共用電源，另給一路"}
+    - {position: "output", pedal_id: "tone_king_imperial_mkii", voltage: "9–12V DC，中心負", current: "官方未公布 mA；需 ≥ 9W（12V 時 ≥ 750 mA）", evidence: "[official]／[inference]", note: "用原廠附的 Universal 12V 變壓器；該變壓器不接地，只接吉他與耳機時可能有較多交流聲 [official]。2026-10-13 改正（原 9–18V、300 mA 預估）"}
   architecture_notes:
     - "至少五台需要獨立、隔離、大電流的輸出孔：PA-1QG、Cali76 Stacked、AASB、Chroma Console、FF-1Y。一般 100 mA 的孔不夠 [inference]"
-    - "NOTADÜMBLË V2、Cali76 Stacked（現行款）、AASB 不可接 18V"
+    - "NOTADÜMBLË V2、Cali76 Stacked（現行款）、AASB 不可接 18V；Imperial MKII 上限 12V [official]"
     - "Imperial MKII 另給一路，避開數位設備"
 
 known_conflicts:

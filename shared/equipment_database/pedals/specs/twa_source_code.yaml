@@ -48,7 +48,10 @@ technical_specs:
     - "Multi-transistor input buffer"
     - "Magic IC OpAmp"
 
-  bypass: "True Bypass"
+  bypass: "Mechanical true bypass"   # [official] 官方頁 Details：「Top-mounted jacks and mechanical true bypass switching.」
+  bypass_note: >-
+    [inference] 因為是 mechanical true bypass，multi-transistor input buffer 只在效果開啟時位於訊號路徑上；
+    效果關閉時訊號直通，不經過 buffer。官方頁只寫「Multi-transistor input buffer」，沒有說 buffer 常駐。
 
 # Bite Control (核心創新)
 bite_control:
@@ -121,9 +124,14 @@ usage_recommendations:
 
 # 阻抗特性
 impedance:
-  input: "High (multi-transistor buffer)"
-  output: "Low (buffer 輸出)"
-  buffer: "Always-on multi-transistor design"
+  input: "效果開啟時由 multi-transistor input buffer 決定，屬高阻抗 [inference]；數值官方未公布 [unknown]。效果關閉時 true bypass 直通"
+  output: "效果開啟時預期為低阻抗 [inference]；數值官方未公布 [unknown]。效果關閉時 true bypass 直通，輸出阻抗即前級來源阻抗"
+  buffer: "Multi-transistor input buffer，僅在效果開啟時作用（非 always-on）"   # [official] buffer 存在；[inference] 僅開啟時作用，依 mechanical true bypass 推得
+  # 2026-10-13 修正：impedance.buffer "Always-on multi-transistor design" -> 上列；
+  #   technical_specs.bypass "True Bypass" -> "Mechanical true bypass"；
+  #   impedance.input "High (multi-transistor buffer)"、impedance.output "Low (buffer 輸出)" 補上僅限效果開啟的條件。
+  #   原 always-on 說法與官方「mechanical true bypass switching」矛盾。
+  #   來源：https://totallywyckedaudio.com/products/sc-01-source-code-overdrive（2026-10-13 抓取，商品 JSON updated_at 2026-10-12）
 
 # 評價
 review_summary:

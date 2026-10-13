@@ -26,9 +26,12 @@ price:
 # 核心技術規格
 technical_specs:
   power:
-    voltage: "9V DC (centre negative) or 9V Battery"
-    current: "5mA"
-    battery: true
+    voltage: "9V DC (centre negative) or 9V Battery"  # [official] 手冊 Power requirements："6F22 9V battery or DC eliminator 2.1 mm plug center negative and positive sleeve"
+    # 2026-10-13 新增：官方 "Supply voltage range: 7.5 to 18VDC"；手冊同時寫 "Use recommended voltage for best results"，18V 是上限不是建議值
+    max_voltage: "18V DC（官方供電範圍 7.5–18V DC）"  # [official]
+    # 2026-10-13 改：5mA -> 6 mA。官方 "Current consumption at 9VDC: 6 mA"
+    current: "6 mA"  # [official] 於 9V DC
+    battery: true  # [official] 6F22 9V
 
   controls:
     - name: "Volume"
@@ -47,7 +50,7 @@ technical_specs:
       official_text: "[official] BASS, pre distortion, it sets how the bass and low mids are distorted."
       effect_on_distortion: "[official] 會改變低頻與低中頻的失真方式"
 
-  bypass: "True Bypass"
+  bypass: "True Bypass"  # [official] 手冊 "Complete bypass (true bypass)"
 
 # 音色特性
 tonal_characteristics:
@@ -75,6 +78,8 @@ tonal_characteristics:
 focus_control:
   name: "FOCUS"
   description: "調整動態響應與整體 EQ"
+  # 2026-10-13 補：官方手冊 "A good starting point is 11 o'clock."
+  official_starting_point: "11 點鐘"  # [official]
   ccw:
     setting: "逆時針"
     behavior: "需要更用力彈奏才產生失真"
@@ -109,7 +114,7 @@ usage_recommendations:
     general:
       volume: "3 點鐘"
       drive: "12 點鐘"
-      focus: "1-2 點鐘"
+      focus: "1-2 點鐘"  # [inference] 本庫的使用建議，不是官方值；官方起點是 11 點鐘（見 focus_control.official_starting_point）
 
   features:
     - "Honey Bee circuit evolution"
@@ -118,9 +123,11 @@ usage_recommendations:
     - "Low to medium gain"
 
 # 阻抗特性
+# 2026-10-13 改：input "~1MΩ (標準)" -> "390kΩ"；output "~10-50kΩ (預估)" -> "25kΩ"
+# 來源：官方手冊 "Input impedance: 390K Ohms"、"Output impedance: 25K Ohms"
 impedance:
-  input: "~1MΩ (標準)"
-  output: "~10-50kΩ (預估)"
+  input: "390kΩ"   # [official]
+  output: "25kΩ"   # [official]
 
 # 與其他踏板比較
 comparisons:
@@ -169,10 +176,15 @@ sources:
 
 data_collected: 2025-12-13
 data_updated: 2026-10-13
-# ⚠️ 2026-10-13 讀官方手冊時發現下列欄位與本檔不一致，本次稽核範圍外，尚未修改，待另行處理：
-#   - 耗流：官方 "Current consumption at 9VDC: 6 mA"；本檔 technical_specs.power.current 寫 5mA
-#   - 電壓：官方 "Supply voltage range: 7.5 to 18VDC"；本檔只寫 9V
-#   - 阻抗：官方 "Input impedance: 390K Ohms"、"Output impedance: 25K Ohms"；本檔寫 ~1MΩ／~10-50kΩ (預估)
-#   - Focus 起點：官方 "A good starting point is 11 o'clock"；本檔 recommended_settings.general.focus 寫 1-2 點鐘
-#   - 手冊未提 Björn Juhl、Bias 類比、任何藝人名稱
+# 2026-10-13 依官方手冊修正（網站回報手冊與本檔不一致）：
+#   - technical_specs.power.current：5mA -> 6 mA
+#   - technical_specs.power.max_voltage：（無）-> 18V DC（官方範圍 7.5–18V DC）
+#   - impedance.input：~1MΩ (標準) -> 390kΩ；impedance.output：~10-50kΩ (預估) -> 25kΩ
+#   - focus_control.official_starting_point：新增 11 點鐘；recommended_settings 的 1-2 點鐘保留並標為 [inference]
+#   來源：https://mpamp.com/files/manuals/Sweet%20Honey%20Overdrive%20Deluxe%20manual.pdf
+#   （2026-10-13 抓取；由官網現行 /category/34/manuals 頁連結；PDF CreationDate 2016-03-22，伺服器 Last-Modified 2024-10-29）
+#   控制項名稱與功能、true bypass、9V 電池／中心負 2.1mm 與手冊一致，未改
+#   官網現行 pedals／factory／handwired／shop 分類都沒有 Deluxe 的產品頁（只有 SHOD、Custom、Handwired），
+#   無法以官方產品頁交叉比對；手冊未列尺寸 [unknown]
+#   備註：手冊未提 Björn Juhl、Bias 類比、任何藝人名稱
 data_reliability: "高 (多方驗證)"

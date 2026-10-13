@@ -2,7 +2,7 @@
 # 音箱/Preamp Pedal 詳細技術資料
 
 version: 3.0
-last_updated: 2026-01-14
+last_updated: 2026-10-13  # 2026-10-13 更正 technical_specs.power（舊 last_updated 2026-01-14）
 correction_note: "重大更新 - 加入 Zero Watt Power Amp, Cabinet Simulation (15組 IR), 內建 Reverb/Tremolo"
 
 # 基本資訊
@@ -42,11 +42,26 @@ technical_specs:
     note: "Tri-tube design at high voltage"
     phase_inverter: "Exact Imperial MKII amp phase inverter circuitry (uses one of three 12AX7 tubes)"
 
+  # 2026-10-13 依官方手冊與官方產品頁更正。證據等級：[official] Tone King 官方手冊／產品頁；
+  # [inference] 本庫推算；[unknown] 查過但官方沒有公布。
+  # 舊值 → 新值：
+  #   voltage "9-18V DC" → "9–12V DC"（舊值上限 18V 超出官方標示的 12V）
+  #   current "300mA (預估)" → 官方只給功率 9W，不給 mA；改為 power_rating + 推算的最低電流
+  #   type "DC adapter (center negative)" → polarity "center negative"（原值正確，現有官方依據）
+  #   note "Standard 9V pedal power supply compatible" → 移除（一般 9V 100–500 mA 輸出不到 9W）
+  #   新增 included_supply "Universal 12V Power Supply"
+  # 來源：https://www.toneking.com/wp-content/uploads/2025/04/TONE-KING-IMPERIAL-PREAMP-INSTRUCTION-MANUAL-BOOKLET.pdf
+  #       （PDF 建立 2025-02-18、修改 2025-04-04；官方產品頁的 Product manual 連結指向此檔）
+  #       https://www.toneking.com/shop/pedals/tone-king-imperial-preamp/
   power:
-    voltage: "9-18V DC"
-    current: "300mA (預估)"
-    type: "DC adapter (center negative)"
-    note: "Standard 9V pedal power supply compatible"
+    voltage: "9–12V DC"          # [official] 手冊 DC INPUT：「use 9V to 12V adapter with >= 9W power available」；背板標示「9-12VDC 9W」
+    polarity: "center negative"  # [official] 手冊背板圖 DC 插座旁的極性符號：⊕ 接外環、⊖ 接中心
+    power_rating: "≥ 9W"         # [official] 手冊 DC INPUT 與背板標示
+    current: "官方未公布 mA 數"   # [unknown]
+    current_required: "12V 時至少 750 mA，9V 時至少 1000 mA"   # [inference] 由官方 9W 換算（W ÷ V），不是實測耗電
+    included_supply: "Universal 12V Power Supply"   # [official] 手冊與產品頁的 Included 清單。該變壓器的電流額定官方未公布 [unknown]
+    earthing: "附的變壓器不接地；只接吉他與耳機時可能有較多 hum，官方建議改用接地電源或把 SEND／RETURN／BALANCED OUT／USB 接到有接地的設備"   # [official] 手冊 HEADPHONES 段的 NOTE
+    type: "DC adapter"
 
   size:
     width: "7.2 inches (183 mm)"

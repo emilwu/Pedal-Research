@@ -370,3 +370,16 @@
 
 - 報告第四節（目錄資料裡的使用者個人資訊 24 項）：使用者這次沒有要求處理
 - Imperial MKII 的電源：處置 agent 發現官方手冊寫附 Universal 12V 電源，spec 寫 9–18V DC（預估）。本次沒有改 spec，列為 Research 待查
+
+## 補充：回覆 Website ack 的 6 件事（2026-10-13）
+
+| # | 事項 | Research 的結論 | Website 要做什麼 |
+|---|---|---|---|
+| 1 | JC-22 `specs.pedalPairingNotes[3]` 的「Sag」 | 比照 description，刪掉「Sag」。spec 沒有任何地方提到 Sag | 刪掉「Sag 與」，保留「溫暖度」 |
+| 2 | Thinline `specs.reviewSummary.cons` | spec 分開記載：「Ash 琴身對濕度敏感」與「Semi-hollow 結構較脆弱」 | 改寫成兩點，不要把濕度敏感歸給半空心結構 |
+| 3 | Imperial MKII 電源 | spec 已依官方手冊改正：**9–12V DC**、中心負、需 ≥ 9W、附 Universal 12V 變壓器（不接地）。官方沒有公布 mA 數。原本的 9–18V、300 mA 是預估值 | 用 `/migrate-data` 同步電源欄位 |
+| 4 | Colosseum 電流與輸出阻抗 | spec 已依官方手冊改正：**200mA**、輸出阻抗 **10kΩ** | 同步 |
+| 5 | Sweet Honey | spec 已依官方手冊改正：電流 **6 mA**、供電 7.5–18V DC、輸入阻抗 **390kΩ**、輸出阻抗 **25kΩ**、bypass 與電池加上 [official] | 同步 |
+| 6 | Source Code bypass | spec 已依官方頁改正：**mechanical true bypass**。input buffer 只在效果開啟時作用，不是 always-on | 同步 |
+
+第 3–6 件每份 spec 由 1 個 agent 修正、1 個 agent 重新抓官方來源驗證。brand／model／id 都沒動，不需要 previousKeys。

@@ -174,3 +174,5 @@ Herdr 裡的 `pedal-website`（pane `w1:p2`）會隨重啟消失。它的工作�
 - 規則：資料檔的值不算證據。處置只有 keep／add_to_spec（本次抓到官方來源或 HANDOFF 的使用者確認）／spec_fixed／delete
 - 產出：`shared/equipment_database/AUDIT_RESPONSE_2026-10-13.md`（刪除 170、保留 20、補進 spec 23、修正 spec 1；45 agent 0 失敗）。15 份 spec 有修改，brand／model／id 都沒動
 - 第四節（使用者個人資訊 24 項）不在這次範圍
+- Website 已套用（Planning `9dd010d`、`9711d7d`）：24 筆 63 項修改，31 筆的 suggestedSettings／suitableStyles 全部清成 []
+- Website 回報 6 件請 Research 確認：1 JC-22 pedalPairingNotes 的 Sag → 刪；2 Thinline cons → 依 spec 分開寫「Ash 琴身對濕度敏感」「Semi-hollow 結構較脆弱」；3–6（Imperial 電源、Colosseum 電流／阻抗、Sweet Honey 手冊、Source Code bypass）→ workflow `wf_49e5fe73-30d` 查官方來源修 spec

@@ -36,7 +36,7 @@
 | 8 | Hologram Chroma Console | 多效果 | 三選一，出廠預設 [unknown] | 立體聲機，單聲道使用 | ● | ● |
 | 9 | Free the Tone FF-1Y | 主 delay | spec 未寫 | 立體聲機，單聲道使用 | ● | ● |
 
-\* PA-1QG、AASB、FF-1Y、Imperial MKII 的 spec 是舊格式，沒有標證據等級。下文引用時不另加標籤。
+\* PA-1QG、AASB、FF-1Y、Imperial MKII 的 spec 是舊格式，沒有標證據等級。下文引用時不另加標籤。例外：Imperial MKII 的電源段已於 2026-10-13 依官方手冊改正並加上證據等級。
 
 **兩個情境**：Arca（1–5、7–9）與 RAAT（1–4、6–9）。第 5、6 位永不同時開啟 [user]。
 
@@ -238,11 +238,12 @@ inventory 沒有記錄電源供應器，供電方案未定。
 | 7 | AASB | **只能 9V** | 150 mA | |
 | 8 | Chroma Console | 9V，中心負 | [unknown] | 供應器至少 500 mA 連續 [official]；這是供應器下限，不是耗電量 |
 | 9 | FF-1Y | 9V，中心負 | 350 mA | |
-| — | Imperial MKII | 9–18V，中心負 | 300 mA（預估） | spec 要求避免與數位設備共用電源 |
+| — | Imperial MKII | **9–12V**，中心負 [official] | 官方未公布 mA；需 ≥ 9W [official]（12V 時 ≥ 750 mA、9V 時 ≥ 1000 mA [inference]） | 附 Universal 12V 變壓器 [official]。2026-10-13 依官方手冊改正，原本寫 9–18V、300 mA（預估） |
 
 - 至少五台需要獨立、隔離、大電流的輸出孔：PA-1QG、Cali76、AASB、Chroma、FF-1Y。一般 100 mA 的孔不夠 [inference]。
-- Imperial 另給一路，避開數位設備。
-- NOTADÜMBLË V2、Cali76（現行款）、AASB 不可接 18V。供應器若有可調電壓的孔，要特別標示。
+- **Imperial 用原廠附的 12V 變壓器** [inference]。它需要至少 9W，一般隔離式效果器電源的單一輸出孔供不起。
+- 原廠變壓器**不接地**。官方手冊提醒：只接吉他與耳機時，吉他可能收到較多交流聲 [official]。這正是這條鏈的接法。對策是改用接地的電源，或把 SEND／RETURN／BALANCED OUT／USB 其中一個接到有接地的設備 [official]。
+- NOTADÜMBLË V2、Cali76（現行款）、AASB 不可接 18V；Imperial MKII 上限 12V [official]。供應器若有可調電壓的孔，要特別標示。
 - 未知值不加總。總電流等 RAAT、Arca、Chroma 確認後再算。
 
 ---
@@ -329,6 +330,7 @@ inventory 沒有記錄電源供應器，供電方案未定。
 13. **NOTADÜMBLË V2** 兩聲道都關時是否 true bypass；Clean 聲道 Input 旋鈕在 buffer 後面還有沒有作用。
 14. **AASB** 八度音量最小時能不能當一般 reverb；FF-1Y feedback 最大能不能長時間保持，當 HOLD 用。
 15. **Omega 6 與 Throbber 的切單細節**：Omega 6 切單保留哪一顆線圈、stereo 輸出孔接 TS 導線是否正常；Throbber Pos 4 在 RAAT 增益下是否抵消 hum。
+16. **Imperial 原廠變壓器不接地造成的交流聲**：只接吉他與耳機時是否明顯。明顯的話，依官方建議改用接地電源，或把 BALANCED OUT／USB 接到有接地的設備。
 
 ---
 
