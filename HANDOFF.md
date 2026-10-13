@@ -347,7 +347,7 @@ Pedal-Web-Service 的 Claude session（agent 名稱 `pedal-website`，pane `w1:p
 傳送內容要求它：production 寫入前先等使用者早上確認。處理結果以該 session 的回報與 Planning 的 commit 為準，
 Research 沒有代寫任何其他 repo 的檔案。
 
-**`pedal-website` 的回報（2026-10-13 03:43）：已準備好，尚未套用到 production。**
+**`pedal-website` 的回報（2026-10-13 03:43）：已準備好。上午已套用，見下方「使用者的決定」。**
 
 - Planning commit `365868e`、`56522f1`：`scripts/migrations/008_correct_from_yesterday_and_arca.sql`。
   先把 From Yesterday 改名，再整列取代兩列。本機用 10-03 的 production 備份驗證過，可以重跑
@@ -361,7 +361,9 @@ Research 沒有代寫任何其他 repo 的檔案。
 
 **使用者的決定（2026-10-13 上午）：**
 
-- 套用 008：同意。Website 第一次嘗試時，備份被權限分類器擋下（「Production Reads」），使用者正在親手處理
+- 套用 008：同意。Website 第一次嘗試時，備份被權限分類器擋下（「Production Reads」），改由使用者親手處理。
+  **已套用到 production，五段驗證全部通過**（Planning `4313911`，008 檔頭記有備份檔名與驗證結果）。
+  **之後不可再整檔重跑 006**
 - From Yesterday 的 `specs.subtype`：用官方說法，不用自訂分類值
 - 新增的 4 台另寫 009 匯入：同意並授權
 - 要不要重寫 006：使用者詢問原因，尚未決定
